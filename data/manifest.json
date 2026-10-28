@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-28T14:26:30+00:00",
- "started_at": "2026-10-28T14:26:30+00:00",
+ "generated_at": "2026-10-28T14:30:42+00:00",
+ "started_at": "2026-10-28T14:27:13+00:00",
  "pipeline_version": "0.1.0",
  "source": "DOSM / data.gov.my open data (CC BY 4.0)",
  "datasets": {
@@ -230,6 +230,100 @@
     "null_counts": {},
     "issues": []
    }
+  },
+  "lookup_item": {
+   "tier": "item",
+   "title": "PriceCatcher: Item Lookup",
+   "as_of": null,
+   "last_updated": null,
+   "next_update": null,
+   "upstream_source": [],
+   "report": {
+    "dataset_id": "lookup_item",
+    "rows": 797,
+    "date_min": null,
+    "date_max": null,
+    "entities": {
+     "item_code": 797,
+     "item": 740,
+     "unit": 155,
+     "item_group": 8,
+     "item_category": 59
+    },
+    "duplicate_keys": 0,
+    "null_counts": {
+     "item": 1,
+     "unit": 1,
+     "item_group": 1,
+     "item_category": 1
+    },
+    "issues": [
+     {
+      "level": "warning",
+      "code": "null_entity",
+      "message": "'item' has 1 null value(s); these rows cannot be attributed to a group."
+     },
+     {
+      "level": "warning",
+      "code": "null_entity",
+      "message": "'unit' has 1 null value(s); these rows cannot be attributed to a group."
+     },
+     {
+      "level": "warning",
+      "code": "null_entity",
+      "message": "'item_group' has 1 null value(s); these rows cannot be attributed to a group."
+     },
+     {
+      "level": "warning",
+      "code": "null_entity",
+      "message": "'item_category' has 1 null value(s); these rows cannot be attributed to a group."
+     }
+    ]
+   }
+  },
+  "lookup_premise": {
+   "tier": "item",
+   "title": "PriceCatcher: Premise Lookup",
+   "as_of": null,
+   "last_updated": null,
+   "next_update": null,
+   "upstream_source": [],
+   "report": {
+    "dataset_id": "lookup_premise",
+    "rows": 3931,
+    "date_min": null,
+    "date_max": null,
+    "entities": {
+     "state": 16,
+     "premise_code": 3931,
+     "premise": 3887,
+     "premise_type": 13,
+     "district": 177
+    },
+    "duplicate_keys": 0,
+    "null_counts": {
+     "premise_type": 1,
+     "state": 1,
+     "district": 1
+    },
+    "issues": [
+     {
+      "level": "warning",
+      "code": "null_entity",
+      "message": "'premise_type' has 1 null value(s); these rows cannot be attributed to a group."
+     },
+     {
+      "level": "warning",
+      "code": "null_entity",
+      "message": "'state' has 1 null value(s); these rows cannot be attributed to a group."
+     },
+     {
+      "level": "warning",
+      "code": "null_entity",
+      "message": "'district' has 1 null value(s); these rows cannot be attributed to a group."
+     }
+    ]
+   }
   }
  },
  "artifacts": {
@@ -260,6 +354,14 @@
   "regional.json": {
    "bytes": 6871,
    "sha256": "d177a913a6c5c36bd668affc40f6fc9b9e633a37dd8e906b00eef7993d2ea00c"
+  },
+  "pricecatcher/aggregate.parquet": {
+   "bytes": 4707794,
+   "sha256": "217f70a2ea4376d972d19961b5040c1165e6152c8d117e0dbbd5b6aa5da0e76d"
+  },
+  "pricecatcher/items.json": {
+   "bytes": 919647,
+   "sha256": "dcdbb012cf60ad56032346f8d312facf52f6dde6d1d54c8648c29b659d742080"
   }
  }
 }
