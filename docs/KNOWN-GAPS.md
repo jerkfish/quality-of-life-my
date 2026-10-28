@@ -84,7 +84,35 @@ tests; `429` and `5xx` handling is not.
 
 **G13 — `uv.lock` must be committed** for CI's `--frozen` install to be reproducible.
 
-**G14 — No frontend, Worker, or evals yet.** Phases 3-4.
+**G14 — No Worker or eval harness yet.** Phase 4. The frontend shipped in Phase 3.
+
+**G14a — i18n is a client-side toggle, not real localisation.**
+The Bahasa Malaysia dictionary covers navigation and key chrome only. Page bodies, chart
+annotations and every generated sentence from the pipeline are English. Proper localisation
+means per-locale routes so each language is a real, indexable URL; that has not been done.
+The `data-i18n` structure is in place so adding a language is a data change, not a markup
+change.
+
+**G14b — The calculator's formula exists twice.**
+Once in Python (`transforms/personal_inflation.py`, unit-tested) and once in TypeScript in the
+calculator island, because the inputs are the user's and cannot be precomputed. The TS copy
+runs a known-answer self-check on load and refuses to show results if it fails, so drift would
+be visible — but a cross-language test would be better than a runtime guard.
+
+**G14c — Charts render client-side.**
+They are drawn by Observable Plot in the browser, ~98 KB gzipped, shared and deferred. A
+build-time SVG render would ship less JavaScript and would work with JS disabled. The charts
+do have text alternatives that a screen reader gets, so the *information* is available without
+JS even though the graphics are not.
+
+**G14d — No automated check that charts actually draw.**
+CI verifies every chart island received non-empty props, but "props present" is not "SVG
+rendered". Two charts were silently failing during development and only a manual headless-Chrome
+DOM inspection caught them. A browser-based smoke test belongs in CI.
+
+**G14e — Not deployed.**
+The Cloudflare Pages project does not exist yet, so there is no live URL. Everything is
+verified against a local preview build.
 
 **G15 — PriceCatcher raw is ~130 MB of downloads per full CI run.**
 Reduced to a 4.5 MB aggregate, but the scheduled job is not fast.

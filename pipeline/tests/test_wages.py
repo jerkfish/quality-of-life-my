@@ -112,3 +112,30 @@ def test_state_medians_below_zero_do_not_explode():
     )
     out = wages.real_wages_by_state(w, cpi)
     assert pd.isna(out["real_median"]).all()
+
+
+def test_national_real_wages_known_answer(cpi_national_years, wages_state_frame):
+    """Malaysia row: 1100 -> 1600 nominal against +25% inflation is +16.36% real."""
+    out = wages.national_real_wages(wages_state_frame, cpi_national_years)
+    assert len(out) == 2
+    assert out.iloc[0]["year"] == 2010
+    assert out.iloc[0]["real_median"] == pytest.approx(1100.0)
+    assert out.iloc[1]["real_median"] == pytest.approx(1600.0 / 1.25)
+
+
+def test_national_real_wages_refuses_without_a_national_row(cpi_national_years, wages_state_frame):
+    """The state frame has no Malaysia row; this function must not silently return nothing."""
+    states_only = wages_state_frame[wages_state_frame["state"] != "Malaysia"]
+    with pytest.raises(ValueError, match="no 'Malaysia' row"):
+        wages.national_real_wages(states_only, cpi_national_years)
+
+
+def test_state_frame_genuinely_lacks_a_national_row(cpi_state_frame, wages_state_frame):
+    """Documents why national_real_wages exists at all.
+
+    `real_wages_by_state` inner-joins against cpi_state, which carries the 16 states and no
+    nationwide row. A headline national figure read off that frame comes back empty rather
+    than raising -- which is exactly how this was caught, by a page rendering "no data".
+    """
+    state_real = wages.real_wages_by_state(wages_state_frame, cpi_state_frame)
+    assert "Malaysia" not in set(state_real["state"])

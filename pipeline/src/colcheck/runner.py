@@ -255,6 +255,7 @@ class Runner:
         wages_artifact = artifacts.build_real_wages(
             wages_state,
             cpi_state,
+            cpi_headline,
             published_real,
             self.metas.get("wages_state"),
             self.metas.get("wages_real_state_citizen"),

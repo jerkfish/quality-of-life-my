@@ -1,0 +1,108 @@
+---
+/**
+ * A chart island.
+ *
+ * The charting library is imported by the mount script below, so it is bundled once and only
+ * on pages that actually use a chart. A page with no charts ships no chart JavaScript.
+ *
+ * The container reserves its height before mount so the page does not shift as charts appear —
+ * both a Core Web Vitals matter and a courtesy to anyone reading while it loads.
+ */
+import type { RendererName } from "../lib/charts";
+
+interface Props {
+  name: RendererName;
+  props: Record<string, unknown>;
+  title: string;
+  subtitle?: string;
+  height?: number;
+}
+
+const { name, props, title, subtitle, height = 280 } = Astro.props;
+---
+<figure class="chart" data-chart={name} data-props={JSON.stringify(props)}>
+  <figcaption>
+    <p class="chart-title">{title}</p>
+    {subtitle && <p class="chart-sub">{subtitle}</p>}
+  </figcaption>
+  <div class="chart-body" style={`min-height:${height}px`}>
+    <div class="chart-loading" data-chart-loading>Loading chart…</div>
+  </div>
+  {
+    /* The text alternative. Every chart ships one, because a chart a screen reader cannot
+       read is a finding a blind user cannot reach. */
+  }
+  <p class="visually-hidden" data-chart-summary></p>
+</figure>
+
+<script>
+  import { RENDERERS, type RendererName } from "../lib/charts";
+  import { chartTheme } from "../lib/theme";
+
+  type Mountable = HTMLElement & { __chartProps?: Record<string, unknown> };
+
+  /**
+   * Make a rendered chart decorative, with the text alternative carrying the meaning.
+   *
+   * Two things happen here, both needed:
+   *
+   * 1. Observable Plot labels its internal `<g>` elements ("dot", "line", "rule") with
+   *    `aria-label` for its own keyboard navigation. `aria-label` is prohibited on an element
+   *    with no role, and these groups have none, so the markup is invalid and axe flags it.
+   *    The labels are also meaningless to a screen reader -- "line" tells you nothing.
+   * 2. The SVG is then hidden from assistive technology entirely, because the figure's
+   *    visually-hidden summary is the text alternative. A screen reader gets one accurate
+   *    description rather than a pile of "dot, dot, dot".
+   */
+  function makeDecorative(element: Element) {
+    element.setAttribute("aria-hidden", "true");
+    element.setAttribute("focusable", "false");
+    element.removeAttribute("aria-label");
+    element.querySelectorAll("[aria-label]").forEach((node) => node.removeAttribute("aria-label"));
+  }
+
+  function render(figure: Mountable) {
+    const name = figure.dataset.chart as RendererName | undefined;
+    const body = figure.querySelector<HTMLElement>(".chart-body");
+    const summaryNode = figure.querySelector<HTMLElement>("[data-chart-summary]");
+    if (!name || !body || !(name in RENDERERS)) return;
+
+    let props: Record<string, unknown> = {};
+    try {
+      props = JSON.parse(figure.dataset.props ?? "{}") as Record<string, unknown>;
+    } catch {
+      body.textContent = "This chart could not be drawn: its data failed to parse.";
+      return;
+    }
+
+    try {
+      const { element, summary } = RENDERERS[name](props, chartTheme());
+      makeDecorative(element);
+      body.replaceChildren(element);
+      if (summaryNode) summaryNode.textContent = summary;
+    } catch (error) {
+      // A chart that fails must say so in place rather than leaving a blank rectangle the
+      // reader would assume means "no data".
+      body.replaceChildren(
+        Object.assign(document.createElement("p"), {
+          className: "chart-loading",
+          textContent: "This chart could not be drawn.",
+        }),
+      );
+      if (summaryNode) summaryNode.textContent = "Chart unavailable due to a rendering error.";
+      console.error(`chart ${name} failed`, error);
+    }
+  }
+
+  function renderAll(scope: ParentNode = document) {
+    scope.querySelectorAll<Mountable>("[data-chart]").forEach(render);
+  }
+
+  renderAll();
+
+  // Redraw on theme change so axes and labels follow the stylesheet rather than keeping the
+  // colours they were first painted with.
+  const redraw = () => renderAll();
+  document.addEventListener("themechange", redraw);
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+</script>

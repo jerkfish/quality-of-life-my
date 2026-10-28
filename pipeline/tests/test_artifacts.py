@@ -12,6 +12,7 @@ import pytest
 
 from colcheck.artifacts import (
     ArtifactWriter,
+    _latest_by_state,
     build_cpi_groups,
     build_cpi_national,
     build_real_wages,
@@ -76,9 +77,11 @@ def test_cpi_groups_cumulative_uses_only_observed_years(mcoicop_frame):
 
 
 def test_real_wages_artifact_includes_the_validation_block(
-    cpi_state_frame, wages_state_frame, published_real_frame
+    cpi_state_frame, cpi_national_years, wages_state_frame, published_real_frame
 ):
-    payload = build_real_wages(wages_state_frame, cpi_state_frame, published_real_frame, None, None)
+    payload = build_real_wages(
+        wages_state_frame, cpi_state_frame, cpi_national_years, published_real_frame, None, None
+    )
     validation = payload["meta"]["validation_against_dosm"]
     assert validation["passed"] is True
     assert validation["n_compared"] == 2
@@ -87,20 +90,22 @@ def test_real_wages_artifact_includes_the_validation_block(
 
 
 def test_real_wages_artifact_states_the_caveats(
-    cpi_state_frame, wages_state_frame, published_real_frame
+    cpi_state_frame, cpi_national_years, wages_state_frame, published_real_frame
 ):
     """The composition caveat is not optional; medians move when the population mix moves."""
-    payload = build_real_wages(wages_state_frame, cpi_state_frame, published_real_frame, None, None)
+    payload = build_real_wages(
+        wages_state_frame, cpi_state_frame, cpi_national_years, published_real_frame, None, None
+    )
     joined = " ".join(payload["caveats"]).lower()
     assert "self-employed" in joined
     assert "composition" in joined
 
 
 def test_regional_spreads_compute_both_sides(
-    cpi_state_frame, wages_state_frame, published_real_frame
+    cpi_state_frame, cpi_national_years, wages_state_frame, published_real_frame
 ):
     wages_artifact = build_real_wages(
-        wages_state_frame, cpi_state_frame, published_real_frame, None, None
+        wages_state_frame, cpi_state_frame, cpi_national_years, published_real_frame, None, None
     )
     income_summary = pd.DataFrame(
         [
@@ -163,3 +168,65 @@ def test_manifest_drops_artifacts_that_no_longer_exist(tmp_path):
         writer2, reports={}, metas={}, started_at=pd.Timestamp("2026-01-02").to_pydatetime()
     )
     assert "gone.json" not in merged["artifacts"]
+
+
+# --------------------------------------------------- PriceCatcher state extraction
+
+
+def _aggregate(months: list[tuple[str, int]]) -> pd.DataFrame:
+    """Build a minimal aggregate: (month, item_count) -> one row per item in Johor."""
+    rows = []
+    for month, count in months:
+        for code in range(1, count + 1):
+            rows.append(
+                {
+                    "item_code": code,
+                    "item": f"ITEM {code}",
+                    "unit": "1kg",
+                    "item_group": "G",
+                    "item_category": "C",
+                    "state": "Johor",
+                    "month": month,
+                    "median_price": 10.0,
+                    "mean_price": 10.0,
+                    "min_price": 9.0,
+                    "max_price": 11.0,
+                    "n_obs": 5,
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def test_latest_by_state_picks_the_newest_month():
+    agg = _aggregate([("2026-08", 300), ("2026-09", 300), ("2026-10", 300)])
+    assert _latest_by_state(agg)["month"] == "2026-10"
+
+
+def test_latest_by_state_steps_back_from_a_partial_month():
+    """A month that has only just begun must not become the 'current' price table."""
+    agg = _aggregate([("2026-08", 300), ("2026-09", 300), ("2026-10", 40)])
+    assert _latest_by_state(agg)["month"] == "2026-09"
+
+
+def test_latest_by_state_does_not_walk_back_to_the_oldest_month():
+    """The regression this function was rewritten for.
+
+    PriceCatcher's item panel genuinely shrinks over time (729 items in 2022, ~340 by 2026).
+    A rule of "newest month with at least 80% of the all-time maximum" therefore rejected
+    every recent month and returned 2022-05 -- presenting three-year-old prices as current.
+    """
+    agg = _aggregate([("2022-05", 700), ("2026-08", 340), ("2026-09", 340), ("2026-10", 339)])
+    assert _latest_by_state(agg)["month"] == "2026-10"
+
+
+def test_latest_by_state_ignores_unattributable_rows():
+    agg = _aggregate([("2026-10", 10)])
+    unknown = agg.head(1).copy()
+    unknown["state"] = None
+    unknown["item_code"] = 999
+    result = _latest_by_state(pd.concat([agg, unknown], ignore_index=True))
+    assert "999" not in result["prices"]
+
+
+def test_latest_by_state_handles_an_empty_aggregate():
+    assert _latest_by_state(pd.DataFrame())["month"] is None

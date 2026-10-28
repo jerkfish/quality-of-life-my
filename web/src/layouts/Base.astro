@@ -1,0 +1,130 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { ui, defaultLang, type UiKey } from "../i18n/ui";
+import { generatedAt, pipelineVersion } from "../lib/data";
+import { dated } from "../lib/format";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Artifact filenames this page reads, so the nav can show a per-page freshness badge. */
+  artifactNames?: string[];
+}
+
+const { title, description } = Astro.props;
+
+const NAV: { href: string; key: UiKey }[] = [
+  { href: "/", key: "nav.overview" },
+  { href: "/income", key: "nav.income" },
+  { href: "/states", key: "nav.states" },
+  { href: "/calculator", key: "nav.calculator" },
+  { href: "/forecast", key: "nav.forecast" },
+  { href: "/prices", key: "nav.prices" },
+  { href: "/methodology", key: "nav.methodology" },
+];
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
+---
+<!doctype html>
+<html lang={defaultLang}>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="common.skipToContent">
+      {ui[defaultLang]["common.skipToContent"]}
+    </a>
+
+    <header class="site">
+      <div class="wrap header-inner">
+        <a class="brand" href="/">
+          {ui[defaultLang]["site.name"]}
+          <span>{ui[defaultLang]["site.tagline"]}</span>
+        </a>
+        <nav class="site" aria-label="Main">
+          {
+            NAV.map((item) => (
+              <a href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined}>
+                {ui[defaultLang][item.key]}
+              </a>
+            ))
+          }
+        </nav>
+        <ThemeToggle />
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="wrap">
+        <slot />
+      </div>
+    </main>
+
+    <footer class="site">
+      <div class="wrap">
+        <p>
+          Data © Department of Statistics Malaysia (DOSM), published under
+          <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener">
+            CC BY 4.0</a
+          >. Retrieved from
+          <a href="https://open.dosm.gov.my" rel="noopener">open.dosm.gov.my</a> and
+          <a href="https://data.gov.my" rel="noopener">data.gov.my</a>.
+        </p>
+        <p>
+          Artifacts built {dated(generatedAt())} by pipeline <code>v{pipelineVersion()}</code>.
+          This site reads only the committed data files; it never calls the upstream API.
+        </p>
+        <p>
+          <a href="/methodology">Methodology and limitations</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Language toggle. Applies `data-i18n` labels over the server-rendered English, which
+      // stays the default so the page is fully readable with JavaScript disabled.
+      import { ui, isLang, type Lang } from "../i18n/ui";
+
+      const STORAGE_KEY = "lang";
+      const dict = ui as Record<string, Record<string, string>>;
+
+      function apply(lang: Lang) {
+        document.documentElement.lang = lang === "bm" ? "ms" : "en";
+        for (const el of document.querySelectorAll<HTMLElement>("[data-i18n]")) {
+          const key = el.dataset.i18n;
+          if (!key) continue;
+          const value = dict[lang]?.[key];
+          if (value) el.textContent = value;
+        }
+        for (const el of document.querySelectorAll<HTMLElement>("[data-i18n-aria]")) {
+          const key = el.dataset.i18nAria;
+          if (!key) continue;
+          const value = dict[lang]?.[key];
+          if (value) el.setAttribute("aria-label", value);
+        }
+        document.dispatchEvent(new CustomEvent("langchange", { detail: { lang } }));
+      }
+
+      let stored: string | null = null;
+      try {
+        stored = localStorage.getItem(STORAGE_KEY);
+      } catch {
+        /* storage unavailable */
+      }
+      if (isLang(stored) && stored !== "en") apply(stored);
+
+      document.addEventListener("langtoggle", () => {
+        const next: Lang = document.documentElement.lang === "ms" ? "en" : "bm";
+        try {
+          localStorage.setItem(STORAGE_KEY, next);
+        } catch {
+          /* ignore */
+        }
+        apply(next);
+      });
+    </script>
+  </body>
+</html>

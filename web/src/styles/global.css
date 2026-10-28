@@ -1,0 +1,531 @@
+/*
+ * Global styles.
+ *
+ * Deliberate choices for the Lighthouse budget:
+ *   - system font stack, no webfont request
+ *   - no CSS framework; this file is the whole stylesheet
+ *   - dark mode from custom properties, so no duplicated rules and no JS flash
+ *
+ * Colours are checked against WCAG AA (4.5:1) for body text in both themes.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  --bg: #ffffff;
+  --bg-subtle: #f6f7f9;
+  --bg-raised: #ffffff;
+  --fg: #16181d;
+  --fg-muted: #5a6172;
+  --fg-faint: #848b9c;
+  --border: #dfe3ea;
+  --border-strong: #c3cad8;
+
+  --accent: #1b5fbf;
+  --accent-fg: #ffffff;
+  --accent-subtle: #e8f0fc;
+
+  /* Semantic series colours. Chosen to stay distinguishable for the common forms of
+     colour-vision deficiency: the diverging pair differs in lightness, not just hue. */
+  --series-1: #1b5fbf;
+  --series-2: #d9531e;
+  --series-3: #0f8a6a;
+  --series-4: #8a4fbd;
+  --series-muted: #b6bcc9;
+
+  --warn-bg: #fff6e5;
+  --warn-border: #e0a94a;
+  --warn-fg: #6b4708;
+  --good-bg: #e9f6ef;
+  --good-border: #4aa87a;
+  --good-fg: #12503a;
+
+  --radius: 8px;
+  --measure: 68ch;
+  --shadow: 0 1px 2px rgb(0 0 0 / 6%), 0 4px 12px rgb(0 0 0 / 4%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14161a;
+    --bg-subtle: #1b1e24;
+    --bg-raised: #1f232a;
+    --fg: #e9ecf1;
+    --fg-muted: #a4acbd;
+    --fg-faint: #7d8598;
+    --border: #2d323c;
+    --border-strong: #3f4551;
+
+    --accent: #7fb0f5;
+    --accent-fg: #10203a;
+    --accent-subtle: #1d2a3f;
+
+    --series-1: #7fb0f5;
+    --series-2: #f0906a;
+    --series-3: #56c9a2;
+    --series-4: #c39ae8;
+    --series-muted: #4a5160;
+
+    --warn-bg: #34280f;
+    --warn-border: #7a5a1e;
+    --warn-fg: #f0cd8a;
+    --good-bg: #102b21;
+    --good-border: #2f6b52;
+    --good-fg: #8fd9b6;
+
+    --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 4px 12px rgb(0 0 0 / 25%);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #14161a;
+  --bg-subtle: #1b1e24;
+  --bg-raised: #1f232a;
+  --fg: #e9ecf1;
+  --fg-muted: #a4acbd;
+  --fg-faint: #7d8598;
+  --border: #2d323c;
+  --border-strong: #3f4551;
+  --accent: #7fb0f5;
+  --accent-fg: #10203a;
+  --accent-subtle: #1d2a3f;
+  --series-1: #7fb0f5;
+  --series-2: #f0906a;
+  --series-3: #56c9a2;
+  --series-4: #c39ae8;
+  --series-muted: #4a5160;
+  --warn-bg: #34280f;
+  --warn-border: #7a5a1e;
+  --warn-fg: #f0cd8a;
+  --good-bg: #102b21;
+  --good-border: #2f6b52;
+  --good-fg: #8fd9b6;
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 4px 12px rgb(0 0 0 / 25%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Visible focus everywhere. Removing outlines is the single most common accessibility bug
+   in a chart-heavy site, because canvas elements swallow clicks. */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: var(--accent-fg);
+  padding: 0.6rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+/* ------------------------------------------------------------------ layout */
+
+.wrap {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+main {
+  padding-bottom: 4rem;
+}
+
+header.site {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  padding: 0.75rem 0;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--fg);
+  text-decoration: none;
+  margin-right: auto;
+  letter-spacing: -0.01em;
+}
+
+.brand span {
+  display: block;
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  letter-spacing: 0;
+}
+
+nav.site {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  font-size: 0.9rem;
+}
+
+nav.site a {
+  color: var(--fg-muted);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+}
+nav.site a:hover {
+  color: var(--fg);
+}
+nav.site a[aria-current="page"] {
+  color: var(--fg);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+
+footer.site {
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+  padding: 1.5rem 0 3rem;
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+}
+footer.site a {
+  color: inherit;
+}
+
+/* ------------------------------------------------------------------ typography */
+
+h1 {
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.3rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 2rem 0 0.75rem;
+}
+h2 {
+  font-size: clamp(1.25rem, 1.05rem + 0.7vw, 1.55rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 2.5rem 0 0.75rem;
+}
+h3 {
+  font-size: 1.08rem;
+  margin: 1.75rem 0 0.5rem;
+}
+
+p,
+li {
+  max-width: var(--measure);
+}
+
+.lede {
+  font-size: 1.1rem;
+  color: var(--fg-muted);
+  max-width: var(--measure);
+}
+
+a {
+  color: var(--accent);
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.05em 0.35em;
+}
+
+/* ------------------------------------------------------------------ components */
+
+.card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.stat {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+}
+.stat .label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fg-muted);
+  margin: 0;
+}
+.stat .value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0.2rem 0 0;
+  letter-spacing: -0.02em;
+}
+.stat .note {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  margin: 0.3rem 0 0;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+.callout {
+  border-left: 4px solid var(--border-strong);
+  background: var(--bg-subtle);
+  padding: 0.9rem 1.1rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 1.25rem 0;
+  font-size: 0.94rem;
+}
+.callout p:last-child {
+  margin-bottom: 0;
+}
+.callout.warn {
+  border-left-color: var(--warn-border);
+  background: var(--warn-bg);
+  color: var(--warn-fg);
+}
+.callout.good {
+  border-left-color: var(--good-border);
+  background: var(--good-bg);
+  color: var(--good-fg);
+}
+.callout h3 {
+  margin-top: 0;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.data-note {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  border-top: 1px dashed var(--border);
+  padding-top: 0.5rem;
+  margin-top: 0.75rem;
+}
+.data-note p {
+  margin: 0.2rem 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+caption {
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  padding-bottom: 0.5rem;
+}
+th,
+td {
+  text-align: left;
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+th {
+  font-weight: 600;
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+td.num,
+th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+tbody tr:hover {
+  background: var(--bg-subtle);
+}
+
+/* Scrollable table wrapper: wide tables must not force the page to scroll sideways. */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chart {
+  margin: 1.5rem 0;
+}
+.chart svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.chart-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.15rem;
+}
+.chart-sub {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  margin: 0 0 0.75rem;
+}
+
+/* A skeleton shown until a chart island mounts, so the page does not jump. */
+.chart-loading {
+  min-height: 14rem;
+  background: var(--bg-subtle);
+  border-radius: var(--radius);
+  display: grid;
+  place-items: center;
+  color: var(--fg-faint);
+  font-size: 0.85rem;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  align-items: flex-end;
+  margin: 1rem 0;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+}
+.field label {
+  color: var(--fg-muted);
+  font-weight: 600;
+}
+select,
+input[type="number"],
+input[type="range"],
+button {
+  font: inherit;
+  color: var(--fg);
+  background: var(--bg-raised);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  padding: 0.4rem 0.5rem;
+}
+button {
+  cursor: pointer;
+}
+button.primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+button.primary:hover {
+  filter: brightness(1.08);
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+ul.plain {
+  list-style: none;
+  padding-left: 0;
+}
+ul.plain li {
+  padding-left: 1rem;
+  position: relative;
+}
+ul.plain li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--fg-faint);
+}
+
+@media print {
+  header.site,
+  footer.site,
+  .theme-toggle,
+  .controls {
+    display: none;
+  }
+  .card {
+    break-inside: avoid;
+  }
+}

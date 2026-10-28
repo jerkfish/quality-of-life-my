@@ -1,0 +1,484 @@
+---
+import Base from "../layouts/Base.astro";
+import { nationalCpi, asOf } from "../lib/data";
+import { asOfLabel } from "../lib/format";
+
+const cpi = nationalCpi();
+const asOfValue = asOf(["cpi_national.json"]);
+
+const DIVISIONS = Object.entries(cpi.meta.division_names)
+  .filter(([code]) => code !== "overall")
+  .map(([code, names]) => ({ code, ...names }))
+  .sort((a, b) => a.code.localeCompare(b.code));
+
+/** Cumulative percent change between two annual means, per division. */
+function rateSince(baseYear: number): Record<string, number> {
+  const annual: Record<number, Record<string, number>> = {};
+  cpi.periods.forEach((period, i) => {
+    const year = Number(period.slice(0, 4));
+    annual[year] ??= {};
+    for (const [code, values] of Object.entries(cpi.series)) {
+      const v = values[i];
+      if (typeof v === "number") {
+        annual[year][code] = (annual[year][code] ?? 0) + v;
+      }
+    }
+  });
+  const counts: Record<number, number> = {};
+  cpi.periods.forEach((period) => {
+    const year = Number(period.slice(0, 4));
+    counts[year] = (counts[year] ?? 0) + 1;
+  });
+  for (const year of Object.keys(annual)) {
+    for (const code of Object.keys(annual[Number(year)])) {
+      annual[Number(year)][code] /= counts[Number(year)];
+    }
+  }
+  const years = Object.keys(annual).map(Number).sort((a, b) => a - b);
+  const latest = years.at(-1)!;
+  if (!annual[baseYear] || !annual[latest]) return {};
+  const out: Record<string, number> = {};
+  for (const code of Object.keys(annual[latest])) {
+    const a = annual[baseYear][code];
+    const b = annual[latest][code];
+    if (typeof a === "number" && typeof b === "number" && a !== 0) {
+      out[code] = (b / a - 1) * 100;
+    }
+  }
+  return out;
+}
+
+/** Latest year-on-year rate per division, from the monthly index. */
+function latestYoy(): Record<string, number> {
+  const out: Record<string, number> = {};
+  const n = cpi.periods.length;
+  for (const [code, values] of Object.entries(cpi.series)) {
+    const prev = values[n - 13];
+    const now = values[n - 1];
+    if (typeof prev === "number" && typeof now === "number" && prev !== 0) {
+      out[code] = (now / prev - 1) * 100;
+    }
+  }
+  return out;
+}
+
+const periods = {
+  yoy: { label: `Latest 12 months (${asOfLabel(asOfValue)})`, rates: latestYoy() },
+  since2010: { label: "Since 2010", rates: rateSince(2010) },
+};
+
+const latestPeriod = cpi.periods.at(-1);
+---
+<Base
+  title="Your basket — Malaysia Cost-of-Living Reality Check"
+  description="Enter your monthly spending by category and see your own inflation rate, compared with the headline figure and explained in plain language."
+>
+  <h1>What is <em>your</em> inflation rate?</h1>
+  <p class="lede">
+    Headline CPI is an average over everybody. If you spend more than average on things that
+    got expensive, your rate is higher than the headline — and vice versa. Enter a rough
+    monthly spending split to find out.
+  </p>
+
+  <div class="callout">
+    <h3>Why there is no default basket</h3>
+    <p>
+      DOSM does not publish CPI expenditure weights as open data — we searched the whole
+      catalogue and the only "weight" datasets are about child nutrition. The official weights
+      live in a PDF technical note, not a machine-readable file. So we will not invent a
+      plausible-looking default and present it as the real one. You supply the split; we do the
+      arithmetic honestly.
+    </p>
+    <p>
+      Rough numbers are fine. This is about the <em>shape</em> of your spending, not precision.
+    </p>
+  </div>
+
+  <div class="controls">
+    <div class="field">
+      <label for="period">Compare over</label>
+      <select id="period" data-period>
+        {
+          Object.entries(periods).map(([key, p], idx) => (
+            <option value={key} selected={idx === 0}>{p.label}</option>
+          ))
+        }
+      </select>
+    </div>
+    <button type="button" class="primary" data-compute>Calculate my rate</button>
+    <button type="button" data-evenly>Split evenly across all</button>
+    <button type="button" data-clear>Clear</button>
+  </div>
+
+  <form data-basket-form>
+    <div class="table-scroll">
+      <table>
+        <caption>
+          Your monthly spending, in ringgit. Enter 0 or leave blank for categories you do not
+          spend on. Weights are normalised, so only the proportions matter.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Category</th>
+            <th scope="col" class="num">RM per month</th>
+            <th scope="col" class="num">Share</th>
+            <th scope="col" class="num">Price change</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            DIVISIONS.map((d) => (
+              <tr>
+                <th scope="row">{d.en}</th>
+                <td class="num">
+                  <label class="visually-hidden" for={`w-${d.code}`}>
+                    Monthly spending on {d.en}
+                  </label>
+                  <input
+                    id={`w-${d.code}`}
+                    type="number"
+                    min="0"
+                    step="10"
+                    inputmode="decimal"
+                    data-weight={d.code}
+                    style="width:8rem;text-align:right"
+                  />
+                </td>
+                <td class="num" data-share={d.code}>—</td>
+                <td class="num" data-rate={d.code}>—</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </form>
+
+  <div class="card" data-result hidden aria-live="polite">
+    <h2 style="margin-top:0">Your result</h2>
+    <div class="grid">
+      <div class="stat">
+        <p class="label">Your inflation</p>
+        <p class="value" data-out-personal>—</p>
+      </div>
+      <div class="stat">
+        <p class="label">Headline inflation</p>
+        <p class="value" data-out-headline>—</p>
+      </div>
+      <div class="stat">
+        <p class="label">Difference</p>
+        <p class="value" data-out-gap>—</p>
+      </div>
+    </div>
+    <p data-out-explain style="margin-top:1rem"></p>
+    <div data-out-drivers></div>
+    <div data-out-caveats></div>
+  </div>
+
+  <script
+    id="calculator-data"
+    type="application/json"
+    set:html={JSON.stringify({ periods, divisions: DIVISIONS, latestPeriod })}
+  />
+
+  <script>
+    /**
+     * Personal inflation.
+     *
+     * NOTE ON DUPLICATION: the same formula exists in Python in
+     * `pipeline/src/colcheck/transforms/personal_inflation.py`, where it is unit-tested. This
+     * is a re-implementation because the inputs are the user's, so it cannot be precomputed.
+     * The known-answer assertions in `selfCheck()` below pin the arithmetic; keeping the two
+     * in step is listed as a known gap.
+     */
+
+    interface Division {
+      code: string;
+      en: string;
+      bm: string;
+    }
+
+    interface CalcData {
+      periods: Record<string, { label: string; rates: Record<string, number> }>;
+      divisions: Division[];
+      latestPeriod: string;
+    }
+
+    const data: CalcData = JSON.parse(
+      document.getElementById("calculator-data")?.textContent ?? "{}",
+    );
+
+    const $ = <T extends HTMLElement>(sel: string) => document.querySelector<T>(sel);
+
+    /** Weighted average of division rates. Weights are normalised, so scale does not matter. */
+    function personalInflation(
+      weights: Record<string, number>,
+      rates: Record<string, number>,
+    ): { personal: number; headline: number; covered: number; missing: string[]; contributions: { code: string; weight: number; rate: number; contribution: number }[] } {
+      const positive = Object.entries(weights).filter(([, w]) => w > 0);
+      const total = positive.reduce((a, [, w]) => a + w, 0);
+      const missing = positive.filter(([code]) => !(code in rates)).map(([code]) => code);
+      const priced = positive.filter(([code]) => code in rates);
+      const pricedTotal = priced.reduce((a, [, w]) => a + w, 0);
+
+      if (!total || !pricedTotal) {
+        return { personal: NaN, headline: rates.overall ?? NaN, covered: 0, missing, contributions: [] };
+      }
+
+      const contributions = priced
+        .map(([code, w]) => {
+          const weight = w / pricedTotal;
+          const rate = rates[code];
+          return { code, weight, rate, contribution: weight * rate };
+        })
+        .sort((a, b) => b.weight - a.weight);
+
+      return {
+        personal: contributions.reduce((a, c) => a + c.contribution, 0),
+        headline: rates.overall ?? NaN,
+        // Share of the user's stated spend that we could actually price.
+        covered: pricedTotal / total,
+        missing,
+        contributions,
+      };
+    }
+
+    /** Known-answer checks. Run once on load; failure is surfaced, not swallowed. */
+    function selfCheck(): string | null {
+      const a = personalInflation({ "01": 70, "07": 30 }, { "01": 4, "07": 10, overall: 2 });
+      if (Math.abs(a.personal - 5.8) > 1e-9) return `expected 5.8, got ${a.personal}`;
+      if (Math.abs(a.headline - 2) > 1e-9) return "headline mismatch";
+      const b = personalInflation({ "01": 1 }, { "01": 4, overall: 2 });
+      if (Math.abs(b.personal - 4) > 1e-9) return `single-division expected 4, got ${b.personal}`;
+      const c = personalInflation({ "99": 1 }, { "01": 4, overall: 2 });
+      if (!Number.isNaN(c.personal)) return "unpriceable basket should not produce a number";
+      return null;
+    }
+
+    function readWeights(): Record<string, number> {
+      const out: Record<string, number> = {};
+      document.querySelectorAll<HTMLInputElement>("[data-weight]").forEach((input) => {
+        const v = Number(input.value);
+        out[input.dataset.weight ?? ""] = Number.isFinite(v) && v > 0 ? v : 0;
+      });
+      return out;
+    }
+
+    function updateRates(rates: Record<string, number>) {
+      for (const d of data.divisions) {
+        const cell = document.querySelector<HTMLElement>(`[data-rate="${d.code}"]`);
+        if (!cell) continue;
+        const r = rates[d.code];
+        cell.textContent = typeof r === "number" ? `${r > 0 ? "+" : ""}${r.toFixed(1)}%` : "n/a";
+      }
+    }
+
+    function updateShares(weights: Record<string, number>) {
+      const total = Object.values(weights).reduce((a, b) => a + b, 0);
+      for (const d of data.divisions) {
+        const cell = document.querySelector<HTMLElement>(`[data-share="${d.code}"]`);
+        if (!cell) continue;
+        const w = weights[d.code] ?? 0;
+        cell.textContent = total > 0 && w > 0 ? `${((w / total) * 100).toFixed(0)}%` : "—";
+      }
+    }
+
+    function compute() {
+      const periodKey = ($("[data-period]") as HTMLSelectElement | null)?.value ?? "yoy";
+      const period = data.periods[periodKey];
+      if (!period) return;
+
+      const weights = readWeights();
+      const result = personalInflation(weights, period.rates);
+      const card = $("[data-result]");
+      if (!card) return;
+
+      if (Number.isNaN(result.personal)) {
+        card.hidden = false;
+        setText("[data-out-personal]", "—");
+        setText("[data-out-headline]", fmtPct(result.headline));
+        setText("[data-out-gap]", "—");
+        setText(
+          "[data-out-explain]",
+          "Enter at least one category with a non-zero amount, then press Calculate.",
+        );
+        $("[data-out-drivers]")!.innerHTML = "";
+        $("[data-out-caveats]")!.innerHTML = "";
+        return;
+      }
+
+      card.hidden = false;
+      const gap = result.personal - result.headline;
+      setText("[data-out-personal]", fmtPct(result.personal));
+      setText("[data-out-headline]", fmtPct(result.headline));
+      setText("[data-out-gap]", `${gap >= 0 ? "+" : ""}${gap.toFixed(1)} pp`);
+      setText("[data-out-explain]", explain(result.personal, result.headline, gap, result.contributions));
+
+      // Show each category's contribution, and what it would have contributed at the
+      // headline rate — the difference is what "your basket is different" actually means.
+      const rows = result.contributions
+        .map((c) => {
+          const name = data.divisions.find((d) => d.code === c.code)?.en ?? c.code;
+          const atHeadline = c.weight * result.headline;
+          const delta = c.contribution - atHeadline;
+          return { name, weight: c.weight, rate: c.rate, contribution: c.contribution, delta };
+        })
+        .filter((r) => Math.abs(r.delta) > 0.005)
+        .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta))
+        .slice(0, 5);
+
+      const drivers = $("[data-out-drivers]");
+      if (drivers) {
+        drivers.innerHTML = rows.length
+          ? `<h3>What moves your number away from the headline</h3>
+             <div class="table-scroll"><table>
+               <thead><tr><th scope="col">Category</th><th scope="col" class="num">Your share</th>
+               <th scope="col" class="num">Price change</th><th scope="col" class="num">Effect vs headline</th></tr></thead>
+               <tbody>${rows
+                 .map(
+                   (r) =>
+                     `<tr><th scope="row">${escapeHtml(r.name)}</th>
+                      <td class="num">${(r.weight * 100).toFixed(0)}%</td>
+                      <td class="num">${r.rate > 0 ? "+" : ""}${r.rate.toFixed(1)}%</td>
+                      <td class="num">${r.delta > 0 ? "+" : ""}${r.delta.toFixed(2)} pp</td></tr>`,
+                 )
+                 .join("")}</tbody></table></div>`
+          : "";
+      }
+
+      const caveats = $("[data-out-caveats]");
+      if (caveats) {
+        const notes: string[] = [];
+        if (result.missing.length) {
+          notes.push(
+            `We have no price data for ${result.missing.length} category(ies) in your basket, so they were excluded rather than counted as zero.`,
+          );
+        }
+        if (result.covered < 0.5) {
+          notes.push(
+            `Only ${(result.covered * 100).toFixed(0)}% of your spending could be priced, so this figure is not reliable.`,
+          );
+        }
+        notes.push(
+          "This uses national price changes. Prices move differently in different states — see the States page.",
+        );
+        notes.push(
+          "Food away from home and food at home are separate divisions. If you eat out a lot, weight division 11 (Restaurants & Accommodation) accordingly.",
+        );
+        caveats.innerHTML = `<div class="data-note">${notes.map((n) => `<p>${escapeHtml(n)}</p>`).join("")}</div>`;
+      }
+    }
+
+    function explain(
+      personal: number,
+      headline: number,
+      gap: number,
+      contributions: { code: string; weight: number; rate: number; contribution: number }[],
+    ): string {
+      if (Math.abs(gap) < 0.05) {
+        return `Your spending pattern gives you essentially the same inflation rate as the headline figure of ${headline.toFixed(1)}%.`;
+      }
+      const ranked = contributions
+        .map((c) => ({
+          name: data.divisions.find((d) => d.code === c.code)?.en ?? c.code,
+          weight: c.weight,
+          delta: c.contribution - c.weight * headline,
+        }))
+        .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta))
+        .slice(0, 3)
+        .map((c) => `${c.name.toLowerCase()} (${(c.weight * 100).toFixed(0)}% of your spending)`);
+
+      const direction = gap >= 0 ? "above" : "below";
+      return (
+        `Your inflation is ${Math.abs(gap).toFixed(1)} percentage points ${direction} the headline rate ` +
+        `(${personal.toFixed(1)}% versus ${headline.toFixed(1)}%). The categories pushing you away from ` +
+        `the average are ${ranked.join(", ")}.`
+      );
+    }
+
+    const setText = (sel: string, text: string) => {
+      const el = $(sel);
+      if (el) el.textContent = text;
+    };
+    const fmtPct = (v: number) => (Number.isFinite(v) ? `${v.toFixed(1)}%` : "no data");
+    const escapeHtml = (s: string) =>
+      s.replace(/[&<>"']/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] ?? c,
+      );
+
+    // Wire up
+    const periodSelect = $<HTMLSelectElement>("[data-period]");
+    const refresh = () => {
+      const key = periodSelect?.value ?? "yoy";
+      const rates = data.periods[key]?.rates ?? {};
+      updateRates(rates);
+      updateShares(readWeights());
+    };
+
+    periodSelect?.addEventListener("change", () => {
+      refresh();
+      compute();
+    });
+
+    document.querySelector("[data-compute]")?.addEventListener("click", compute);
+    document.querySelector("[data-clear]")?.addEventListener("click", () => {
+      document.querySelectorAll<HTMLInputElement>("[data-weight]").forEach((i) => {
+        i.value = "";
+      });
+      const card = $("[data-result]");
+      if (card) card.hidden = true;
+      refresh();
+    });
+    document.querySelector("[data-evenly]")?.addEventListener("click", () => {
+      document.querySelectorAll<HTMLInputElement>("[data-weight]").forEach((i) => {
+        i.value = "100";
+      });
+      refresh();
+    });
+
+    document.querySelector("[data-basket-form]")?.addEventListener("input", () => {
+      updateShares(readWeights());
+    });
+
+    const problem = selfCheck();
+    if (problem) {
+      const card = $("[data-result]");
+      if (card) {
+        card.hidden = false;
+        setText(
+          "[data-out-explain]",
+          `This calculator failed its own accuracy check (${problem}) and its results should not be trusted.`,
+        );
+      }
+    }
+
+    refresh();
+  </script>
+
+  <h2>How this works</h2>
+  <p>
+    Your personal rate is the weighted average of the price changes in each category you spend
+    on, weighted by how much of your budget goes there:
+  </p>
+  <p><code>your inflation = Σ (your share of category i) × (price change in category i)</code></p>
+  <p>
+    The headline rate is the same calculation using the national average spending pattern
+    instead of yours. The gap between them is entirely about <em>what you buy</em>.
+  </p>
+  <p>
+    The method, including what happens when a category cannot be priced, is set out in the
+    <a href="/methodology">methodology</a>.
+  </p>
+
+  <div class="data-note">
+    <p>
+      Price changes are national, as of {asOfLabel(asOfValue)}. This is a simplification:
+      running the same calculation per state would need state-level category weights, which
+      DOSM does not publish either.
+    </p>
+    <p>
+      Percentages are computed from index levels, never by adding published percentage changes
+      together. Compounding percentages is where this kind of tool usually goes wrong.
+    </p>
+  </div>
+</Base>

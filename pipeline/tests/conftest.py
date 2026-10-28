@@ -64,6 +64,26 @@ def cpi_state_frame() -> pd.DataFrame:
 
 
 @pytest.fixture
+def cpi_national_years() -> pd.DataFrame:
+    """National CPI covering the same years as `wages_state_frame`.
+
+    Deliberately two full years, so the annual mean has 12 observations and neither year is
+    flagged partial. Index goes 100 -> 125, i.e. +25% inflation.
+    """
+    rows = []
+    for year, level in ((2010, 100.0), (2025, 125.0)):
+        for month in range(1, 13):
+            rows.append(
+                {
+                    "date": pd.Timestamp(year=year, month=month, day=1),
+                    "division": "overall",
+                    "index": level,
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+@pytest.fixture
 def wages_state_frame() -> pd.DataFrame:
     """Nominal wages matching `cpi_state_frame`'s states, 'both' sex, plus a Malaysia row.
 

@@ -210,6 +210,7 @@ def build_cpi_strata(cpi_strata: pd.DataFrame, meta: CatalogueMeta | None) -> di
 def build_real_wages(
     wages_state: pd.DataFrame,
     cpi_state: pd.DataFrame,
+    cpi_headline: pd.DataFrame,
     published_real: pd.DataFrame,
     meta_wages: CatalogueMeta | None,
     meta_real: CatalogueMeta | None,
@@ -219,6 +220,9 @@ def build_real_wages(
     summary = wages_t.real_wage_summary(
         real, cpi_state, start_year=WAGE_START_YEAR, end_year=WAGE_END_YEAR
     )
+    # The 16-state frame has no nationwide row by construction, so the national series is
+    # built separately against the national CPI.
+    national = wages_t.national_real_wages(wages_state, cpi_headline)
 
     return {
         "meta": {
@@ -248,6 +252,19 @@ def build_real_wages(
         "summary": [
             {k: (round_or_none(v) if isinstance(v, float) else v) for k, v in row.items()}
             for row in summary.to_dict(orient="records")
+        ],
+        # Nationwide series, deflated by the national CPI. Separate from `series` because
+        # `series` is keyed by state and joins against the state CPI.
+        "national": [
+            {
+                "year": int(r["year"]),
+                "wages_median": round_or_none(r["wages_median"]),
+                "wages_mean": round_or_none(r["wages_mean"]),
+                "cpi": round_or_none(r["cpi"], 3),
+                "real_median": round_or_none(r["real_median"]),
+                "real_mean": round_or_none(r["real_mean"]),
+            }
+            for _, r in national.iterrows()
         ],
         "caveats": [
             "Covers employees only. The self-employed and informal sector are not included, "
@@ -405,7 +422,13 @@ def build_regional(
 
 
 def build_pricecatcher(aggregate: pd.DataFrame, items: pd.DataFrame) -> dict[str, Any]:
-    """Item metadata plus per-item national series. The full aggregate ships as parquet."""
+    """Item metadata, per-item national series, and the latest month by state.
+
+    The full item x state x month aggregate ships as parquet because it is the queryable
+    layer. It is not usable directly in a browser, so the slice the site actually needs --
+    latest month, one number per item per state -- is extracted here as JSON. That keeps the
+    "what does it cost near you" panel from needing a parquet reader on the client.
+    """
     national = pc_t.national_item_series(aggregate)
     items_meta = (
         items.loc[:, ["item_code", "item", "unit", "item_group", "item_category"]]
@@ -436,7 +459,61 @@ def build_pricecatcher(aggregate: pd.DataFrame, items: pd.DataFrame) -> dict[str
         },
         "items": [{**r, "item_code": int(r["item_code"])} for r in items_meta],
         "series": by_item,
+        "latest_by_state": _latest_by_state(aggregate),
     }
+
+
+def _latest_by_state(aggregate: pd.DataFrame, coverage_floor: float = 0.8) -> dict[str, Any]:
+    """Median price per item per state for the most recent month with usable coverage.
+
+    The full aggregate is item x state x month and ships as parquet, which a browser cannot
+    read without a parquet decoder. The slice the site renders -- one number per item per
+    state for one month -- is extracted here instead, so the price panel needs no extra
+    client-side dependency.
+
+    **Selecting the month.** The obvious rule ("most recent month with at least 80% of the
+    best month's items") is wrong here, and produced 2022-05. PriceCatcher's item panel
+    genuinely shrinks over time -- 729 items in early 2022 down to about 340 by 2026 -- so
+    every recent month fails a floor set against the all-time maximum, and the rule walks
+    backwards to the oldest month it can find. Iterating that way would have shipped a
+    three-year-old price table as "current".
+
+    What the floor is actually for is a *partial* month: the current edition having only just
+    begun, or a month where collection was interrupted. So we start at the newest month and
+    only step back while it looks thin **relative to its own recent neighbours**.
+    """
+    if aggregate.empty:
+        return {"month": None, "prices": {}, "counts": {}}
+
+    per_month = aggregate.groupby("month")["item_code"].nunique().sort_index()
+    months = list(per_month.index)
+    month = months[-1]
+
+    # Compare a candidate month against the twelve *preceding* it, not against itself. Check
+    # the newest month first, and walk back only while it looks thin.
+    for _ in range(3):
+        idx = months.index(month)
+        if idx == 0:
+            break
+        preceding = per_month.iloc[max(0, idx - 12) : idx]
+        baseline = float(preceding.median()) if len(preceding) else 0.0
+        if not baseline or per_month.loc[month] >= coverage_floor * baseline:
+            break
+        month = months[idx - 1]
+
+    prices: dict[str, dict[str, float]] = {}
+    counts: dict[str, dict[str, int]] = {}
+    for _, row in aggregate[aggregate["month"] == month].iterrows():
+        state = row["state"]
+        # A premise missing from the lookup table cannot be attributed to a state. Excluded
+        # rather than bucketed under a guess.
+        if not isinstance(state, str) or not state:
+            continue
+        code = str(int(row["item_code"]))
+        prices.setdefault(code, {})[state] = round_or_none(row["median_price"], 2)
+        counts.setdefault(code, {})[state] = int(row["n_obs"])
+
+    return {"month": str(month), "prices": prices, "counts": counts}
 
 
 def _load_existing_manifest(path: Path) -> dict[str, Any]:

@@ -7,8 +7,9 @@ A public web app built entirely on Malaysia's open data. All figures come from D
 [open.dosm.gov.my](https://open.dosm.gov.my) and [data.gov.my](https://data.gov.my). Nothing
 is modelled, interpolated, or invented.
 
-> **Status: Phase 2 (analyses) complete.** No frontend, Worker, or eval harness yet.
-> This README will lead with charts once they ship.
+> **Status: Phase 3 (frontend) complete.** A seven-page static site is built and passing
+> Lighthouse 99/100/100/100. The Worker and eval harness (Phase 4) and the deploy (Phase 5)
+> are still to come, so there is no live URL yet.
 
 ## Forecast, reported honestly
 
@@ -64,20 +65,46 @@ every dataset, and the reasoning, is in [`docs/DATA.md`](docs/DATA.md).
 ## Quick start
 
 ```bash
+# Data
 cd pipeline
 uv sync --extra dev
-
-uv run pytest -m "not network"     # 95 offline tests
+uv run pytest -m "not network"     # 142 offline tests
 uv run pytest -m network           # 18 live upstream contract tests
 uv run colcheck run                # full pipeline -> ../data
-uv run colcheck run --skip-pricecatcher    # core artifacts only, much faster
+uv run colcheck run --skip-pricecatcher --skip-forecast   # fast iteration
+
+# Site
+cd ../web
+bun install
+bun x astro build                  # static site -> web/dist
+bun x astro preview                # serve it locally
 ```
+
+The site reads `data/*.json` at **build time** and never contacts `data.gov.my`. If an
+artifact is missing the build fails, rather than rendering a chart that quietly means nothing.
+
+## The site
+
+Seven pages, eleven charts, no runtime data fetching.
+
+| Page | What it shows |
+| --- | --- |
+| `/` | The three findings, with the caveats that matter |
+| `/income` | Nominal vs real wages and household income, per state |
+| `/states` | The full ranking, and the divergence against inflation |
+| `/calculator` | Your own inflation rate, from your own spending split |
+| `/forecast` | 12-month projection, including where the model fails |
+| `/prices` | What specific items cost, by state |
+| `/methodology` | Every formula, assumption and limitation |
+
+**Lighthouse: performance 99, accessibility 100, best practices 100, SEO 100**, zero failing
+audits. Dark mode, no webfonts, and a page with no charts ships zero JavaScript.
 
 ## Repository layout
 
 ```
 pipeline/   Python data pipeline: fetch -> validate -> transform -> artifacts
-web/        Static site (Astro) — reads only the committed artifacts   [Phase 3]
+web/        Astro static site — reads only the committed artifacts, at build time
 worker/     Cloudflare Worker — /api/ask agent loop                    [Phase 4]
 evals/      Agent evaluation harness                                   [Phase 4]
 docs/       Documentation (below)

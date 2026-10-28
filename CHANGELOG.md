@@ -5,6 +5,38 @@ the project aims at [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added — Phase 3 (frontend)
+- Astro static site in `web/`, reading only the committed `data/` artifacts at build time.
+  Nothing on the site can reach `data.gov.my`, by construction.
+- Seven pages: overview, income, states, personal-inflation calculator, forecast, item prices,
+  and methodology.
+- Eleven Observable Plot charts, themed from CSS custom properties and redrawn on theme change.
+- Dark mode with no flash of the wrong theme, system font stack, no webfont request.
+- Client-side calculator with the same formula as the Python reference, plus a self-check that
+  runs on load and refuses to present results if the arithmetic does not verify.
+- Accessibility: every chart carries a text alternative, charts are hidden from assistive
+  technology so a screen reader gets one accurate description rather than "dot, dot, dot",
+  skip link, visible focus, reduced-motion support.
+- Performance: **Lighthouse 99 / 100 / 100 / 100** (performance / accessibility / best
+  practices / SEO) with zero failing audits. A page with no charts ships zero JavaScript.
+- `web.yml` CI: type check, build, empty-chart-props guard, Lighthouse thresholds enforced.
+
+### Fixed — Phase 3
+- **The wage artifact had no national series.** `real_wages_by_state` inner-joins against
+  `cpi_state`, which carries only the 16 states — correctly, since there is no national
+  CPI-by-state observation. The national row was therefore silently absent, and every headline
+  national figure rendered as "no data" rather than raising. Added `national_real_wages`,
+  deflated by the national CPI.
+- **The PriceCatcher "current month" table was three years old.** The rule "newest month with
+  at least 80% of the all-time maximum item count" is wrong for this data, because the item
+  panel genuinely shrinks over time (729 items in 2022, ~340 by 2026). Every recent month
+  failed the floor and the rule walked backwards to 2022-05. It now steps back only when a
+  month looks thin *relative to its own recent neighbours*, which is what the guard was for.
+- **Two charts failed to render and the failure was invisible until checked.** A local named
+  `base` shadowed the module-level `base(theme)` helper, putting it in the temporal dead zone
+  and throwing at runtime; and the state-inflation chart read `cumulative_inflation_pct` from
+  a block that calls it `cumulative_pct`. Both now fixed, with the empty-array case guarded.
+
 ### Added — Phase 2 (analyses)
 - **Forecasting** (`transforms/forecast.py`): ETS and SARIMA against an inflation-persistence
   baseline, rolling-origin expanding-window backtesting, 80% prediction intervals reported in

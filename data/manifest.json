@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-28T15:30:21+00:00",
- "started_at": "2026-10-28T15:25:50+00:00",
+ "generated_at": "2026-10-28T16:05:40+00:00",
+ "started_at": "2026-10-28T16:03:03+00:00",
  "pipeline_version": "0.1.0",
  "source": "DOSM / data.gov.my open data (CC BY 4.0)",
  "datasets": {
@@ -408,8 +408,8 @@
    "sha256": "3aa400109b6fa3bd86343d5f9aad818366889a1f1ed9839547b6b6c09d7cd36c"
   },
   "real_wages.json": {
-   "bytes": 42338,
-   "sha256": "095658660d0714058a7dd83a76399a22cf074a3e4f16641e3b490c084f3e469f"
+   "bytes": 44325,
+   "sha256": "aa298ab03ac02bf637a976122959cdc4cea347d39e88704414a347c769bd60b7"
   },
   "household_income.json": {
    "bytes": 16925,
@@ -424,8 +424,8 @@
    "sha256": "217f70a2ea4376d972d19961b5040c1165e6152c8d117e0dbbd5b6aa5da0e76d"
   },
   "pricecatcher/items.json": {
-   "bytes": 919647,
-   "sha256": "dcdbb012cf60ad56032346f8d312facf52f6dde6d1d54c8648c29b659d742080"
+   "bytes": 1093675,
+   "sha256": "df13938f65bdf2a695e1f028a6d6dcdb5abd50e92c3b6c4e1ba95e5b54b253ac"
   },
   "anomalies.json": {
    "bytes": 186467,

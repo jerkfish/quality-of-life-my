@@ -107,6 +107,20 @@ key UI strings only if time allows in Phase 5.
 **A16 — Conventional commits from the first commit**, since a clean history is an explicit
 grading criterion.
 
+**A19 — The site reads artifacts at build time, never at runtime.**
+No fetch calls, no API, no client-side data loading. A missing artifact fails the build rather
+than rendering an empty chart a reader would not notice.
+
+**A20 — Charts are client-side islands; prose and tables are static HTML.**
+Every chart has a text alternative, so the findings are reachable with JavaScript disabled,
+but the graphics are not. Build-time SVG rendering would be better and is listed as a gap.
+
+**A21 — No default basket in the calculator.**
+Sharpened from A6. DOSM does not publish expenditure weights as open data, so inventing a
+plausible default and presenting it as official would be the easiest and most misleading
+option. The form starts empty, with a one-click even split and a clear explanation of why
+there is no preset.
+
 ## Open questions deferred to the phase gate
 
 See the Phase 0 report. The material ones: whether to include PriceCatcher, whether the

@@ -1,0 +1,232 @@
+---
+import Base from "../layouts/Base.astro";
+import Chart from "../components/Chart.astro";
+import { realWages, householdIncome, regional, asOf } from "../lib/data";
+import { pct, myr, asOfLabel, number } from "../lib/format";
+
+const rw = realWages();
+const hh = householdIncome();
+const reg = regional();
+
+const wageStates = [...new Set(rw.series.map((s) => s.state))].sort();
+
+// The nationwide series lives in its own artifact block; the state-keyed map has no Malaysia
+// entry, because it joins against the state CPI which carries only the 16 states.
+const nationalWage = rw.national.slice().sort((a, b) => a.year - b.year);
+const latestNational = nationalWage.at(-1);
+
+const wageAsOf = asOf(["real_wages.json"]);
+const incomeAsOf = asOf(["household_income.json"]);
+
+// Per-state series for the selector, computed once at build time and handed to the island.
+const seriesByState: Record<
+  string,
+  { year: number; wages_median: number | null; real_median: number | null; cpi: number | null }[]
+> = {};
+seriesByState["Malaysia"] = nationalWage;
+for (const state of wageStates) {
+  seriesByState[state] = rw.series
+    .filter((s) => s.state === state)
+    .sort((a, b) => a.year - b.year)
+    .map((s) => ({
+      year: s.year,
+      wages_median: s.wages_median,
+      real_median: s.real_median,
+      cpi: s.cpi,
+    }));
+}
+
+const wageRanking = reg.wages_ranking.slice().sort((a, b) => b.real_wage_growth_pct - a.real_wage_growth_pct);
+const incomeRanking = reg.income_ranking
+  .slice()
+  .sort((a, b) => b.real_income_growth_pct - a.real_income_growth_pct);
+---
+<Base
+  title="Income — Malaysia Cost-of-Living Reality Check"
+  description="Nominal versus real wages and household income by state, deflated by the state CPI. No interpolation; survey gaps are shown as gaps."
+>
+  <h1>Income: nominal versus real</h1>
+  <p class="lede">
+    What people earn, before and after prices. Two sources are shown side by side because they
+    measure different things and agree on the shape of the answer — which is stronger evidence
+    than either alone.
+  </p>
+
+  <div class="callout">
+    <h3>The method, in one line</h3>
+    <p>
+      Real income is nominal income divided by the change in the state CPI since 2010. The CPI
+      is based at 2010 = 100 and the wage series starts in the same year, so no rebasing or
+      splicing is needed anywhere.
+    </p>
+  </div>
+
+  <Chart
+    name="nominal-vs-real"
+    props={{ points: nationalWage, state: "Malaysia" }}
+    title="Malaysia — median monthly wage"
+    subtitle="Nominal against real, in 2010 ringgit. Employees who are Malaysian citizens."
+    height={330}
+  />
+
+  <h2>Pick a state</h2>
+  <div class="controls">
+    <div class="field">
+      <label for="state-select">State</label>
+      <select id="state-select" data-state-select>
+        <option value="Malaysia" selected>Malaysia</option>
+        {wageStates.map((s) => <option value={s}>{s}</option>)}
+      </select>
+    </div>
+  </div>
+
+  <div data-state-chart>
+    <Chart
+      name="nominal-vs-real"
+      props={{ points: seriesByState[wageStates[0]] ?? [], state: wageStates[0] }}
+      title="Median monthly wage by state"
+      subtitle="Switch the selector above to compare states."
+      height={330}
+    />
+  </div>
+
+  <script>
+    // Re-renders the chart in place when the state changes. The data is embedded at build
+    // time, so this never fetches anything.
+    import { RENDERERS } from "../lib/charts";
+    import { chartTheme } from "../lib/theme";
+
+    const SERIES: Record<string, { year: number; wages_median: number | null; real_median: number | null }[]> =
+      JSON.parse(document.getElementById("state-series-data")?.textContent ?? "{}");
+
+    const select = document.querySelector<HTMLSelectElement>("[data-state-select]");
+    const host = document.querySelector<HTMLElement>("[data-state-chart]");
+
+    function draw(state: string) {
+      const figure = host?.querySelector<HTMLElement>("[data-chart]");
+      const body = figure?.querySelector<HTMLElement>(".chart-body");
+      const summary = figure?.querySelector<HTMLElement>("[data-chart-summary]");
+      if (!figure || !body) return;
+      const points = SERIES[state] ?? [];
+      const { element, summary: text } = RENDERERS["nominal-vs-real"]({ points, state }, chartTheme());
+      body.replaceChildren(element);
+      if (summary) summary.textContent = text;
+      const title = figure.querySelector<HTMLElement>(".chart-sub");
+      if (title) {
+        title.textContent = `${state} — nominal against real, in 2010 ringgit.`;
+      }
+    }
+
+    select?.addEventListener("change", () => draw(select.value));
+  </script>
+
+  <script
+    id="state-series-data"
+    type="application/json"
+    set:html={JSON.stringify(seriesByState)}
+  />
+
+  <h2>Ranked by real growth</h2>
+  <p>
+    The same underlying series, ordered. Note how little of this ordering is explained by
+    inflation — the <a href="/states">States page</a> shows that directly.
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <caption>
+        Median wage by state, {rw.meta.period.start_year}–{rw.meta.period.end_year}
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">State</th>
+          <th scope="col" class="num">Median {rw.meta.period.start_year}</th>
+          <th scope="col" class="num">Median {rw.meta.period.end_year}</th>
+          <th scope="col" class="num">Nominal growth</th>
+          <th scope="col" class="num">Inflation</th>
+          <th scope="col" class="num">Real growth</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          wageRanking.map((r) => (
+            <tr>
+              <th scope="row">{r.state}</th>
+              <td class="num">{myr(r.wages_median_start)}</td>
+              <td class="num">{myr(r.wages_median_end)}</td>
+              <td class="num">{pct(r.nominal_wage_growth_pct)}</td>
+              <td class="num">{pct(r.cumulative_inflation_pct, 1, false)}</td>
+              <td class="num">{pct(r.real_wage_growth_pct)}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Household income, from the household survey</h2>
+  <p>
+    HIES measures households, not individual employees — a different population, a different
+    question. It is a survey, so it exists only for certain years, and those years are
+    irregularly spaced. The chart shows only the years that exist; nothing is smoothed or
+    filled in between them.
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <caption>
+        Household median income by state, {hh.meta.period.start_year}–{hh.meta.period.end_year}
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">State</th>
+          <th scope="col" class="num">Median {hh.meta.period.start_year}</th>
+          <th scope="col" class="num">Median {hh.meta.period.end_year}</th>
+          <th scope="col" class="num">Nominal growth</th>
+          <th scope="col" class="num">Inflation</th>
+          <th scope="col" class="num">Real growth</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          incomeRanking.map((r) => (
+            <tr>
+              <th scope="row">{r.state}</th>
+              <td class="num">{myr(r.income_median_start)}</td>
+              <td class="num">{myr(r.income_median_end)}</td>
+              <td class="num">{pct(r.nominal_income_growth_pct)}</td>
+              <td class="num">{pct(r.cumulative_inflation_pct, 1, false)}</td>
+              <td class="num">{pct(r.real_income_growth_pct)}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p class="data-note">
+    Survey years available: {hh.meta.survey_years.join(", ")}. Years not listed do not exist in
+    the data and are not drawn.
+  </p>
+
+  <div class="callout warn">
+    <h3>Caveats on both sources</h3>
+    <ul>
+      {rw.caveats.map((c) => <li>{c}</li>)}
+      {hh.caveats.map((c) => <li>{c}</li>)}
+    </ul>
+  </div>
+
+  <div class="data-note">
+    <p>Wage data as of {asOfLabel(wageAsOf)} · household income as of {asOfLabel(incomeAsOf)}</p>
+    <p>
+      Latest national median wage: {myr(latestNational?.wages_median)} nominal,{" "}
+      {myr(latestNational?.real_median)} in 2010 ringgit ({latestNational?.year}).
+    </p>
+    <p>
+      Deflation check: maximum difference from DOSM's published real series is{" "}
+      {number(rw.meta.validation_against_dosm.max_abs_diff_median, 2)} RM across{" "}
+      {rw.meta.validation_against_dosm.n_compared} states.
+    </p>
+  </div>
+</Base>

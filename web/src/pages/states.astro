@@ -1,0 +1,244 @@
+---
+import Base from "../layouts/Base.astro";
+import Chart from "../components/Chart.astro";
+import { stateCpi, regional, asOf } from "../lib/data";
+import { pct, number, asOfLabel } from "../lib/format";
+
+const cpi = stateCpi();
+const reg = regional();
+const cpiAsOf = asOf(["cpi_state.json"]);
+
+// The wages-period ranking drives the bars. Field names are mapped here rather than in the
+// chart: this artifact block calls it `cumulative_pct` while the rankings use
+// `cumulative_inflation_pct`, and a chart reading the wrong one renders "NaN".
+const inflationRanking = (reg.meta.inflation_by_state_wages_period ?? []).map((r) => ({
+  state: r.state,
+  cumulative_inflation_pct: r.cumulative_pct,
+}));
+
+const divergenceRows = [
+  ...reg.wages_ranking.map((r) => ({
+    state: r.state,
+    cumulative_inflation_pct: r.cumulative_inflation_pct,
+    real_growth_pct: r.real_wage_growth_pct,
+    measure: "Wages",
+  })),
+  ...reg.income_ranking.map((r) => ({
+    state: r.state,
+    cumulative_inflation_pct: r.cumulative_inflation_pct,
+    real_growth_pct: r.real_income_growth_pct,
+    measure: "Household income",
+  })),
+];
+
+const w = reg.spreads.wages;
+const i = reg.spreads.income;
+
+// Correlation between inflation and real growth, computed here rather than asserted. A value
+// near zero is the finding: the two are not linked.
+function pearson(xs: number[], ys: number[]): number | null {
+  const n = xs.length;
+  if (n < 3) return null;
+  const mx = xs.reduce((a, b) => a + b, 0) / n;
+  const my = ys.reduce((a, b) => a + b, 0) / n;
+  let num = 0;
+  let dx = 0;
+  let dy = 0;
+  for (let k = 0; k < n; k++) {
+    num += (xs[k] - mx) * (ys[k] - my);
+    dx += (xs[k] - mx) ** 2;
+    dy += (ys[k] - my) ** 2;
+  }
+  return dx && dy ? num / Math.sqrt(dx * dy) : null;
+}
+
+const wageCorr = pearson(
+  reg.wages_ranking.map((r) => r.cumulative_inflation_pct),
+  reg.wages_ranking.map((r) => r.real_wage_growth_pct),
+);
+const incomeCorr = pearson(
+  reg.income_ranking.map((r) => r.cumulative_inflation_pct),
+  reg.income_ranking.map((r) => r.real_income_growth_pct),
+);
+
+// State-level CPI series for the small-multiples comparison.
+const stateOverall: Record<string, (number | null)[]> = {};
+for (const state of cpi.meta.states) {
+  stateOverall[state] = cpi.series[`${state}|overall`] ?? [];
+}
+---
+<Base
+  title="States — Malaysia Cost-of-Living Reality Check"
+  description="Which states fell behind, and why. Cumulative inflation against real income growth for all 16 states and federal territories."
+>
+  <h1>States: the divergence is on the income side</h1>
+  <p class="lede">
+    Price inflation is remarkably similar everywhere in Malaysia. Income growth is not. That
+    asymmetry is the finding this whole project exists to show.
+  </p>
+
+  <div class="grid" style="margin:1.5rem 0">
+    <div class="stat">
+      <p class="label">Inflation spread</p>
+      <p class="value">{number(w.inflation.spread_pp, 1)} pp</p>
+      <p class="note">
+        {w.inflation.min_state} {pct(w.inflation.min_pct, 1, false)} → {w.inflation.max_state}
+        {" "}{pct(w.inflation.max_pct, 1, false)}, {reg.meta.wages_period.start_year}–{reg.meta.wages_period.end_year}
+      </p>
+    </div>
+    <div class="stat">
+      <p class="label">Real wage growth spread</p>
+      <p class="value">{number(w.real_growth.spread_pp, 1)} pp</p>
+      <p class="note">
+        {w.real_growth.min_state} {pct(w.real_growth.min_pct)} → {w.real_growth.max_state}
+        {" "}{pct(w.real_growth.max_pct)}
+      </p>
+    </div>
+    <div class="stat">
+      <p class="label">Correlation</p>
+      <p class="value">{wageCorr === null ? "n/a" : number(wageCorr, 2)}</p>
+      <p class="note">
+        Between a state's inflation and its real wage growth. Near zero means higher prices did
+        not come with higher income growth.
+      </p>
+    </div>
+  </div>
+
+  <h2>Cumulative inflation by state</h2>
+  <Chart
+    name="state-inflation-bars"
+    props={{ rows: inflationRanking }}
+    title="Cumulative consumer price inflation, 2010 to latest"
+    subtitle="The bars are close together. That is the whole point."
+    height={440}
+  />
+
+  <h2>The two rankings, side by side</h2>
+  <p>
+    Sorted by real income growth. Note that the ordering here bears almost no relationship to
+    the inflation ranking above: the state with the highest inflation is not the state that
+    lost the most purchasing power.
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <caption>
+        Median wage by state, {reg.meta.wages_period.start_year}–{reg.meta.wages_period.end_year}
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Rank</th>
+          <th scope="col">State</th>
+          <th scope="col" class="num">Nominal growth</th>
+          <th scope="col" class="num">Inflation</th>
+          <th scope="col" class="num">Real growth</th>
+          <th scope="col" class="num">Gap (nominal − inflation)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          reg.wages_ranking.map((r, idx) => (
+            <tr>
+              <td>{idx + 1}</td>
+              <th scope="row">{r.state}</th>
+              <td class="num">{pct(r.nominal_wage_growth_pct)}</td>
+              <td class="num">{pct(r.cumulative_inflation_pct, 1, false)}</td>
+              <td class="num">{pct(r.real_wage_growth_pct)}</td>
+              <td class="num">
+                {pct(r.nominal_wage_growth_pct - r.cumulative_inflation_pct)}
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p class="data-note">
+    The "gap" column is the simple subtraction, shown because it is the intuitive reading.
+    It overstates the real change over a 15-year horizon: the figures above use the ratio of
+    growth factors, which is correct. Chatting about the difference is a good interview
+    question; the method is in <a href="/methodology">methodology</a>.
+  </p>
+
+  <h2>The same picture from household income</h2>
+  <p>
+    A different survey, a different population, different years — and the same conclusion.
+    Household real income growth, {reg.meta.income_period.start_year}–{reg.meta.income_period.end_year}:
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <caption>
+        Household median income by state, {reg.meta.income_period.start_year}–{reg.meta.income_period.end_year}
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">State</th>
+          <th scope="col" class="num">Nominal growth</th>
+          <th scope="col" class="num">Inflation</th>
+          <th scope="col" class="num">Real growth</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          reg.income_ranking.map((r) => (
+            <tr>
+              <th scope="row">{r.state}</th>
+              <td class="num">{pct(r.nominal_income_growth_pct)}</td>
+              <td class="num">{pct(r.cumulative_inflation_pct, 1, false)}</td>
+              <td class="num">{pct(r.real_income_growth_pct)}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    Income growth spread: {number(i.real_growth.spread_pp, 1)} pp, against an inflation spread of
+    just {number(i.inflation.spread_pp, 1)} pp. Correlation between the two across states:{" "}
+    {incomeCorr === null ? "n/a" : number(incomeCorr, 2)}.
+  </p>
+
+  <Chart
+    name="divergence-scatter"
+    props={{ rows: divergenceRows }}
+    title="Inflation against real income growth, both measures"
+    subtitle="If prices drove the divergence, these would slope upwards. They do not."
+    height={380}
+  />
+
+  <div class="callout warn">
+    <h3>What this is not</h3>
+    <p>
+      There is no choropleth here. A map would imply a spatial pattern, and the data does not
+      show one — neighbouring states land all over both rankings. A ranked bar chart is the
+      honest rendering of the actual result. A map would be prettier and would suggest
+      something the numbers do not support.
+    </p>
+  </div>
+
+  <div class="callout">
+    <h3>Why we do not explain the gap</h3>
+    <p>
+      We can say the divergence is on the income side. We cannot say why from this data:
+      industry mix, cost of living differences driving migration, oil revenue, urbanisation and
+      minimum wage effects are all candidates, and none of them are testable with CPI and wage
+      tables alone. Stating a cause here would be storytelling.
+    </p>
+  </div>
+
+  <div class="data-note">
+    <p>State CPI as of {asOfLabel(cpiAsOf)}</p>
+    <p>
+      Cumulative inflation figures use the mean of the 12 monthly index values in each calendar
+      year. Partial years are excluded from the endpoints.
+    </p>
+    <p>
+      Two periods are reported because the sources start in different years: wages
+      {reg.meta.wages_period.start_year}–{reg.meta.wages_period.end_year}, household income
+      {reg.meta.income_period.start_year}–{reg.meta.income_period.end_year}.
+    </p>
+  </div>
+</Base>

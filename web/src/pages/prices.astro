@@ -1,0 +1,349 @@
+---
+import Base from "../layouts/Base.astro";
+import Chart from "../components/Chart.astro";
+import { pricecatcher, stateCpi } from "../lib/data";
+import { monthLabel, number } from "../lib/format";
+
+const pc = pricecatcher();
+const cpi = stateCpi();
+
+if (!pc) {
+  throw new Error(
+    "pricecatcher/items.json is missing. Run `cd pipeline && uv run colcheck run` (without --skip-pricecatcher).",
+  );
+}
+
+const latest = pc.latest_by_state;
+const states = cpi.meta.states;
+
+// Only items that have both a national series and a state table are useful here.
+const rankable = pc.items
+  .filter((i) => pc.series[String(i.item_code)] && latest.prices[String(i.item_code)])
+  .map((i) => {
+    const s = pc.series[String(i.item_code)];
+    const prices = s.median_price.filter((p): p is number => p !== null);
+    const first = prices[0];
+    const last = prices.at(-1);
+    return {
+      ...i,
+      months: s.months.length,
+      first: first ?? null,
+      last: last ?? null,
+      change_pct: first && last ? (last / first - 1) * 100 : null,
+      stateCount: Object.keys(latest.prices[String(i.item_code)] ?? {}).length,
+    };
+  })
+  .sort((a, b) => (b.change_pct ?? -Infinity) - (a.change_pct ?? -Infinity));
+
+const biggestRises = rankable.filter((r) => r.change_pct !== null).slice(0, 10);
+const biggestFalls = rankable
+  .filter((r) => r.change_pct !== null)
+  .slice(-10)
+  .reverse();
+
+const withHistory = rankable.filter((r) => r.months >= 12);
+
+// The item used for the default chart: the most-observed staple with a full history.
+const DEFAULT_ITEM = "1";
+const defaultItem = pc.items.find((i) => String(i.item_code) === DEFAULT_ITEM) ?? rankable[0];
+const defaultSeries = pc.series[String(defaultItem.item_code)];
+
+const itemLookup = Object.fromEntries(
+  rankable.map((r) => [
+    String(r.item_code),
+    {
+      item: r.item,
+      unit: r.unit,
+      group: r.item_group,
+      category: r.item_category,
+      series: pc.series[String(r.item_code)],
+      states: latest.prices[String(r.item_code)] ?? {},
+      counts: latest.counts[String(r.item_code)] ?? {},
+    },
+  ]),
+);
+---
+<Base
+  title="Prices — Malaysia Cost-of-Living Reality Check"
+  description="What specific items actually cost, by state, from PriceCatcher. Explicitly not an inflation measure."
+>
+  <h1>What things actually cost</h1>
+  <p class="lede">
+    Item-level prices, observed at thousands of premises across all 16 states. Pick an item to
+    see its national price history and what it costs in each state.
+  </p>
+
+  <div class="callout warn">
+    <h3>This is not an inflation measure</h3>
+    <p>{pc.meta.caveat}</p>
+    <p>
+      So nothing on this page feeds any inflation number elsewhere on the site. It is here
+      because "what does a kilo of chicken actually cost, and has it gone up" is a fair
+      question, and this is the dataset that answers it.
+    </p>
+  </div>
+
+  <div class="controls">
+    <div class="field">
+      <label for="item-select">Item</label>
+      <select id="item-select" data-item-select style="max-width:32rem">
+        {
+          rankable.map((r) => (
+            <option value={String(r.item_code)} selected={r.item_code === defaultItem.item_code}>
+              {r.item} — {r.unit}
+            </option>
+          ))
+        }
+      </select>
+    </div>
+  </div>
+
+  <div data-item-host>
+    <Chart
+      name="item-price"
+      props={{
+        months: defaultSeries.months,
+        median_price: defaultSeries.median_price,
+        item: defaultItem.item,
+        unit: defaultItem.unit,
+      }}
+      title={defaultItem.item}
+      subtitle={`Median observed price per ${defaultItem.unit}, national`}
+      height={300}
+    />
+  </div>
+
+  <div class="grid" data-item-stats>
+    <div class="stat">
+      <p class="label">Median price, {latest.month ? monthLabel(latest.month) : "latest"}</p>
+      <p class="value" data-out-price>—</p>
+      <p class="note" data-out-unit></p>
+    </div>
+    <div class="stat">
+      <p class="label">Change since {defaultSeries.months[0] ? monthLabel(defaultSeries.months[0]) : "start"}</p>
+      <p class="value" data-out-change>—</p>
+      <p class="note">On the national median, not a like-for-like basket</p>
+    </div>
+    <div class="stat">
+      <p class="label">States with data</p>
+      <p class="value" data-out-states>—</p>
+      <p class="note">Out of 16 states and federal territories</p>
+    </div>
+  </div>
+
+  <h2>By state</h2>
+  <div class="table-scroll">
+    <table>
+      <caption data-state-caption>
+        Median observed price in {latest.month ? monthLabel(latest.month) : "the latest month"},
+        with the number of observations behind each figure
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">State</th>
+          <th scope="col" class="num">Median price</th>
+          <th scope="col" class="num">Observations</th>
+          <th scope="col" class="num">vs cheapest state</th>
+        </tr>
+      </thead>
+      <tbody data-state-rows></tbody>
+    </table>
+  </div>
+
+  <script
+    id="item-data"
+    type="application/json"
+    set:html={JSON.stringify({ items: itemLookup, states, month: latest.month })}
+  />
+
+  <script>
+    import { RENDERERS } from "../lib/charts";
+    import { chartTheme } from "../lib/theme";
+
+    interface ItemInfo {
+      item: string;
+      unit: string | null;
+      series: { months: string[]; median_price: (number | null)[] };
+      states: Record<string, number | null>;
+      counts: Record<string, number>;
+    }
+
+    const data: { items: Record<string, ItemInfo>; states: string[]; month: string | null } =
+      JSON.parse(document.getElementById("item-data")?.textContent ?? "{}");
+
+    const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const monthLabel = (p: string) => {
+      const [y, m] = p.split("-").map(Number);
+      return `${MONTHS[(m ?? 1) - 1] ?? m} ${y}`;
+    };
+    const setText = (sel: string, text: string) => {
+      const el = document.querySelector(sel);
+      if (el) el.textContent = text;
+    };
+    const escapeHtml = (s: string) =>
+      s.replace(/[&<>"']/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] ?? c,
+      );
+
+    function drawItem(code: string) {
+      const info = data.items[code];
+      if (!info) return;
+
+      // Chart
+      const figure = document.querySelector<HTMLElement>("[data-item-host] [data-chart]");
+      const body = figure?.querySelector<HTMLElement>(".chart-body");
+      const summary = figure?.querySelector<HTMLElement>("[data-chart-summary]");
+      const title = figure?.querySelector<HTMLElement>(".chart-title");
+      const sub = figure?.querySelector<HTMLElement>(".chart-sub");
+      if (body && figure) {
+        const rendered = RENDERERS["item-price"](
+          {
+            months: info.series.months,
+            median_price: info.series.median_price,
+            item: info.item,
+            unit: info.unit,
+          },
+          chartTheme(),
+        );
+        body.replaceChildren(rendered.element);
+        if (summary) summary.textContent = rendered.summary;
+        if (title) title.textContent = info.item;
+        if (sub) sub.textContent = `Median observed price per ${info.unit ?? "unit"}, national`;
+      }
+
+      // Stats
+      const prices = info.series.median_price.filter((p): p is number => p !== null);
+      const last = prices.at(-1);
+      const first = prices[0];
+      setText("[data-out-price]", last === undefined ? "no data" : `RM ${last.toFixed(2)}`);
+      setText("[data-out-unit]", `per ${info.unit ?? "unit"}`);
+      setText(
+        "[data-out-change]",
+        first && last
+          ? `${last / first - 1 >= 0 ? "+" : ""}${((last / first - 1) * 100).toFixed(1)}%`
+          : "no data",
+      );
+
+      // State table
+      const entries = Object.entries(info.states)
+        .filter(([, price]) => typeof price === "number")
+        .sort((a, b) => (a[1] as number) - (b[1] as number));
+      setText("[data-out-states]", String(entries.length));
+
+      const cheapest = entries[0]?.[1] as number | undefined;
+      const rows = document.querySelector("[data-state-rows]");
+      if (rows) {
+        rows.innerHTML = entries.length
+          ? entries
+              .map(([state, price]) => {
+                const p = price as number;
+                const n = info.counts[state] ?? 0;
+                const vs = cheapest ? ((p / cheapest - 1) * 100).toFixed(1) : null;
+                return `<tr>
+                  <th scope="row">${escapeHtml(state)}</th>
+                  <td class="num">RM ${p.toFixed(2)}</td>
+                  <td class="num">${n.toLocaleString("en-MY")}</td>
+                  <td class="num">${vs === null || vs === "0.0" ? "cheapest" : `+${vs}%`}</td>
+                </tr>`;
+              })
+              .join("")
+          : `<tr><td colspan="4">No state-level data for this item in ${data.month ?? "the latest month"}.</td></tr>`;
+      }
+
+      const cap = document.querySelector("[data-state-caption]");
+      if (cap && data.month) {
+        cap.textContent = `Median observed price in ${monthLabel(data.month)}, with the number of observations behind each figure`;
+      }
+    }
+
+    const select = document.querySelector<HTMLSelectElement>("[data-item-select]");
+    select?.addEventListener("change", () => drawItem(select.value));
+    if (select) drawItem(select.value);
+  </script>
+
+  <h2>Biggest movers since 2022</h2>
+  <p>
+    Across the whole PriceCatcher history, using the national weighted median. These are
+    observed shelf prices, not a cost-of-living index — a change here reflects what was
+    actually on shelves, not a representative basket.
+  </p>
+
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(22rem,1fr))">
+    <div class="card">
+      <h3 style="margin-top:0">Largest increases</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Item</th>
+              <th scope="col" class="num">Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              biggestRises.map((r) => (
+                <tr>
+                  <th scope="row">
+                    {r.item} <small style="color:var(--fg-muted)">({r.unit})</small>
+                  </th>
+                  <td class="num">{r.change_pct === null ? "—" : `+${r.change_pct.toFixed(1)}%`}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Largest decreases</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Item</th>
+              <th scope="col" class="num">Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              biggestFalls.map((r) => (
+                <tr>
+                  <th scope="row">
+                    {r.item} <small style="color:var(--fg-muted)">({r.unit})</small>
+                  </th>
+                  <td class="num">{r.change_pct === null ? "—" : `${r.change_pct.toFixed(1)}%`}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <h3>Two things that make these numbers hard to read</h3>
+    <p>
+      <strong>The item panel shrinks over time.</strong> PriceCatcher covered around 730 items
+      in early 2022 and about 340 by 2026. So "the number of items with data" is not constant,
+      and a long-run comparison is between a wider and a narrower panel.
+    </p>
+    <p>
+      <strong>Units differ per item.</strong> Some prices are per kilogram, some per plate, some
+      per bird. Comparing across items is meaningless; the unit is shown next to every figure.
+    </p>
+  </div>
+
+  <div class="data-note">
+    <p>
+      {number(pc.meta.n_items, 0)} items known · {pc.meta.editions.length} monthly editions ·
+      latest state table from {latest.month ? monthLabel(latest.month) : "no data"} ·
+      source: {pc.meta.source?.join(", ") ?? "KPDN (PriceCatcher)"}
+    </p>
+    <p>
+      Prices are medians of individual premise observations within a state and month, not
+      averages of averages. Outliers from a single mispriced till do not drag the figure.
+    </p>
+    <p>Items with at least 12 months of history: {withHistory.length} of {rankable.length}.</p>
+  </div>
+</Base>

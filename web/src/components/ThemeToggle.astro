@@ -1,0 +1,70 @@
+---
+import { ui, defaultLang } from "../i18n/ui";
+---
+<div style="display:flex;gap:.4rem;align-items:center">
+  <button
+    class="theme-toggle"
+    type="button"
+    data-theme-toggle
+    data-i18n-aria="theme.toggle"
+    aria-label={ui[defaultLang]["theme.toggle"]}
+  >
+    <span aria-hidden="true" data-theme-icon>◐</span>
+  </button>
+  {
+    /* No aria-label here on purpose. The visible text is "BM", and an aria-label that does not
+       contain it breaks the "visible label is part of the accessible name" rule (WCAG 2.5.3),
+       which matters for anyone driving the page by voice. The accessible name is composed
+       from the visible "BM" plus the hidden description instead. */
+  }
+  <button class="theme-toggle" type="button" data-lang-toggle title="English / Bahasa Malaysia">
+    <span aria-hidden="true">BM</span>
+    <span class="visually-hidden">Switch language</span>
+  </button>
+</div>
+
+<script>
+  const root = document.documentElement;
+
+  function currentTheme(): "light" | "dark" {
+    const set = root.dataset.theme;
+    if (set === "light" || set === "dark") return set;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+
+  function sync() {
+    const icon = document.querySelector("[data-theme-icon]");
+    if (icon) icon.textContent = currentTheme() === "dark" ? "☀" : "◐";
+  }
+
+  document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const next = currentTheme() === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem("theme", next);
+      } catch {
+        /* storage unavailable: the toggle still works for this page view */
+      }
+      // Setting `data-theme` triggers the observer below, which dispatches `themechange`.
+      // Dispatching here as well would redraw every chart twice.
+      sync();
+    });
+  });
+
+  document.querySelectorAll("[data-lang-toggle]").forEach((button) => {
+    button.addEventListener("click", () => {
+      document.dispatchEvent(new CustomEvent("langtoggle"));
+    });
+  });
+
+  // Charts read their colours from CSS custom properties. When the theme changes they have to
+  // redraw, otherwise a dark-mode user gets light-mode axes on a dark background.
+  new MutationObserver(() => {
+    sync();
+    document.dispatchEvent(new CustomEvent("themechange"));
+  }).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", sync);
+  sync();
+</script>

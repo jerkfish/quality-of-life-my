@@ -1,0 +1,288 @@
+---
+import Base from "../layouts/Base.astro";
+import Chart from "../components/Chart.astro";
+import { groupCpi, regional, realWages, householdIncome, asOf } from "../lib/data";
+import { pct, number, asOfLabel, myr } from "../lib/format";
+
+const groups = groupCpi();
+const rw = realWages();
+const hh = householdIncome();
+const reg = regional();
+
+const cpiAsOf = asOf(["cpi_national.json", "cpi_state.json"]);
+const wagesAsOf = asOf(["real_wages.json"]);
+const incomeAsOf = asOf(["household_income.json"]);
+
+// --- Finding 1: real incomes rose, unevenly -----------------------------------------
+const wageSpread = reg.spreads.wages.real_growth;
+const incomeSpread = reg.spreads.income.real_growth;
+
+// National real wage growth. Read from the artifact's dedicated `national` block: the
+// state-keyed `series` has no Malaysia row, because it inner-joins against the state CPI,
+// which carries only the 16 states.
+const nationalWages = rw.national.slice().sort((a, b) => a.year - b.year);
+const w0 = nationalWages[0];
+const w1 = nationalWages.at(-1);
+const nationalNominalGrowth =
+  w0 && w1 && w0.wages_median && w1.wages_median
+    ? (w1.wages_median / w0.wages_median - 1) * 100
+    : null;
+const nationalRealGrowth =
+  w0 && w1 && w0.real_median && w1.real_median
+    ? (w1.real_median / w0.real_median - 1) * 100
+    : null;
+const nationalInflation =
+  w0 && w1 && w0.cpi && w1.cpi ? (w1.cpi / w0.cpi - 1) * 100 : null;
+
+// --- Finding 2: the divergence is on the income side --------------------------------
+const wageInflationSpread = reg.spreads.wages.inflation.spread_pp ?? 0;
+const wageRealSpread = reg.spreads.wages.real_growth.spread_pp ?? 0;
+
+// --- Finding 3: food away vs food at home -------------------------------------------
+const foodAway = groups.meta.cumulative_from_base_pct?.["001"] ?? null;
+const foodHome = groups.meta.cumulative_from_base_pct?.["011"] ?? null;
+
+const validation = rw.meta.validation_against_dosm;
+
+// National household income growth, computed rather than pasted in. The two survey years are
+// 2012 and 2024; the ratio form is used because subtracting inflation from nominal growth
+// drifts over a 12-year horizon.
+const hhNational = hh.national.slice().sort((a, b) => a.year - b.year);
+const h0 = hhNational[0];
+const h1 = hhNational.at(-1);
+const nationalIncomeGrowth =
+  h0?.income_median && h1?.income_median ? (h1.income_median / h0.income_median - 1) * 100 : null;
+const nationalIncomeRealGrowth =
+  h0?.income_median && h1?.income_median && h0?.cpi && h1?.cpi
+    ? ((h1.income_median / h0.income_median) / (h1.cpi / h0.cpi) - 1) * 100
+    : null;
+
+const descriptions = [
+  {
+    code: "001",
+    label: "Food away from home",
+    value: foodAway,
+    colour: "var(--series-2)",
+  },
+  { code: "011", label: "Food at home", value: foodHome, colour: "var(--series-3)" },
+];
+
+const divergenceRows = [
+  ...reg.wages_ranking.map((r) => ({
+    state: r.state,
+    cumulative_inflation_pct: r.cumulative_inflation_pct,
+    real_growth_pct: r.real_wage_growth_pct,
+    measure: "Wages",
+  })),
+  ...reg.income_ranking.map((r) => ({
+    state: r.state,
+    cumulative_inflation_pct: r.cumulative_inflation_pct,
+    real_growth_pct: r.real_income_growth_pct,
+    measure: "Household income",
+  })),
+];
+---
+<Base
+  title="Malaysia Cost-of-Living Reality Check"
+  description="Is purchasing power in Malaysia actually improving? Real income, inflation and regional divergence, built entirely from DOSM open data."
+>
+  <h1>Is purchasing power in Malaysia actually improving?</h1>
+  <p class="lede">
+    Short answer: yes on average, but the national average hides a spread between states that
+    is two to three times wider than any difference in prices. Here is what the data supports —
+    and where it refuses to support the usual story.
+  </p>
+
+  <div class="grid" style="margin:1.5rem 0">
+    <div class="stat">
+      <p class="label">National real median wage</p>
+      <p class="value">{pct(nationalRealGrowth)}</p>
+      <p class="note">
+        {w0?.year}–{w1?.year}, in 2010 ringgit. Wages rose {pct(nationalNominalGrowth)} nominal
+        against {pct(nationalInflation, 1, false)} inflation. Household income, a different
+        measure: {pct(nationalIncomeGrowth)} nominal.
+      </p>
+    </div>
+    <div class="stat">
+      <p class="label">Spread across states</p>
+      <p class="value">{number(wageRealSpread, 1)} pp</p>
+      <p class="note">
+        Real wage growth ranges from {pct(wageSpread.min_pct)} in {wageSpread.min_state} to{" "}
+        {pct(wageSpread.max_pct)} in {wageSpread.max_state}.
+      </p>
+    </div>
+    <div class="stat">
+      <p class="label">Spread in prices</p>
+      <p class="value">{number(wageInflationSpread, 1)} pp</p>
+      <p class="note">
+        Cumulative inflation across states is far more uniform than income growth. Prices are
+        not what is diverging.
+      </p>
+    </div>
+  </div>
+
+  <h2>Finding 1 — Real incomes rose, but the map is deeply uneven</h2>
+  <p>
+    Two independent sources agree on the shape. The employer wage survey (individual employees)
+    and the Household Income and Expenditure Survey (households) start in different years and
+    measure different things, but both show a substantial national gain and a very wide spread.
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <caption>Real income growth by state, both sources</caption>
+      <thead>
+        <tr>
+          <th scope="col">Measure</th>
+          <th scope="col">Period</th>
+          <th scope="col" class="num">National</th>
+          <th scope="col" class="num">Lowest</th>
+          <th scope="col" class="num">Highest</th>
+          <th scope="col" class="num">Spread</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Median wage</th>
+          <td>{rw.meta.period.start_year}–{rw.meta.period.end_year}</td>
+          <td class="num">{pct(nationalRealGrowth)}</td>
+          <td class="num">{pct(wageSpread.min_pct)} <small>({wageSpread.min_state})</small></td>
+          <td class="num">{pct(wageSpread.max_pct)} <small>({wageSpread.max_state})</small></td>
+          <td class="num">{number(wageSpread.spread_pp, 1)} pp</td>
+        </tr>
+        <tr>
+          <th scope="row">Household median income</th>
+          <td>{hh.meta.period.start_year}–{hh.meta.period.end_year}</td>
+          <td class="num">{pct(nationalIncomeRealGrowth)}</td>
+          <td class="num">{pct(incomeSpread.min_pct)} <small>({incomeSpread.min_state})</small></td>
+          <td class="num">{pct(incomeSpread.max_pct)} <small>({incomeSpread.max_state})</small></td>
+          <td class="num">{number(incomeSpread.spread_pp, 1)} pp</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <h3>Read this before trusting the medians</h3>
+    <p>
+      The wage figures are the median <em>of the employee population</em>. That median moves
+      when the mix of employees changes — more part-time work, more or fewer non-citizens in
+      the workforce — with no change in anyone's pay. It is a real caveat we cannot correct
+      without microdata. Employment surveys also exclude the self-employed and informal sector
+      entirely.
+    </p>
+  </div>
+
+  <h2>Finding 2 — The divergence is about wages, not prices</h2>
+  <p>
+    If cost of living were diverging because some states got expensive, prices would be the
+    thing that spread out. They are not.
+  </p>
+
+  <Chart
+    name="divergence-scatter"
+    props={{ rows: divergenceRows }}
+    title="Price inflation versus real income growth, by state"
+    subtitle="Each dot is one state. Flat and wide means prices are similar everywhere while income growth is not."
+    height={380}
+  />
+
+  <p>
+    Cumulative inflation across the 16 states spans {number(wageInflationSpread, 1)} percentage
+    points. Real income growth spans {number(wageRealSpread, 1)}. The states that fell behind
+    did so on the income side. W.P. Putrajaya is the clearest case: it has both the highest
+    cumulative inflation and the lowest real household income growth.
+  </p>
+
+  <div class="callout">
+    <p>
+      <strong>No causal claim.</strong> The data says the divergence is on the income side, not
+      the price side. It does not say why. Explaining that would need data this project does not
+      have, and we would rather leave the question open than invent a narrative.
+    </p>
+  </div>
+
+  <h2>Finding 3 — Your spending pattern matters more than your postcode</h2>
+  <p>
+    Eating out and cooking at home are separate categories in DOSM's CPI, and they have moved
+    very differently.
+  </p>
+
+  <Chart
+    name="group-comparison"
+    props={{
+      periods: groups.periods,
+      series: groups.series,
+      names: groups.meta.group_names,
+      codes: ["001", "011"],
+    }}
+    title="Food away from home versus food at home"
+    subtitle="Cumulative price change since 2010, national"
+    height={330}
+  />
+
+  <div class="grid" style="margin:1.25rem 0">
+    {
+      descriptions.map((d) => (
+        <div class="stat">
+          <p class="label">{d.label}</p>
+          <p class="value" style={`color:${d.colour}`}>
+            {d.value === null ? "no data" : `+${d.value.toFixed(1)}%`}
+          </p>
+          <p class="note">since 2010</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <p>
+    A household that eats out regularly has experienced meaningfully more inflation on that
+    part of its budget than one that cooks. That is a difference in <em>what you buy</em>, not
+    in <em>where you live</em> — and you can
+    <a href="/calculator">work out your own rate</a> from your own spending split.
+  </p>
+
+  <p>
+    And two results that cut against the expected narrative. Over 2010–2025, low-income
+    households' CPI rose <strong>35.0%</strong> against a headline <strong>34.6%</strong> — a
+    gap of 0.4 percentage points, essentially nothing. Urban households, meanwhile, saw
+    <strong>35.6%</strong> against <strong>29.5%</strong> for rural. Where you live (urban vs
+    rural) moved inflation about fifteen times more than how much you earn did.
+  </p>
+
+  <div class="callout good">
+    <p>
+      <strong>We report that as found.</strong> "Inflation hits the poor hardest" is a
+      reasonable prior and it is not what this data shows, at the aggregate level. The
+      <em>composition</em> does differ — low-income inflation ran hotter on restaurants and
+      tobacco and cooler on education and food — but the total does not. We would rather say
+      so than pick a period that makes it look bigger.
+    </p>
+  </div>
+
+  <h2>Where to go next</h2>
+  <ul class="plain">
+    <li><a href="/income">Income</a> — nominal versus real, by state, from both sources</li>
+    <li><a href="/states">States</a> — the full ranking and the divergence in detail</li>
+    <li><a href="/calculator">Your basket</a> — your own inflation rate from your spending split</li>
+    <li><a href="/forecast">Forecast</a> — 12 months ahead, including where the model fails</li>
+    <li><a href="/prices">Prices</a> — what specific items actually cost, by state</li>
+    <li><a href="/methodology">Methodology</a> — every formula, assumption, and limitation</li>
+  </ul>
+
+  <div class="data-note">
+    <p>
+      CPI as of {asOfLabel(cpiAsOf)} · wages as of {asOfLabel(wagesAsOf)} · household income as
+      of {asOfLabel(incomeAsOf)}
+    </p>
+    <p>
+      Deflation method validated against DOSM's own published real-wage series: {validation.n_compared}
+      {" "}states compared, maximum difference {validation.max_abs_diff_median.toFixed(2)} RM. This
+      is asserted by a test, not merely claimed.
+    </p>
+    <p>
+      National median wage {w0?.year}: {myr(w0?.wages_median)} nominal, {myr(w0?.real_median)} in
+      2010 ringgit → {w1?.year}: {myr(w1?.wages_median)} nominal, {myr(w1?.real_median)} real.
+    </p>
+  </div>
+</Base>

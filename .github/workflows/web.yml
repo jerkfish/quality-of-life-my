@@ -1,0 +1,116 @@
+name: web
+
+# Builds the static site from the committed data artifacts and checks quality gates.
+#
+# This workflow does NOT fetch upstream data. If the pipeline workflow has just committed
+# refreshed artifacts, this one builds against them — so a broken artifact surfaces as a
+# failed build rather than as a wrong number on a live site.
+
+on:
+  push:
+    paths:
+      - "web/**"
+      - "data/**"
+      - ".github/workflows/web.yml"
+  pull_request:
+    paths:
+      - "web/**"
+      - "data/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: web-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        working-directory: web
+        run: bun install --frozen-lockfile
+
+      # Fails loudly if an artifact is missing or a page references data the pipeline no
+      # longer emits. `data.ts` throws at import time for exactly this reason.
+      - name: Type check
+        working-directory: web
+        run: bun x astro check
+
+      - name: Build
+        working-directory: web
+        run: bun x astro build
+
+      - name: Check every chart's data is present in the built HTML
+        working-directory: web
+        run: |
+          # Charts render client-side, so the built HTML cannot prove they draw. What it CAN
+          # prove is that every chart island received a non-empty props object — an empty one
+          # renders a blank rectangle that looks like "no data".
+          fail=0
+          for f in $(find dist -name '*.html'); do
+            empties=$(grep -o 'data-props="{}"' "$f" | wc -l)
+            if [ "$empties" -gt 0 ]; then
+              echo "::error file=$f::$empties chart(s) received empty props"
+              fail=1
+            fi
+          done
+          exit $fail
+
+      # Performance and accessibility gates. The brief asks for Lighthouse >= 90; we hold
+      # the same bar in CI so a regression cannot merge quietly.
+      - name: Lighthouse
+        working-directory: web
+        run: |
+          bun x astro preview --port 4321 &
+          sleep 5
+          bun x lighthouse http://localhost:4321/ \
+            --quiet --chrome-flags="--headless=new --no-sandbox" \
+            --output=json --output-path=./lighthouse.json \
+            --only-categories=performance,accessibility,best-practices,seo
+
+      - name: Enforce Lighthouse thresholds
+        working-directory: web
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          scores = json.load(open("lighthouse.json"))["categories"]
+          thresholds = {"performance": 90, "accessibility": 95, "best-practices": 90, "seo": 90}
+          failed = False
+          print("| category | score | required |")
+          print("|---|---|---|")
+          for name, floor in thresholds.items():
+              got = round(scores[name]["score"] * 100)
+              ok = got >= floor
+              failed |= not ok
+              print(f"| {name} | {got} | {floor} |{' FAIL' if not ok else ''}")
+          with open("lighthouse.md", "w") as fh:
+              fh.write("### Lighthouse\n\n")
+          sys.exit(1 if failed else 0)
+          PY
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: web/dist
+          retention-days: 7
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Web build" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f web/lighthouse.md ]; then cat web/lighthouse.md >> "$GITHUB_STEP_SUMMARY"; fi
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          du -sh web/dist >> "$GITHUB_STEP_SUMMARY"

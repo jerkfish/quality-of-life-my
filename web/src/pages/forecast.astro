@@ -1,0 +1,459 @@
+---
+import Base from "../layouts/Base.astro";
+import Chart from "../components/Chart.astro";
+import { forecast, anomalies, nationalCpi, asOf } from "../lib/data";
+import { pct, number, asOfLabel, monthLabel } from "../lib/format";
+
+const fc = forecast();
+const an = anomalies();
+const cpi = nationalCpi();
+const asOfValue = asOf(["forecast.json", "anomalies.json"]);
+
+if (!fc) {
+  throw new Error("forecast.json is missing. Run `cd pipeline && uv run colcheck run` (without --skip-forecast).");
+}
+
+// Only series that actually have enough history to backtest appear in the artifact, so the
+// selector is driven by the data rather than a hard-coded list.
+const seriesList = fc.series.map((s) => ({ id: s.series_id, label: s.label }));
+
+/** Year-on-year rate history for one division, computed from the index. */
+function yoyHistory(seriesId: string, months = 180): { period: string; value: number }[] {
+  const code = seriesId.split(":")[1];
+  const values = cpi.series[code] ?? [];
+  const out: { period: string; value: number }[] = [];
+  for (let i = 0; i < cpi.periods.length; i++) {
+    const prev = values[i - 12];
+    const now = values[i];
+    if (typeof prev !== "number" || typeof now !== "number" || prev === 0) continue;
+    out.push({ period: cpi.periods[i], value: (now / prev - 1) * 100 });
+  }
+  return out.slice(-months);
+}
+
+const charts = Object.fromEntries(
+  fc.series.map((s) => [s.series_id, { history: yoyHistory(s.series_id), points: s.points }]),
+);
+
+const beaten = fc.series.filter((s) => s.beats_baseline);
+const lost = fc.series.filter((s) => !s.beats_baseline);
+const headline = fc.series.find((s) => s.series_id === "cpi_headline:overall") ?? fc.series[0];
+const headlineScores = headline.scores.slice().sort((a, b) => a.mae_pp - b.mae_pp);
+
+const headlineContext = headline.points.map((p, idx) => ({
+  period: p.period,
+  index: p.point,
+  yoy: p.implied_yoy,
+  lo: p.implied_yoy_lo80,
+  hi: p.implied_yoy_hi80,
+  step: idx + 1,
+}));
+
+const nationalAnomalies = an?.series.find((s) => s.series_id === "cpi_headline:overall");
+const anomalyHistory = yoyHistory("cpi_headline:overall", 12 * 40);
+---
+<Base
+  title="Forecast — Malaysia Cost-of-Living Reality Check"
+  description="A 12-month CPI forecast with rolling-origin backtesting, prediction intervals, and an explicit verdict when the model fails to beat a naive baseline."
+>
+  <h1>Forecast, with the failures left in</h1>
+  <p class="lede">
+    A 12-month projection of headline and category inflation, backtested against a baseline of
+    "inflation stays what it was a year ago". Where the model loses to that baseline, this page
+    says so.
+  </p>
+
+  <div class="callout good">
+    <h3>Headline result</h3>
+    <p><strong>{headline.verdict}</strong></p>
+    <p style="margin-top:.5rem">
+      Best model: <code>{headline.method}</code> · baseline: <code>{fc.meta.baseline}</code> ·
+      scored on {fc.meta.scored_on}.
+    </p>
+  </div>
+
+  <Chart
+    name="model-scores"
+    props={{ scores: headline.scores, baseline: fc.meta.baseline }}
+    title="Backtest accuracy, headline CPI"
+    subtitle="Mean absolute error on the year-on-year inflation rate. Lower is better."
+    height={200}
+  />
+
+  <div class="table-scroll">
+    <table>
+      <caption>
+        Accuracy over {headlineScores[0]?.n_observations} backtested forecasts, rolling-origin
+        expanding window
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Model</th>
+          <th scope="col" class="num">MAE (pp)</th>
+          <th scope="col" class="num">MAPE</th>
+          <th scope="col" class="num">RMSE (pp)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          headlineScores.map((s) => (
+            <tr>
+              <th scope="row">
+                {s.model}
+                {s.model === fc.meta.baseline ? " (baseline)" : ""}
+              </th>
+              <td class="num">{number(s.mae_pp, 2)}</td>
+              <td class="num">{number(s.mape_pct, 1)}%</td>
+              <td class="num">{number(s.rmse_pp, 2)}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <Chart
+    name="forecast-path"
+    props={{
+      ...charts[headline.series_id],
+      label: headline.label,
+    }}
+    title={`${headline.label} — actual and forecast`}
+    subtitle="Dashed line is the forecast, shaded band the 80% prediction interval."
+    height={340}
+  />
+
+  <h3>Month by month</h3>
+  <div class="table-scroll">
+    <table>
+      <caption>
+        Projected {headline.label.toLowerCase()} inflation, 80% interval. Horizon {headline.horizon} months.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Month</th>
+          <th scope="col" class="num">Step</th>
+          <th scope="col" class="num">Index</th>
+          <th scope="col" class="num">Implied inflation</th>
+          <th scope="col" class="num">80% interval</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          headlineContext.map((p) => (
+            <tr>
+              <th scope="row">{monthLabel(p.period)}</th>
+              <td class="num">{p.step}</td>
+              <td class="num">{number(p.index, 1)}</td>
+              <td class="num">{p.yoy === null ? "no data" : `${p.yoy.toFixed(2)}%`}</td>
+              <td class="num">
+                {p.lo === null || p.hi === null
+                  ? "no data"
+                  : `${p.lo.toFixed(1)}% to ${p.hi.toFixed(1)}%`}
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Which categories the model can and cannot forecast</h2>
+  <p>
+    Across the headline series and all 13 CPI divisions, {beaten.length} of {fc.series.length}
+    beat the baseline. The rest did not, and are listed here rather than quietly dropped.
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <caption>Best model per series, and whether it beat the baseline</caption>
+      <thead>
+        <tr>
+          <th scope="col">Category</th>
+          <th scope="col">Chosen model</th>
+          <th scope="col" class="num">MAE (pp)</th>
+          <th scope="col" class="num">Baseline MAE</th>
+          <th scope="col">Beats baseline?</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          fc.series.map((s) => {
+            const best = s.scores.slice().sort((a, b) => a.mae_pp - b.mae_pp)[0];
+            const base = s.scores.find((x) => x.model === fc.meta.baseline);
+            return (
+              <tr>
+                <th scope="row">{s.label}</th>
+                <td><code>{s.method}</code></td>
+                <td class="num">{number(best?.mae_pp, 2)}</td>
+                <td class="num">{number(base?.mae_pp, 2)}</td>
+                <td>
+                  <span class={s.beats_baseline ? "badge" : "badge"} style={
+                    s.beats_baseline
+                      ? "border-color:var(--good-border);color:var(--good-fg)"
+                      : "border-color:var(--warn-border);color:var(--warn-fg)"
+                  }>
+                    {s.beats_baseline ? "yes" : "no"}
+                  </span>
+                </td>
+              </tr>
+            );
+          })
+        }
+      </tbody>
+    </table>
+  </div>
+
+  {
+    lost.length > 0 && (
+      <div class="callout warn">
+        <h3>Where the forecast has no skill</h3>
+        <p>
+          {lost.map((s) => s.label).join(", ")} — these {lost.length} categories did not beat
+          the naive baseline. The projection shown for them is a continuation of the current
+          rate and carries no more information than that.
+        </p>
+        <p>
+          We are reporting this rather than hiding it because it is the honest answer, and
+          because it is genuinely informative: some prices in Malaysia are forecastable twelve
+          months out and some are not.
+        </p>
+      </div>
+    )
+  }
+
+  <h2>Browse a category</h2>
+  <div class="controls">
+    <div class="field">
+      <label for="series-select">Series</label>
+      <select id="series-select" data-series-select>
+        {
+          seriesList.map((s) => (
+            <option value={s.id}>
+              {s.label} — {fc.series.find((x) => x.series_id === s.id)?.beats_baseline ? "beats baseline" : "no better than baseline"}
+            </option>
+          ))
+        }
+      </select>
+    </div>
+  </div>
+
+  <div data-series-host>
+    <Chart
+      name="forecast-path"
+      props={{ ...charts[headline.series_id], label: headline.label }}
+      title="Selected category"
+      subtitle="Use the selector above."
+      height={340}
+    />
+  </div>
+
+  <script
+    id="forecast-data"
+    type="application/json"
+    set:html={JSON.stringify({ charts, series: fc.series, baseline: fc.meta.baseline })}
+  />
+
+  <script>
+    import { RENDERERS } from "../lib/charts";
+    import { chartTheme } from "../lib/theme";
+
+    const select = document.querySelector<HTMLSelectElement>("[data-series-select]");
+    const host = document.querySelector<HTMLElement>("[data-series-host]");
+
+    function draw() {
+      const raw = document.getElementById("forecast-data")?.textContent;
+      if (!raw || !select || !host) return;
+      const data = JSON.parse(raw) as {
+        charts: Record<string, { history: { period: string; value: number }[]; points: unknown[] }>;
+        series: { series_id: string; label: string; method: string; beats_baseline: boolean; verdict: string }[];
+        baseline: string;
+      };
+      const chosen = data.series.find((s) => s.series_id === select.value);
+      const chartData = data.charts[select.value];
+      const figure = host.querySelector<HTMLElement>("[data-chart]");
+      const body = figure?.querySelector<HTMLElement>(".chart-body");
+      const summary = figure?.querySelector<HTMLElement>("[data-chart-summary]");
+      const subtitle = figure?.querySelector<HTMLElement>(".chart-sub");
+      if (!figure || !body || !chartData || !chosen) return;
+
+      const { element, summary: text } = RENDERERS["forecast-path"](
+        { history: chartData.history, points: chartData.points, label: chosen.label },
+        chartTheme(),
+      );
+      body.replaceChildren(element);
+      if (summary) summary.textContent = text;
+      if (subtitle) {
+        subtitle.textContent = chosen.beats_baseline
+          ? `${chosen.verdict}`
+          : `No better than the baseline. ${chosen.verdict}`;
+      }
+    }
+
+    select?.addEventListener("change", draw);
+  </script>
+
+  {
+    an && nationalAnomalies && (
+      <>
+        <h2>Unusual months and regime shifts</h2>
+        <p>
+          A separate question from forecasting: which months departed unusually from trend, and
+          where did the level of inflation durably change? Both are detected from the data with
+          no hard-coded dates.
+        </p>
+
+        <Chart
+          name="anomaly-timeline"
+          props={{
+            history: anomalyHistory,
+            anomalies: nationalAnomalies.anomalies,
+            regimes: nationalAnomalies.regimes,
+          }}
+          title="Headline inflation, with unusual months and regime boundaries"
+          subtitle={`Dots are months where the STL remainder exceeded ${nationalAnomalies.threshold_z} robust standard deviations. Dashed lines are regime boundaries.`}
+          height={340}
+        />
+
+        <div class="table-scroll">
+          <table>
+            <caption>Inflation regimes detected by binary segmentation</caption>
+            <thead>
+              <tr>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col" class="num">Months</th>
+                <th scope="col" class="num">Mean inflation</th>
+                <th scope="col" class="num">Range</th>
+              </tr>
+            </thead>
+            <tbody>
+              {nationalAnomalies.regimes.map((r) => (
+                <tr>
+                  <th scope="row">{monthLabel(r.start_period)}</th>
+                  <td>{monthLabel(r.end_period)}</td>
+                  <td class="num">{r.months}</td>
+                  <td class="num">{pct(r.mean_yoy)}</td>
+                  <td class="num">
+                    {r.min_yoy.toFixed(1)}% to {r.max_yoy.toFixed(1)}%
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3>The largest deviations</h3>
+        <div class="table-scroll">
+          <table>
+            <caption>
+              Months whose STL remainder was furthest from trend, out of{" "}
+              {nationalAnomalies.anomalies.length} flagged
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Month</th>
+                <th scope="col" class="num">Deviation</th>
+                <th scope="col">Direction</th>
+                <th scope="col" class="num">Inflation that month</th>
+              </tr>
+            </thead>
+            <tbody>
+              {nationalAnomalies.anomalies
+                .slice()
+                .sort((a, b) => Math.abs(b.z) - Math.abs(a.z))
+                .slice(0, 10)
+                .map((a) => (
+                  <tr>
+                    <th scope="row">{monthLabel(a.period)}</th>
+                    <td class="num">
+                      {a.z > 0 ? "+" : ""}
+                      {a.z.toFixed(1)} σ
+                    </td>
+                    <td>{a.direction === "above" ? "above trend" : "below trend"}</td>
+                    <td class="num">
+                      {a.yoy_at_period === null ? "no data" : `${a.yoy_at_period.toFixed(1)}%`}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+
+        {
+          Object.keys(nationalAnomalies.context).length > 0 && (
+            <div class="callout">
+              <h3>Corroboration, not causation</h3>
+              <p>
+                Around the most notable recent deviation (
+                {monthLabel(String(nationalAnomalies.context.anomaly_period))}), independently
+                datable series also moved:
+              </p>
+              <ul>
+                {"ron95_price_change_pct_in_window" in nationalAnomalies.context && (
+                  <li>
+                    RON95 petrol price changed by{" "}
+                    {number(
+                      nationalAnomalies.context.ron95_price_change_pct_in_window as number,
+                      2,
+                    )}
+                    % over the surrounding three months.
+                  </li>
+                )}
+                {"employment_change_pct_after" in nationalAnomalies.context && (
+                  <li>
+                    Total employment changed by{" "}
+                    {number(nationalAnomalies.context.employment_change_pct_after as number, 2)}%
+                    in the three months after.
+                  </li>
+                )}
+              </ul>
+              <p>
+                These are coincidences in time. Nothing here establishes that one caused the
+                other, and we do not claim it does.
+              </p>
+            </div>
+          )
+        }
+
+        <div class="callout warn">
+          <h3>What an anomaly flag means</h3>
+          <ul>
+            {nationalAnomalies.caveats.map((c) => <li>{c}</li>)}
+          </ul>
+        </div>
+      </>
+    )
+  }
+
+  <div class="callout">
+    <h3>Why the baseline is not the textbook one</h3>
+    <p>
+      The usual seasonal-naive baseline predicts next year's index equals last year's. Scored
+      on the year-on-year <em>rate</em> — which is what this page reports — that model predicts
+      exactly 0% inflation at every horizon, by construction. It is an identity, not a
+      forecast, and beating it would prove nothing. Our first implementation used it; the tell
+      was an error metric of exactly 100%.
+    </p>
+    <p>
+      The baseline here is persistence of the inflation rate instead. It is genuinely hard to
+      beat, which is why losing to it is worth reporting.
+    </p>
+  </div>
+
+  <div class="callout">
+    <h3>{fc.caveats?.length ? "Caveats" : "Caveats"}</h3>
+    <ul>
+      {headline.caveats.map((c) => <li>{c}</li>)}
+    </ul>
+  </div>
+
+  <div class="data-note">
+    <p>As of {asOfLabel(asOfValue)} · pipeline {fc.meta.method_note}</p>
+    <p>
+      Forecasts are national. State-level forecasts would mean 16 states × 14 divisions at
+      roughly 12 seconds per series, which does not fit a sensible build budget. It is listed
+      as a known gap rather than quietly omitted.
+    </p>
+  </div>
+</Base>

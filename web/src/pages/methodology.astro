@@ -1,0 +1,302 @@
+---
+import Base from "../layouts/Base.astro";
+import { manifest, realWages } from "../lib/data";
+import { asOfLabel, dated, number } from "../lib/format";
+
+const m = manifest();
+const rw = realWages();
+const validation = rw.meta.validation_against_dosm;
+
+// Per-dataset freshness. There is deliberately no single site-wide "last updated": the
+// sources refresh on different cadences and one badge covering all of them would be wrong.
+const datasets = Object.entries(m.datasets)
+  .map(([id, d]) => ({ id, ...d }))
+  .sort((a, b) => a.id.localeCompare(b.id));
+
+const warnings = datasets.flatMap((d) =>
+  (d.report?.issues ?? [])
+    .filter((i) => i.level === "warning")
+    .map((i) => ({ dataset: d.id, ...i })),
+);
+
+const errors = datasets.flatMap((d) =>
+  (d.report?.issues ?? [])
+    .filter((i) => i.level === "error")
+    .map((i) => ({ dataset: d.id, ...i })),
+);
+---
+<Base
+  title="Methodology — Malaysia Cost-of-Living Reality Check"
+  description="Every formula, assumption and limitation behind the figures on this site, plus data provenance for each source."
+>
+  <h1>Methodology and limitations</h1>
+  <p class="lede">
+    What the numbers mean, how they were computed, and where they are weak. Written so the
+    figures can be checked rather than taken on trust.
+  </p>
+
+  <h2>Real income</h2>
+  <p>Real-terms figures divide nominal values by the change in the CPI:</p>
+  <p><code>real(t) = nominal(t) ÷ ( CPI(t) ÷ CPI(2010) )</code></p>
+  <p>
+    DOSM bases the CPI at <strong>2010 = 100</strong> and the state wage series also begins in
+    2010, so no rebasing or splicing is needed. That is asserted by a test: if DOSM rebases,
+    the build fails rather than silently corrupting every real-terms figure.
+  </p>
+  <p>
+    Growth over a period uses the <strong>ratio of growth factors</strong>, never a
+    subtraction:
+  </p>
+  <p><code>real growth = ( nominal(t1) ÷ nominal(t0) ) ÷ ( CPI(t1) ÷ CPI(t0) ) − 1</code></p>
+  <p>
+    Subtracting inflation from nominal growth is a common shortcut that drifts over long
+    horizons. For transparency, both are shown on the <a href="/states">States</a> page.
+  </p>
+
+  <h3>Which deflator, and why it reproduces DOSM's own figures</h3>
+  <p>
+    Annual figures are deflated by the <strong>mean of the 12 monthly index values</strong> in
+    that calendar year. Years with fewer than 12 observations are flagged partial and labelled.
+  </p>
+  <p>
+    This is not an arbitrary choice. Computed independently, it reproduces DOSM's published
+    real-wage series to within <strong>{number(validation.max_abs_diff_median, 2)} RM</strong>
+    {" "}across all {validation.n_compared} states, with a tolerance of {validation.tolerance_rm} RM.
+    The residual is rounding in the published figures. The comparison runs as a test on every
+    build.
+  </p>
+
+  <h2>Personal inflation</h2>
+  <p>
+    Weighted average of category price changes, weighted by the user's own spending split:
+  </p>
+  <p><code>your inflation = Σ ( your share of category i ) × ( price change in category i )</code></p>
+  <p>
+    Weights are normalised, so proportions are what matter. If a category in the basket has no
+    price data it is <strong>excluded from the normalisation and reported</strong>, never
+    counted as zero — treating a missing category as zero inflation would silently understate
+    the result.
+  </p>
+
+  <div class="callout warn">
+    <h3>Why there is no default basket</h3>
+    <p>
+      DOSM does not publish CPI expenditure weights as open data. We searched the entire
+      catalogue: the only "weight" datasets are about child nutrition. The official weights
+      exist in a PDF technical note, not a machine-readable file.
+    </p>
+    <p>
+      So there is no default. Inventing a plausible-looking basket and presenting it as the
+      official one would be the easiest thing in the world and the most misleading.
+    </p>
+  </div>
+
+  <h2>Forecasting</h2>
+  <p>
+    The index level is modelled — it has clean trend and seasonal structure — but accuracy is
+    measured on the implied <strong>year-on-year rate</strong> in percentage points. Scoring on
+    the index would flatter every model, because the index only goes up.
+  </p>
+  <p>
+    Every model is backtested with <strong>rolling-origin, expanding-window</strong> folds:
+    each fold fits only on data available at that origin, and nothing is shuffled. Twelve
+    folds in the reference run, eight in the shipped pipeline.
+  </p>
+
+  <h3>The baseline</h3>
+  <p><code>level(t) = level(t−12) × ( 1 + inflation(t−12) )</code></p>
+  <p>
+    That is: inflation stays what it was a year ago. It is a hard baseline to beat, which is
+    the point.
+  </p>
+  <div class="callout warn">
+    <h3>Why not the textbook seasonal-naive baseline?</h3>
+    <p>
+      The usual baseline predicts <code>level(t) = level(t−12)</code>. Scored on the
+      year-on-year rate, that model predicts <strong>exactly 0% inflation at every
+      horizon</strong>, by construction. It is an identity, not a forecast, and beating it
+      would prove nothing.
+    </p>
+    <p>
+      We built it that way first. The tell was an error metric of exactly 100.00%. Against that
+      straw man the real model appeared nine times better, which was meaningless.
+    </p>
+  </div>
+
+  <h3>Prediction intervals and the honesty requirement</h3>
+  <p>
+    80% intervals, reported in both index and rate space. Interval <em>coverage</em> is
+    reported alongside accuracy, because a model with good average error and intervals that
+    contain the outcome 40% of the time is worse than one with slightly worse error and honest
+    intervals.
+  </p>
+  <p>
+    When the best model does not beat the baseline, the artifact records
+    <code>beats_baseline: false</code> together with a verdict and a caveat. That state lives in
+    the data rather than in a rendering decision, so the site cannot omit it by accident — and
+    a test pins the behaviour so a refactor cannot quietly drop it.
+  </p>
+
+  <h2>Anomaly detection</h2>
+  <p>
+    STL decomposition into trend, seasonal and remainder, then a robust z-score on the
+    remainder using the median absolute deviation rather than the standard deviation. A single
+    large shock inflates a standard deviation enough to hide itself, which is exactly the case
+    worth catching.
+  </p>
+  <p>
+    MAD has its own blind spot: it is exactly zero when more than half the values are identical,
+    which happens whenever STL fits a seasonal series almost exactly. When that occurs we fall
+    back to the mean absolute deviation about the median.
+  </p>
+  <p>
+    Regime shifts are found separately, by binary segmentation on the year-on-year rate, with a
+    24-month minimum segment. Deliberately simple — it is explainable in one sentence and
+    reproducible without a random seed.
+  </p>
+  <p>
+    <strong>Flags are statistical, not explanatory.</strong> Where a flag coincides with
+    movement in an independently datable series, that is reported as corroboration and never as
+    cause. The generated text never contains "because".
+  </p>
+
+  <h2>What we do not do</h2>
+  <ul class="plain">
+    <li>
+      <strong>No interpolation.</strong> Not for missing months, not for survey gaps, not for
+      gaps in wage series. Where a chart cannot be drawn honestly at monthly resolution it
+      drops to a coarser resolution instead.
+    </li>
+    <li>
+      <strong>No causal claims.</strong> We report that regional divergence is on the income
+      side rather than the price side. We do not claim to know why.
+    </li>
+    <li>
+      <strong>No invented events.</strong> Anomaly annotations come from the data. Nothing is
+      labelled "because of COVID" or "because of the fuel subsidy".
+    </li>
+    <li>
+      <strong>No favourable period selection.</strong> Periods are chosen by data availability
+      and both available periods are reported.
+    </li>
+    <li>
+      <strong>No smoothing of inconvenient findings.</strong> The low-income result is reported
+      as found. See <a href="/">the overview</a>.
+    </li>
+  </ul>
+
+  <h2>Data sources and freshness</h2>
+  <p>
+    All data is from DOSM via
+    <a href="https://open.dosm.gov.my" rel="noopener">open.dosm.gov.my</a> and
+    <a href="https://data.gov.my" rel="noopener">data.gov.my</a>, published under CC BY 4.0.
+    The pipeline reads bulk parquet rather than the REST API, because the API allows four
+    requests a minute and is missing several of these datasets entirely.
+  </p>
+  <p>
+    There is deliberately no single site-wide "last updated" date. These sources refresh on
+    different cadences, so one badge would be wrong for most of the page.
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <caption>
+        Coverage and freshness per dataset. Artifacts built {dated(m.generated_at)} by pipeline
+        <code>v{m.pipeline_version}</code>.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Dataset</th>
+          <th scope="col">Tier</th>
+          <th scope="col">Data as of</th>
+          <th scope="col">Upstream updated</th>
+          <th scope="col" class="num">Rows</th>
+          <th scope="col" class="num">Warnings</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          datasets.map((d) => {
+            const warnCount = (d.report?.issues ?? []).filter((i) => i.level === "warning").length;
+            return (
+              <tr>
+                <th scope="row">{d.title}</th>
+                <td>{d.tier}</td>
+                <td>{asOfLabel(d.as_of)}</td>
+                <td>{d.last_updated ?? "—"}</td>
+                <td class="num">{d.report?.rows?.toLocaleString("en-MY") ?? "—"}</td>
+                <td class="num">{warnCount || "—"}</td>
+              </tr>
+            );
+          })
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Data-quality warnings</h3>
+  {
+    errors.length > 0 && (
+      <div class="callout warn">
+        <p>{errors.length} error-level contract violations were recorded. This should not happen
+        in a shipped artifact set.</p>
+      </div>
+    )
+  }
+  {
+    warnings.length ? (
+      <div class="callout">
+        <p>
+          These are real gaps in the upstream data, carried through rather than filled. They are
+          why several charts show breaks.
+        </p>
+        <ul>
+          {warnings.map((w) => (
+            <li>
+              <code>{w.dataset}</code> — {w.message}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ) : (
+      <p>No warnings recorded in this build.</p>
+    )
+  }
+
+  <h2>Reproducing this</h2>
+  <p>Everything on this site is generated from committed data files by a tested pipeline.</p>
+  <pre
+    style="overflow-x:auto;background:var(--bg-subtle);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:.85rem"
+  ><code>cd pipeline
+uv sync --extra dev
+uv run pytest -m "not network"     # offline unit and contract tests
+uv run pytest -m network           # live upstream contract tests
+uv run colcheck run                # rebuild every artifact
+
+cd ../web
+bun install
+bun x astro build                  # build this site</code></pre>
+
+  <h2>Known limitations</h2>
+  <p>
+    Kept in full in the repository rather than summarised away. The material ones:
+  </p>
+  <ul class="plain">
+    <li>Wage data covers employees only; the self-employed and informal sector are absent.</li>
+    <li>
+      Medians are composition-sensitive — the median of the employee population moves when the
+      mix of employees changes, with no change in anyone's pay.
+    </li>
+    <li>HIES is a survey with irregular gaps that are never filled.</li>
+    <li>PriceCatcher is a price-surveillance dataset and is not an inflation measure.</li>
+    <li>Forecasts are national; state-level forecasts would not fit the build budget.</li>
+    <li>
+      Three of the categories modelled do not beat the naive baseline, and the site says so.
+    </li>
+  </ul>
+
+  <p>
+    This page is generated from the same artifacts as every chart on the site. If a number here
+    disagrees with a number elsewhere, one of them is a bug — report it.
+  </p>
+</Base>

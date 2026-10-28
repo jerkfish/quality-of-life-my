@@ -15,6 +15,7 @@ from __future__ import annotations
 import pandas as pd
 from pydantic import BaseModel
 
+from ..registry import MALAYSIA
 from .common import annual_means, real_growth_pct
 
 WAGE_REFERENCE_YEAR = 2010
@@ -81,6 +82,49 @@ def real_wages_by_state(
     merged["real_median"] = merged["wages_median"] / deflator
     merged["real_mean"] = merged["wages_mean"] / deflator
     return merged.sort_values(["state", "year"]).reset_index(drop=True)
+
+
+def national_real_wages(
+    wages_state: pd.DataFrame,
+    cpi_headline: pd.DataFrame,
+    *,
+    base_year: int = WAGE_REFERENCE_YEAR,
+    sex: str = SEX_ALL,
+) -> pd.DataFrame:
+    """The nationwide real wage series.
+
+    This needs its own function because `real_wages_by_state` inner-joins against `cpi_state`,
+    which carries the 16 states and **no** nationwide row — correctly, since there is no
+    "national CPI by state" observation to join to. Deflating the national wage therefore has
+    to use `cpi_headline` instead.
+
+    Getting this wrong is silent: the state frame simply contains no Malaysia entry, and any
+    headline national figure reads as missing rather than raising. It was caught by the
+    frontend rendering "no data" where a number belonged.
+    """
+    wages = wages_state[(wages_state["sex"] == sex) & (wages_state["state"] == MALAYSIA)]
+    if wages.empty:
+        raise ValueError(
+            f"wages_state has no '{MALAYSIA}' row for sex={sex!r}; cannot build a national series."
+        )
+    wages = wages.loc[:, ["date", "wages_median", "wages_mean"]].copy()
+    wages["date"] = pd.to_datetime(wages["date"])
+    wages["year"] = wages["date"].dt.year
+
+    prices = (
+        cpi_headline[cpi_headline["division"] == "overall"]
+        .pipe(lambda d: annual_means(d, value_col="index"))
+        .rename(columns={"value": "cpi"})
+        .drop(columns=["is_partial", "months_observed"])
+    )
+    merged = wages.merge(prices, on="year", how="inner")
+    base = merged.loc[merged["year"] == base_year, "cpi"]
+    if base.empty:
+        raise ValueError(f"Base year {base_year} absent from the national CPI.")
+    deflator = merged["cpi"] / float(base.iloc[0])
+    merged["real_median"] = merged["wages_median"] / deflator
+    merged["real_mean"] = merged["wages_mean"] / deflator
+    return merged.sort_values("year").reset_index(drop=True)
 
 
 def validate_against_dosm(
