@@ -1,0 +1,4178 @@
+{
+ "meta": {
+  "id": "mcoicop",
+  "type": "data-catalogue",
+  "category": null,
+  "agency": "DOSM"
+ },
+ "params": {
+  "id": "mcoicop"
+ },
+ "query": {
+  "id": "mcoicop"
+ },
+ "id": "mcoicop",
+ "exclude_openapi": false,
+ "manual_trigger": "1",
+ "title": "MCOICOP",
+ "description": "This table provides a complete lookup for 2, 3, 4, and 5-digit codes under Malaysia's COICOP (Classification of Individual Consumption According to Purpose), as applied and used in data publications in Malaysia. The MCOICOP is primarily used by the Department of Statistics Malaysia (DOSM), for instance when categorising and analysing consumer price inflation.",
+ "link_parquet": "https://storage.dosm.gov.my/dictionaries/mcoicop.parquet",
+ "link_csv": "https://storage.dosm.gov.my/dictionaries/mcoicop.csv",
+ "link_preview": null,
+ "link_editions": null,
+ "frequency": "INFREQUENT",
+ "data_source": [
+  "DOSM"
+ ],
+ "fields": [
+  {
+   "name": "digits",
+   "title": "Digits",
+   "description": "[Integer] Number of digits; this column can be used as a filter if you only want to keep 2 digit codes, for example"
+  },
+  {
+   "name": "division",
+   "title": "Division",
+   "description": "[String] 2-digit code; please ensure that you read this column as a string, because the (intentional) leading zeroes will be dropped if read as an integer (e.g. upon opening in Microsoft Excel)"
+  },
+  {
+   "name": "group",
+   "title": "Group",
+   "description": "[String] 3-digit code, with dashes where not applicable (e.g. for rows providing 2-digit definitions)"
+  },
+  {
+   "name": "class",
+   "title": "Class",
+   "description": "[String] 4-digit code, with dashes where not applicable (e.g. for rows providing 2 and 3-digit definitions)"
+  },
+  {
+   "name": "subclass",
+   "title": "Subclass",
+   "description": "[String] 5-digit code, with dashes where not applicable (e.g. for rows providing 2 and 3-digit definitions)"
+  },
+  {
+   "name": "desc_en",
+   "title": "Description (EN)",
+   "description": "[String] Description for the code, in English"
+  },
+  {
+   "name": "desc_bm",
+   "title": "Description (BM)",
+   "description": "[String] Description for the code, in Malay"
+  }
+ ],
+ "data_as_of": "2018",
+ "last_updated": "2024-04-16",
+ "next_update": "—",
+ "methodology": "The MCOICOP was adapted from the [latest COICOP published by the United Nations Statistics Division](https://unstats.un.org/unsd/classifications/Econ), which is used as a global reference in the classification of individual and household consumption.",
+ "caveat": "—",
+ "publication": "—",
+ "translations": {
+  "class": "Class",
+  "group": "Group",
+  "digits": "Digits",
+  "desc_bm": "Description (BM)",
+  "desc_en": "Description (EN)",
+  "division": "Division",
+  "subclass": "Subclass"
+ },
+ "related_datasets": [],
+ "dataviz_set": [
+  {
+   "dataviz_id": "table",
+   "title": "Table",
+   "chart_type": "TABLE",
+   "config": {
+    "precision": 0,
+    "filter_columns": [],
+    "freeze_columns": []
+   }
+  }
+ ],
+ "dropdown": [],
+ "data": [
+  {
+   "digits": 1,
+   "division": "overall",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "All items",
+   "desc_bm": "Semua item"
+  },
+  {
+   "digits": 2,
+   "division": "01",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Food & Beverages",
+   "desc_bm": "Makanan & Minuman"
+  },
+  {
+   "digits": 3,
+   "division": "01",
+   "group": "001",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Food away from home",
+   "desc_bm": "Makanan di luar rumah"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "001",
+   "class": "0011",
+   "subclass": "-",
+   "desc_en": "Food away from home",
+   "desc_bm": "Makanan di luar rumah"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "001",
+   "class": "0011",
+   "subclass": "00111",
+   "desc_en": "Food away from home",
+   "desc_bm": "Makanan di luar rumah"
+  },
+  {
+   "digits": 3,
+   "division": "01",
+   "group": "011",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Food at home",
+   "desc_bm": "Makanan di rumah"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "011",
+   "class": "0111",
+   "subclass": "-",
+   "desc_en": "Cereals & cereal products",
+   "desc_bm": "Bijirin & produk bijirin"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0111",
+   "subclass": "01111",
+   "desc_en": "Cereals",
+   "desc_bm": "Bijirin"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0111",
+   "subclass": "01112",
+   "desc_en": "Flour of cereals",
+   "desc_bm": "Tepung bijirin"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0111",
+   "subclass": "01113",
+   "desc_en": "Bread & bakery products",
+   "desc_bm": "Roti & produk bakeri"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0111",
+   "subclass": "01114",
+   "desc_en": "Breakfast cereals",
+   "desc_bm": "Bijirin sarapan"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0111",
+   "subclass": "01115",
+   "desc_en": "Macaroni, noodles & pasta products",
+   "desc_bm": "Makaroni, mi & produk pasta"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "011",
+   "class": "0112",
+   "subclass": "-",
+   "desc_en": "Meat",
+   "desc_bm": "Daging"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0112",
+   "subclass": "01122",
+   "desc_en": "Meat, fresh, chilled or frozen",
+   "desc_bm": "Daging segar, disejukkan atau beku"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0112",
+   "subclass": "01124",
+   "desc_en": "Offal fresh, chilled or frozen",
+   "desc_bm": "Organ dalaman segar, disejukkan atau beku"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0112",
+   "subclass": "01125",
+   "desc_en": "Food preparation from meat and offal",
+   "desc_bm": "Makanan tersedia dari daging dan organ dalaman"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "011",
+   "class": "0113",
+   "subclass": "-",
+   "desc_en": "Fish & other seafood",
+   "desc_bm": "Ikan & makanan laut lain"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0113",
+   "subclass": "01131",
+   "desc_en": "Fish, live, fresh, chilled or frozen",
+   "desc_bm": "Ikan hidup, segar, sejuk & beku"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0113",
+   "subclass": "01132",
+   "desc_en": "Fish, dried and salted",
+   "desc_bm": "Ikan yang dikeringkan dan diasinkan"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0113",
+   "subclass": "01133",
+   "desc_en": "Fish preparations",
+   "desc_bm": "Makanan tersedia dari ikan"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0113",
+   "subclass": "01134",
+   "desc_en": "Other seafood, live, fresh, chilled or frozen",
+   "desc_bm": "Makanan laut lain hidup, segar, sejuk atau beku"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0113",
+   "subclass": "01135",
+   "desc_en": "Other seafood, dried, salted, in brine or smoked",
+   "desc_bm": "Makanan laut lain yang dikeringkan, diasinkan"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0113",
+   "subclass": "01136",
+   "desc_en": "Other seafood preparations",
+   "desc_bm": "Makanan tersedia dari makanan laut lain"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "011",
+   "class": "0114",
+   "subclass": "-",
+   "desc_en": "Milk, other dairy products & eggs",
+   "desc_bm": "Susu, produk tenusu lain & telur"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0114",
+   "subclass": "01141",
+   "desc_en": "Raw & whole milk",
+   "desc_bm": "Susu asli & susu yang dibancuh"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0114",
+   "subclass": "01143",
+   "desc_en": "Other milk & cream",
+   "desc_bm": "Lain-lain susu & krim"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0114",
+   "subclass": "01144",
+   "desc_en": "Non-animal milk",
+   "desc_bm": "Susu bukan daripada sumber haiwan"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0114",
+   "subclass": "01145",
+   "desc_en": "Cheese",
+   "desc_bm": "Keju"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0114",
+   "subclass": "01146",
+   "desc_en": "Yoghurt & similar products",
+   "desc_bm": "Yogurt & produk seumpamanya"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0114",
+   "subclass": "01148",
+   "desc_en": "Eggs",
+   "desc_bm": "Telur"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "011",
+   "class": "0115",
+   "subclass": "-",
+   "desc_en": "Oils & fats",
+   "desc_bm": "Minyak & lemak"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0115",
+   "subclass": "01151",
+   "desc_en": "Vegetable oils",
+   "desc_bm": "Minyak sayuran"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0115",
+   "subclass": "01152",
+   "desc_en": "Butter & other fats & oils derived from milk",
+   "desc_bm": "Mentega & lemak & minyak lain yang dihasilkan daripada susu"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0115",
+   "subclass": "01153",
+   "desc_en": "Margarine & similar preparations",
+   "desc_bm": "Marjerin & produk seumpamanya"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "011",
+   "class": "0116",
+   "subclass": "-",
+   "desc_en": "Fruits & nuts",
+   "desc_bm": "Buah-buahan & kacang"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0116",
+   "subclass": "01161",
+   "desc_en": "Dates, figs & tropical fruits, fresh",
+   "desc_bm": "Kurma, buah tin & buah-buahan tropika, segar"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0116",
+   "subclass": "01162",
+   "desc_en": "Citrus fruits, fresh",
+   "desc_bm": "Buah-buahan sitrus"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0116",
+   "subclass": "01163",
+   "desc_en": "Stone fruits & pome fruits, fresh",
+   "desc_bm": "Buah-buahan stone & pome"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0116",
+   "subclass": "01165",
+   "desc_en": "Other fruits, fresh",
+   "desc_bm": "Buah-buahan segar lain"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0116",
+   "subclass": "01168",
+   "desc_en": "Nuts, in shell or shelled",
+   "desc_bm": "Kacang dengan kulit atau telah dikupas"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0116",
+   "subclass": "01169",
+   "desc_en": "Fruit & nuts ground & other preparations",
+   "desc_bm": "Makanan tersedia dari buah-buahan & kacang"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "011",
+   "class": "0117",
+   "subclass": "-",
+   "desc_en": "Vegetables",
+   "desc_bm": "Sayur-sayuran"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0117",
+   "subclass": "01171",
+   "desc_en": "Leafy or stem vegetables, fresh or chilled",
+   "desc_bm": "Sayur-sayuran berdaun atau berbatang, segar atau disejukkan"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0117",
+   "subclass": "01172",
+   "desc_en": "Fruit-bearing vegetables, fresh or chilled",
+   "desc_bm": "Sayur-sayuran berbuah, segar atau disejukkan"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0117",
+   "subclass": "01173",
+   "desc_en": "Green leguminous vegetables, fresh or chilled",
+   "desc_bm": "Sayur-sayuran kekacang hijau, segar atau disejukkan"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0117",
+   "subclass": "01174",
+   "desc_en": "Other vegetables, fresh or chilled",
+   "desc_bm": "Sayur-sayuran lain, segar atau disejukkan"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0117",
+   "subclass": "01175",
+   "desc_en": "Tubers, plantains & cooking bananas",
+   "desc_bm": "Ubi, plantain & pisang sayuran"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0117",
+   "subclass": "01179",
+   "desc_en": "Vegetables, tubers, plantains, cooking bananas & pulses ground & other preparations",
+   "desc_bm": "Makanan tersedia dari sayur-sayuran, ubi, plantain, pisang sayuran & kekacang"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "011",
+   "class": "0118",
+   "subclass": "-",
+   "desc_en": "Sugar, confectionery & desserts",
+   "desc_bm": "Gula, manisan & pencuci mulut"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0118",
+   "subclass": "01181",
+   "desc_en": "Cane & beet sugar",
+   "desc_bm": "Gula tebu & gula bit"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0118",
+   "subclass": "01182",
+   "desc_en": "Other sugar & sugar substitutes",
+   "desc_bm": "Lain-lain gula & pengganti gula"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0118",
+   "subclass": "01183",
+   "desc_en": "Jams and honey",
+   "desc_bm": "Jem dan madu"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0118",
+   "subclass": "01184",
+   "desc_en": "Nut butter",
+   "desc_bm": "Mentega kacang"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0118",
+   "subclass": "01185",
+   "desc_en": "Chocolate, cocoa, & cocoa-based food products",
+   "desc_bm": "Coklat, koko & produk makanan berasaskan koko"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0118",
+   "subclass": "01186",
+   "desc_en": "Ice, ice cream & sorbet",
+   "desc_bm": "Ais, aiskrim & sorbet"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0118",
+   "subclass": "01189",
+   "desc_en": "Other sugar confectionery & desserts n.e.c.",
+   "desc_bm": "Lain-lain manisan gula & pencuci mulut t.t.t.l."
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "011",
+   "class": "0119",
+   "subclass": "-",
+   "desc_en": "Ready-made food & other food products n.e.c.",
+   "desc_bm": "Makanan sedia dimakan & produk makanan lain t.t.t.l."
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0119",
+   "subclass": "01191",
+   "desc_en": "Ready-made food",
+   "desc_bm": "Makanan yang sedia dimakan"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0119",
+   "subclass": "01192",
+   "desc_en": "Baby food",
+   "desc_bm": "Makanan bayi"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0119",
+   "subclass": "01193",
+   "desc_en": "Salt, condiments & sauces",
+   "desc_bm": "Garam, bahan perasa & sos"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0119",
+   "subclass": "01194",
+   "desc_en": "Spices",
+   "desc_bm": "Rempah ratus"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "011",
+   "class": "0119",
+   "subclass": "01199",
+   "desc_en": "Other food products n.e.c.",
+   "desc_bm": "Produk makanan lain t.t.t.l."
+  },
+  {
+   "digits": 3,
+   "division": "01",
+   "group": "012",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Non-alcoholic beverages",
+   "desc_bm": "Minuman bukan alkohol"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "012",
+   "class": "0121",
+   "subclass": "-",
+   "desc_en": "Fruit & vegetable juices",
+   "desc_bm": "Jus buah-buahan & sayur-sayuran"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "012",
+   "class": "0121",
+   "subclass": "01210",
+   "desc_en": "Fruit & vegetable juices",
+   "desc_bm": "Jus buah-buahan & sayur-sayuran"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "012",
+   "class": "0122",
+   "subclass": "-",
+   "desc_en": "Coffee & coffee substitutes",
+   "desc_bm": "Kopi & pengganti kopi"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "012",
+   "class": "0122",
+   "subclass": "01220",
+   "desc_en": "Coffee & coffee substitutes",
+   "desc_bm": "Kopi & pengganti kopi"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "012",
+   "class": "0123",
+   "subclass": "-",
+   "desc_en": "Tea",
+   "desc_bm": "Teh"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "012",
+   "class": "0123",
+   "subclass": "01230",
+   "desc_en": "Tea, maté & other plant products for infusion",
+   "desc_bm": "Teh, mate' & produk tumbuhan lain untuk seduhan"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "012",
+   "class": "0124",
+   "subclass": "-",
+   "desc_en": "Cocoa drinks",
+   "desc_bm": "Minuman koko"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "012",
+   "class": "0124",
+   "subclass": "01240",
+   "desc_en": "Cocoa drinks",
+   "desc_bm": "Minuman koko"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "012",
+   "class": "0125",
+   "subclass": "-",
+   "desc_en": "Water",
+   "desc_bm": "Air"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "012",
+   "class": "0125",
+   "subclass": "01250",
+   "desc_en": "Water",
+   "desc_bm": "Air"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "012",
+   "class": "0126",
+   "subclass": "-",
+   "desc_en": "Soft drinks",
+   "desc_bm": "Minuman ringan"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "012",
+   "class": "0126",
+   "subclass": "01260",
+   "desc_en": "Soft drinks",
+   "desc_bm": "Minuman ringan"
+  },
+  {
+   "digits": 4,
+   "division": "01",
+   "group": "012",
+   "class": "0129",
+   "subclass": "-",
+   "desc_en": "Other non-alcoholic beverages",
+   "desc_bm": "Minuman tidak beralkohol lain"
+  },
+  {
+   "digits": 5,
+   "division": "01",
+   "group": "012",
+   "class": "0129",
+   "subclass": "01290",
+   "desc_en": "Other non-alcoholic beverages",
+   "desc_bm": "Minuman tidak beralkohol lain"
+  },
+  {
+   "digits": 2,
+   "division": "02",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Alcoholic Beverages & Tobacco",
+   "desc_bm": "Minuman Alkohol & Tembakau"
+  },
+  {
+   "digits": 3,
+   "division": "02",
+   "group": "021",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Alcoholic beverages",
+   "desc_bm": "Minuman keras/alkohol"
+  },
+  {
+   "digits": 4,
+   "division": "02",
+   "group": "021",
+   "class": "0211",
+   "subclass": "-",
+   "desc_en": "Spirits & liquors",
+   "desc_bm": "Arak & minuman keras"
+  },
+  {
+   "digits": 5,
+   "division": "02",
+   "group": "021",
+   "class": "0211",
+   "subclass": "02110",
+   "desc_en": "Spirits & liquors",
+   "desc_bm": "Arak & minuman keras"
+  },
+  {
+   "digits": 4,
+   "division": "02",
+   "group": "021",
+   "class": "0212",
+   "subclass": "-",
+   "desc_en": "Wine",
+   "desc_bm": "Wain"
+  },
+  {
+   "digits": 5,
+   "division": "02",
+   "group": "021",
+   "class": "0212",
+   "subclass": "02121",
+   "desc_en": "Wine from grapes",
+   "desc_bm": "Wain daripada anggur"
+  },
+  {
+   "digits": 4,
+   "division": "02",
+   "group": "021",
+   "class": "0213",
+   "subclass": "-",
+   "desc_en": "Beer",
+   "desc_bm": "Bir"
+  },
+  {
+   "digits": 5,
+   "division": "02",
+   "group": "021",
+   "class": "0213",
+   "subclass": "02130",
+   "desc_en": "Beer",
+   "desc_bm": "Bir"
+  },
+  {
+   "digits": 3,
+   "division": "02",
+   "group": "023",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Tobacco",
+   "desc_bm": "Tembakau"
+  },
+  {
+   "digits": 4,
+   "division": "02",
+   "group": "023",
+   "class": "0230",
+   "subclass": "-",
+   "desc_en": "Tobacco",
+   "desc_bm": "Tembakau"
+  },
+  {
+   "digits": 5,
+   "division": "02",
+   "group": "023",
+   "class": "0230",
+   "subclass": "02301",
+   "desc_en": "Cigarettes",
+   "desc_bm": "Rokok"
+  },
+  {
+   "digits": 2,
+   "division": "03",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Clothing & Footwear",
+   "desc_bm": "Pakaian & Kasut"
+  },
+  {
+   "digits": 3,
+   "division": "03",
+   "group": "031",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Clothes",
+   "desc_bm": "Pakaian"
+  },
+  {
+   "digits": 4,
+   "division": "03",
+   "group": "031",
+   "class": "0312",
+   "subclass": "-",
+   "desc_en": "Garments",
+   "desc_bm": "Pakaian"
+  },
+  {
+   "digits": 5,
+   "division": "03",
+   "group": "031",
+   "class": "0312",
+   "subclass": "03121",
+   "desc_en": "Garments for men or boys",
+   "desc_bm": "Pakaian lelaki & kanak-kanak lelaki"
+  },
+  {
+   "digits": 5,
+   "division": "03",
+   "group": "031",
+   "class": "0312",
+   "subclass": "03122",
+   "desc_en": "Garments for women or girls",
+   "desc_bm": "Pakaian wanita & kanak-kanak perempuan"
+  },
+  {
+   "digits": 5,
+   "division": "03",
+   "group": "031",
+   "class": "0312",
+   "subclass": "03123",
+   "desc_en": "Garments for infants (under 2 years old)",
+   "desc_bm": "Pakaian bayi (di bawah umur 2 tahun)"
+  },
+  {
+   "digits": 5,
+   "division": "03",
+   "group": "031",
+   "class": "0312",
+   "subclass": "03124",
+   "desc_en": "School uniforms",
+   "desc_bm": "Pakaian seragam sekolah"
+  },
+  {
+   "digits": 5,
+   "division": "03",
+   "group": "031",
+   "class": "0312",
+   "subclass": "03125",
+   "desc_en": "Garments for unisex",
+   "desc_bm": "Pakaian uniseks"
+  },
+  {
+   "digits": 4,
+   "division": "03",
+   "group": "031",
+   "class": "0313",
+   "subclass": "-",
+   "desc_en": "Other articles of clothing & clothing accessories",
+   "desc_bm": "Lain-lain jenis pakaian & aksesori pakaian"
+  },
+  {
+   "digits": 5,
+   "division": "03",
+   "group": "031",
+   "class": "0313",
+   "subclass": "03131",
+   "desc_en": "Other articles of clothing",
+   "desc_bm": "Lain-lain jenis pakaian"
+  },
+  {
+   "digits": 4,
+   "division": "03",
+   "group": "031",
+   "class": "0314",
+   "subclass": "-",
+   "desc_en": "Cleaning, repair, tailoring & hire of clothing",
+   "desc_bm": "Pencucian, pembaikan, menjahit & sewa pakaian"
+  },
+  {
+   "digits": 5,
+   "division": "03",
+   "group": "031",
+   "class": "0314",
+   "subclass": "03141",
+   "desc_en": "Cleaning of clothing",
+   "desc_bm": "Pencucian pakaian"
+  },
+  {
+   "digits": 5,
+   "division": "03",
+   "group": "031",
+   "class": "0314",
+   "subclass": "03142",
+   "desc_en": "Repair, tailoring & hire of clothing",
+   "desc_bm": "Pembaikan, menjahit & sewaan pakaian"
+  },
+  {
+   "digits": 3,
+   "division": "03",
+   "group": "032",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Shoes",
+   "desc_bm": "Kasut"
+  },
+  {
+   "digits": 4,
+   "division": "03",
+   "group": "032",
+   "class": "0321",
+   "subclass": "-",
+   "desc_en": "Shoes & other footwear",
+   "desc_bm": "Kasut & lain-lain jenis alas kaki"
+  },
+  {
+   "digits": 5,
+   "division": "03",
+   "group": "032",
+   "class": "0321",
+   "subclass": "03211",
+   "desc_en": "Footwear for men",
+   "desc_bm": "Kasut lelaki"
+  },
+  {
+   "digits": 5,
+   "division": "03",
+   "group": "032",
+   "class": "0321",
+   "subclass": "03212",
+   "desc_en": "Footwear for women",
+   "desc_bm": "Kasut perempuan"
+  },
+  {
+   "digits": 5,
+   "division": "03",
+   "group": "032",
+   "class": "0321",
+   "subclass": "03213",
+   "desc_en": "Footwear for infants & children",
+   "desc_bm": "Kasut bayi & kanak-kanak"
+  },
+  {
+   "digits": 5,
+   "division": "03",
+   "group": "032",
+   "class": "0321",
+   "subclass": "03214",
+   "desc_en": "Footwear for unisex",
+   "desc_bm": "Kasut uniseks"
+  },
+  {
+   "digits": 2,
+   "division": "04",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Housing, Water, Electricity, Gas & Other Fuels",
+   "desc_bm": "Perumahan, Air, Elektrik, Gas & Bahan Api Lain"
+  },
+  {
+   "digits": 3,
+   "division": "04",
+   "group": "041",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Actual rentals for housing",
+   "desc_bm": "Sewa sebenar untuk kediaman"
+  },
+  {
+   "digits": 4,
+   "division": "04",
+   "group": "041",
+   "class": "0411",
+   "subclass": "-",
+   "desc_en": "Actual rentals paid by tenants for main residence",
+   "desc_bm": "Sewa sebenar yang dibayar oleh penyewa"
+  },
+  {
+   "digits": 5,
+   "division": "04",
+   "group": "041",
+   "class": "0411",
+   "subclass": "04110",
+   "desc_en": "Actual rentals paid by tenants",
+   "desc_bm": "Sewa sebenar yang dibayar oleh penyewa"
+  },
+  {
+   "digits": 3,
+   "division": "04",
+   "group": "043",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Maintenance, repair & security of the dwelling",
+   "desc_bm": "Penyelenggaran, pembaikan & keselamatan rumah kediaman"
+  },
+  {
+   "digits": 4,
+   "division": "04",
+   "group": "043",
+   "class": "0431",
+   "subclass": "-",
+   "desc_en": "Security equipment & materials for the maintenance & repair of the dwelling",
+   "desc_bm": "Kelengkapan keselamatan & bahan-bahan untuk pembaikan & penyelenggaraan rumah kediaman"
+  },
+  {
+   "digits": 5,
+   "division": "04",
+   "group": "043",
+   "class": "0431",
+   "subclass": "04311",
+   "desc_en": "Materials for the maintenance repair of the dwelling",
+   "desc_bm": "Bahan-bahan untuk pembaikan & penyelenggaraan rumah kediaman"
+  },
+  {
+   "digits": 4,
+   "division": "04",
+   "group": "043",
+   "class": "0432",
+   "subclass": "-",
+   "desc_en": "Services for the maintenance, repair & security of the dwelling",
+   "desc_bm": "Bayaran perkhidmatan penyelenggaraan, pembaikan & keselamatan rumah kediaman"
+  },
+  {
+   "digits": 5,
+   "division": "04",
+   "group": "043",
+   "class": "0432",
+   "subclass": "04320",
+   "desc_en": "Services for the maintenance, repair & security of the dwelling",
+   "desc_bm": "Bayaran perkhidmatan penyelenggaraan, pembaikan & keselamatan rumah kediaman"
+  },
+  {
+   "digits": 3,
+   "division": "04",
+   "group": "044",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Water supply & miscellaneous services relating to the dwelling",
+   "desc_bm": "Bekalan air & pelbagai perkhidmatan berkaitan dengan rumah kediaman"
+  },
+  {
+   "digits": 4,
+   "division": "04",
+   "group": "044",
+   "class": "0441",
+   "subclass": "-",
+   "desc_en": "Water supply",
+   "desc_bm": "Bekalan air"
+  },
+  {
+   "digits": 5,
+   "division": "04",
+   "group": "044",
+   "class": "0441",
+   "subclass": "04411",
+   "desc_en": "Water supply through network systems",
+   "desc_bm": "Bekalan air melalui sistem rangkaian"
+  },
+  {
+   "digits": 4,
+   "division": "04",
+   "group": "044",
+   "class": "0443",
+   "subclass": "-",
+   "desc_en": "Sewage collection",
+   "desc_bm": "Pembetungan"
+  },
+  {
+   "digits": 5,
+   "division": "04",
+   "group": "044",
+   "class": "0443",
+   "subclass": "04431",
+   "desc_en": "Sewage collection through sewer systems",
+   "desc_bm": "Pembetungan bersistem"
+  },
+  {
+   "digits": 4,
+   "division": "04",
+   "group": "044",
+   "class": "0444",
+   "subclass": "-",
+   "desc_en": "Other services relating to the dwelling n.e.c.",
+   "desc_bm": "Perkhidmatan lain berkaitan rumah kediaman t.t.t.l."
+  },
+  {
+   "digits": 5,
+   "division": "04",
+   "group": "044",
+   "class": "0444",
+   "subclass": "04441",
+   "desc_en": "Maintenance charges in multi-occupied buildings",
+   "desc_bm": "Caj penyelenggaraan untuk rumah bertingkat"
+  },
+  {
+   "digits": 3,
+   "division": "04",
+   "group": "045",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Electricity, gas & fuel",
+   "desc_bm": "Elektrik, gas & bahan api"
+  },
+  {
+   "digits": 4,
+   "division": "04",
+   "group": "045",
+   "class": "0451",
+   "subclass": "-",
+   "desc_en": "Electricity",
+   "desc_bm": "Bekalan elektrik"
+  },
+  {
+   "digits": 5,
+   "division": "04",
+   "group": "045",
+   "class": "0451",
+   "subclass": "04510",
+   "desc_en": "Electricity from all sources",
+   "desc_bm": "Bekalan elektrik daripada semua sumber"
+  },
+  {
+   "digits": 4,
+   "division": "04",
+   "group": "045",
+   "class": "0452",
+   "subclass": "-",
+   "desc_en": "Gas",
+   "desc_bm": "Gas"
+  },
+  {
+   "digits": 5,
+   "division": "04",
+   "group": "045",
+   "class": "0452",
+   "subclass": "04522",
+   "desc_en": "Gas",
+   "desc_bm": "Gas"
+  },
+  {
+   "digits": 2,
+   "division": "05",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Furnishings, Household Equipment & Routine Household Maintenance",
+   "desc_bm": "Hiasan, Perkakasan & Penyelenggaraan Isi Rumah"
+  },
+  {
+   "digits": 3,
+   "division": "05",
+   "group": "051",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Furniture, furnishings & loose carpets",
+   "desc_bm": "Perabot, kelengkapan & permaidani"
+  },
+  {
+   "digits": 4,
+   "division": "05",
+   "group": "051",
+   "class": "0511",
+   "subclass": "-",
+   "desc_en": "Furniture, furnishings & loose carpets",
+   "desc_bm": "Perabot, kelengkapan & permaidani"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "051",
+   "class": "0511",
+   "subclass": "05111",
+   "desc_en": "Household furniture",
+   "desc_bm": "Perabot isi rumah"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "051",
+   "class": "0511",
+   "subclass": "05113",
+   "desc_en": "Lighting equipment",
+   "desc_bm": "Kelengkapan lampu"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "051",
+   "class": "0511",
+   "subclass": "05114",
+   "desc_en": "Furnishings, carpets & rugs",
+   "desc_bm": "Permaidani, tikar & hiasan"
+  },
+  {
+   "digits": 3,
+   "division": "05",
+   "group": "052",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Household textiles",
+   "desc_bm": "Tekstil isi rumah"
+  },
+  {
+   "digits": 4,
+   "division": "05",
+   "group": "052",
+   "class": "0521",
+   "subclass": "-",
+   "desc_en": "Household textiles",
+   "desc_bm": "Tekstil isi rumah"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "052",
+   "class": "0521",
+   "subclass": "05211",
+   "desc_en": "Furnishing fabrics & curtains",
+   "desc_bm": "Fabrik kelengkapan & langsir"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "052",
+   "class": "0521",
+   "subclass": "05212",
+   "desc_en": "Bed linen & bedding",
+   "desc_bm": "Linen katil & kelengkapan tidur"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "052",
+   "class": "0521",
+   "subclass": "05213",
+   "desc_en": "Table linen & bathroom linen",
+   "desc_bm": "Alas meja & bilik air"
+  },
+  {
+   "digits": 3,
+   "division": "05",
+   "group": "053",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Household appliances",
+   "desc_bm": "Perkakas isi rumah"
+  },
+  {
+   "digits": 4,
+   "division": "05",
+   "group": "053",
+   "class": "0531",
+   "subclass": "-",
+   "desc_en": "Major household appliances, whether electric or not",
+   "desc_bm": "Perkakasan utama isi rumah sama ada elektrik atau bukan elektrik"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "053",
+   "class": "0531",
+   "subclass": "05311",
+   "desc_en": "Major kitchen appliances",
+   "desc_bm": "Perkakasan utama dapur"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "053",
+   "class": "0531",
+   "subclass": "05312",
+   "desc_en": "Major laundry appliances",
+   "desc_bm": "Perkakasan mencuci utama"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "053",
+   "class": "0531",
+   "subclass": "05313",
+   "desc_en": "Heaters, air conditioners",
+   "desc_bm": "Pemanas & penghawa dingin"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "053",
+   "class": "0531",
+   "subclass": "05314",
+   "desc_en": "Cleaning equipment",
+   "desc_bm": "Perkakasan pembersihan"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "053",
+   "class": "0531",
+   "subclass": "05319",
+   "desc_en": "Other major household appliances",
+   "desc_bm": "Lain-lain perkakasan utama isi rumah"
+  },
+  {
+   "digits": 4,
+   "division": "05",
+   "group": "053",
+   "class": "0532",
+   "subclass": "-",
+   "desc_en": "Small household appliances",
+   "desc_bm": "Kelengkapan elektrik kecil isi rumah"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "053",
+   "class": "0532",
+   "subclass": "05321",
+   "desc_en": "Small appliances for cooking & processing of food",
+   "desc_bm": "Perkakasan elektrik kecil untuk memasak & memproses makanan"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "053",
+   "class": "0532",
+   "subclass": "05329",
+   "desc_en": "Other small household appliances",
+   "desc_bm": "Perkakasan elektrik kecil isi rumah yang lain"
+  },
+  {
+   "digits": 4,
+   "division": "05",
+   "group": "053",
+   "class": "0533",
+   "subclass": "-",
+   "desc_en": "Repair, installation & hire of household appliances",
+   "desc_bm": "Pembaikan, pemasangan & sewa perkakas isi rumah"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "053",
+   "class": "0533",
+   "subclass": "05330",
+   "desc_en": "Repair, installation & hire of household appliances",
+   "desc_bm": "Pembaikan, pemasangan & sewa perkakas isi rumah"
+  },
+  {
+   "digits": 3,
+   "division": "05",
+   "group": "054",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Glassware, tableware & household utensils",
+   "desc_bm": "Barang kaca, pinggan mangkuk & peralatan dapur isi rumah"
+  },
+  {
+   "digits": 4,
+   "division": "05",
+   "group": "054",
+   "class": "0540",
+   "subclass": "-",
+   "desc_en": "Glassware, tableware & household utensils",
+   "desc_bm": "Barang kaca, pinggan mangkuk & peralatan dapur isi rumah"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "054",
+   "class": "0540",
+   "subclass": "05401",
+   "desc_en": "Glassware & ceramic ware",
+   "desc_bm": "Barang kaca & barang seramik"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "054",
+   "class": "0540",
+   "subclass": "05403",
+   "desc_en": "Kitchen utensils & articles",
+   "desc_bm": "Peralatan & barang keperluan dapur"
+  },
+  {
+   "digits": 3,
+   "division": "05",
+   "group": "055",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Tools & equipment for house & garden",
+   "desc_bm": "Alat pertukangan & peralatan untuk rumah & kebun"
+  },
+  {
+   "digits": 4,
+   "division": "05",
+   "group": "055",
+   "class": "0551",
+   "subclass": "-",
+   "desc_en": "Motorized tools & equipment",
+   "desc_bm": "Alat-alat & peralatan bermotor"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "055",
+   "class": "0551",
+   "subclass": "05510",
+   "desc_en": "Motorised tools & equipment",
+   "desc_bm": "Alat-alat & peralatan bermotor"
+  },
+  {
+   "digits": 4,
+   "division": "05",
+   "group": "055",
+   "class": "0552",
+   "subclass": "-",
+   "desc_en": "Non-motorized tools & miscellaneous accessories",
+   "desc_bm": "Alat-alat tidak bermotor & pelbagai aksesori"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "055",
+   "class": "0552",
+   "subclass": "05522",
+   "desc_en": "Miscellaneous accessories",
+   "desc_bm": "Pelbagai aksesori"
+  },
+  {
+   "digits": 3,
+   "division": "05",
+   "group": "056",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Goods & services for routine household maintenance",
+   "desc_bm": "Barangan & perkhidmatan penyelenggaran isi rumah"
+  },
+  {
+   "digits": 4,
+   "division": "05",
+   "group": "056",
+   "class": "0561",
+   "subclass": "-",
+   "desc_en": "Non-durable household goods",
+   "desc_bm": "Barang-barang isi rumah tidak tahan lama"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "056",
+   "class": "0561",
+   "subclass": "05611",
+   "desc_en": "Household cleaning & maintenance products",
+   "desc_bm": "Produk pencuci & penyelenggaraan"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "056",
+   "class": "0561",
+   "subclass": "05619",
+   "desc_en": "Other non-durable household goods",
+   "desc_bm": "Barang-barang isi rumah tidak tahan lama lain"
+  },
+  {
+   "digits": 4,
+   "division": "05",
+   "group": "056",
+   "class": "0562",
+   "subclass": "-",
+   "desc_en": "Domestic services & household services",
+   "desc_bm": "Perkhidmatan domestik & perkhidmatan isi rumah"
+  },
+  {
+   "digits": 5,
+   "division": "05",
+   "group": "056",
+   "class": "0562",
+   "subclass": "05621",
+   "desc_en": "Domestic services by paid staff",
+   "desc_bm": "Perkhidmatan domestik oleh kakitangan yang dibayar"
+  },
+  {
+   "digits": 2,
+   "division": "06",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Health",
+   "desc_bm": "Kesihatan"
+  },
+  {
+   "digits": 3,
+   "division": "06",
+   "group": "061",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Medicines & health products",
+   "desc_bm": "Ubat-ubatan & produk kesihatan"
+  },
+  {
+   "digits": 4,
+   "division": "06",
+   "group": "061",
+   "class": "0611",
+   "subclass": "-",
+   "desc_en": "Medicines",
+   "desc_bm": "Ubat-ubatan"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "061",
+   "class": "0611",
+   "subclass": "06111",
+   "desc_en": "Medicines, vaccines & other pharmaceutical products",
+   "desc_bm": "Ubat-ubatan, vaksin & produk farmaseutikal lain"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "061",
+   "class": "0611",
+   "subclass": "06112",
+   "desc_en": "Herbal medicines & homeopathic products",
+   "desc_bm": "Ubat-ubatan herba & produk homeopati"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "061",
+   "class": "0611",
+   "subclass": "06113",
+   "desc_en": "Health supplements",
+   "desc_bm": "Supplemen kesihatan"
+  },
+  {
+   "digits": 4,
+   "division": "06",
+   "group": "061",
+   "class": "0612",
+   "subclass": "-",
+   "desc_en": "Medical products",
+   "desc_bm": "Produk perubatan"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "061",
+   "class": "0612",
+   "subclass": "06121",
+   "desc_en": "Medical diagnostic products",
+   "desc_bm": "Produk diagnostik perubatan"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "061",
+   "class": "0612",
+   "subclass": "06122",
+   "desc_en": "Prevention & protective devices",
+   "desc_bm": "Alat pencegahan & pelindung"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "061",
+   "class": "0612",
+   "subclass": "06123",
+   "desc_en": "Treatment devices for personal use",
+   "desc_bm": "Peralatan rawatan untuk kegunaan peribadi"
+  },
+  {
+   "digits": 4,
+   "division": "06",
+   "group": "061",
+   "class": "0613",
+   "subclass": "-",
+   "desc_en": "Assistive products",
+   "desc_bm": "Alat bantu"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "061",
+   "class": "0613",
+   "subclass": "06131",
+   "desc_en": "Assistive products for vision",
+   "desc_bm": "Alat bantu untuk penglihatan"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "061",
+   "class": "0613",
+   "subclass": "06133",
+   "desc_en": "Assistive products for mobility & daily living",
+   "desc_bm": "Alat bantu untuk mobiliti & kehidupan seharian"
+  },
+  {
+   "digits": 3,
+   "division": "06",
+   "group": "062",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Outpatient care services",
+   "desc_bm": "Perkhidmatan penjagaan pesakit luar"
+  },
+  {
+   "digits": 4,
+   "division": "06",
+   "group": "062",
+   "class": "0622",
+   "subclass": "-",
+   "desc_en": "Outpatient dental services",
+   "desc_bm": "Perkhidmatan pergigian pesakit luar"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "062",
+   "class": "0622",
+   "subclass": "06229",
+   "desc_en": "Other outpatient dental services",
+   "desc_bm": "Perkhidmatan pergigian pesakit luar yang lain"
+  },
+  {
+   "digits": 4,
+   "division": "06",
+   "group": "062",
+   "class": "0623",
+   "subclass": "-",
+   "desc_en": "Other outpatient care services (excluding preventive & dental)",
+   "desc_bm": "Perkhidmatan rawatan pesakit luar yang lain (tidak termasuk perkhidmatan pergigian)"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "062",
+   "class": "0623",
+   "subclass": "06231",
+   "desc_en": "Outpatient curative & rehabilitative services (excluding dental services)",
+   "desc_bm": "Perkhidmatan kuratif & pemulihan pesakit luar (tidak termasuk perkhidmatan pergigian)"
+  },
+  {
+   "digits": 3,
+   "division": "06",
+   "group": "063",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Inpatient care services",
+   "desc_bm": "Perkhidmatan penjagaan pesakit dalam hospital"
+  },
+  {
+   "digits": 4,
+   "division": "06",
+   "group": "063",
+   "class": "0631",
+   "subclass": "-",
+   "desc_en": "Inpatient curative & rehabilitative services",
+   "desc_bm": "Perkhidmatan kuratif & pemulihan pesakit dalam"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "063",
+   "class": "0631",
+   "subclass": "06310",
+   "desc_en": "Inpatient curative & rehabilitative services",
+   "desc_bm": "Perkhidmatan kuratif & pemulihan pesakit dalam"
+  },
+  {
+   "digits": 4,
+   "division": "06",
+   "group": "063",
+   "class": "0632",
+   "subclass": "-",
+   "desc_en": "Inpatient long term care services",
+   "desc_bm": "Perkhidmatan rawatan jangka panjang pesakit dalam"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "063",
+   "class": "0632",
+   "subclass": "06320",
+   "desc_en": "Inpatient long term care services",
+   "desc_bm": "Perkhidmatan rawatan jangka panjang pesakit dalam"
+  },
+  {
+   "digits": 3,
+   "division": "06",
+   "group": "064",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Others health services",
+   "desc_bm": "Perkhidmatan kesihatan lain"
+  },
+  {
+   "digits": 4,
+   "division": "06",
+   "group": "064",
+   "class": "0641",
+   "subclass": "-",
+   "desc_en": "Diagnostic imaging services & medical laboratory services",
+   "desc_bm": "Perkhidmatan pengimejan diagnostik & perkhidmatan makmal perubatan"
+  },
+  {
+   "digits": 5,
+   "division": "06",
+   "group": "064",
+   "class": "0641",
+   "subclass": "06410",
+   "desc_en": "Diagnostic imaging services & medical laboratory services",
+   "desc_bm": "Perkhidmatan pengimejan diagnostik & perkhidmatan makmal perubatan"
+  },
+  {
+   "digits": 2,
+   "division": "07",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Transport",
+   "desc_bm": "Pengangkutan"
+  },
+  {
+   "digits": 3,
+   "division": "07",
+   "group": "071",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Purchase of vehicles",
+   "desc_bm": "Pembelian kenderaan"
+  },
+  {
+   "digits": 4,
+   "division": "07",
+   "group": "071",
+   "class": "0711",
+   "subclass": "-",
+   "desc_en": "Motor cars",
+   "desc_bm": "Kereta"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "071",
+   "class": "0711",
+   "subclass": "07111",
+   "desc_en": "Cars",
+   "desc_bm": "Kereta"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "071",
+   "class": "0711",
+   "subclass": "07112",
+   "desc_en": "Second hand cars",
+   "desc_bm": "Kereta terpakai"
+  },
+  {
+   "digits": 4,
+   "division": "07",
+   "group": "071",
+   "class": "0712",
+   "subclass": "-",
+   "desc_en": "Motorcycles",
+   "desc_bm": "Motosikal"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "071",
+   "class": "0712",
+   "subclass": "07120",
+   "desc_en": "Motorcycles",
+   "desc_bm": "Motosikal"
+  },
+  {
+   "digits": 4,
+   "division": "07",
+   "group": "071",
+   "class": "0713",
+   "subclass": "-",
+   "desc_en": "Bicycles",
+   "desc_bm": "Basikal"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "071",
+   "class": "0713",
+   "subclass": "07130",
+   "desc_en": "Bicycles",
+   "desc_bm": "Basikal"
+  },
+  {
+   "digits": 3,
+   "division": "07",
+   "group": "072",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Operation of personal transport equipment",
+   "desc_bm": "Pengurusan peralatan pengangkutan persendirian"
+  },
+  {
+   "digits": 4,
+   "division": "07",
+   "group": "072",
+   "class": "0721",
+   "subclass": "-",
+   "desc_en": "Parts & accessories for personal transport equipment",
+   "desc_bm": "Alat ganti & aksesori untuk kelengkapan pengangkutan persendirian"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "072",
+   "class": "0721",
+   "subclass": "07211",
+   "desc_en": "Tyre",
+   "desc_bm": "Tayar"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "072",
+   "class": "0721",
+   "subclass": "07212",
+   "desc_en": "Parts for personal transport equipment",
+   "desc_bm": "Alat ganti untuk kelengkapan pengangkutan persendirian"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "072",
+   "class": "0721",
+   "subclass": "07213",
+   "desc_en": "Accessories for personal transport equipment",
+   "desc_bm": "Aksesori untuk kelengkapan pengangkutan persendirian"
+  },
+  {
+   "digits": 4,
+   "division": "07",
+   "group": "072",
+   "class": "0722",
+   "subclass": "-",
+   "desc_en": "Fuels & lubricants for personal transport equipment",
+   "desc_bm": "Bahan api & pelincir untuk kelengkapan pengangkutan persendirian"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "072",
+   "class": "0722",
+   "subclass": "07221",
+   "desc_en": "Diesel",
+   "desc_bm": "Diesel"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "072",
+   "class": "0722",
+   "subclass": "07222",
+   "desc_en": "Petrol",
+   "desc_bm": "Petrol"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "072",
+   "class": "0722",
+   "subclass": "07224",
+   "desc_en": "Lubricants",
+   "desc_bm": "Pelincir"
+  },
+  {
+   "digits": 4,
+   "division": "07",
+   "group": "072",
+   "class": "0723",
+   "subclass": "-",
+   "desc_en": "Maintenance & repair of personal transport equipment",
+   "desc_bm": "Penyelenggaraan & pembaikan kelengkapan kenderaan persendirian"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "072",
+   "class": "0723",
+   "subclass": "07230",
+   "desc_en": "Maintenance & repair of personal transport equipment",
+   "desc_bm": "Penyelenggaraan & pembaikan kelengkapan kenderaan persendirian"
+  },
+  {
+   "digits": 4,
+   "division": "07",
+   "group": "072",
+   "class": "0724",
+   "subclass": "-",
+   "desc_en": "Other services in respect of personal transport equipment",
+   "desc_bm": "Perkhidmatan lain berkenaan kelengkapan pengangkutan persendirian"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "072",
+   "class": "0724",
+   "subclass": "07241",
+   "desc_en": "Services for parking",
+   "desc_bm": "Perkhidmatan parking"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "072",
+   "class": "0724",
+   "subclass": "07242",
+   "desc_en": "Toll facilities",
+   "desc_bm": "Fasiliti tol"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "072",
+   "class": "0724",
+   "subclass": "07243",
+   "desc_en": "Driving lessons & licences",
+   "desc_bm": "Kelas memandu & lesen"
+  },
+  {
+   "digits": 3,
+   "division": "07",
+   "group": "073",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Passenger transport services",
+   "desc_bm": "Perkhidmatan pengangkutan awam"
+  },
+  {
+   "digits": 4,
+   "division": "07",
+   "group": "073",
+   "class": "0731",
+   "subclass": "-",
+   "desc_en": "Passenger transport by railway",
+   "desc_bm": "Pengangkutan penumpang menggunakan laluan rel"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "073",
+   "class": "0731",
+   "subclass": "07311",
+   "desc_en": "Passenger transport by train",
+   "desc_bm": "Pengangkutan penumpang menggunakan kereta api"
+  },
+  {
+   "digits": 4,
+   "division": "07",
+   "group": "073",
+   "class": "0732",
+   "subclass": "-",
+   "desc_en": "Passenger transport by road",
+   "desc_bm": "Pengangkutan penumpang menggunakan jalan raya"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "073",
+   "class": "0732",
+   "subclass": "07321",
+   "desc_en": "Passenger transport by bus & coach",
+   "desc_bm": "Pengangkutan penumpang menggunakan bas & koc"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "073",
+   "class": "0732",
+   "subclass": "07323",
+   "desc_en": "Passenger transport for students to & from school",
+   "desc_bm": "Pengangkutan penumpang bagi pelajar pergi & balik sekolah"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "073",
+   "class": "0732",
+   "subclass": "07329",
+   "desc_en": "Other passenger transport by road",
+   "desc_bm": "Pengangkutan penumpang lain menggunakan jalan raya"
+  },
+  {
+   "digits": 4,
+   "division": "07",
+   "group": "073",
+   "class": "0733",
+   "subclass": "-",
+   "desc_en": "Passenger transport by air",
+   "desc_bm": "Pengangkutan penumpang melalui udara"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "073",
+   "class": "0733",
+   "subclass": "07331",
+   "desc_en": "Passenger transport by air, domestic",
+   "desc_bm": "Pengangkutan penumpang melalui udara, domestik"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "073",
+   "class": "0733",
+   "subclass": "07332",
+   "desc_en": "Passenger transport by air, international",
+   "desc_bm": "Pengangkutan penumpang melalui udara, antarabangsa"
+  },
+  {
+   "digits": 4,
+   "division": "07",
+   "group": "073",
+   "class": "0734",
+   "subclass": "-",
+   "desc_en": "Passenger transport by sea & inland waterway",
+   "desc_bm": "Pengangkutan penumpang melalui laut & air"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "073",
+   "class": "0734",
+   "subclass": "07340",
+   "desc_en": "Passenger transport by sea & inland waterway",
+   "desc_bm": "Pengangkutan penumpang melalui laut & air"
+  },
+  {
+   "digits": 3,
+   "division": "07",
+   "group": "074",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Transport services of goods",
+   "desc_bm": "Perkhidmatan pengangkutan barangan"
+  },
+  {
+   "digits": 4,
+   "division": "07",
+   "group": "074",
+   "class": "0749",
+   "subclass": "-",
+   "desc_en": "Other transport of goods",
+   "desc_bm": "Pengangkutan barang-barang lain"
+  },
+  {
+   "digits": 5,
+   "division": "07",
+   "group": "074",
+   "class": "0749",
+   "subclass": "07492",
+   "desc_en": "Delivery of goods",
+   "desc_bm": "Penghantaran barangan"
+  },
+  {
+   "digits": 2,
+   "division": "08",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Information & Communication",
+   "desc_bm": "Maklumat & Komunikasi"
+  },
+  {
+   "digits": 3,
+   "division": "08",
+   "group": "081",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Information & communication equipment",
+   "desc_bm": "Peralatan maklumat & komunikasi"
+  },
+  {
+   "digits": 4,
+   "division": "08",
+   "group": "081",
+   "class": "0812",
+   "subclass": "-",
+   "desc_en": "Mobile telephone equipment",
+   "desc_bm": "Peralatan telefon bimbit"
+  },
+  {
+   "digits": 5,
+   "division": "08",
+   "group": "081",
+   "class": "0812",
+   "subclass": "08120",
+   "desc_en": "Mobile telephone equipment",
+   "desc_bm": "Peralatan telefon bimbit"
+  },
+  {
+   "digits": 4,
+   "division": "08",
+   "group": "081",
+   "class": "0813",
+   "subclass": "-",
+   "desc_en": "Information processing equipment",
+   "desc_bm": "Peralatan pemprosesan maklumat"
+  },
+  {
+   "digits": 5,
+   "division": "08",
+   "group": "081",
+   "class": "0813",
+   "subclass": "08131",
+   "desc_en": "Computers, laptops & tablets",
+   "desc_bm": "Komputer, komputer riba & tablet"
+  },
+  {
+   "digits": 4,
+   "division": "08",
+   "group": "081",
+   "class": "0814",
+   "subclass": "-",
+   "desc_en": "Equipment for the reception, recording & reproduction of sound & vision",
+   "desc_bm": "Peralatan untuk penerimaan, rakaman & penghasilan suara & penglihatan"
+  },
+  {
+   "digits": 5,
+   "division": "08",
+   "group": "081",
+   "class": "0814",
+   "subclass": "08140",
+   "desc_en": "Equipment for the reception, recording & reproduction of sound & vision",
+   "desc_bm": "Peralatan untuk penerimaan, rakaman & penghasilan suara & penglihatan"
+  },
+  {
+   "digits": 4,
+   "division": "08",
+   "group": "081",
+   "class": "0819",
+   "subclass": "-",
+   "desc_en": "Other information & communication equipment & accessories",
+   "desc_bm": "Peralatan & aksesori maklumat & komunikasi lain"
+  },
+  {
+   "digits": 5,
+   "division": "08",
+   "group": "081",
+   "class": "0819",
+   "subclass": "08191",
+   "desc_en": "Other information & communication equipment",
+   "desc_bm": "Peralatan maklumat & komunikasi lain"
+  },
+  {
+   "digits": 3,
+   "division": "08",
+   "group": "083",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Information & communication services",
+   "desc_bm": "Perkhidmatan maklumat & komunikasi"
+  },
+  {
+   "digits": 4,
+   "division": "08",
+   "group": "083",
+   "class": "0832",
+   "subclass": "-",
+   "desc_en": "Mobile communication services",
+   "desc_bm": "Perkhidmatan komunikasi mudah alih"
+  },
+  {
+   "digits": 5,
+   "division": "08",
+   "group": "083",
+   "class": "0832",
+   "subclass": "08320",
+   "desc_en": "Mobile communication services",
+   "desc_bm": "Perkhidmatan komunikasi mudah alih"
+  },
+  {
+   "digits": 4,
+   "division": "08",
+   "group": "083",
+   "class": "0833",
+   "subclass": "-",
+   "desc_en": "Internet access provision services & net storage services",
+   "desc_bm": "Perkhidmatan penyediaan akses internet"
+  },
+  {
+   "digits": 5,
+   "division": "08",
+   "group": "083",
+   "class": "0833",
+   "subclass": "08330",
+   "desc_en": "Internet access provision services",
+   "desc_bm": "Perkhidmatan penyediaan akses internet"
+  },
+  {
+   "digits": 4,
+   "division": "08",
+   "group": "083",
+   "class": "0834",
+   "subclass": "-",
+   "desc_en": "Bundled telecommunication services",
+   "desc_bm": "Pakej perkhidmatan telekomunikasi"
+  },
+  {
+   "digits": 5,
+   "division": "08",
+   "group": "083",
+   "class": "0834",
+   "subclass": "08340",
+   "desc_en": "Telecommunication services packages",
+   "desc_bm": "Pakej perkhidmatan telekomunikasi"
+  },
+  {
+   "digits": 4,
+   "division": "08",
+   "group": "083",
+   "class": "0839",
+   "subclass": "-",
+   "desc_en": "Other information & communication services",
+   "desc_bm": "Perkhidmatan maklumat & komunikasi lain"
+  },
+  {
+   "digits": 5,
+   "division": "08",
+   "group": "083",
+   "class": "0839",
+   "subclass": "08392",
+   "desc_en": "Subscription to audio-visual content, streaming services & rentals of audio-visual content",
+   "desc_bm": "Langganan kandungan audio-visual, perkhidmatan streaming & penyewaan kandungan audio-visual"
+  },
+  {
+   "digits": 2,
+   "division": "09",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Recreation, Sport & Culture",
+   "desc_bm": "Rekreasi, Sukan & Kebudayaan"
+  },
+  {
+   "digits": 3,
+   "division": "09",
+   "group": "092",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Other recreational goods",
+   "desc_bm": "Barangan rekreasi lain"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "092",
+   "class": "0921",
+   "subclass": "-",
+   "desc_en": "Games, toys & hobbies",
+   "desc_bm": "Permainan, mainan & hobi"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "092",
+   "class": "0921",
+   "subclass": "09211",
+   "desc_en": "Equipment for sport",
+   "desc_bm": "Kelengkapan untuk bersukan"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "092",
+   "class": "0921",
+   "subclass": "09212",
+   "desc_en": "Other games, toys & hobbies",
+   "desc_bm": "Lain-lain permainan, mainan & hobi"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "092",
+   "class": "0922",
+   "subclass": "-",
+   "desc_en": "Equipment for sport, camping & open-air recreation",
+   "desc_bm": "Kelengkapan untuk bersukan, perkhemahan & rekreasi terbuka"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "092",
+   "class": "0922",
+   "subclass": "09221",
+   "desc_en": "Equipment for sport",
+   "desc_bm": "Kelengkapan untuk bersukan"
+  },
+  {
+   "digits": 3,
+   "division": "09",
+   "group": "093",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Garden products & pets",
+   "desc_bm": "Produk kebun & binatang peliharaan"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "093",
+   "class": "0931",
+   "subclass": "-",
+   "desc_en": "Garden products, plants & flowers",
+   "desc_bm": "Produk kebun, tanaman & bunga"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "093",
+   "class": "0931",
+   "subclass": "09311",
+   "desc_en": "Garden products",
+   "desc_bm": "Produk kebun"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "093",
+   "class": "0931",
+   "subclass": "09312",
+   "desc_en": "Plants, seeds & flowers",
+   "desc_bm": "Tanaman, benih & bunga"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "093",
+   "class": "0932",
+   "subclass": "-",
+   "desc_en": "Pets & products for pets",
+   "desc_bm": "Binatang peliharaan & produk untuk binatang peliharaan"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "093",
+   "class": "0932",
+   "subclass": "09321",
+   "desc_en": "Purchase of pets",
+   "desc_bm": "Pembelian binatang peliharaan"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "093",
+   "class": "0932",
+   "subclass": "09322",
+   "desc_en": "Products for pets & other household animals",
+   "desc_bm": "Produk untuk binatang peliharaan & binatang isi rumah yang lain"
+  },
+  {
+   "digits": 3,
+   "division": "09",
+   "group": "094",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Recreational services",
+   "desc_bm": "Perkhidmatan rekreasi"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "094",
+   "class": "0945",
+   "subclass": "-",
+   "desc_en": "Veterinary & other services for pets",
+   "desc_bm": "Veterinar & lain-lain perkhidmatan untuk binatang peliharaan"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "094",
+   "class": "0945",
+   "subclass": "09450",
+   "desc_en": "Veterinary & other services for pets",
+   "desc_bm": "Veterinar & lain-lain perkhidmatan untuk binatang peliharaan"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "094",
+   "class": "0946",
+   "subclass": "-",
+   "desc_en": "Recreational & sporting services",
+   "desc_bm": "Perkhidmatan rekreasi & sukan"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "094",
+   "class": "0946",
+   "subclass": "09461",
+   "desc_en": "Recreational & leisure services",
+   "desc_bm": "Perkhidmatan rekreasi & riadah"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "094",
+   "class": "0946",
+   "subclass": "09462",
+   "desc_en": "Sporting services - practice",
+   "desc_bm": "Perkhidmatan sukan - latihan"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "094",
+   "class": "0946",
+   "subclass": "09463",
+   "desc_en": "Sporting services - attendance",
+   "desc_bm": "Perkhidmatan sukan - kehadiran"
+  },
+  {
+   "digits": 3,
+   "division": "09",
+   "group": "095",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Cultural goods",
+   "desc_bm": "Barangan kebudayaan"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "095",
+   "class": "0951",
+   "subclass": "-",
+   "desc_en": "Musical instruments",
+   "desc_bm": "Alat muzik"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "095",
+   "class": "0951",
+   "subclass": "09510",
+   "desc_en": "Musical instruments",
+   "desc_bm": "Alat muzik"
+  },
+  {
+   "digits": 3,
+   "division": "09",
+   "group": "096",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Cultural services",
+   "desc_bm": "Perkhidmatan kebudayaan"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "096",
+   "class": "0961",
+   "subclass": "-",
+   "desc_en": "Services provided by cinemas, theatres & concert venues",
+   "desc_bm": "Perkhidmatan yang disediakan oleh panggung wayang"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "096",
+   "class": "0961",
+   "subclass": "09610",
+   "desc_en": "Services provided by cinemas",
+   "desc_bm": "Perkhidmatan yang disediakan oleh panggung wayang"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "096",
+   "class": "0962",
+   "subclass": "-",
+   "desc_en": "Services provided by museums, libraries, & cultural sites",
+   "desc_bm": "Perkhidmatan yang disediakan oleh muzium"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "096",
+   "class": "0962",
+   "subclass": "09620",
+   "desc_en": "Services provided by museums",
+   "desc_bm": "Perkhidmatan yang disediakan oleh muzium"
+  },
+  {
+   "digits": 3,
+   "division": "09",
+   "group": "097",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Newpapers, books & stationery",
+   "desc_bm": "Surat khabar, buku & alat tulis"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "097",
+   "class": "0971",
+   "subclass": "-",
+   "desc_en": "Books",
+   "desc_bm": "Buku"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "097",
+   "class": "0971",
+   "subclass": "09711",
+   "desc_en": "Educational & text books",
+   "desc_bm": "Buku pendidikan & buku teks"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "097",
+   "class": "0972",
+   "subclass": "-",
+   "desc_en": "Newspapers & periodicals",
+   "desc_bm": "Surat khabar & bacaan berkala"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "097",
+   "class": "0972",
+   "subclass": "09721",
+   "desc_en": "Newspapers",
+   "desc_bm": "Surat khabar"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "097",
+   "class": "0974",
+   "subclass": "-",
+   "desc_en": "Stationery & drawing materials",
+   "desc_bm": "Alat tulis & bahan lukisan"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "097",
+   "class": "0974",
+   "subclass": "09740",
+   "desc_en": "Stationery & drawing materials",
+   "desc_bm": "Alat tulis & bahan lukisan"
+  },
+  {
+   "digits": 3,
+   "division": "09",
+   "group": "098",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Package holidays",
+   "desc_bm": "Pakej percutian"
+  },
+  {
+   "digits": 4,
+   "division": "09",
+   "group": "098",
+   "class": "0980",
+   "subclass": "-",
+   "desc_en": "Package holidays",
+   "desc_bm": "Pakej percutian"
+  },
+  {
+   "digits": 5,
+   "division": "09",
+   "group": "098",
+   "class": "0980",
+   "subclass": "09800",
+   "desc_en": "Package holidays",
+   "desc_bm": "Pakej percutian"
+  },
+  {
+   "digits": 2,
+   "division": "10",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Education",
+   "desc_bm": "Pendidikan"
+  },
+  {
+   "digits": 3,
+   "division": "10",
+   "group": "101",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Pre primary & primary education",
+   "desc_bm": "Pendidikan peringkat pra sekolah & sekolah rendah"
+  },
+  {
+   "digits": 4,
+   "division": "10",
+   "group": "101",
+   "class": "1010",
+   "subclass": "-",
+   "desc_en": "Pre primary & primary education",
+   "desc_bm": "Pendidikan peringkat pra sekolah & sekolah rendah"
+  },
+  {
+   "digits": 5,
+   "division": "10",
+   "group": "101",
+   "class": "1010",
+   "subclass": "10101",
+   "desc_en": "Pre primary education",
+   "desc_bm": "Pendidikan pra sekolah"
+  },
+  {
+   "digits": 5,
+   "division": "10",
+   "group": "101",
+   "class": "1010",
+   "subclass": "10102",
+   "desc_en": "Primary education",
+   "desc_bm": "Pendidikan sekolah rendah"
+  },
+  {
+   "digits": 3,
+   "division": "10",
+   "group": "102",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Secondary education",
+   "desc_bm": "Pendidikan peringkat menengah"
+  },
+  {
+   "digits": 4,
+   "division": "10",
+   "group": "102",
+   "class": "1020",
+   "subclass": "-",
+   "desc_en": "Secondary education",
+   "desc_bm": "Pendidikan peringkat menengah"
+  },
+  {
+   "digits": 5,
+   "division": "10",
+   "group": "102",
+   "class": "1020",
+   "subclass": "10200",
+   "desc_en": "Secondary education",
+   "desc_bm": "Pendidikan peringkat menengah"
+  },
+  {
+   "digits": 3,
+   "division": "10",
+   "group": "103",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Post-secondary non-tertiary education",
+   "desc_bm": "Pendidikan peringkat lepasan menengah bukan tertiari"
+  },
+  {
+   "digits": 4,
+   "division": "10",
+   "group": "103",
+   "class": "1030",
+   "subclass": "-",
+   "desc_en": "Post-secondary non-tertiary education",
+   "desc_bm": "Pendidikan peringkat lepasan menengah bukan tertiari"
+  },
+  {
+   "digits": 5,
+   "division": "10",
+   "group": "103",
+   "class": "1030",
+   "subclass": "10300",
+   "desc_en": "Post-secondary non-tertiary education",
+   "desc_bm": "Pendidikan peringkat lepasan menengah bukan tertiari"
+  },
+  {
+   "digits": 3,
+   "division": "10",
+   "group": "104",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Tertiary education",
+   "desc_bm": "Pendidikan peringkat diploma & ke atas"
+  },
+  {
+   "digits": 4,
+   "division": "10",
+   "group": "104",
+   "class": "1040",
+   "subclass": "-",
+   "desc_en": "Tertiary education",
+   "desc_bm": "Pendidikan peringkat diploma & ke atas"
+  },
+  {
+   "digits": 5,
+   "division": "10",
+   "group": "104",
+   "class": "1040",
+   "subclass": "10400",
+   "desc_en": "Tertiary education",
+   "desc_bm": "Pendidikan peringkat diploma & ke atas"
+  },
+  {
+   "digits": 3,
+   "division": "10",
+   "group": "105",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Education not defined by level",
+   "desc_bm": "Pendidikan yang tidak dikelaskan mengikut peringkat"
+  },
+  {
+   "digits": 4,
+   "division": "10",
+   "group": "105",
+   "class": "1050",
+   "subclass": "-",
+   "desc_en": "Education not defined by level\n",
+   "desc_bm": "Pendidikan yang tidak dikelaskan mengikut peringkat"
+  },
+  {
+   "digits": 5,
+   "division": "10",
+   "group": "105",
+   "class": "1050",
+   "subclass": "10502",
+   "desc_en": "Other education not defined by level",
+   "desc_bm": "Pendidikan lain yang tidak dikelaskan mengikut peringkat"
+  },
+  {
+   "digits": 2,
+   "division": "11",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Restaurant & Accommodation Services",
+   "desc_bm": "Restoran & Perkhidmatan Penginapan"
+  },
+  {
+   "digits": 3,
+   "division": "11",
+   "group": "111",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Food & beverage preparation services",
+   "desc_bm": "Perkhidmatan penyediaan minuman"
+  },
+  {
+   "digits": 4,
+   "division": "11",
+   "group": "111",
+   "class": "1111",
+   "subclass": "-",
+   "desc_en": "Restaurants, cafés & the like",
+   "desc_bm": "Restoran, kafe & seumpamanya"
+  },
+  {
+   "digits": 5,
+   "division": "11",
+   "group": "111",
+   "class": "1111",
+   "subclass": "11111",
+   "desc_en": "Restaurants, cafés & the like",
+   "desc_bm": "Restoran, kafe & seumpamanya"
+  },
+  {
+   "digits": 3,
+   "division": "11",
+   "group": "112",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Accommodation services",
+   "desc_bm": "Perkhidmatan penginapan"
+  },
+  {
+   "digits": 4,
+   "division": "11",
+   "group": "112",
+   "class": "1120",
+   "subclass": "-",
+   "desc_en": "Accommodation services",
+   "desc_bm": "Perkhidmatan penginapan"
+  },
+  {
+   "digits": 5,
+   "division": "11",
+   "group": "112",
+   "class": "1120",
+   "subclass": "11201",
+   "desc_en": "Hotels",
+   "desc_bm": "Hotel"
+  },
+  {
+   "digits": 5,
+   "division": "11",
+   "group": "112",
+   "class": "1120",
+   "subclass": "11202",
+   "desc_en": "Holiday centres & similar accommodation services",
+   "desc_bm": "Pusat percutian & perkhidmatan penginapan seumpanya"
+  },
+  {
+   "digits": 3,
+   "division": "12",
+   "group": "122",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Financial Services",
+   "desc_bm": "Perkhidmatan Kewangan"
+  },
+  {
+   "digits": 2,
+   "division": "12",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Insurance & Financial Services",
+   "desc_bm": "Insurans & Perkhidmatan Kewangan"
+  },
+  {
+   "digits": 3,
+   "division": "12",
+   "group": "121",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Insurance",
+   "desc_bm": "Insurans"
+  },
+  {
+   "digits": 4,
+   "division": "12",
+   "group": "121",
+   "class": "1212",
+   "subclass": "-",
+   "desc_en": "Insurance connected with health",
+   "desc_bm": "Insurans berkaitan dengan kesihatan"
+  },
+  {
+   "digits": 5,
+   "division": "12",
+   "group": "121",
+   "class": "1212",
+   "subclass": "12120",
+   "desc_en": "Insurance connected with health",
+   "desc_bm": "Insurans berkaitan dengan kesihatan"
+  },
+  {
+   "digits": 4,
+   "division": "12",
+   "group": "121",
+   "class": "1214",
+   "subclass": "-",
+   "desc_en": "Insurance connected with transport",
+   "desc_bm": "Insurans berkaitan dengan pengangkutan"
+  },
+  {
+   "digits": 5,
+   "division": "12",
+   "group": "121",
+   "class": "1214",
+   "subclass": "12141",
+   "desc_en": "Personal transport insurance",
+   "desc_bm": "Insurans pengangkutan persendirian"
+  },
+  {
+   "digits": 4,
+   "division": "12",
+   "group": "122",
+   "class": "1222",
+   "subclass": "-",
+   "desc_en": "Explicit charges by deposit-taking corporations",
+   "desc_bm": "Caj eksplisit oleh syarikat pengambilan deposit"
+  },
+  {
+   "digits": 5,
+   "division": "12",
+   "group": "122",
+   "class": "1222",
+   "subclass": "12220",
+   "desc_en": "Explicit charges by deposit-taking corporations",
+   "desc_bm": "Caj eksplisit oleh syarikat pengambilan deposit"
+  },
+  {
+   "digits": 2,
+   "division": "13",
+   "group": "-",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Personal Care, Social Protection & Miscellaneous Goods & Services",
+   "desc_bm": "Penjagaan Diri, Perlindungan Sosial & Pelbagai Barangan & Perkhidmatan"
+  },
+  {
+   "digits": 3,
+   "division": "13",
+   "group": "131",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Personal care",
+   "desc_bm": "Penjagaan diri"
+  },
+  {
+   "digits": 4,
+   "division": "13",
+   "group": "131",
+   "class": "1312",
+   "subclass": "-",
+   "desc_en": "Other appliances, articles & products for personal care",
+   "desc_bm": "Lain-lain perkakas, artikel & produk untuk penjagaan diri"
+  },
+  {
+   "digits": 5,
+   "division": "13",
+   "group": "131",
+   "class": "1312",
+   "subclass": "13120",
+   "desc_en": "Other appliances, articles & products for personal care",
+   "desc_bm": "Lain-lain perkakas, artikel & produk untuk penjagaan diri"
+  },
+  {
+   "digits": 4,
+   "division": "13",
+   "group": "131",
+   "class": "1313",
+   "subclass": "-",
+   "desc_en": "Hairdressing salons & personal grooming establishments",
+   "desc_bm": "Salon dandanan rambut & pusat dandanan peribadi"
+  },
+  {
+   "digits": 5,
+   "division": "13",
+   "group": "131",
+   "class": "1313",
+   "subclass": "13131",
+   "desc_en": "Hairdressing",
+   "desc_bm": "Mendandan rambut"
+  },
+  {
+   "digits": 5,
+   "division": "13",
+   "group": "131",
+   "class": "1313",
+   "subclass": "13132",
+   "desc_en": "Personal grooming treatments",
+   "desc_bm": "Rawatan dandanan peribadi"
+  },
+  {
+   "digits": 3,
+   "division": "13",
+   "group": "132",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Other personal item",
+   "desc_bm": "Barangan peribadi lain"
+  },
+  {
+   "digits": 4,
+   "division": "13",
+   "group": "132",
+   "class": "1321",
+   "subclass": "-",
+   "desc_en": "Jewellery & watches",
+   "desc_bm": "Barang kemas & jam tangan"
+  },
+  {
+   "digits": 5,
+   "division": "13",
+   "group": "132",
+   "class": "1321",
+   "subclass": "13211",
+   "desc_en": "Jewellery & watches",
+   "desc_bm": "Barang kemas & jam tangan"
+  },
+  {
+   "digits": 4,
+   "division": "13",
+   "group": "132",
+   "class": "1322",
+   "subclass": "-",
+   "desc_en": "Devotional articles & articles for religious & ritual celebrations",
+   "desc_bm": "Artikel pemujaan & artikel untuk perayaan keagamaan & ritual"
+  },
+  {
+   "digits": 5,
+   "division": "13",
+   "group": "132",
+   "class": "1322",
+   "subclass": "13220",
+   "desc_en": "Devotional articles & articles for religious & ritual celebrations",
+   "desc_bm": "Artikel pemujaan & artikel untuk perayaan keagamaan & ritual"
+  },
+  {
+   "digits": 4,
+   "division": "13",
+   "group": "132",
+   "class": "1329",
+   "subclass": "-",
+   "desc_en": "Other personal effects n.e.c",
+   "desc_bm": "Barang peribadi lain t.t.t.l."
+  },
+  {
+   "digits": 5,
+   "division": "13",
+   "group": "132",
+   "class": "1329",
+   "subclass": "13291",
+   "desc_en": "Other personal effects n.e.c",
+   "desc_bm": "Barang peribadi lain t.t.t.l."
+  },
+  {
+   "digits": 3,
+   "division": "13",
+   "group": "133",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Social protection",
+   "desc_bm": "Perlidungan sosial"
+  },
+  {
+   "digits": 4,
+   "division": "13",
+   "group": "133",
+   "class": "1330",
+   "subclass": "-",
+   "desc_en": "Social protection",
+   "desc_bm": "Perlidungan sosial"
+  },
+  {
+   "digits": 5,
+   "division": "13",
+   "group": "133",
+   "class": "1330",
+   "subclass": "13301",
+   "desc_en": "Child care services",
+   "desc_bm": "Perkhidmatan penjagaan kanak-kanak"
+  },
+  {
+   "digits": 3,
+   "division": "13",
+   "group": "139",
+   "class": "-",
+   "subclass": "-",
+   "desc_en": "Other services",
+   "desc_bm": "Lain-lain perkhidmatan"
+  },
+  {
+   "digits": 4,
+   "division": "13",
+   "group": "139",
+   "class": "1390",
+   "subclass": "-",
+   "desc_en": "Other services",
+   "desc_bm": "Lain-lain perkhidmatan"
+  },
+  {
+   "digits": 5,
+   "division": "13",
+   "group": "139",
+   "class": "1390",
+   "subclass": "13909",
+   "desc_en": "Other services n.e.c",
+   "desc_bm": "Lain-lain perkhidmatan t.t.t.l."
+  }
+ ],
+ "_nextI18Next": {
+  "initialI18nStore": {
+   "en-GB": {
+    "catalogue": {
+     "header": "Data Catalogue",
+     "header_category_govt": "Malaysia's official open data portal",
+     "header_category_agency": "{{ agency }}'s official open data portal",
+     "description": "Your one-stop interface to browse Malaysia's wealth of open data. This page will consistently grow in depth and breadth with high-quality data from federal and state agencies in Malaysia.",
+     "description_agency": "Your one-stop interface to browse open data from {{ agency }}. This page will grow over time as we expand the quality and quantity of our open data.",
+     "description_opendosm": "Your one-stop interface to browse our wealth of open data. This page will consistently grow in depth and breadth, providing richer and more varied data from the various divisions of DOSM.",
+     "description_databnm": "Multi-format downloads, exploratory dataviz, and programmatic access - pick your preferred method of freely using our data. Pay particular attention to the metadata to gain a deeper understanding of a dataset's scope, use, and limitations, and write to data@bnm.gov.my if you want to discuss or request anything further!",
+     "dataset_count": "{{ count }} data series, and counting",
+     "download": "Download",
+     "category": "Category",
+     "chart": "Chart",
+     "table": "Table",
+     "filter": "Filter",
+     "period": "Frequency",
+     "frequency": "Frequency",
+     "geography": "Geography",
+     "demography": "Demography",
+     "begin": "Begin",
+     "end": "End",
+     "source": "Data Source",
+     "desktop": "Desktop",
+     "mobile": "Mobile",
+     "settings": "Settings",
+     "embed": "Embed",
+     "embed_code": "Embed Code",
+     "view_full_chart": "View full chart",
+     "placeholder": {
+      "source": "Select agency",
+      "search": "Search for dataset",
+      "demography": "Data contains"
+     },
+     "filter_options": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "yearly": "Yearly",
+      "intraday": "Intraday",
+      "infrequent": "Infrequent",
+      "as_required": "As Required",
+      "one_off": "One-Off",
+      "state": "State",
+      "dun": "DUN",
+      "national": "National",
+      "parlimen": "Parliament",
+      "district": "District",
+      "sex": "Sex",
+      "ethnicity": "Ethnicity",
+      "age": "Age",
+      "religion": "Religion",
+      "nationality": "Nationality",
+      "disability": "Disability status",
+      "marital": "Marital status"
+     },
+     "image": {
+      "title": "Image (PNG)",
+      "desc": "Suitable for general digital use."
+     },
+     "vector": {
+      "title": "Vector Graphic (SVG)",
+      "desc": "Suitable for high quality prints or further image editing."
+     },
+     "csv": {
+      "title": "Full Dataset (CSV)",
+      "desc": "Recommended for individuals seeking an Excel-friendly format."
+     },
+     "parquet": {
+      "title": "Full Dataset (Parquet)",
+      "desc": "Recommended for data scientists seeking to work with data via code."
+     },
+     "geojson": {
+      "title": "GeoJSON (JSON)",
+      "desc": "Open standard format for plotting geographical features on maps."
+     },
+     "header_1": "How is this data produced?",
+     "header_2": "What caveats I should bear in mind when using this data?",
+     "header_3": "Publication(s) using this data",
+     "header_4": "Related Datasets",
+     "meta_desc": "Dataset description",
+     "meta_def": "Variable definitions",
+     "meta_chart_above": "(Chart above)",
+     "meta_all_dataset": "In the entire dataset:",
+     "meta_variable": "Variable",
+     "meta_variable_name": "Name in Dataset",
+     "meta_data_type": "Data type",
+     "meta_definition": "Definition",
+     "meta_source": "Data source(s)",
+     "meta_url": "URLs to dataset",
+     "meta_license": "License",
+     "code": "Code",
+     "code_desc": "Connect directly to the data with Python.",
+     "code_note": "If not already installed, do",
+     "code_comments": {
+      "geojson_1": "# the first URL gives you 15dp accuracy (highest possible) \n# the _LIGHT URL gives you 5dp accuracy, sufficient for visuals but not analysis \n# the _LIGHT URL is over 90% smaller in size, hence the tradeoff",
+      "geojson_2": "# Uncomment below to maintain a rectangular map, but remove the whitespace caused by the South China Sea",
+      "geojson_3": "# Uncomment below to change from rectangular --> square, for a more compact visual"
+     },
+     "sample_query": {
+      "section_title": "Sample OpenAPI query",
+      "desc1": "The following code is an example of how to make an API query to retrieve the data catalogue mentioned above. You can use different programming languages by switching the code accordingly. For a complete guide on possible query parameters and syntax, please refer to the ",
+      "link1": "official Open API Documentation",
+      "desc2": "Additionally, you can experiment with the code interactively and send requests at the ",
+      "link2": "Example Requests section",
+      "unavailable": "This data catalog is not available through OpenAPI as the nature of the data makes it unsuitable for API access. For the full dataset, please use the provided download link as shown in the above section."
+     },
+     "license_text": "This data is made open under the Creative Commons Attribution 4.0 International License (CC BY 4.0). A copy of the license is available "
+    },
+    "common": {
+     "site": {
+      "name": "data.gov.my",
+      "description": "Your one-stop interface to browse Malaysia's wealth of open data!"
+     },
+     "error": {
+      "404": {
+       "title": "Oops, we cannot find the page you're looking for.",
+       "description": "Is your URL incorrect?",
+       "legacy": "If you're looking for a dataset that was available via the old site, you may head to ",
+       "reason": "Error code: 404 -- Page not found"
+      },
+      "500": {
+       "title": "Oops, something went terribly wrong.",
+       "description": "We are sorry for this incident.",
+       "reason": "Error code: 500 -- Server error"
+      },
+      "output": "Output",
+      "disclaimer": "*Not an actual terminal / console.",
+      "toast": {
+       "request_failure": "Oops! Unable to load requested data",
+       "image_download_failure": "Oops! Unable to download requested image",
+       "form_submission_failure": "Oops! Unable to process form submission",
+       "try_again": "Please try again later",
+       "reach_support": "Please check again or reach out to support for assistance"
+      }
+     },
+     "common": {
+      "state": "State",
+      "district": "District",
+      "type": "Type",
+      "name": "Name",
+      "previous": "Previous",
+      "next": "Next",
+      "in": " in ",
+      "yr": "yr",
+      "views_one": "view",
+      "views_other": "views",
+      "downloads_one": "download",
+      "downloads_other": "downloads",
+      "page_of": "{{ current }} of {{ total }}",
+      "data_for": "Data for {{ state }}",
+      "data_of": "Data as of {{ date }}",
+      "latest": "Latest ({{ date }})",
+      "last_updated": "Last updated: {{ date }}",
+      "next_update": "Next update: {{ date }}",
+      "slider": "",
+      "zoom": "Zoom into my area",
+      "clear": "Clear",
+      "clear_selection": "Clear selection",
+      "clear_all": "Clear all",
+      "reset": "Reset",
+      "reset_default": "Reset to default",
+      "close": "Close",
+      "select": "Select",
+      "here": "Here",
+      "no_entries": "No entries found",
+      "check_out": "Check out",
+      "no_data": "No data",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "maximum": "Maximum",
+      "minimum": "Minimum",
+      "sort": "Sort",
+      "asc_order": "Ascending order",
+      "desc_order": "Descending order",
+      "play": "Play",
+      "pause": "Pause",
+      "indicator": "Indicator",
+      "available_at": "Available at",
+      "accessed": "Accessed",
+      "last_modified": "Last modified",
+      "cited": "cited",
+      "available_from": "Available from",
+      "ranking": "Ranking ({{ count, number }})",
+      "charts": {
+       "heatmap": "Heatmap",
+       "table": "Table"
+      },
+      "banner": "",
+      "opendosm_banner": ""
+     },
+     "time": {
+      "daily_7d": "Daily (7d avg)",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "yearly": "Yearly"
+     },
+     "placeholder": {
+      "all": "All",
+      "search": "Search",
+      "state": "Select state",
+      "state_first": "Select a state first",
+      "district": "Select district",
+      "facility": "Select facility",
+      "facility_type": "Select facility type",
+      "no_results": "No results",
+      "loading": "Loading..."
+     },
+     "nav": {
+      "home": "Home",
+      "dashboards": "Dashboards",
+      "catalogue": "Data Catalogue",
+      "api_docs": "API Docs",
+      "about": "About",
+      "data_request": "Data Request",
+      "community": "Community",
+      "helpdesk": "Helpdesk",
+      "progress": "Progress",
+      "legacy": "Legacy Site",
+      "publications": "Publications",
+      "national_summary_data_page": "NSDP",
+      "pmo": "Prime Minister's Department",
+      "gov": "Government of Malaysia",
+      "open_source": "Open Source",
+      "open_data_portal": "Open Data Portal",
+      "frontend": "Frontend Repo: NextJS",
+      "backend": "Backend Repo: Django",
+      "uiux": "UI + UX Design: Figma",
+      "mampu": "MAMPU",
+      "open_data": "Open Data",
+      "public_open_data": "Public Sector Open Data",
+      "bond_sukuk": " Bond & Sukuk Info (BIX)",
+      "guiding_principles": "Guiding Principles",
+      "terms_of_use": "Terms of Use",
+      "ai": "AI Helper: OpenAI",
+      "moh_github": "MoH GitHub",
+      "jc3_climate": "Climate Data (JC3)",
+      "faq": "FAQ"
+     },
+     "components": {
+      "theme": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "brought_by": "Brought to you by",
+      "brought_by_the": "Brought to you by the",
+      "product_by_division": "A open data product by the",
+      "visit_portal": "Visit our portal",
+      "click_to_explore": "Click to explore",
+      "ovs": "Malaysian-born Overseas",
+      "try_datagpt": "Try the new DataGPT"
+     },
+     "categories": {
+      "construction": "Construction",
+      "democracy": "Democracy",
+      "demography": "Demography",
+      "digitalisation": "Digitalisation",
+      "economy": "Economy",
+      "education": "Education",
+      "environment": "Environment",
+      "financial_sector": "Financial Sector",
+      "government_programs": "Government Programs",
+      "healthcare": "Healthcare",
+      "public_finances": "Public Finances",
+      "public_safety": "Public Safety",
+      "transportation": "Transportation",
+      "national_accounts": "National Accounts",
+      "services": "Services",
+      "summary": "Summary Page",
+      "public_administration": "Public Administration",
+      "labour_markets": "Labour Market",
+      "producer_price": "Producer Prices",
+      "households": "Households",
+      "trade": "Trade"
+     },
+     "home": {
+      "category": "Malaysia's official open data portal",
+      "title": "High frequency. High granularity. High impact.",
+      "description": "Your one-stop centre to browse Malaysia's wealth of open data. Whether you're a regular citizen looking for information, a researcher looking for material, or an application developer looking for an API, we've got you covered. Our mission is to make Malaysia the #1 data-driven country in the world.",
+      "section_1": {
+       "title": "Explore our hottest dashboards!",
+       "description": "These dashboards have been getting attention, but don't forget to check out our full collection of dashboards!"
+      },
+      "section_2": {
+       "title": "Study our most popular datasets!",
+       "description": "To search for something specific, use our data catalogue - it allows you to download or programmatically access our datasets.",
+       "past_24h": "24 hours",
+       "past_month": "1 month",
+       "all_time": "All-time",
+       "dashboards": "Dashboards",
+       "datasets_available": "Datasets available",
+       "resource_views": "Resource views",
+       "resource_downloads": "Resource downloads",
+       "top_dashboards": "Most viewed dashboards",
+       "top_catalogues": "Most viewed datasets",
+       "top_files": "Most downloaded (data)",
+       "top_images": "Most downloaded (graphics)"
+      },
+      "section_3": {
+       "title": "Usage of data.gov.my",
+       "daily": "Daily",
+       "total": "Total"
+      },
+      "keys": {
+       "users": "Daily OpenAPI Usage",
+       "views": "Daily Views",
+       "downloads": "Daily Downloads"
+      }
+     }
+    },
+    "agencies": {
+     "aadk": {
+      "full": "National Anti-Drugs Agency",
+      "abbr": "AADK"
+     },
+     "audit": {
+      "full": "National Audit Department",
+      "abbr": "AUDIT"
+     },
+     "bnm": {
+      "full": "Central Bank of Malaysia",
+      "abbr": "BNM"
+     },
+     "bomba": {
+      "full": "Fire and Rescue Department of Malaysia",
+      "abbr": "BOMBA"
+     },
+     "doa": {
+      "full": "Department of Agriculture",
+      "abbr": "DOA"
+     },
+     "dosm": {
+      "full": "Department of Statistics Malaysia",
+      "abbr": "DOSM"
+     },
+     "epf": {
+      "full": "Employees Provident Fund",
+      "abbr": "EPF"
+     },
+     "epu": {
+      "full": "Ministry of the Economy",
+      "abbr": "EPU"
+     },
+     "govt": {
+      "full": "Government of Malaysia",
+      "abbr": "GOVT"
+     },
+     "icujpm": {
+      "full": "Internal Coordination Unit",
+      "abbr": "ICUJPM"
+     },
+     "imigresen": {
+      "full": "Immigration Department of Malaysia",
+      "abbr": "Imigresen"
+     },
+     "jakoa": {
+      "full": "Department of Orang Asli Development",
+      "abbr": "JAKOA"
+     },
+     "janm": {
+      "full": "Accountant-General's Department",
+      "abbr": "JANM"
+     },
+     "jas": {
+      "full": "Department of Environment",
+      "abbr": "JAS"
+     },
+     "jbg": {
+      "full": "Legal Aid Department",
+      "abbr": "JBG"
+     },
+     "jdn": {
+      "full": "Jabatan Digital Negara",
+      "abbr": "JDN"
+     },
+     "jpa": {
+      "full": "Public Service Department",
+      "abbr": "JPA"
+     },
+     "jpj": {
+      "full": "Road Transport Department",
+      "abbr": "JPJ"
+     },
+     "jpn": {
+      "full": "National Registration Department",
+      "abbr": "JPN"
+     },
+     "jps": {
+      "full": "Department of Irrigation and Drainage",
+      "abbr": "JPS"
+     },
+     "jmg": {
+      "full": "Department of Mineral and Geoscience",
+      "abbr": "JMG"
+     },
+     "kd": {
+      "full": "Ministry of Digital",
+      "abbr": "MOD"
+     },
+     "kdn": {
+      "full": "Ministry of Home Affairs",
+      "abbr": "KDN"
+     },
+     "kpdn": {
+      "full": "Ministry of Domestic Trade",
+      "abbr": "KPDN"
+     },
+     "kpkt": {
+      "full": "Ministry of Housing & Local Government",
+      "abbr": "KPKT"
+     },
+     "ktmb": {
+      "full": "Malayan Railways Limited",
+      "abbr": "KTMB"
+     },
+     "kwap": {
+      "full": "Retirement Fund Incorporated",
+      "abbr": "KWAP"
+     },
+     "lhdn": {
+      "full": "Inland Revenue Board of Malaysia",
+      "abbr": "LHDN"
+     },
+     "mafs": {
+      "full": "Ministry of Agriculture and Food Security",
+      "abbr": "MAFS"
+     },
+     "mampu": {
+      "full": "Malaysian Administrative Modernisation and Management Planning Unit",
+      "abbr": "MAMPU"
+     },
+     "mcmc": {
+      "full": "Malaysian Communications and Multimedia Commission",
+      "abbr": "MCMC"
+     },
+     "mers-999": {
+      "full": "Malaysian Emergency Response Services 999",
+      "abbr": "MERS 999"
+     },
+     "met": {
+      "full": "Malaysian Meteorology Department",
+      "abbr": "Met"
+     },
+     "moe": {
+      "full": "Ministry of Education",
+      "abbr": "MOE"
+     },
+     "mof": {
+      "full": "Ministry of Finance",
+      "abbr": "MOF"
+     },
+     "moh": {
+      "full": "Ministry of Health Malaysia",
+      "abbr": "MOH"
+     },
+     "mohe": {
+      "full": "Ministry of Higher Education",
+      "abbr": "MOHE"
+     },
+     "mot": {
+      "full": "Ministry of Transport",
+      "abbr": "MOT"
+     },
+     "mynic": {
+      "full": "Malaysian Network Information Centre Berhad",
+      "abbr": "MYNIC"
+     },
+     "mysa": {
+      "full": "Malaysian Space Agency",
+      "abbr": "MYSA"
+     },
+     "napic": {
+      "full": "National Property Information Centre",
+      "abbr": "NAPIC"
+     },
+     "npra": {
+      "full": "National Pharmaceutical Regulatory Agency",
+      "abbr": "NPRA"
+     },
+     "nres": {
+      "full": "Ministry of Natural Resources & Environmental Sustainability",
+      "abbr": "NRES"
+     },
+     "ntrc": {
+      "full": "National Transplant Resource Centre",
+      "abbr": "NTRC"
+     },
+     "parlimen": {
+      "full": "Parliament of Malaysia",
+      "abbr": "Parlimen"
+     },
+     "paynet": {
+      "full": "Payments Network Malaysia Sdn Bhd",
+      "abbr": "PayNet"
+     },
+     "penjara": {
+      "full": "Prison Department",
+      "abbr": "Penjara"
+     },
+     "perikanan": {
+      "full": "Department of Fisheries",
+      "abbr": "Perikanan"
+     },
+     "pdn": {
+      "full": "National Blood Centre",
+      "abbr": "PDN"
+     },
+     "pdrm": {
+      "full": "Royal Malaysia Police",
+      "abbr": "PDRM"
+     },
+     "perhutanan": {
+      "full": "Forestry Department of Peninsular Malaysia",
+      "abbr": "Perhutanan"
+     },
+     "perkeso": {
+      "full": "Social Security Organization",
+      "abbr": "PERKESO"
+     },
+     "phcorp": {
+      "full": "ProtectHealth Corporation",
+      "abbr": "PHCorp"
+     },
+     "prasarana": {
+      "full": "Prasarana Malaysia",
+      "abbr": "Prasarana"
+     },
+     "sesb": {
+      "full": "Sabah Electricity Sdn. Bhd.",
+      "abbr": "SESB"
+     },
+     "spr": {
+      "full": "Election Commission of Malaysia",
+      "abbr": "SPR"
+     },
+     "span": {
+      "full": "The National Water Services Commission",
+      "abbr": "SPAN"
+     },
+     "ssm": {
+      "full": "Companies Commission of Malaysia",
+      "abbr": "SSM"
+     },
+     "st": {
+      "full": "Energy Commission of Malaysia",
+      "abbr": "ST"
+     },
+     "swk-energy": {
+      "full": "Sarawak Energy Berhad",
+      "abbr": "SWK-ENERGY"
+     },
+     "tnb": {
+      "full": "Tenaga Nasional Berhad",
+      "abbr": "TNB"
+     },
+     "unhcr": {
+      "full": "United Nations High Commissioner for Refugees",
+      "abbr": "UNHCR"
+     }
+    },
+    "division": {
+     "bipd": {
+      "full": "Integration and Data Management Division",
+      "abbr": "BIPD"
+     },
+     "bkp": {
+      "full": "Management Services Division",
+      "abbr": "BKP"
+     },
+     "bmp": {
+      "full": "Methology & Research Division",
+      "abbr": "BMP"
+     },
+     "bpan": {
+      "full": "National Accounts Division",
+      "abbr": "BPAN"
+     },
+     "bpe": {
+      "full": "Economic Indicators Division",
+      "abbr": "BPE"
+     },
+     "bphpp": {
+      "full": "Price, Income & Expenditure Statistics Division",
+      "abbr": "BPHPP"
+     },
+     "bpip": {
+      "full": "Balance of Payments Statistics Division",
+      "abbr": "BPIP"
+     },
+     "bpksa": {
+      "full": "Strategic Communication & International Division",
+      "abbr": "BPKSA"
+     },
+     "bpm": {
+      "full": "Information Management Division",
+      "abbr": "BPM"
+     },
+     "bpp": {
+      "full": "Services Statistics Division",
+      "abbr": "BPP"
+     },
+     "bppa": {
+      "full": "International Trade Statistics Division",
+      "abbr": "BPPA"
+     },
+     "bppas": {
+      "full": "Agricultural & Environment Statistics Division",
+      "abbr": "BPPAS"
+     },
+     "bppd": {
+      "full": "Population & Demographic Statistics Division",
+      "abbr": "BPPD"
+     },
+     "bppib": {
+      "full": "Industrial Production & Construction Division",
+      "abbr": "BPPIB"
+     },
+     "bptms": {
+      "full": "Manpower & Social Statistics Division",
+      "abbr": "BPTMS"
+     },
+     "ilsm": {
+      "full": "Malaysia Statistical Training Institute",
+      "abbr": "ILSM"
+     },
+     "mbls": {
+      "full": "Malaysian Bureau of Labour Statistics",
+      "abbr": "MBLS"
+     },
+     "kpdn": {
+      "full": "Ministry of Domestic Trade",
+      "abbr": "KPDN"
+     }
+    },
+    "dashboards": {
+     "header": "Dashboards",
+     "description": "Your one-stop interface to explore data-driven insights and analytics on all areas of the public sector, powered by the data made open on this site.",
+     "description_agency": "Your one-stop interface to explore data-driven insights and analytics on the core work of {{ agency }}, powered by the data they make open on this site.",
+     "source_placeholder": "Agency",
+     "search_placeholder": "Search for dashboards",
+     "section1_title": "Most popular Dashboards",
+     "section2_title": "All dashboards",
+     "tabs": {
+      "thematic": "By Theme",
+      "most_popular": "Most Popular",
+      "recent_updated": "Recently Updated"
+     },
+     "categories": {
+      "healthcare": "Healthcare",
+      "transport": "Transport",
+      "demography": "Demography",
+      "public-finances": "Public Finances",
+      "public-administration": "Public Administration",
+      "economy": "Economy",
+      "public-safety": "Public Safety",
+      "financial-sector": "Financial Sector",
+      "democracy": "Democracy",
+      "environment": "Environment",
+      "digitalisation": "Digitalisation",
+      "government-programs": "Government Programs",
+      "education": "Education",
+      "infectious-diseases": "Infectious Diseases",
+      "healthcare-resources": "Healthcare Resources",
+      "healthcare-programs": "Healthcare Programs",
+      "national-accounts": "National Accounts",
+      "services": "Services",
+      "labour_markets": "Labour Market",
+      "producer_price": "Producer Prices",
+      "trade": "Trade"
+     },
+     "dashboards": {
+      "birthday-explorer": {
+       "name": "Birthday Popularity",
+       "description": "Interactive explorer of birth registration data since 1920, allowing you to discover fun facts about your date of birth!"
+      },
+      "orang-asli": {
+       "name": "The Indigenous Peoples",
+       "description": "Annual kampung-level census of Peninsular Malaysia's original inhabitants, with breakdowns by key demographics."
+      },
+      "immigration": {
+       "name": "Immigration",
+       "description": "Monthly foreign arrivals in Malaysia by nationality."
+      },
+      "ktmb-explorer": {
+       "name": "KTMB Explorer",
+       "description": "Interactive explorer of daily ridership on KTMB services, allowing you to explore ridership from any origin to any destination!"
+      },
+      "rapid-explorer": {
+       "name": "Rapid Rail Explorer",
+       "description": "Interactive explorer of daily Rapid Rail ridership, allowing you to explore any origin-destination pairing!"
+      },
+      "rapid-bus-rail": {
+       "name": "Rapid Rail Explorer",
+       "description": "Interactive explorer of daily ridership on Rapid Rail services, allowing you to explore ridership from any origin to any destination!"
+      },
+      "car-popularity": {
+       "name": "Car Popularity Explorer",
+       "description": "Interactive explorer of car registration data, allowing you to discover trends for any maker or model!"
+      },
+      "vehicle-registrations": {
+       "name": "Vehicle Registrations",
+       "description": "Macro view of vehicle registrations for policymakers, with breakdowns by fuel type and vehicle type."
+      },
+      "public-transportation": {
+       "name": "Public Transportation",
+       "description": "Monthly ridership data from all key public transport operators nationwide, with breakdowns by service."
+      },
+      "covid-19": {
+       "name": "COVID-19",
+       "description": "Weekly surveillance of COVID-19 in Malaysia at state level, covering cases, hospitalisations, and deaths."
+      },
+      "covid-vaccination": {
+       "name": "COVID-19 Vaccination",
+       "description": "Daily COVID-19 vaccination activity by dose type and age group, including vaccination coverage rates across the country."
+      },
+      "blood-donation": {
+       "name": "Blood Donation",
+       "description": "Daily blood donation activity at national and state level, with breakdowns by key demographics including blood type."
+      },
+      "organ-donation": {
+       "name": "Organ Donation",
+       "description": "Daily organ donation pledges and nationwide pledger rates, with breakdowns by key demographics."
+      },
+      "peka-b40": {
+       "name": "Peka B40",
+       "description": "Daily screenings under the PeKA B40 program, including screening rates for the target population across the country."
+      },
+      "hospital-bed-utilisation": {
+       "name": "Hospital Bed Utilisation",
+       "description": "Daily bed utilisation at hospital level, covering utilisation for critical and non-critical care beds on a daily basis."
+      },
+      "weather-and-climate": {
+       "name": "Weather and Climate",
+       "description": "10 years of rainfall and temperature data from the 42 major weather stations in Malaysia."
+      },
+      "income-taxation": {
+       "name": "Income Taxation",
+       "description": "Interactive explorer of granular income tax data, allowing you to compare yourself against other Malaysian taxpayers!"
+      },
+      "jobless-claims": {
+       "name": "Jobless Claims",
+       "description": "Daily claims from the Employment Insurance System (EIS), with breakdowns by key demographics."
+      },
+      "social-security": {
+       "name": "Jobless Claims",
+       "description": "Daily claims from the Employment Insurance System (EIS), with breakdowns by key demographics."
+      },
+      "business-creation-destruction": {
+       "name": "Business Creation and Destruction",
+       "description": "Monthly trends in business creation and destruction, derived from SSM's authoritative database of businesses and companies."
+      },
+      "international-reserves": {
+       "name": "International Reserves",
+       "description": "Biweekly surveillance of Bank Negara Malaysia's international reserves, covering key sufficiency indicators."
+      },
+      "reserve-money": {
+       "name": "Reserve Money",
+       "description": "Monthly evolution of key reserve money measures, including factors affecting reserve money."
+      },
+      "money-supply": {
+       "name": "Money Supply",
+       "description": "Monthly evolution of the money supply, covering M1, M2, M3, and their components."
+      },
+      "currency-in-circulation": {
+       "name": "Currency in Circulation",
+       "description": "Monthly evolution of currency in circulation, with breakdowns by denomination of notes and coins."
+      },
+      "household-debt": {
+       "name": "Household Debt",
+       "description": "Monthly surveillance of lending activity, covering loans applied, approved, disbursed and repaid, broken down by purpose."
+      },
+      "interest-rates": {
+       "name": "Interest Rates",
+       "description": "Monthly surveillance of key interest rates, including the OPR, base lending rate, and fixed deposit rate."
+      },
+      "electronic-payments": {
+       "name": "Electronic Payments",
+       "description": "Monthly surveillance of e-payments in Malaysia, covering key payment instruments, channels, and systems."
+      },
+      "exchange-rates": {
+       "name": "Exchange Rates",
+       "description": "Daily rate of exchange of MYR against currencies of 24 major trading partners, including USA, China, UK, and Singapore."
+      },
+      "drug-addiction": {
+       "name": "Drug Addiction",
+       "description": "Annual data on drug and substance abuses cases, with breakdowns by key demographics and drug category."
+      },
+      "fire-and-rescue": {
+       "name": "Fire and Rescue",
+       "description": "Monthly data on fire and rescue operations at national and state level, broken down by incident type."
+      },
+      "internet-penetration": {
+       "name": "Internet Penetration",
+       "description": "Monthly broadband traffic and internet penetration data, broken down by type of broadband."
+      },
+      "retirement-readiness": {
+       "name": "Retirement Readiness",
+       "description": "—"
+      },
+      "sekolahku": {
+       "name": "Sekolahku",
+       "description": "—"
+      },
+      "name-popularity": {
+       "name": "Baby Name Popularity",
+       "description": "—"
+      },
+      "refugee-situation": {
+       "name": "Malaysia's Refugee Situation",
+       "description": "—"
+      },
+      "healthcare-facilities": {
+       "name": "Healthcare Facilities",
+       "description": "—"
+      },
+      "covidnow-data": {
+       "name": "Data on COVIDNOW",
+       "description": "—"
+      },
+      "emergency-response": {
+       "name": "Emergency Response",
+       "description": "—"
+      },
+      "circle-of-life": {
+       "name": "The Circle of Life",
+       "description": "—"
+      },
+      "civil-service": {
+       "name": "The Civil Service",
+       "description": "—"
+      },
+      "crime": {
+       "name": "Crime",
+       "description": "—"
+      },
+      "election-explorer": {
+       "name": "Election Explorer",
+       "description": "—"
+      },
+      "flood-warning": {
+       "name": "Flood Warning",
+       "description": "—"
+      },
+      "government-site-tracker": {
+       "name": "Government Site Tracker",
+       "description": "—"
+      },
+      "ipr": {
+       "name": "The People's Income Initiative (IPR)",
+       "description": "—"
+      },
+      "passport-and-passes": {
+       "name": "Passport and Passes",
+       "description": "—"
+      },
+      "poverty": {
+       "name": "Poverty",
+       "description": "—"
+      },
+      "public-contracting": {
+       "name": "Public Contracting",
+       "description": "—"
+      },
+      "public-pension": {
+       "name": "Public Pensions",
+       "description": "—"
+      },
+      "gdp": {
+       "name": "Gross Domestic Product (GDP)",
+       "description": "Quarterly economic growth, covering real and nominal GDP by expenditure and economic activity."
+      },
+      "consumer-prices": {
+       "name": "Consumer Prices",
+       "description": "Monthly CPI inflation at national and state level, covering headline CPI, core CPI, and CPI by category."
+      },
+      "labour-market": {
+       "name": "Labour Markets",
+       "description": "Monthly Labour Force Survey (LFS) report, covering unemployment, participation, and nature of employment."
+      },
+      "composite-index": {
+       "name": "Composite Indices",
+       "description": "Monthly leading, coincident, and lagging indicators for the Malaysian economy's performance."
+      },
+      "composite-indices": {
+       "name": "Composite Indices",
+       "description": "Monthly leading, coincident, and lagging indicators of the Malaysian economy's performance."
+      },
+      "wholesale-retail": {
+       "name": "Wholesale & Retail Trade",
+       "description": "Monthly wholesale and retail trade performance, including the performance of motor vehicle sales."
+      },
+      "wholesale-retail-trade": {
+       "name": "Wholesale & Retail Trade",
+       "description": "Monthly wholesale and retail trade performance, including the performance of motor vehicle sales."
+      },
+      "industrial-production": {
+       "name": "Industrial Production",
+       "description": "Monthly industrial production performance, covering mining, manufacturing, and electricity production."
+      },
+      "producer-prices": {
+       "name": "Producer Prices",
+       "description": "Monthly PPI inflation, covering producer prices for all main economic sectors except services and construction."
+      },
+      "kawasanku": {
+       "name": "Kawasanku",
+       "description": "Census 2020 data at national, state, district, parliament, and state legislative assembly (DUN) level."
+      },
+      "iip": {
+       "name": "International Investment Position (IIP)",
+       "description": "Quarterly statement of Malaysia's external financial assets and liabilities; the IIP shows stocks while the BOP shows flows."
+      },
+      "international-investment-position": {
+       "name": "International Investment Position (IIP)",
+       "description": "Quarterly statement of Malaysia's external financial assets and liabilities; the IIP shows stocks while the BOP shows flows."
+      },
+      "bop": {
+       "name": "Balance of Payments",
+       "description": "Quarterly statement of Malaysia's transactions with other nations; the BOP shows flows while the IIP shows stocks."
+      },
+      "balance-of-payments": {
+       "name": "Balance of Payments",
+       "description": "Quarterly statement of Malaysia's transactions with other nations; the BOP shows flows while the IIP shows stocks."
+      },
+      "manufacturing-statistics": {
+       "name": "Manufacturing Statistics",
+       "description": "Monthly performance of manufacturing subsectors, covering sales, employment, and wages."
+      },
+      "labour-productivity": {
+       "name": "Labour Productivity",
+       "description": "Quarterly labour productivity across all key economic sectors, covering time-based and worker-based productivity."
+      },
+      "formal-sector-wages": {
+       "name": "Formal Sector Wages",
+       "description": "Quarterly formal sector wages at national and state level, based on administrative data from EPF and SOCSO"
+      },
+      "services-statistics": {
+       "name": "Services Statistics",
+       "description": "Quarterly performance of services sub-sectors, covering sales, employment, and wages."
+      },
+      "services-producer-prices": {
+       "name": "Services Producer Prices",
+       "description": "Quarterly producer prices in the services sector, complementing the PPI which does not cover the services sector."
+      },
+      "construction-statistics": {
+       "name": "Construction Statistics",
+       "description": "Quarterly surveillance of construction projects in the public and private sectors."
+      },
+      "household-income-expenditure": {
+       "name": "Household Income & Expenditure",
+       "description": "Household income and expenditure at national, state and district level, updated with the latest data from the 2022 survey."
+      },
+      "population": {
+       "name": "Population of Malaysia",
+       "description": "Annual population of Malaysia from 1970 to the present, including vital statistics on births and deaths."
+      },
+      "external-trade": {
+       "name": "External Trade",
+       "description": "Monthly external trade statistics and indices, covering exports, imports, the trade balance, and terms of trade."
+      },
+      "life-expectancy": {
+       "name": "Life Expectancy",
+       "description": "Annual data on life expectancy from 1957 to the present, with breakdowns by state and demographic group."
+      },
+      "wellbeing": {
+       "name": "Well-Being",
+       "description": "Annual well-being of Malaysians from 2000 to the present, covering key economic and social components."
+      },
+      "padu-tracker": {
+       "name": "Pangkalan Data Utama (PADU)",
+       "description": "—"
+      },
+      "digital-economy": {
+       "name": "Digital Economy",
+       "description": "Annual performance of e-commerce and the ICT sector, as well as businesses' and households' usage of ICT tools."
+      },
+      "house-prices": {
+       "name": "House Prices",
+       "description": "This dashboard uses NAPIC’s authoritative data to give you an easy way to understand house price trends."
+      }
+     }
+    }
+   }
+  },
+  "initialLocale": "en-GB",
+  "ns": [
+   "catalogue",
+   "common",
+   "agencies",
+   "division",
+   "dashboards"
+  ],
+  "userConfig": null
+ },
+ "_source_base": "https://open.dosm.gov.my"
+}

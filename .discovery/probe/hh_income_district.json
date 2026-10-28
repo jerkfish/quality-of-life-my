@@ -1,0 +1,1 @@
+{"meta": {"catalogue_id": "hh_income_district", "data_as_of": "2024", "last_updated": "2025-12-31 12:00", "next_update": "\u2014", "data_source": ["DOSM"], "update_frequency": "YEARLY", "total": 1, "limit": 1}, "data": [{"date": "2019-01-01", "state": "Johor", "district": "Batu Pahat", "income_mean": 7392, "income_median": 6504}]}

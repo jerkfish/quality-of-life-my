@@ -1,0 +1,48 @@
+cpi_headline|Monthly CPI by Division (2-digit)|https://storage.dosm.gov.my/cpi/cpi_2d.parquet|MONTHLY|date,division,index
+cpi_headline_inflation|Monthly CPI Inflation by Division (2-digit)|https://storage.dosm.gov.my/cpi/cpi_2d_inflation.parquet|MONTHLY|date,division,inflation_yoy,inflation_mom
+cpi_core|Monthly Core CPI by Division (2-digit)|https://storage.dosm.gov.my/cpi/cpi_2d_core.parquet|MONTHLY|date,division,index
+cpi_core_inflation|Monthly Core CPI Inflation by Division (2-digit)|https://storage.dosm.gov.my/cpi/cpi_2d_core_inflation.parquet|MONTHLY|date,division,index
+cpi_state|Monthly CPI by State & Division (2-digit)|https://storage.dosm.gov.my/cpi/cpi_2d_state.parquet|MONTHLY|state,date,division,index
+cpi_state_inflation|Monthly CPI Inflation by State & Division (2-digit)|https://storage.dosm.gov.my/cpi/cpi_2d_state_inflation.parquet|MONTHLY|state,date,division,inflation_yoy,inflation_mom
+cpi_3d|Monthly CPI by Group (3-digit)|https://storage.dosm.gov.my/cpi/cpi_3d.parquet|MONTHLY|date,group,index
+cpi_4d|Monthly CPI by Class (4-digit)|https://storage.dosm.gov.my/cpi/cpi_4d.parquet|MONTHLY|date,class,index
+cpi_5d|Monthly CPI by Subclass (5-digit)|https://storage.dosm.gov.my/cpi/cpi_5d.parquet|MONTHLY|date,subclass,index
+cpi_annual|Annual CPI by Division (2-digit)|https://storage.dosm.gov.my/cpi/cpi_2d_annual.parquet|YEARLY|date,division,index
+cpi_annual_inflation|Annual CPI Inflation by Division (2-digit)|https://storage.dosm.gov.my/cpi/cpi_2d_annual_inflation.parquet|YEARLY|date,division,inflation
+cpi_strata|Monthly CPI by Strata & Division (2-digit)|https://storage.dosm.gov.my/cpi/cpi_2d_strata.parquet|MONTHLY|strata,date,division,index
+cpi_lowincome|Monthly CPI for Low-Income Households|https://storage.dosm.gov.my/cpi/cpi_2d_lowincome.parquet|MONTHLY|date,division,index
+mcoicop|MCOICOP|https://storage.dosm.gov.my/dictionaries/mcoicop.parquet|INFREQUENT|digits,division,group,class,subclass,desc_en,desc_bm
+hh_income|Household Income|https://storage.dosm.gov.my/hies/hh_income.parquet|YEARLY|date,income_mean,income_median
+hh_income_state|Household Income by State|https://storage.dosm.gov.my/hies/hh_income_state.parquet|YEARLY|state,date,income_mean,income_median
+hh_income_district|Household Income by Administrative District|https://storage.dosm.gov.my/hies/hh_income_district.parquet|YEARLY|state,district,date,income_mean,income_median
+hies_state|Household Income and Expenditure: States|https://storage.dosm.gov.my/hies/hies_state.parquet|YEARLY|date,state,income_mean,income_median,expenditure_mean,gini,poverty
+hies_district|Household Income and Expenditure: Administrative Districts|https://storage.dosm.gov.my/hies/hies_district.parquet|YEARLY|date,state,district,income_mean,income_median,expenditure_mean,gini,poverty
+hies_malaysia_percentile|Household Income by Percentile|https://storage.dosm.gov.my/hies/hies_malaysia_percentile.parquet|YEARLY|date,percentile,variable,income
+hies_state_percentile|Household Income by State & Percentile|https://storage.dosm.gov.my/hies/hies_state_percentile.parquet|YEARLY|date,state,percentile,variable,income
+hh_expenditure_dun|Household Expenditure by DUN|https://storage.dosm.gov.my/hies/hh_expenditure_dun.parquet|YEARLY|state,parlimen,dun,date,expenditure
+hh_expenditure_parlimen|Household Expenditure by Parliament|https://storage.dosm.gov.my/hies/hh_expenditure_parlimen.parquet|YEARLY|state,parlimen,date,expenditure
+hh_poverty_state|Poverty by State|https://storage.dosm.gov.my/hies/hh_poverty_state.parquet|YEARLY|state,date,poverty_absolute,poverty_hardcore,poverty_relative
+hh_inequality_state|Income Inequality by State|https://storage.dosm.gov.my/hies/hh_inequality_state.parquet|YEARLY|state,date,gini
+hh_profile_state|Number of Households and Living Quarters by State|https://storage.dosm.gov.my/demography/hh_lq_state.parquet|YEARLY|date,state,households,living_quarters
+wages_state|Annual Salaries & Wages by State & Sex|https://storage.dosm.gov.my/labour/wages_state.parquet|YEARLY|state,date,sex,recipients,wages_median,wages_mean
+wages_real_state|Annual Real Salaries & Wages by State|https://storage.dosm.gov.my/labour/wages_real_state.parquet|YEARLY|state,date,wages_median_real,wages_mean_real
+wages_real_state_citizen|Annual Real Salaries & Wages of Citizens by State|https://storage.dosm.gov.my/labour/wages_real_state_citizen.parquet|YEARLY|state,date,wages_median_real,wages_mean_real
+formal_wages|Monthly Formal Sector Wages by Sex, Ethnicity & Age|https://storage.dosm.gov.my/labour/formal_wages.parquet|MONTHLY|date,sex,ethnicity,age,employees,wages_median
+formal_wages_state|Monthly Formal Sector Wages by State|https://storage.dosm.gov.my/labour/formal_wages_state.parquet|MONTHLY|date,state,employees,wages_median
+formal_wages_band|Monthly Formal Sector Employees by Wage Band|https://storage.dosm.gov.my/labour/formal_wages_band.parquet|MONTHLY|date,band,employees
+formal_wages_percentile|Monthly Formal Sector Wage Percentiles|https://storage.dosm.gov.my/labour/formal_wages_percentile.parquet|MONTHLY|date,pX
+wages_sector|Annual Salaries & Wages by Sector & Sex|https://storage.dosm.gov.my/labour/wages_sector.parquet|YEARLY|date,sex,sector,recipients,wages_median,wages_mean
+wages_occupation|Annual Salaries & Wages by Occupation & Sex|https://storage.dosm.gov.my/labour/wages_occupation.parquet|YEARLY|date,sex,occupation,recipients,wages_median,wages_mean
+wages_education|Annual Salaries & Wages by Educational Attainment & Sex|https://storage.dosm.gov.my/labour/wages_education.parquet|YEARLY|date,sex,education,recipients,wages_median,wages_mean
+lfs_month|Monthly Principal Labour Force Statistics|https://storage.dosm.gov.my/labour/lfs_month.parquet|MONTHLY|date,lf,lf_employed,lf_unemployed,lf_outside,u_rate,p_rate,ep_ratio
+lfs_qtr_state|Quarterly Principal Labour Force Statistics by State|https://storage.dosm.gov.my/labour/lfs_qtr_state.parquet|QUARTERLY|date,state,lf,lf_employed,lf_unemployed,lf_outside,u_rate,p_rate
+lfs_state_sex|Annual Principal Labour Force Statistics by State & Sex|https://storage.dosm.gov.my/labour/lfs_state_sex.parquet|YEARLY|state,sex,date,lf,lf_employed,lf_unemployed,lf_outside,u_rate,p_rate,ep_ratio
+pricecatcher|PriceCatcher: Transactional Records|https://storage.data.gov.my/pricecatcher/pricecatcher_YYYY-MM-DD.parquet|DAILY|date,premise_code,item_code,price
+lookup_item|PriceCatcher: Item Lookup|https://storage.data.gov.my/pricecatcher/lookup_item.parquet|INFREQUENT|item_code,item,unit,item_group,item_category
+lookup_premise|PriceCatcher: Premise Lookup|https://storage.data.gov.my/pricecatcher/lookup_premise.parquet|INFREQUENT|premise_code,premise,address,premise_type,state,district
+fuelprice|Price of Petroleum & Diesel|https://storage.data.gov.my/commodities/fuelprice.parquet|WEEKLY|series_type,date,ron95,ron97,diesel,diesel_eastmsia,ron95_budi95,ron95_skps
+population_state|Population Table: States|https://storage.dosm.gov.my/population/population_state.parquet|YEARLY|date,state,sex,age,ethnicity,population
+population_district|Population Table: Administrative Districts|https://storage.dosm.gov.my/population/population_district.parquet|YEARLY|date,state,district,sex,age,ethnicity,population
+gdp_state_real_supply|Annual Real GDP by State & Economic Sector|https://storage.dosm.gov.my/gdp/gdp_state_real_supply.parquet|YEARLY|series,date,state,sector,value
+gdp_gni_annual_real|Annual Real GDP & GNI: 1970 to Present|https://storage.dosm.gov.my/gdp/gdp_gni_annual_real.parquet|YEARLY|series,date,gdp,gni,gdp_capita,gni_capita
+gdp_annual_real_supply|Annual Real GDP by Economic Sector|https://storage.dosm.gov.my/gdp/gdp_annual_real_supply.parquet|YEARLY|series,date,sector,value

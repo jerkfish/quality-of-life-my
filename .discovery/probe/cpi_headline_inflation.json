@@ -1,0 +1,1 @@
+{"meta": {"catalogue_id": "cpi_headline_inflation", "data_as_of": "2026-09", "last_updated": "2026-10-19 13:12", "next_update": "2026-11-19 12:30", "data_source": ["DOSM"], "update_frequency": "MONTHLY", "total": 1, "limit": 1}, "data": [{"date": "1980-02-01", "division": "overall", "inflation_mom": 0.5, "inflation_yoy": null}]}

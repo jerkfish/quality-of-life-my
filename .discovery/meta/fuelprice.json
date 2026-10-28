@@ -1,0 +1,6993 @@
+{
+ "meta": {
+  "id": "fuelprice",
+  "type": "data-catalogue",
+  "category": null,
+  "agency": "MOF"
+ },
+ "params": {
+  "id": "fuelprice"
+ },
+ "query": {
+  "id": "fuelprice"
+ },
+ "id": "fuelprice",
+ "exclude_openapi": false,
+ "manual_trigger": "2026-10-21 22:48:31.741461",
+ "title": "Price of Petroleum & Diesel",
+ "description": "Weekly retail prices of RON95 petrol, RON97 petrol, and diesel in Malaysia.",
+ "link_parquet": "https://storage.data.gov.my/commodities/fuelprice.parquet",
+ "link_csv": "https://storage.data.gov.my/commodities/fuelprice.csv",
+ "link_preview": null,
+ "link_editions": null,
+ "frequency": "WEEKLY",
+ "data_source": [
+  "MOF"
+ ],
+ "fields": [
+  {
+   "name": "series_type",
+   "title": "Chart Type",
+   "description": "[categorical] Price in RM (level), or weekly change in RM (change_weekly)."
+  },
+  {
+   "name": "date",
+   "title": "Date",
+   "description": "[Date] The date of effect of the price, in YYYY-MM-DD format"
+  },
+  {
+   "name": "ron95",
+   "title": "RON95 Petrol Price",
+   "description": "[Float] Price per litre of RON95 petrol, in RM"
+  },
+  {
+   "name": "ron97",
+   "title": "RON97 Petrol Price",
+   "description": "[Float] Price per litre of RON97 petrol, in RM"
+  },
+  {
+   "name": "diesel",
+   "title": "Price of Diesel (Peninsular Malaysia)",
+   "description": "[Float] Price per litre of diesel in Peninsular Malaysia, in RM"
+  },
+  {
+   "name": "diesel_eastmsia",
+   "title": "Price of Diesel (East Malaysia)",
+   "description": "[Float] Price per litre of diesel in East Malaysia, in RM"
+  },
+  {
+   "name": "ron95_budi95",
+   "title": "RON95 Petrol Price (BUDI 95)",
+   "description": "[Float] Price per litre of RON95 petrol under BUDI 95 subsidy, in RM"
+  },
+  {
+   "name": "ron95_skps",
+   "title": "RON95 Petrol Price (SKPS)",
+   "description": "[Float] Price per litre of RON95 petrol under the Subsidised Petrol Control System (SKPS), in RM"
+  }
+ ],
+ "data_as_of": "2026-10-22 00:01",
+ "last_updated": "2026-10-21 23:59",
+ "next_update": "2026-10-28 23:59",
+ "methodology": "This dataset presents the weekly retail price of RON95 petrol, RON97 petrol, and diesel in Malaysia. Since April 2017, the retail price of fuel in Malaysia has been set on a weekly basis (except for a short period at the end of 2018 where it was announced monthly) using the Automatic Pricing Mechanism (APM). The APM is designed to allow the government to monitor the effects of changes in global crude oil prices and adjust retail fuel prices to ensure the continued welfare of the rakyat.",
+ "caveat": "The following information should be incorporated into any analysis of fuel prices in Malaysia:\n\n- Malaysia's goods and services tax (GST) was zero-rated on 1 June 2018, with the sales and services tax (SST) subsequently implemented on 1 September 2018. However, because petrol and diesel prices are controlled by the government, they were not affected by this.\n- Beginning 3 March 2021, the announcement of fuel prices was changed from Fridays to Wednesdays.\n- On 10 June 2024, diesel subsidies were removed in Peninsular Malaysia, leading to a discontinuous jump from RM2.15 to RM3.35 per litre. Therefore, beginning 13 June 2024, the weekly price of diesel was announced separately for Peninsular Malaysia and East Malaysia (Sarawak, Sabah, W.P. Labuan).\n- On 30 Sep 2025, the price of RON95 petrol was increased to RM2.60 for the general market, lowered to RM1.99 (up to a maximum of 300 litres per month) for eligibles individuals under the BUDI 95 subsidy, and maintained at RM2.05 for commercial vehicles eligible under the Subsidised Petrol Control System (SPCS).",
+ "publication": "[MoF's weekly press statement](https://www.mof.gov.my/portal/en/component/tags/tag/price-of-petroleum) on the retail price of petroleum products.",
+ "translations": {
+  "x": "Date",
+  "y": "Price (RM)",
+  "y1": "Price (RM)",
+  "date": "Date",
+  "level": "Price",
+  "ron95": "RON95",
+  "ron97": "RON97",
+  "diesel": "Diesel (Peninsular)",
+  "ron95_skps": "RON95 (SKPS)",
+  "series_type": "Series",
+  "ron95_budi95": "RON95 (BUDI 95)",
+  "change-weekly": "Weekly Change",
+  "diesel_eastmsia": "Diesel (Sbh/Swk)"
+ },
+ "related_datasets": [],
+ "dataviz_set": [
+  {
+   "dataviz_id": "ron95",
+   "title": "Price of RON95 Petrol",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "ron95"
+     ]
+    },
+    "operation": "MEAN",
+    "precision": 2,
+    "filter_columns": [
+     "series_type"
+    ]
+   }
+  },
+  {
+   "dataviz_id": "ron97",
+   "title": "Price of RON97 Petrol",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "ron97"
+     ]
+    },
+    "operation": "MEAN",
+    "precision": 2,
+    "filter_columns": [
+     "series_type"
+    ]
+   }
+  },
+  {
+   "dataviz_id": "diesel",
+   "title": "Price of Diesel (Peninsular Malaysia)",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "diesel"
+     ]
+    },
+    "operation": "MEAN",
+    "precision": 2,
+    "filter_columns": [
+     "series_type"
+    ]
+   }
+  },
+  {
+   "dataviz_id": "diesel-eastmsia",
+   "title": "Price of Diesel (East Malaysia)",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "diesel_eastmsia"
+     ]
+    },
+    "operation": "MEAN",
+    "precision": 2,
+    "filter_columns": [
+     "series_type"
+    ]
+   }
+  },
+  {
+   "dataviz_id": "table",
+   "title": "Table",
+   "chart_type": "TABLE",
+   "config": {
+    "precision": 2,
+    "filter_columns": [
+     "series_type"
+    ],
+    "freeze_columns": []
+   }
+  }
+ ],
+ "dropdown": [
+  {
+   "name": "series_type",
+   "selected": "level",
+   "options": [
+    "level",
+    "change-weekly"
+   ]
+  }
+ ],
+ "data": [
+  {
+   "series_type": "level",
+   "date": "2017-03-30",
+   "ron95": 2.13,
+   "ron97": 2.41,
+   "diesel": 2.11,
+   "diesel_eastmsia": 2.11,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-04-06",
+   "ron95": 2.16,
+   "ron97": 2.43,
+   "diesel": 2.08,
+   "diesel_eastmsia": 2.08,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-04-13",
+   "ron95": 2.24,
+   "ron97": 2.52,
+   "diesel": 2.16,
+   "diesel_eastmsia": 2.16,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-04-20",
+   "ron95": 2.27,
+   "ron97": 2.54,
+   "diesel": 2.21,
+   "diesel_eastmsia": 2.21,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-04-27",
+   "ron95": 2.21,
+   "ron97": 2.49,
+   "diesel": 2.14,
+   "diesel_eastmsia": 2.14,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-05-04",
+   "ron95": 2.11,
+   "ron97": 2.39,
+   "diesel": 2.08,
+   "diesel_eastmsia": 2.08,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-05-11",
+   "ron95": 2.01,
+   "ron97": 2.29,
+   "diesel": 1.95,
+   "diesel_eastmsia": 1.95,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-05-18",
+   "ron95": 2.08,
+   "ron97": 2.36,
+   "diesel": 1.99,
+   "diesel_eastmsia": 1.99,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-05-25",
+   "ron95": 2.12,
+   "ron97": 2.4,
+   "diesel": 2.03,
+   "diesel_eastmsia": 2.03,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-06-01",
+   "ron95": 2.1,
+   "ron97": 2.38,
+   "diesel": 2.02,
+   "diesel_eastmsia": 2.02,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-06-08",
+   "ron95": 2.05,
+   "ron97": 2.31,
+   "diesel": 1.94,
+   "diesel_eastmsia": 1.94,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-06-15",
+   "ron95": 1.98,
+   "ron97": 2.24,
+   "diesel": 1.88,
+   "diesel_eastmsia": 1.88,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-06-22",
+   "ron95": 1.91,
+   "ron97": 2.17,
+   "diesel": 1.88,
+   "diesel_eastmsia": 1.88,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-06-29",
+   "ron95": 1.89,
+   "ron97": 2.15,
+   "diesel": 1.84,
+   "diesel_eastmsia": 1.84,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-07-06",
+   "ron95": 1.93,
+   "ron97": 2.19,
+   "diesel": 1.91,
+   "diesel_eastmsia": 1.91,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-07-13",
+   "ron95": 1.97,
+   "ron97": 2.22,
+   "diesel": 1.96,
+   "diesel_eastmsia": 1.96,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-07-20",
+   "ron95": 1.97,
+   "ron97": 2.22,
+   "diesel": 1.96,
+   "diesel_eastmsia": 1.96,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-07-27",
+   "ron95": 2.03,
+   "ron97": 2.28,
+   "diesel": 1.99,
+   "diesel_eastmsia": 1.99,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-08-03",
+   "ron95": 2.07,
+   "ron97": 2.32,
+   "diesel": 2.05,
+   "diesel_eastmsia": 2.05,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-08-10",
+   "ron95": 2.12,
+   "ron97": 2.39,
+   "diesel": 2.06,
+   "diesel_eastmsia": 2.06,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-08-17",
+   "ron95": 2.15,
+   "ron97": 2.43,
+   "diesel": 2.04,
+   "diesel_eastmsia": 2.04,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-08-24",
+   "ron95": 2.15,
+   "ron97": 2.43,
+   "diesel": 2.01,
+   "diesel_eastmsia": 2.01,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-08-31",
+   "ron95": 2.16,
+   "ron97": 2.44,
+   "diesel": 2.04,
+   "diesel_eastmsia": 2.04,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-09-07",
+   "ron95": 2.2,
+   "ron97": 2.48,
+   "diesel": 2.05,
+   "diesel_eastmsia": 2.05,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-09-14",
+   "ron95": 2.21,
+   "ron97": 2.52,
+   "diesel": 2.14,
+   "diesel_eastmsia": 2.14,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-09-21",
+   "ron95": 2.19,
+   "ron97": 2.49,
+   "diesel": 2.1,
+   "diesel_eastmsia": 2.1,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-09-28",
+   "ron95": 2.16,
+   "ron97": 2.46,
+   "diesel": 2.12,
+   "diesel_eastmsia": 2.12,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-10-05",
+   "ron95": 2.19,
+   "ron97": 2.49,
+   "diesel": 2.17,
+   "diesel_eastmsia": 2.17,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-10-12",
+   "ron95": 2.16,
+   "ron97": 2.46,
+   "diesel": 2.1,
+   "diesel_eastmsia": 2.1,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-10-19",
+   "ron95": 2.17,
+   "ron97": 2.47,
+   "diesel": 2.11,
+   "diesel_eastmsia": 2.11,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-10-26",
+   "ron95": 2.2,
+   "ron97": 2.5,
+   "diesel": 2.13,
+   "diesel_eastmsia": 2.13,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-11-02",
+   "ron95": 2.24,
+   "ron97": 2.54,
+   "diesel": 2.17,
+   "diesel_eastmsia": 2.17,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-11-09",
+   "ron95": 2.31,
+   "ron97": 2.6,
+   "diesel": 2.2,
+   "diesel_eastmsia": 2.2,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-11-16",
+   "ron95": 2.38,
+   "ron97": 2.66,
+   "diesel": 2.25,
+   "diesel_eastmsia": 2.25,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-11-23",
+   "ron95": 2.3,
+   "ron97": 2.58,
+   "diesel": 2.23,
+   "diesel_eastmsia": 2.23,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-11-30",
+   "ron95": 2.3,
+   "ron97": 2.58,
+   "diesel": 2.25,
+   "diesel_eastmsia": 2.25,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-12-07",
+   "ron95": 2.29,
+   "ron97": 2.57,
+   "diesel": 2.21,
+   "diesel_eastmsia": 2.21,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-12-14",
+   "ron95": 2.25,
+   "ron97": 2.52,
+   "diesel": 2.2,
+   "diesel_eastmsia": 2.2,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-12-21",
+   "ron95": 2.27,
+   "ron97": 2.54,
+   "diesel": 2.23,
+   "diesel_eastmsia": 2.23,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2017-12-28",
+   "ron95": 2.26,
+   "ron97": 2.53,
+   "diesel": 2.26,
+   "diesel_eastmsia": 2.26,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-01-04",
+   "ron95": 2.29,
+   "ron97": 2.56,
+   "diesel": 2.32,
+   "diesel_eastmsia": 2.32,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-01-11",
+   "ron95": 2.26,
+   "ron97": 2.53,
+   "diesel": 2.32,
+   "diesel_eastmsia": 2.32,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-01-18",
+   "ron95": 2.3,
+   "ron97": 2.57,
+   "diesel": 2.32,
+   "diesel_eastmsia": 2.32,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-01-25",
+   "ron95": 2.29,
+   "ron97": 2.56,
+   "diesel": 2.31,
+   "diesel_eastmsia": 2.31,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-02-01",
+   "ron95": 2.31,
+   "ron97": 2.58,
+   "diesel": 2.34,
+   "diesel_eastmsia": 2.34,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-02-08",
+   "ron95": 2.33,
+   "ron97": 2.61,
+   "diesel": 2.31,
+   "diesel_eastmsia": 2.31,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-02-15",
+   "ron95": 2.23,
+   "ron97": 2.5,
+   "diesel": 2.19,
+   "diesel_eastmsia": 2.19,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-02-22",
+   "ron95": 2.17,
+   "ron97": 2.43,
+   "diesel": 2.13,
+   "diesel_eastmsia": 2.13,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-03-01",
+   "ron95": 2.2,
+   "ron97": 2.47,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-03-08",
+   "ron95": 2.21,
+   "ron97": 2.47,
+   "diesel": 2.17,
+   "diesel_eastmsia": 2.17,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-03-15",
+   "ron95": 2.18,
+   "ron97": 2.45,
+   "diesel": 2.16,
+   "diesel_eastmsia": 2.16,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-03-22",
+   "ron95": 2.2,
+   "ron97": 2.47,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-03-29",
+   "ron95": 2.2,
+   "ron97": 2.47,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-04-05",
+   "ron95": 2.2,
+   "ron97": 2.47,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-04-12",
+   "ron95": 2.2,
+   "ron97": 2.47,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-04-19",
+   "ron95": 2.2,
+   "ron97": 2.47,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-04-26",
+   "ron95": 2.2,
+   "ron97": 2.47,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-05-03",
+   "ron95": 2.2,
+   "ron97": 2.47,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-05-10",
+   "ron95": 2.2,
+   "ron97": 2.47,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-06-07",
+   "ron95": 2.2,
+   "ron97": 2.66,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-06-14",
+   "ron95": 2.2,
+   "ron97": 2.6,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-06-21",
+   "ron95": 2.2,
+   "ron97": 2.59,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-06-28",
+   "ron95": 2.2,
+   "ron97": 2.5,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-07-05",
+   "ron95": 2.2,
+   "ron97": 2.58,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-07-12",
+   "ron95": 2.2,
+   "ron97": 2.59,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-07-19",
+   "ron95": 2.2,
+   "ron97": 2.56,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-07-26",
+   "ron95": 2.2,
+   "ron97": 2.54,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-08-02",
+   "ron95": 2.2,
+   "ron97": 2.64,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-08-09",
+   "ron95": 2.2,
+   "ron97": 2.61,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-08-16",
+   "ron95": 2.2,
+   "ron97": 2.65,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-08-23",
+   "ron95": 2.2,
+   "ron97": 2.65,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-08-30",
+   "ron95": 2.2,
+   "ron97": 2.69,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-10-01",
+   "ron95": 2.2,
+   "ron97": 2.79,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-11-01",
+   "ron95": 2.2,
+   "ron97": 2.81,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2018-12-01",
+   "ron95": 2.2,
+   "ron97": 2.5,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-01-01",
+   "ron95": 2.2,
+   "ron97": 2.5,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-01-05",
+   "ron95": 1.93,
+   "ron97": 2.23,
+   "diesel": 2.04,
+   "diesel_eastmsia": 2.04,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-01-12",
+   "ron95": 1.92,
+   "ron97": 2.22,
+   "diesel": 2.05,
+   "diesel_eastmsia": 2.05,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-01-19",
+   "ron95": 1.98,
+   "ron97": 2.28,
+   "diesel": 2.17,
+   "diesel_eastmsia": 2.17,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-01-26",
+   "ron95": 1.98,
+   "ron97": 2.28,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-02-02",
+   "ron95": 1.93,
+   "ron97": 2.23,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-02-09",
+   "ron95": 1.97,
+   "ron97": 2.27,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-02-16",
+   "ron95": 1.98,
+   "ron97": 2.28,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-02-23",
+   "ron95": 2.08,
+   "ron97": 2.38,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-03-02",
+   "ron95": 2.08,
+   "ron97": 2.43,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-03-09",
+   "ron95": 2.08,
+   "ron97": 2.46,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-03-16",
+   "ron95": 2.08,
+   "ron97": 2.54,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-03-23",
+   "ron95": 2.08,
+   "ron97": 2.61,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-03-30",
+   "ron95": 2.08,
+   "ron97": 2.63,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-04-06",
+   "ron95": 2.08,
+   "ron97": 2.63,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-04-13",
+   "ron95": 2.08,
+   "ron97": 2.68,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-04-20",
+   "ron95": 2.08,
+   "ron97": 2.8,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-04-27",
+   "ron95": 2.08,
+   "ron97": 2.81,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-05-04",
+   "ron95": 2.08,
+   "ron97": 2.8,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-05-11",
+   "ron95": 2.08,
+   "ron97": 2.7,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-05-18",
+   "ron95": 2.08,
+   "ron97": 2.68,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-05-25",
+   "ron95": 2.08,
+   "ron97": 2.76,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-06-01",
+   "ron95": 2.08,
+   "ron97": 2.63,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-06-15",
+   "ron95": 2.08,
+   "ron97": 2.41,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-06-22",
+   "ron95": 2.08,
+   "ron97": 2.38,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-06-29",
+   "ron95": 2.08,
+   "ron97": 2.49,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-07-06",
+   "ron95": 2.08,
+   "ron97": 2.53,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-07-13",
+   "ron95": 2.08,
+   "ron97": 2.57,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-07-20",
+   "ron95": 2.08,
+   "ron97": 2.67,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-07-27",
+   "ron95": 2.08,
+   "ron97": 2.56,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-08-03",
+   "ron95": 2.08,
+   "ron97": 2.54,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-08-10",
+   "ron95": 2.08,
+   "ron97": 2.49,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-08-17",
+   "ron95": 2.08,
+   "ron97": 2.49,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-08-24",
+   "ron95": 2.08,
+   "ron97": 2.51,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-08-31",
+   "ron95": 2.08,
+   "ron97": 2.5,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-09-07",
+   "ron95": 2.08,
+   "ron97": 2.5,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-09-14",
+   "ron95": 2.08,
+   "ron97": 2.53,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-09-21",
+   "ron95": 2.08,
+   "ron97": 2.67,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-09-28",
+   "ron95": 2.08,
+   "ron97": 2.79,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-10-05",
+   "ron95": 2.08,
+   "ron97": 2.6,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-10-12",
+   "ron95": 2.08,
+   "ron97": 2.67,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-10-19",
+   "ron95": 2.08,
+   "ron97": 2.68,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-10-26",
+   "ron95": 2.08,
+   "ron97": 2.59,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-11-02",
+   "ron95": 2.08,
+   "ron97": 2.56,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-11-09",
+   "ron95": 2.08,
+   "ron97": 2.57,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-11-16",
+   "ron95": 2.08,
+   "ron97": 2.7,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-11-23",
+   "ron95": 2.08,
+   "ron97": 2.66,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-11-30",
+   "ron95": 2.08,
+   "ron97": 2.66,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-12-07",
+   "ron95": 2.08,
+   "ron97": 2.64,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-12-14",
+   "ron95": 2.08,
+   "ron97": 2.64,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-12-21",
+   "ron95": 2.08,
+   "ron97": 2.58,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2019-12-28",
+   "ron95": 2.08,
+   "ron97": 2.63,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-01-04",
+   "ron95": 2.08,
+   "ron97": 2.65,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-01-11",
+   "ron95": 2.08,
+   "ron97": 2.62,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-01-18",
+   "ron95": 2.08,
+   "ron97": 2.53,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-01-25",
+   "ron95": 2.08,
+   "ron97": 2.49,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-02-01",
+   "ron95": 2.08,
+   "ron97": 2.41,
+   "diesel": 2.18,
+   "diesel_eastmsia": 2.18,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-02-08",
+   "ron95": 2.04,
+   "ron97": 2.34,
+   "diesel": 2.08,
+   "diesel_eastmsia": 2.08,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-02-15",
+   "ron95": 2.06,
+   "ron97": 2.36,
+   "diesel": 2.14,
+   "diesel_eastmsia": 2.14,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-02-22",
+   "ron95": 2.08,
+   "ron97": 2.38,
+   "diesel": 2.14,
+   "diesel_eastmsia": 2.14,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-02-29",
+   "ron95": 2.08,
+   "ron97": 2.4,
+   "diesel": 2.13,
+   "diesel_eastmsia": 2.13,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-03-07",
+   "ron95": 1.89,
+   "ron97": 2.19,
+   "diesel": 1.96,
+   "diesel_eastmsia": 1.96,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-03-14",
+   "ron95": 1.82,
+   "ron97": 2.1,
+   "diesel": 1.87,
+   "diesel_eastmsia": 1.87,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-03-21",
+   "ron95": 1.44,
+   "ron97": 1.74,
+   "diesel": 1.75,
+   "diesel_eastmsia": 1.75,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-03-28",
+   "ron95": 1.38,
+   "ron97": 1.68,
+   "diesel": 1.68,
+   "diesel_eastmsia": 1.68,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-04-04",
+   "ron95": 1.3,
+   "ron97": 1.6,
+   "diesel": 1.58,
+   "diesel_eastmsia": 1.58,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-04-11",
+   "ron95": 1.25,
+   "ron97": 1.55,
+   "diesel": 1.46,
+   "diesel_eastmsia": 1.46,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-04-18",
+   "ron95": 1.25,
+   "ron97": 1.55,
+   "diesel": 1.43,
+   "diesel_eastmsia": 1.43,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-04-25",
+   "ron95": 1.25,
+   "ron97": 1.55,
+   "diesel": 1.4,
+   "diesel_eastmsia": 1.4,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-05-02",
+   "ron95": 1.25,
+   "ron97": 1.55,
+   "diesel": 1.4,
+   "diesel_eastmsia": 1.4,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-05-09",
+   "ron95": 1.25,
+   "ron97": 1.55,
+   "diesel": 1.4,
+   "diesel_eastmsia": 1.4,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-05-16",
+   "ron95": 1.31,
+   "ron97": 1.61,
+   "diesel": 1.45,
+   "diesel_eastmsia": 1.45,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-05-23",
+   "ron95": 1.38,
+   "ron97": 1.68,
+   "diesel": 1.51,
+   "diesel_eastmsia": 1.51,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-05-30",
+   "ron95": 1.43,
+   "ron97": 1.73,
+   "diesel": 1.61,
+   "diesel_eastmsia": 1.61,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-06-06",
+   "ron95": 1.48,
+   "ron97": 1.78,
+   "diesel": 1.63,
+   "diesel_eastmsia": 1.63,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-06-13",
+   "ron95": 1.56,
+   "ron97": 1.86,
+   "diesel": 1.73,
+   "diesel_eastmsia": 1.73,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-06-20",
+   "ron95": 1.59,
+   "ron97": 1.89,
+   "diesel": 1.77,
+   "diesel_eastmsia": 1.77,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-06-27",
+   "ron95": 1.69,
+   "ron97": 1.99,
+   "diesel": 1.86,
+   "diesel_eastmsia": 1.86,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-07-04",
+   "ron95": 1.65,
+   "ron97": 1.95,
+   "diesel": 1.84,
+   "diesel_eastmsia": 1.84,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-07-11",
+   "ron95": 1.72,
+   "ron97": 2.02,
+   "diesel": 1.87,
+   "diesel_eastmsia": 1.87,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-07-18",
+   "ron95": 1.72,
+   "ron97": 2.02,
+   "diesel": 1.87,
+   "diesel_eastmsia": 1.87,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-07-25",
+   "ron95": 1.68,
+   "ron97": 1.98,
+   "diesel": 1.82,
+   "diesel_eastmsia": 1.82,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-08-01",
+   "ron95": 1.68,
+   "ron97": 1.98,
+   "diesel": 1.83,
+   "diesel_eastmsia": 1.83,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-08-08",
+   "ron95": 1.63,
+   "ron97": 1.93,
+   "diesel": 1.79,
+   "diesel_eastmsia": 1.79,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-08-15",
+   "ron95": 1.68,
+   "ron97": 1.98,
+   "diesel": 1.82,
+   "diesel_eastmsia": 1.82,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-08-22",
+   "ron95": 1.71,
+   "ron97": 2.01,
+   "diesel": 1.8,
+   "diesel_eastmsia": 1.8,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-08-29",
+   "ron95": 1.72,
+   "ron97": 2.02,
+   "diesel": 1.78,
+   "diesel_eastmsia": 1.78,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-09-05",
+   "ron95": 1.71,
+   "ron97": 2.01,
+   "diesel": 1.78,
+   "diesel_eastmsia": 1.78,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-09-12",
+   "ron95": 1.66,
+   "ron97": 1.96,
+   "diesel": 1.72,
+   "diesel_eastmsia": 1.72,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-09-19",
+   "ron95": 1.63,
+   "ron97": 1.93,
+   "diesel": 1.67,
+   "diesel_eastmsia": 1.67,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-09-26",
+   "ron95": 1.68,
+   "ron97": 1.98,
+   "diesel": 1.71,
+   "diesel_eastmsia": 1.71,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-10-03",
+   "ron95": 1.71,
+   "ron97": 2.01,
+   "diesel": 1.7,
+   "diesel_eastmsia": 1.7,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-10-10",
+   "ron95": 1.67,
+   "ron97": 1.97,
+   "diesel": 1.69,
+   "diesel_eastmsia": 1.69,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-10-17",
+   "ron95": 1.68,
+   "ron97": 1.98,
+   "diesel": 1.74,
+   "diesel_eastmsia": 1.74,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-10-24",
+   "ron95": 1.64,
+   "ron97": 1.94,
+   "diesel": 1.74,
+   "diesel_eastmsia": 1.74,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-10-31",
+   "ron95": 1.64,
+   "ron97": 1.94,
+   "diesel": 1.74,
+   "diesel_eastmsia": 1.74,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-11-07",
+   "ron95": 1.61,
+   "ron97": 1.91,
+   "diesel": 1.68,
+   "diesel_eastmsia": 1.68,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-11-14",
+   "ron95": 1.62,
+   "ron97": 1.92,
+   "diesel": 1.74,
+   "diesel_eastmsia": 1.74,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-11-21",
+   "ron95": 1.64,
+   "ron97": 1.94,
+   "diesel": 1.81,
+   "diesel_eastmsia": 1.81,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-11-28",
+   "ron95": 1.67,
+   "ron97": 1.97,
+   "diesel": 1.85,
+   "diesel_eastmsia": 1.85,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-12-05",
+   "ron95": 1.7,
+   "ron97": 2,
+   "diesel": 1.9,
+   "diesel_eastmsia": 1.9,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-12-12",
+   "ron95": 1.73,
+   "ron97": 2.03,
+   "diesel": 1.93,
+   "diesel_eastmsia": 1.93,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-12-19",
+   "ron95": 1.78,
+   "ron97": 2.08,
+   "diesel": 1.96,
+   "diesel_eastmsia": 1.96,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2020-12-26",
+   "ron95": 1.8,
+   "ron97": 2.1,
+   "diesel": 1.98,
+   "diesel_eastmsia": 1.98,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-01-02",
+   "ron95": 1.84,
+   "ron97": 2.14,
+   "diesel": 2.01,
+   "diesel_eastmsia": 2.01,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-01-09",
+   "ron95": 1.84,
+   "ron97": 2.14,
+   "diesel": 2.02,
+   "diesel_eastmsia": 2.02,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-01-16",
+   "ron95": 1.89,
+   "ron97": 2.19,
+   "diesel": 2.05,
+   "diesel_eastmsia": 2.05,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-01-23",
+   "ron95": 1.9,
+   "ron97": 2.2,
+   "diesel": 2.09,
+   "diesel_eastmsia": 2.09,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-01-30",
+   "ron95": 1.9,
+   "ron97": 2.2,
+   "diesel": 2.07,
+   "diesel_eastmsia": 2.07,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-02-06",
+   "ron95": 1.93,
+   "ron97": 2.23,
+   "diesel": 2.11,
+   "diesel_eastmsia": 2.11,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-02-13",
+   "ron95": 1.96,
+   "ron97": 2.26,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-02-20",
+   "ron95": 2,
+   "ron97": 2.3,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-02-27",
+   "ron95": 2.05,
+   "ron97": 2.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-03-04",
+   "ron95": 2.05,
+   "ron97": 2.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-03-11",
+   "ron95": 2.05,
+   "ron97": 2.4,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-03-18",
+   "ron95": 2.05,
+   "ron97": 2.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-03-25",
+   "ron95": 2.05,
+   "ron97": 2.5,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-04-01",
+   "ron95": 2.05,
+   "ron97": 2.52,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-04-08",
+   "ron95": 2.05,
+   "ron97": 2.54,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-04-15",
+   "ron95": 2.05,
+   "ron97": 2.54,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-04-22",
+   "ron95": 2.05,
+   "ron97": 2.58,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-04-29",
+   "ron95": 2.05,
+   "ron97": 2.58,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-05-06",
+   "ron95": 2.05,
+   "ron97": 2.6,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-05-13",
+   "ron95": 2.05,
+   "ron97": 2.6,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-05-20",
+   "ron95": 2.05,
+   "ron97": 2.61,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-05-27",
+   "ron95": 2.05,
+   "ron97": 2.61,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-06-03",
+   "ron95": 2.05,
+   "ron97": 2.63,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-06-10",
+   "ron95": 2.05,
+   "ron97": 2.65,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-06-17",
+   "ron95": 2.05,
+   "ron97": 2.67,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-06-24",
+   "ron95": 2.05,
+   "ron97": 2.67,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-07-01",
+   "ron95": 2.05,
+   "ron97": 2.69,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-07-08",
+   "ron95": 2.05,
+   "ron97": 2.7,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-07-15",
+   "ron95": 2.05,
+   "ron97": 2.73,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-07-22",
+   "ron95": 2.05,
+   "ron97": 2.73,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-07-28",
+   "ron95": 2.05,
+   "ron97": 2.74,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-08-05",
+   "ron95": 2.05,
+   "ron97": 2.74,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-08-12",
+   "ron95": 2.05,
+   "ron97": 2.74,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-08-19",
+   "ron95": 2.05,
+   "ron97": 2.74,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-08-26",
+   "ron95": 2.05,
+   "ron97": 2.72,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-09-02",
+   "ron95": 2.05,
+   "ron97": 2.72,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-09-09",
+   "ron95": 2.05,
+   "ron97": 2.73,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-09-16",
+   "ron95": 2.05,
+   "ron97": 2.73,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-09-23",
+   "ron95": 2.05,
+   "ron97": 2.75,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-09-30",
+   "ron95": 2.05,
+   "ron97": 2.76,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-10-07",
+   "ron95": 2.05,
+   "ron97": 2.77,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-10-14",
+   "ron95": 2.05,
+   "ron97": 2.87,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-10-21",
+   "ron95": 2.05,
+   "ron97": 2.87,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-10-28",
+   "ron95": 2.05,
+   "ron97": 2.97,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-11-04",
+   "ron95": 2.05,
+   "ron97": 3.06,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-11-11",
+   "ron95": 2.05,
+   "ron97": 3.08,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-11-18",
+   "ron95": 2.05,
+   "ron97": 3.08,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-11-25",
+   "ron95": 2.05,
+   "ron97": 3.05,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-12-02",
+   "ron95": 2.05,
+   "ron97": 3.02,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-12-09",
+   "ron95": 2.05,
+   "ron97": 2.99,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-12-16",
+   "ron95": 2.05,
+   "ron97": 3,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-12-23",
+   "ron95": 2.05,
+   "ron97": 2.99,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2021-12-30",
+   "ron95": 2.05,
+   "ron97": 3,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-01-06",
+   "ron95": 2.05,
+   "ron97": 3.03,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-01-13",
+   "ron95": 2.05,
+   "ron97": 3.07,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-01-20",
+   "ron95": 2.05,
+   "ron97": 3.07,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-01-27",
+   "ron95": 2.05,
+   "ron97": 3.12,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-02-03",
+   "ron95": 2.05,
+   "ron97": 3.12,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-02-10",
+   "ron95": 2.05,
+   "ron97": 3.21,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-02-17",
+   "ron95": 2.05,
+   "ron97": 3.27,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-02-24",
+   "ron95": 2.05,
+   "ron97": 3.29,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-03-03",
+   "ron95": 2.05,
+   "ron97": 3.45,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-03-10",
+   "ron95": 2.05,
+   "ron97": 3.75,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-03-17",
+   "ron95": 2.05,
+   "ron97": 4,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-03-24",
+   "ron95": 2.05,
+   "ron97": 3.83,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-03-31",
+   "ron95": 2.05,
+   "ron97": 3.91,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-04-07",
+   "ron95": 2.05,
+   "ron97": 3.81,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-04-14",
+   "ron95": 2.05,
+   "ron97": 3.81,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-04-21",
+   "ron95": 2.05,
+   "ron97": 3.81,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-04-28",
+   "ron95": 2.05,
+   "ron97": 3.94,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-05-05",
+   "ron95": 2.05,
+   "ron97": 3.94,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-05-12",
+   "ron95": 2.05,
+   "ron97": 4.31,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-05-19",
+   "ron95": 2.05,
+   "ron97": 4.33,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-05-26",
+   "ron95": 2.05,
+   "ron97": 4.7,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-06-02",
+   "ron95": 2.05,
+   "ron97": 4.7,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-06-09",
+   "ron95": 2.05,
+   "ron97": 4.72,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-06-16",
+   "ron95": 2.05,
+   "ron97": 4.83,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-06-23",
+   "ron95": 2.05,
+   "ron97": 4.84,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-06-30",
+   "ron95": 2.05,
+   "ron97": 4.84,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-07-07",
+   "ron95": 2.05,
+   "ron97": 4.8,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-07-14",
+   "ron95": 2.05,
+   "ron97": 4.75,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-07-21",
+   "ron95": 2.05,
+   "ron97": 4.65,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-07-28",
+   "ron95": 2.05,
+   "ron97": 4.55,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-08-04",
+   "ron95": 2.05,
+   "ron97": 4.5,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-08-11",
+   "ron95": 2.05,
+   "ron97": 4.4,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-08-18",
+   "ron95": 2.05,
+   "ron97": 4.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-08-25",
+   "ron95": 2.05,
+   "ron97": 4.3,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-09-01",
+   "ron95": 2.05,
+   "ron97": 4.3,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-09-08",
+   "ron95": 2.05,
+   "ron97": 4.2,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-09-14",
+   "ron95": 2.05,
+   "ron97": 4.15,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-09-22",
+   "ron95": 2.05,
+   "ron97": 4.05,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-09-29",
+   "ron95": 2.05,
+   "ron97": 4,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-10-06",
+   "ron95": 2.05,
+   "ron97": 3.95,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-10-13",
+   "ron95": 2.05,
+   "ron97": 3.95,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-10-20",
+   "ron95": 2.05,
+   "ron97": 3.95,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-10-27",
+   "ron95": 2.05,
+   "ron97": 3.95,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-11-03",
+   "ron95": 2.05,
+   "ron97": 3.95,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-11-10",
+   "ron95": 2.05,
+   "ron97": 3.95,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-11-17",
+   "ron95": 2.05,
+   "ron97": 3.95,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-11-24",
+   "ron95": 2.05,
+   "ron97": 3.95,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-12-01",
+   "ron95": 2.05,
+   "ron97": 3.85,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-12-08",
+   "ron95": 2.05,
+   "ron97": 3.75,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-12-15",
+   "ron95": 2.05,
+   "ron97": 3.55,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-12-22",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2022-12-29",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-01-05",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-01-12",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-01-19",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-01-26",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-02-02",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-02-09",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-02-16",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-02-23",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-03-02",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-03-09",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-03-16",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-03-23",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-03-30",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-04-06",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-04-13",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-04-20",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-04-27",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-05-04",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-05-11",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-05-18",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-05-25",
+   "ron95": 2.05,
+   "ron97": 3.35,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-06-01",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-06-08",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-06-15",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-06-22",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-06-29",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-07-06",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-07-13",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-07-20",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-07-27",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-08-03",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-08-10",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-08-17",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-08-24",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-08-31",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-09-07",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-09-14",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-09-21",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-09-28",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-10-05",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-10-12",
+   "ron95": 2.05,
+   "ron97": 3.37,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-10-19",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-10-26",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-11-02",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-11-09",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-11-16",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-11-23",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-11-30",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-12-07",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-12-14",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-12-21",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2023-12-28",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-01-04",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-01-11",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-01-18",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-01-25",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-02-01",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-02-08",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-02-15",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-02-22",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-02-29",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-03-07",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-03-14",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-03-21",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-03-28",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-04-04",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-04-11",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-04-18",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-04-25",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-05-02",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-05-09",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-05-16",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-05-23",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-05-30",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-06-06",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 2.15,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": null,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-06-10",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 3.35,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-06-13",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 3.35,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-06-20",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 3.35,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-06-27",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 3.35,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-07-04",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 3.35,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-07-11",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 3.35,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-07-18",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 3.35,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-07-25",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 3.35,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-08-01",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 3.35,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-08-08",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 3.3,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-08-15",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 3.25,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-08-22",
+   "ron95": 2.05,
+   "ron97": 3.47,
+   "diesel": 3.23,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-08-29",
+   "ron95": 2.05,
+   "ron97": 3.42,
+   "diesel": 3.18,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-09-05",
+   "ron95": 2.05,
+   "ron97": 3.4,
+   "diesel": 3.16,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-09-12",
+   "ron95": 2.05,
+   "ron97": 3.25,
+   "diesel": 3.01,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-09-19",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-09-26",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-10-03",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-10-10",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-10-17",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-10-24",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-10-31",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-11-07",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-11-14",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-11-21",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-11-28",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-12-05",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-12-12",
+   "ron95": 2.05,
+   "ron97": 3.19,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-12-19",
+   "ron95": 2.05,
+   "ron97": 3.22,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2024-12-26",
+   "ron95": 2.05,
+   "ron97": 3.25,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-01-02",
+   "ron95": 2.05,
+   "ron97": 3.28,
+   "diesel": 2.98,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-01-09",
+   "ron95": 2.05,
+   "ron97": 3.33,
+   "diesel": 3.03,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-01-16",
+   "ron95": 2.05,
+   "ron97": 3.38,
+   "diesel": 3.08,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-01-23",
+   "ron95": 2.05,
+   "ron97": 3.43,
+   "diesel": 3.13,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-01-30",
+   "ron95": 2.05,
+   "ron97": 3.43,
+   "diesel": 3.18,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-02-06",
+   "ron95": 2.05,
+   "ron97": 3.43,
+   "diesel": 3.18,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-02-13",
+   "ron95": 2.05,
+   "ron97": 3.43,
+   "diesel": 3.18,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-02-20",
+   "ron95": 2.05,
+   "ron97": 3.43,
+   "diesel": 3.18,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-02-27",
+   "ron95": 2.05,
+   "ron97": 3.43,
+   "diesel": 3.18,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-03-06",
+   "ron95": 2.05,
+   "ron97": 3.38,
+   "diesel": 3.13,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-03-13",
+   "ron95": 2.05,
+   "ron97": 3.28,
+   "diesel": 3.06,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-03-20",
+   "ron95": 2.05,
+   "ron97": 3.28,
+   "diesel": 3.03,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-03-27",
+   "ron95": 2.05,
+   "ron97": 3.28,
+   "diesel": 3.03,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-04-03",
+   "ron95": 2.05,
+   "ron97": 3.33,
+   "diesel": 3.03,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-04-10",
+   "ron95": 2.05,
+   "ron97": 3.28,
+   "diesel": 2.98,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-04-17",
+   "ron95": 2.05,
+   "ron97": 3.18,
+   "diesel": 2.88,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-04-24",
+   "ron95": 2.05,
+   "ron97": 3.18,
+   "diesel": 2.88,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-05-01",
+   "ron95": 2.05,
+   "ron97": 3.18,
+   "diesel": 2.88,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-05-08",
+   "ron95": 2.05,
+   "ron97": 3.1,
+   "diesel": 2.8,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-05-15",
+   "ron95": 2.05,
+   "ron97": 3.07,
+   "diesel": 2.77,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-05-22",
+   "ron95": 2.05,
+   "ron97": 3.1,
+   "diesel": 2.8,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-05-29",
+   "ron95": 2.05,
+   "ron97": 3.1,
+   "diesel": 2.77,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-06-05",
+   "ron95": 2.05,
+   "ron97": 3.07,
+   "diesel": 2.74,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-06-12",
+   "ron95": 2.05,
+   "ron97": 3.07,
+   "diesel": 2.74,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-06-19",
+   "ron95": 2.05,
+   "ron97": 3.14,
+   "diesel": 2.81,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-06-26",
+   "ron95": 2.05,
+   "ron97": 3.21,
+   "diesel": 2.88,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-07-03",
+   "ron95": 2.05,
+   "ron97": 3.18,
+   "diesel": 2.85,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-07-10",
+   "ron95": 2.05,
+   "ron97": 3.18,
+   "diesel": 2.88,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-07-17",
+   "ron95": 2.05,
+   "ron97": 3.21,
+   "diesel": 2.91,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-07-24",
+   "ron95": 2.05,
+   "ron97": 3.21,
+   "diesel": 2.91,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-07-31",
+   "ron95": 2.05,
+   "ron97": 3.17,
+   "diesel": 2.91,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-08-07",
+   "ron95": 2.05,
+   "ron97": 3.17,
+   "diesel": 2.94,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-08-14",
+   "ron95": 2.05,
+   "ron97": 3.13,
+   "diesel": 2.9,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-08-21",
+   "ron95": 2.05,
+   "ron97": 3.13,
+   "diesel": 2.85,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-08-28",
+   "ron95": 2.05,
+   "ron97": 3.16,
+   "diesel": 2.88,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-09-04",
+   "ron95": 2.05,
+   "ron97": 3.16,
+   "diesel": 2.88,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-09-11",
+   "ron95": 2.05,
+   "ron97": 3.18,
+   "diesel": 2.9,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-09-18",
+   "ron95": 2.05,
+   "ron97": 3.21,
+   "diesel": 2.93,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-09-25",
+   "ron95": 2.05,
+   "ron97": 3.21,
+   "diesel": 2.93,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": null,
+   "ron95_skps": null,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-09-30",
+   "ron95": 2.6,
+   "ron97": 3.21,
+   "diesel": 2.93,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-10-09",
+   "ron95": 2.6,
+   "ron97": 3.18,
+   "diesel": 2.93,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-10-16",
+   "ron95": 2.6,
+   "ron97": 3.18,
+   "diesel": 2.93,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-10-23",
+   "ron95": 2.6,
+   "ron97": 3.14,
+   "diesel": 2.89,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-10-30",
+   "ron95": 2.6,
+   "ron97": 3.2,
+   "diesel": 2.95,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-11-06",
+   "ron95": 2.6,
+   "ron97": 3.2,
+   "diesel": 3.02,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-11-13",
+   "ron95": 2.65,
+   "ron97": 3.25,
+   "diesel": 3.07,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-11-20",
+   "ron95": 2.65,
+   "ron97": 3.28,
+   "diesel": 3.1,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-11-27",
+   "ron95": 2.63,
+   "ron97": 3.26,
+   "diesel": 3.08,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-12-04",
+   "ron95": 2.66,
+   "ron97": 3.29,
+   "diesel": 3.08,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-12-11",
+   "ron95": 2.64,
+   "ron97": 3.27,
+   "diesel": 3.06,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-12-18",
+   "ron95": 2.62,
+   "ron97": 3.24,
+   "diesel": 3.02,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2025-12-25",
+   "ron95": 2.56,
+   "ron97": 3.16,
+   "diesel": 2.94,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-01-01",
+   "ron95": 2.56,
+   "ron97": 3.16,
+   "diesel": 2.94,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-01-08",
+   "ron95": 2.54,
+   "ron97": 3.11,
+   "diesel": 2.89,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-01-15",
+   "ron95": 2.52,
+   "ron97": 3.08,
+   "diesel": 2.84,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-01-22",
+   "ron95": 2.54,
+   "ron97": 3.1,
+   "diesel": 2.88,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-01-29",
+   "ron95": 2.54,
+   "ron97": 3.1,
+   "diesel": 2.92,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-02-05",
+   "ron95": 2.54,
+   "ron97": 3.1,
+   "diesel": 2.96,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-02-12",
+   "ron95": 2.54,
+   "ron97": 3.1,
+   "diesel": 2.99,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-02-19",
+   "ron95": 2.54,
+   "ron97": 3.1,
+   "diesel": 2.99,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-02-26",
+   "ron95": 2.59,
+   "ron97": 3.15,
+   "diesel": 3.04,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-03-05",
+   "ron95": 2.67,
+   "ron97": 3.25,
+   "diesel": 3.12,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-03-12",
+   "ron95": 3.27,
+   "ron97": 3.85,
+   "diesel": 3.92,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-03-19",
+   "ron95": 3.27,
+   "ron97": 4.55,
+   "diesel": 4.72,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-03-26",
+   "ron95": 3.87,
+   "ron97": 5.15,
+   "diesel": 5.52,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-04-02",
+   "ron95": 3.87,
+   "ron97": 4.95,
+   "diesel": 6.02,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-04-09",
+   "ron95": 4.27,
+   "ron97": 5.35,
+   "diesel": 6.72,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-04-16",
+   "ron95": 4.02,
+   "ron97": 5.1,
+   "diesel": 5.97,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-04-23",
+   "ron95": 3.87,
+   "ron97": 4.85,
+   "diesel": 5.12,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-04-30",
+   "ron95": 3.97,
+   "ron97": 4.9,
+   "diesel": 5.12,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-05-07",
+   "ron95": 4.02,
+   "ron97": 4.9,
+   "diesel": 5.17,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-05-14",
+   "ron95": 3.87,
+   "ron97": 4.7,
+   "diesel": 4.87,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-05-21",
+   "ron95": 4.07,
+   "ron97": 4.85,
+   "diesel": 4.97,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-05-28",
+   "ron95": 3.92,
+   "ron97": 4.65,
+   "diesel": 4.87,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-06-04",
+   "ron95": 3.72,
+   "ron97": 4.35,
+   "diesel": 4.67,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-06-11",
+   "ron95": 3.72,
+   "ron97": 4.35,
+   "diesel": 4.67,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-06-18",
+   "ron95": 3.72,
+   "ron97": 4.35,
+   "diesel": 4.37,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-06-25",
+   "ron95": 3.47,
+   "ron97": 4.1,
+   "diesel": 4.07,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": null
+  },
+  {
+   "series_type": "level",
+   "date": "2026-07-01",
+   "ron95": 3.37,
+   "ron97": 4,
+   "diesel": 3.97,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-07-09",
+   "ron95": 3.37,
+   "ron97": 4,
+   "diesel": 3.97,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-07-16",
+   "ron95": 3.42,
+   "ron97": 4,
+   "diesel": 4.07,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-07-23",
+   "ron95": 3.62,
+   "ron97": 4.2,
+   "diesel": 4.42,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-07-30",
+   "ron95": 3.82,
+   "ron97": 4.4,
+   "diesel": 4.62,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-08-06",
+   "ron95": 3.77,
+   "ron97": 4.35,
+   "diesel": 4.57,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-08-13",
+   "ron95": 3.62,
+   "ron97": 4.15,
+   "diesel": 4.47,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-08-20",
+   "ron95": 3.77,
+   "ron97": 4.25,
+   "diesel": 4.67,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-08-27",
+   "ron95": 3.82,
+   "ron97": 4.3,
+   "diesel": 4.72,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-09-03",
+   "ron95": 3.77,
+   "ron97": 4.25,
+   "diesel": 4.67,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-09-10",
+   "ron95": 4.02,
+   "ron97": 4.5,
+   "diesel": 4.92,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-09-17",
+   "ron95": 4.37,
+   "ron97": 4.85,
+   "diesel": 5.27,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-09-24",
+   "ron95": 4.57,
+   "ron97": 5.05,
+   "diesel": 5.42,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-10-01",
+   "ron95": 4.52,
+   "ron97": 5,
+   "diesel": 5.27,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-10-08",
+   "ron95": 4.67,
+   "ron97": 5.15,
+   "diesel": 5.27,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-10-15",
+   "ron95": 4.62,
+   "ron97": 5.1,
+   "diesel": 5.17,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  },
+  {
+   "series_type": "level",
+   "date": "2026-10-22",
+   "ron95": 4.32,
+   "ron97": 4.8,
+   "diesel": 5.07,
+   "diesel_eastmsia": 2.15,
+   "ron95_budi95": 1.99,
+   "ron95_skps": 2.05,
+   "diesel_skds": 2.15,
+   "diesel_budi": 2.1
+  }
+ ],
+ "_nextI18Next": {
+  "initialI18nStore": {
+   "en-GB": {
+    "catalogue": {
+     "header": "Data Catalogue",
+     "header_category_govt": "Malaysia's official open data portal",
+     "header_category_agency": "{{ agency }}'s official open data portal",
+     "description": "Your one-stop interface to browse Malaysia's wealth of open data. This page will consistently grow in depth and breadth with high-quality data from federal and state agencies in Malaysia.",
+     "description_agency": "Your one-stop interface to browse open data from {{ agency }}. This page will grow over time as we expand the quality and quantity of our open data.",
+     "description_opendosm": "Your one-stop interface to browse our wealth of open data. This page will consistently grow in depth and breadth, providing richer and more varied data from the various divisions of DOSM.",
+     "description_databnm": "Multi-format downloads, exploratory dataviz, and programmatic access - pick your preferred method of freely using our data. Pay particular attention to the metadata to gain a deeper understanding of a dataset's scope, use, and limitations, and write to data@bnm.gov.my if you want to discuss or request anything further!",
+     "dataset_count": "{{ count }} data series, and counting",
+     "download": "Download",
+     "category": "Category",
+     "chart": "Chart",
+     "table": "Table",
+     "filter": "Filter",
+     "period": "Frequency",
+     "frequency": "Frequency",
+     "geography": "Geography",
+     "demography": "Demography",
+     "begin": "Begin",
+     "end": "End",
+     "source": "Data Source",
+     "desktop": "Desktop",
+     "mobile": "Mobile",
+     "settings": "Settings",
+     "embed": "Embed",
+     "embed_code": "Embed Code",
+     "view_full_chart": "View full chart",
+     "placeholder": {
+      "source": "Select agency",
+      "search": "Search for dataset",
+      "demography": "Data contains"
+     },
+     "filter_options": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "yearly": "Yearly",
+      "intraday": "Intraday",
+      "infrequent": "Infrequent",
+      "as_required": "As Required",
+      "one_off": "One-Off",
+      "state": "State",
+      "dun": "DUN",
+      "national": "National",
+      "parlimen": "Parliament",
+      "district": "District",
+      "sex": "Sex",
+      "ethnicity": "Ethnicity",
+      "age": "Age",
+      "religion": "Religion",
+      "nationality": "Nationality",
+      "disability": "Disability status",
+      "marital": "Marital status"
+     },
+     "image": {
+      "title": "Image (PNG)",
+      "desc": "Suitable for general digital use."
+     },
+     "vector": {
+      "title": "Vector Graphic (SVG)",
+      "desc": "Suitable for high quality prints or further image editing."
+     },
+     "csv": {
+      "title": "Full Dataset (CSV)",
+      "desc": "Recommended for individuals seeking an Excel-friendly format."
+     },
+     "parquet": {
+      "title": "Full Dataset (Parquet)",
+      "desc": "Recommended for data scientists seeking to work with data via code."
+     },
+     "geojson": {
+      "title": "GeoJSON (JSON)",
+      "desc": "Open standard format for plotting geographical features on maps."
+     },
+     "header_1": "How is this data produced?",
+     "header_2": "What caveats I should bear in mind when using this data?",
+     "header_3": "Publication(s) using this data",
+     "header_4": "Related Datasets",
+     "meta_desc": "Dataset description",
+     "meta_def": "Variable definitions",
+     "meta_chart_above": "(Chart above)",
+     "meta_all_dataset": "In the entire dataset:",
+     "meta_variable": "Variable",
+     "meta_variable_name": "Name in Dataset",
+     "meta_data_type": "Data type",
+     "meta_definition": "Definition",
+     "meta_source": "Data source(s)",
+     "meta_url": "URLs to dataset",
+     "meta_license": "License",
+     "code": "Code",
+     "code_desc": "Connect directly to the data with Python.",
+     "code_note": "If not already installed, do",
+     "code_comments": {
+      "geojson_1": "# the first URL gives you 15dp accuracy (highest possible) \n# the _LIGHT URL gives you 5dp accuracy, sufficient for visuals but not analysis \n# the _LIGHT URL is over 90% smaller in size, hence the tradeoff",
+      "geojson_2": "# Uncomment below to maintain a rectangular map, but remove the whitespace caused by the South China Sea",
+      "geojson_3": "# Uncomment below to change from rectangular --> square, for a more compact visual"
+     },
+     "sample_query": {
+      "section_title": "Sample OpenAPI query",
+      "desc1": "The following code is an example of how to make an API query to retrieve the data catalogue mentioned above. You can use different programming languages by switching the code accordingly. For a complete guide on possible query parameters and syntax, please refer to the ",
+      "link1": "official Open API Documentation",
+      "desc2": "Additionally, you can experiment with the code interactively and send requests at the ",
+      "link2": "Example Requests section",
+      "unavailable": "This data catalog is not available through OpenAPI as the nature of the data makes it unsuitable for API access. For the full dataset, please use the provided download link as shown in the above section."
+     },
+     "license_text": "This data is made open under the Creative Commons Attribution 4.0 International License (CC BY 4.0). A copy of the license is available "
+    },
+    "common": {
+     "site": {
+      "name": "data.gov.my",
+      "description": "Your one-stop interface to browse Malaysia's wealth of open data!"
+     },
+     "error": {
+      "404": {
+       "title": "Oops, we cannot find the page you're looking for.",
+       "description": "Is your URL incorrect?",
+       "legacy": "If you're looking for a dataset that was available via the old site, you may head to ",
+       "reason": "Error code: 404 -- Page not found"
+      },
+      "500": {
+       "title": "Oops, something went terribly wrong.",
+       "description": "We are sorry for this incident.",
+       "reason": "Error code: 500 -- Server error"
+      },
+      "output": "Output",
+      "disclaimer": "*Not an actual terminal / console.",
+      "toast": {
+       "request_failure": "Oops! Unable to load requested data",
+       "image_download_failure": "Oops! Unable to download requested image",
+       "form_submission_failure": "Oops! Unable to process form submission",
+       "try_again": "Please try again later",
+       "reach_support": "Please check again or reach out to support for assistance"
+      }
+     },
+     "common": {
+      "state": "State",
+      "district": "District",
+      "type": "Type",
+      "name": "Name",
+      "previous": "Previous",
+      "next": "Next",
+      "in": " in ",
+      "yr": "yr",
+      "views_one": "view",
+      "views_other": "views",
+      "downloads_one": "download",
+      "downloads_other": "downloads",
+      "page_of": "{{ current }} of {{ total }}",
+      "data_for": "Data for {{ state }}",
+      "data_of": "Data as of {{ date }}",
+      "latest": "Latest ({{ date }})",
+      "last_updated": "Last updated: {{ date }}",
+      "next_update": "Next update: {{ date }}",
+      "slider": "",
+      "zoom": "Zoom into my area",
+      "clear": "Clear",
+      "clear_selection": "Clear selection",
+      "clear_all": "Clear all",
+      "reset": "Reset",
+      "reset_default": "Reset to default",
+      "close": "Close",
+      "select": "Select",
+      "here": "Here",
+      "no_entries": "No entries found",
+      "check_out": "Check out",
+      "no_data": "No data",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "maximum": "Maximum",
+      "minimum": "Minimum",
+      "sort": "Sort",
+      "asc_order": "Ascending order",
+      "desc_order": "Descending order",
+      "play": "Play",
+      "pause": "Pause",
+      "indicator": "Indicator",
+      "available_at": "Available at",
+      "accessed": "Accessed",
+      "last_modified": "Last modified",
+      "cited": "cited",
+      "available_from": "Available from",
+      "ranking": "Ranking ({{ count, number }})",
+      "charts": {
+       "heatmap": "Heatmap",
+       "table": "Table"
+      },
+      "banner": "",
+      "opendosm_banner": ""
+     },
+     "time": {
+      "daily_7d": "Daily (7d avg)",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "yearly": "Yearly"
+     },
+     "placeholder": {
+      "all": "All",
+      "search": "Search",
+      "state": "Select state",
+      "state_first": "Select a state first",
+      "district": "Select district",
+      "facility": "Select facility",
+      "facility_type": "Select facility type",
+      "no_results": "No results",
+      "loading": "Loading..."
+     },
+     "nav": {
+      "home": "Home",
+      "dashboards": "Dashboards",
+      "catalogue": "Data Catalogue",
+      "api_docs": "API Docs",
+      "about": "About",
+      "data_request": "Data Request",
+      "community": "Community",
+      "helpdesk": "Helpdesk",
+      "progress": "Progress",
+      "legacy": "Legacy Site",
+      "publications": "Publications",
+      "national_summary_data_page": "NSDP",
+      "pmo": "Prime Minister's Department",
+      "gov": "Government of Malaysia",
+      "open_source": "Open Source",
+      "open_data_portal": "Open Data Portal",
+      "frontend": "Frontend Repo: NextJS",
+      "backend": "Backend Repo: Django",
+      "uiux": "UI + UX Design: Figma",
+      "mampu": "MAMPU",
+      "open_data": "Open Data",
+      "public_open_data": "Public Sector Open Data",
+      "bond_sukuk": " Bond & Sukuk Info (BIX)",
+      "guiding_principles": "Guiding Principles",
+      "terms_of_use": "Terms of Use",
+      "ai": "AI Helper: OpenAI",
+      "moh_github": "MoH GitHub",
+      "jc3_climate": "Climate Data (JC3)",
+      "faq": "FAQ"
+     },
+     "components": {
+      "theme": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "brought_by": "Brought to you by",
+      "brought_by_the": "Brought to you by the",
+      "product_by_division": "A open data product by the",
+      "visit_portal": "Visit our portal",
+      "click_to_explore": "Click to explore",
+      "ovs": "Malaysian-born Overseas",
+      "try_datagpt": "Try the new DataGPT"
+     },
+     "categories": {
+      "construction": "Construction",
+      "democracy": "Democracy",
+      "demography": "Demography",
+      "digitalisation": "Digitalisation",
+      "economy": "Economy",
+      "education": "Education",
+      "environment": "Environment",
+      "financial_sector": "Financial Sector",
+      "government_programs": "Government Programs",
+      "healthcare": "Healthcare",
+      "public_finances": "Public Finances",
+      "public_safety": "Public Safety",
+      "transportation": "Transportation",
+      "national_accounts": "National Accounts",
+      "services": "Services",
+      "summary": "Summary Page",
+      "public_administration": "Public Administration",
+      "labour_markets": "Labour Market",
+      "producer_price": "Producer Prices",
+      "households": "Households",
+      "trade": "Trade"
+     },
+     "home": {
+      "category": "Malaysia's official open data portal",
+      "title": "High frequency. High granularity. High impact.",
+      "description": "Your one-stop centre to browse Malaysia's wealth of open data. Whether you're a regular citizen looking for information, a researcher looking for material, or an application developer looking for an API, we've got you covered. Our mission is to make Malaysia the #1 data-driven country in the world.",
+      "section_1": {
+       "title": "Explore our hottest dashboards!",
+       "description": "These dashboards have been getting attention, but don't forget to check out our full collection of dashboards!"
+      },
+      "section_2": {
+       "title": "Study our most popular datasets!",
+       "description": "To search for something specific, use our data catalogue - it allows you to download or programmatically access our datasets.",
+       "past_24h": "24 hours",
+       "past_month": "1 month",
+       "all_time": "All-time",
+       "dashboards": "Dashboards",
+       "datasets_available": "Datasets available",
+       "resource_views": "Resource views",
+       "resource_downloads": "Resource downloads",
+       "top_dashboards": "Most viewed dashboards",
+       "top_catalogues": "Most viewed datasets",
+       "top_files": "Most downloaded (data)",
+       "top_images": "Most downloaded (graphics)"
+      },
+      "section_3": {
+       "title": "Usage of data.gov.my",
+       "daily": "Daily",
+       "total": "Total"
+      },
+      "keys": {
+       "users": "Daily OpenAPI Usage",
+       "views": "Daily Views",
+       "downloads": "Daily Downloads"
+      }
+     }
+    },
+    "agencies": {
+     "aadk": {
+      "full": "National Anti-Drugs Agency",
+      "abbr": "AADK"
+     },
+     "audit": {
+      "full": "National Audit Department",
+      "abbr": "AUDIT"
+     },
+     "bnm": {
+      "full": "Central Bank of Malaysia",
+      "abbr": "BNM"
+     },
+     "bomba": {
+      "full": "Fire and Rescue Department of Malaysia",
+      "abbr": "BOMBA"
+     },
+     "doa": {
+      "full": "Department of Agriculture",
+      "abbr": "DOA"
+     },
+     "dosm": {
+      "full": "Department of Statistics Malaysia",
+      "abbr": "DOSM"
+     },
+     "epf": {
+      "full": "Employees Provident Fund",
+      "abbr": "EPF"
+     },
+     "epu": {
+      "full": "Ministry of the Economy",
+      "abbr": "EPU"
+     },
+     "govt": {
+      "full": "Government of Malaysia",
+      "abbr": "GOVT"
+     },
+     "icujpm": {
+      "full": "Internal Coordination Unit",
+      "abbr": "ICUJPM"
+     },
+     "imigresen": {
+      "full": "Immigration Department of Malaysia",
+      "abbr": "Imigresen"
+     },
+     "jakoa": {
+      "full": "Department of Orang Asli Development",
+      "abbr": "JAKOA"
+     },
+     "janm": {
+      "full": "Accountant-General's Department",
+      "abbr": "JANM"
+     },
+     "jas": {
+      "full": "Department of Environment",
+      "abbr": "JAS"
+     },
+     "jbg": {
+      "full": "Legal Aid Department",
+      "abbr": "JBG"
+     },
+     "jdn": {
+      "full": "Jabatan Digital Negara",
+      "abbr": "JDN"
+     },
+     "jpa": {
+      "full": "Public Service Department",
+      "abbr": "JPA"
+     },
+     "jpj": {
+      "full": "Road Transport Department",
+      "abbr": "JPJ"
+     },
+     "jpn": {
+      "full": "National Registration Department",
+      "abbr": "JPN"
+     },
+     "jps": {
+      "full": "Department of Irrigation and Drainage",
+      "abbr": "JPS"
+     },
+     "jmg": {
+      "full": "Department of Mineral and Geoscience",
+      "abbr": "JMG"
+     },
+     "kd": {
+      "full": "Ministry of Digital",
+      "abbr": "MOD"
+     },
+     "kdn": {
+      "full": "Ministry of Home Affairs",
+      "abbr": "KDN"
+     },
+     "kpdn": {
+      "full": "Ministry of Domestic Trade",
+      "abbr": "KPDN"
+     },
+     "kpkt": {
+      "full": "Ministry of Housing & Local Government",
+      "abbr": "KPKT"
+     },
+     "ktmb": {
+      "full": "Malayan Railways Limited",
+      "abbr": "KTMB"
+     },
+     "kwap": {
+      "full": "Retirement Fund Incorporated",
+      "abbr": "KWAP"
+     },
+     "lhdn": {
+      "full": "Inland Revenue Board of Malaysia",
+      "abbr": "LHDN"
+     },
+     "mafs": {
+      "full": "Ministry of Agriculture and Food Security",
+      "abbr": "MAFS"
+     },
+     "mampu": {
+      "full": "Malaysian Administrative Modernisation and Management Planning Unit",
+      "abbr": "MAMPU"
+     },
+     "mcmc": {
+      "full": "Malaysian Communications and Multimedia Commission",
+      "abbr": "MCMC"
+     },
+     "mers-999": {
+      "full": "Malaysian Emergency Response Services 999",
+      "abbr": "MERS 999"
+     },
+     "met": {
+      "full": "Malaysian Meteorology Department",
+      "abbr": "Met"
+     },
+     "moe": {
+      "full": "Ministry of Education",
+      "abbr": "MOE"
+     },
+     "mof": {
+      "full": "Ministry of Finance",
+      "abbr": "MOF"
+     },
+     "moh": {
+      "full": "Ministry of Health Malaysia",
+      "abbr": "MOH"
+     },
+     "mohe": {
+      "full": "Ministry of Higher Education",
+      "abbr": "MOHE"
+     },
+     "mot": {
+      "full": "Ministry of Transport",
+      "abbr": "MOT"
+     },
+     "mynic": {
+      "full": "Malaysian Network Information Centre Berhad",
+      "abbr": "MYNIC"
+     },
+     "mysa": {
+      "full": "Malaysian Space Agency",
+      "abbr": "MYSA"
+     },
+     "napic": {
+      "full": "National Property Information Centre",
+      "abbr": "NAPIC"
+     },
+     "npra": {
+      "full": "National Pharmaceutical Regulatory Agency",
+      "abbr": "NPRA"
+     },
+     "nres": {
+      "full": "Ministry of Natural Resources & Environmental Sustainability",
+      "abbr": "NRES"
+     },
+     "ntrc": {
+      "full": "National Transplant Resource Centre",
+      "abbr": "NTRC"
+     },
+     "parlimen": {
+      "full": "Parliament of Malaysia",
+      "abbr": "Parlimen"
+     },
+     "paynet": {
+      "full": "Payments Network Malaysia Sdn Bhd",
+      "abbr": "PayNet"
+     },
+     "penjara": {
+      "full": "Prison Department",
+      "abbr": "Penjara"
+     },
+     "perikanan": {
+      "full": "Department of Fisheries",
+      "abbr": "Perikanan"
+     },
+     "pdn": {
+      "full": "National Blood Centre",
+      "abbr": "PDN"
+     },
+     "pdrm": {
+      "full": "Royal Malaysia Police",
+      "abbr": "PDRM"
+     },
+     "perhutanan": {
+      "full": "Forestry Department of Peninsular Malaysia",
+      "abbr": "Perhutanan"
+     },
+     "perkeso": {
+      "full": "Social Security Organization",
+      "abbr": "PERKESO"
+     },
+     "phcorp": {
+      "full": "ProtectHealth Corporation",
+      "abbr": "PHCorp"
+     },
+     "prasarana": {
+      "full": "Prasarana Malaysia",
+      "abbr": "Prasarana"
+     },
+     "sesb": {
+      "full": "Sabah Electricity Sdn. Bhd.",
+      "abbr": "SESB"
+     },
+     "spr": {
+      "full": "Election Commission of Malaysia",
+      "abbr": "SPR"
+     },
+     "span": {
+      "full": "The National Water Services Commission",
+      "abbr": "SPAN"
+     },
+     "ssm": {
+      "full": "Companies Commission of Malaysia",
+      "abbr": "SSM"
+     },
+     "st": {
+      "full": "Energy Commission of Malaysia",
+      "abbr": "ST"
+     },
+     "swk-energy": {
+      "full": "Sarawak Energy Berhad",
+      "abbr": "SWK-ENERGY"
+     },
+     "tnb": {
+      "full": "Tenaga Nasional Berhad",
+      "abbr": "TNB"
+     },
+     "unhcr": {
+      "full": "United Nations High Commissioner for Refugees",
+      "abbr": "UNHCR"
+     }
+    },
+    "division": {
+     "bipd": {
+      "full": "Integration and Data Management Division",
+      "abbr": "BIPD"
+     },
+     "bkp": {
+      "full": "Management Services Division",
+      "abbr": "BKP"
+     },
+     "bmp": {
+      "full": "Methology & Research Division",
+      "abbr": "BMP"
+     },
+     "bpan": {
+      "full": "National Accounts Division",
+      "abbr": "BPAN"
+     },
+     "bpe": {
+      "full": "Economic Indicators Division",
+      "abbr": "BPE"
+     },
+     "bphpp": {
+      "full": "Price, Income & Expenditure Statistics Division",
+      "abbr": "BPHPP"
+     },
+     "bpip": {
+      "full": "Balance of Payments Statistics Division",
+      "abbr": "BPIP"
+     },
+     "bpksa": {
+      "full": "Strategic Communication & International Division",
+      "abbr": "BPKSA"
+     },
+     "bpm": {
+      "full": "Information Management Division",
+      "abbr": "BPM"
+     },
+     "bpp": {
+      "full": "Services Statistics Division",
+      "abbr": "BPP"
+     },
+     "bppa": {
+      "full": "International Trade Statistics Division",
+      "abbr": "BPPA"
+     },
+     "bppas": {
+      "full": "Agricultural & Environment Statistics Division",
+      "abbr": "BPPAS"
+     },
+     "bppd": {
+      "full": "Population & Demographic Statistics Division",
+      "abbr": "BPPD"
+     },
+     "bppib": {
+      "full": "Industrial Production & Construction Division",
+      "abbr": "BPPIB"
+     },
+     "bptms": {
+      "full": "Manpower & Social Statistics Division",
+      "abbr": "BPTMS"
+     },
+     "ilsm": {
+      "full": "Malaysia Statistical Training Institute",
+      "abbr": "ILSM"
+     },
+     "mbls": {
+      "full": "Malaysian Bureau of Labour Statistics",
+      "abbr": "MBLS"
+     },
+     "kpdn": {
+      "full": "Ministry of Domestic Trade",
+      "abbr": "KPDN"
+     }
+    },
+    "dashboards": {
+     "header": "Dashboards",
+     "description": "Your one-stop interface to explore data-driven insights and analytics on all areas of the public sector, powered by the data made open on this site.",
+     "description_agency": "Your one-stop interface to explore data-driven insights and analytics on the core work of {{ agency }}, powered by the data they make open on this site.",
+     "source_placeholder": "Agency",
+     "search_placeholder": "Search for dashboards",
+     "section1_title": "Most popular Dashboards",
+     "section2_title": "All dashboards",
+     "tabs": {
+      "thematic": "By Theme",
+      "most_popular": "Most Popular",
+      "recent_updated": "Recently Updated"
+     },
+     "categories": {
+      "healthcare": "Healthcare",
+      "transport": "Transport",
+      "demography": "Demography",
+      "public-finances": "Public Finances",
+      "public-administration": "Public Administration",
+      "economy": "Economy",
+      "public-safety": "Public Safety",
+      "financial-sector": "Financial Sector",
+      "democracy": "Democracy",
+      "environment": "Environment",
+      "digitalisation": "Digitalisation",
+      "government-programs": "Government Programs",
+      "education": "Education",
+      "infectious-diseases": "Infectious Diseases",
+      "healthcare-resources": "Healthcare Resources",
+      "healthcare-programs": "Healthcare Programs",
+      "national-accounts": "National Accounts",
+      "services": "Services",
+      "labour_markets": "Labour Market",
+      "producer_price": "Producer Prices",
+      "trade": "Trade"
+     },
+     "dashboards": {
+      "birthday-explorer": {
+       "name": "Birthday Popularity",
+       "description": "Interactive explorer of birth registration data since 1920, allowing you to discover fun facts about your date of birth!"
+      },
+      "orang-asli": {
+       "name": "The Indigenous Peoples",
+       "description": "Annual kampung-level census of Peninsular Malaysia's original inhabitants, with breakdowns by key demographics."
+      },
+      "immigration": {
+       "name": "Immigration",
+       "description": "Monthly foreign arrivals in Malaysia by nationality."
+      },
+      "ktmb-explorer": {
+       "name": "KTMB Explorer",
+       "description": "Interactive explorer of daily ridership on KTMB services, allowing you to explore ridership from any origin to any destination!"
+      },
+      "rapid-explorer": {
+       "name": "Rapid Rail Explorer",
+       "description": "Interactive explorer of daily Rapid Rail ridership, allowing you to explore any origin-destination pairing!"
+      },
+      "rapid-bus-rail": {
+       "name": "Rapid Rail Explorer",
+       "description": "Interactive explorer of daily ridership on Rapid Rail services, allowing you to explore ridership from any origin to any destination!"
+      },
+      "car-popularity": {
+       "name": "Car Popularity Explorer",
+       "description": "Interactive explorer of car registration data, allowing you to discover trends for any maker or model!"
+      },
+      "vehicle-registrations": {
+       "name": "Vehicle Registrations",
+       "description": "Macro view of vehicle registrations for policymakers, with breakdowns by fuel type and vehicle type."
+      },
+      "public-transportation": {
+       "name": "Public Transportation",
+       "description": "Monthly ridership data from all key public transport operators nationwide, with breakdowns by service."
+      },
+      "covid-19": {
+       "name": "COVID-19",
+       "description": "Weekly surveillance of COVID-19 in Malaysia at state level, covering cases, hospitalisations, and deaths."
+      },
+      "covid-vaccination": {
+       "name": "COVID-19 Vaccination",
+       "description": "Daily COVID-19 vaccination activity by dose type and age group, including vaccination coverage rates across the country."
+      },
+      "blood-donation": {
+       "name": "Blood Donation",
+       "description": "Daily blood donation activity at national and state level, with breakdowns by key demographics including blood type."
+      },
+      "organ-donation": {
+       "name": "Organ Donation",
+       "description": "Daily organ donation pledges and nationwide pledger rates, with breakdowns by key demographics."
+      },
+      "peka-b40": {
+       "name": "Peka B40",
+       "description": "Daily screenings under the PeKA B40 program, including screening rates for the target population across the country."
+      },
+      "hospital-bed-utilisation": {
+       "name": "Hospital Bed Utilisation",
+       "description": "Daily bed utilisation at hospital level, covering utilisation for critical and non-critical care beds on a daily basis."
+      },
+      "weather-and-climate": {
+       "name": "Weather and Climate",
+       "description": "10 years of rainfall and temperature data from the 42 major weather stations in Malaysia."
+      },
+      "income-taxation": {
+       "name": "Income Taxation",
+       "description": "Interactive explorer of granular income tax data, allowing you to compare yourself against other Malaysian taxpayers!"
+      },
+      "jobless-claims": {
+       "name": "Jobless Claims",
+       "description": "Daily claims from the Employment Insurance System (EIS), with breakdowns by key demographics."
+      },
+      "social-security": {
+       "name": "Jobless Claims",
+       "description": "Daily claims from the Employment Insurance System (EIS), with breakdowns by key demographics."
+      },
+      "business-creation-destruction": {
+       "name": "Business Creation and Destruction",
+       "description": "Monthly trends in business creation and destruction, derived from SSM's authoritative database of businesses and companies."
+      },
+      "international-reserves": {
+       "name": "International Reserves",
+       "description": "Biweekly surveillance of Bank Negara Malaysia's international reserves, covering key sufficiency indicators."
+      },
+      "reserve-money": {
+       "name": "Reserve Money",
+       "description": "Monthly evolution of key reserve money measures, including factors affecting reserve money."
+      },
+      "money-supply": {
+       "name": "Money Supply",
+       "description": "Monthly evolution of the money supply, covering M1, M2, M3, and their components."
+      },
+      "currency-in-circulation": {
+       "name": "Currency in Circulation",
+       "description": "Monthly evolution of currency in circulation, with breakdowns by denomination of notes and coins."
+      },
+      "household-debt": {
+       "name": "Household Debt",
+       "description": "Monthly surveillance of lending activity, covering loans applied, approved, disbursed and repaid, broken down by purpose."
+      },
+      "interest-rates": {
+       "name": "Interest Rates",
+       "description": "Monthly surveillance of key interest rates, including the OPR, base lending rate, and fixed deposit rate."
+      },
+      "electronic-payments": {
+       "name": "Electronic Payments",
+       "description": "Monthly surveillance of e-payments in Malaysia, covering key payment instruments, channels, and systems."
+      },
+      "exchange-rates": {
+       "name": "Exchange Rates",
+       "description": "Daily rate of exchange of MYR against currencies of 24 major trading partners, including USA, China, UK, and Singapore."
+      },
+      "drug-addiction": {
+       "name": "Drug Addiction",
+       "description": "Annual data on drug and substance abuses cases, with breakdowns by key demographics and drug category."
+      },
+      "fire-and-rescue": {
+       "name": "Fire and Rescue",
+       "description": "Monthly data on fire and rescue operations at national and state level, broken down by incident type."
+      },
+      "internet-penetration": {
+       "name": "Internet Penetration",
+       "description": "Monthly broadband traffic and internet penetration data, broken down by type of broadband."
+      },
+      "retirement-readiness": {
+       "name": "Retirement Readiness",
+       "description": "—"
+      },
+      "sekolahku": {
+       "name": "Sekolahku",
+       "description": "—"
+      },
+      "name-popularity": {
+       "name": "Baby Name Popularity",
+       "description": "—"
+      },
+      "refugee-situation": {
+       "name": "Malaysia's Refugee Situation",
+       "description": "—"
+      },
+      "healthcare-facilities": {
+       "name": "Healthcare Facilities",
+       "description": "—"
+      },
+      "covidnow-data": {
+       "name": "Data on COVIDNOW",
+       "description": "—"
+      },
+      "emergency-response": {
+       "name": "Emergency Response",
+       "description": "—"
+      },
+      "circle-of-life": {
+       "name": "The Circle of Life",
+       "description": "—"
+      },
+      "civil-service": {
+       "name": "The Civil Service",
+       "description": "—"
+      },
+      "crime": {
+       "name": "Crime",
+       "description": "—"
+      },
+      "election-explorer": {
+       "name": "Election Explorer",
+       "description": "—"
+      },
+      "flood-warning": {
+       "name": "Flood Warning",
+       "description": "—"
+      },
+      "government-site-tracker": {
+       "name": "Government Site Tracker",
+       "description": "—"
+      },
+      "ipr": {
+       "name": "The People's Income Initiative (IPR)",
+       "description": "—"
+      },
+      "passport-and-passes": {
+       "name": "Passport and Passes",
+       "description": "—"
+      },
+      "poverty": {
+       "name": "Poverty",
+       "description": "—"
+      },
+      "public-contracting": {
+       "name": "Public Contracting",
+       "description": "—"
+      },
+      "public-pension": {
+       "name": "Public Pensions",
+       "description": "—"
+      },
+      "gdp": {
+       "name": "Gross Domestic Product (GDP)",
+       "description": "Quarterly economic growth, covering real and nominal GDP by expenditure and economic activity."
+      },
+      "consumer-prices": {
+       "name": "Consumer Prices",
+       "description": "Monthly CPI inflation at national and state level, covering headline CPI, core CPI, and CPI by category."
+      },
+      "labour-market": {
+       "name": "Labour Markets",
+       "description": "Monthly Labour Force Survey (LFS) report, covering unemployment, participation, and nature of employment."
+      },
+      "composite-index": {
+       "name": "Composite Indices",
+       "description": "Monthly leading, coincident, and lagging indicators for the Malaysian economy's performance."
+      },
+      "composite-indices": {
+       "name": "Composite Indices",
+       "description": "Monthly leading, coincident, and lagging indicators of the Malaysian economy's performance."
+      },
+      "wholesale-retail": {
+       "name": "Wholesale & Retail Trade",
+       "description": "Monthly wholesale and retail trade performance, including the performance of motor vehicle sales."
+      },
+      "wholesale-retail-trade": {
+       "name": "Wholesale & Retail Trade",
+       "description": "Monthly wholesale and retail trade performance, including the performance of motor vehicle sales."
+      },
+      "industrial-production": {
+       "name": "Industrial Production",
+       "description": "Monthly industrial production performance, covering mining, manufacturing, and electricity production."
+      },
+      "producer-prices": {
+       "name": "Producer Prices",
+       "description": "Monthly PPI inflation, covering producer prices for all main economic sectors except services and construction."
+      },
+      "kawasanku": {
+       "name": "Kawasanku",
+       "description": "Census 2020 data at national, state, district, parliament, and state legislative assembly (DUN) level."
+      },
+      "iip": {
+       "name": "International Investment Position (IIP)",
+       "description": "Quarterly statement of Malaysia's external financial assets and liabilities; the IIP shows stocks while the BOP shows flows."
+      },
+      "international-investment-position": {
+       "name": "International Investment Position (IIP)",
+       "description": "Quarterly statement of Malaysia's external financial assets and liabilities; the IIP shows stocks while the BOP shows flows."
+      },
+      "bop": {
+       "name": "Balance of Payments",
+       "description": "Quarterly statement of Malaysia's transactions with other nations; the BOP shows flows while the IIP shows stocks."
+      },
+      "balance-of-payments": {
+       "name": "Balance of Payments",
+       "description": "Quarterly statement of Malaysia's transactions with other nations; the BOP shows flows while the IIP shows stocks."
+      },
+      "manufacturing-statistics": {
+       "name": "Manufacturing Statistics",
+       "description": "Monthly performance of manufacturing subsectors, covering sales, employment, and wages."
+      },
+      "labour-productivity": {
+       "name": "Labour Productivity",
+       "description": "Quarterly labour productivity across all key economic sectors, covering time-based and worker-based productivity."
+      },
+      "formal-sector-wages": {
+       "name": "Formal Sector Wages",
+       "description": "Quarterly formal sector wages at national and state level, based on administrative data from EPF and SOCSO"
+      },
+      "services-statistics": {
+       "name": "Services Statistics",
+       "description": "Quarterly performance of services sub-sectors, covering sales, employment, and wages."
+      },
+      "services-producer-prices": {
+       "name": "Services Producer Prices",
+       "description": "Quarterly producer prices in the services sector, complementing the PPI which does not cover the services sector."
+      },
+      "construction-statistics": {
+       "name": "Construction Statistics",
+       "description": "Quarterly surveillance of construction projects in the public and private sectors."
+      },
+      "household-income-expenditure": {
+       "name": "Household Income & Expenditure",
+       "description": "Household income and expenditure at national, state and district level, updated with the latest data from the 2022 survey."
+      },
+      "population": {
+       "name": "Population of Malaysia",
+       "description": "Annual population of Malaysia from 1970 to the present, including vital statistics on births and deaths."
+      },
+      "external-trade": {
+       "name": "External Trade",
+       "description": "Monthly external trade statistics and indices, covering exports, imports, the trade balance, and terms of trade."
+      },
+      "life-expectancy": {
+       "name": "Life Expectancy",
+       "description": "Annual data on life expectancy from 1957 to the present, with breakdowns by state and demographic group."
+      },
+      "wellbeing": {
+       "name": "Well-Being",
+       "description": "Annual well-being of Malaysians from 2000 to the present, covering key economic and social components."
+      },
+      "padu-tracker": {
+       "name": "Pangkalan Data Utama (PADU)",
+       "description": "—"
+      },
+      "digital-economy": {
+       "name": "Digital Economy",
+       "description": "Annual performance of e-commerce and the ICT sector, as well as businesses' and households' usage of ICT tools."
+      },
+      "house-prices": {
+       "name": "House Prices",
+       "description": "This dashboard uses NAPIC’s authoritative data to give you an easy way to understand house price trends."
+      }
+     }
+    }
+   }
+  },
+  "initialLocale": "en-GB",
+  "ns": [
+   "catalogue",
+   "common",
+   "agencies",
+   "division",
+   "dashboards"
+  ],
+  "userConfig": null
+ },
+ "_source_base": "https://open.dosm.gov.my"
+}

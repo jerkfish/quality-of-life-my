@@ -1,0 +1,1 @@
+{"meta": {"catalogue_id": "hh_expenditure_dun", "data_as_of": "2024", "last_updated": "2025-12-31 12:00", "next_update": "\u2014", "data_source": ["DOSM"], "update_frequency": "YEARLY", "total": 1, "limit": 1}, "data": [{"dun": "N.01 Titi Tinggi", "date": "2019-01-01", "state": "Perlis", "parlimen": "P.001 Padang Besar", "expenditure": 3333}]}

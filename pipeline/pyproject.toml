@@ -1,0 +1,52 @@
+[project]
+name = "colcheck-pipeline"
+version = "0.1.0"
+description = "Data pipeline for Malaysia Cost-of-Living Reality Check: fetch, validate, transform DOSM open data into static artifacts."
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    # Data manipulation. Polars would be faster, but pandas is the lingua franca for
+    # the analysis side and every dataset here is small enough that speed is irrelevant.
+    "pandas>=2.2",
+    # Parquet read/write. Required: pandas alone cannot read parquet.
+    "pyarrow>=17",
+    # Schema validation at every boundary. Required by the brief.
+    "pydantic>=2.9",
+    # HTTP client for the fetch layer. Justified over stdlib urllib for real timeouts,
+    # redirect handling, connection reuse and a clean retry story.
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "ruff>=0.7",
+]
+
+[project.scripts]
+colcheck = "colcheck.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/colcheck"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = [
+    "network: test reaches out to the live internet (deselect with '-m \"not network\"')",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "RET", "PTH"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501"]

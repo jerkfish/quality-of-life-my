@@ -1,0 +1,1479 @@
+{
+ "meta": {
+  "id": "formal_wages_state",
+  "type": "data-catalogue",
+  "category": null,
+  "agency": "DOSM"
+ },
+ "params": {
+  "id": "formal_wages_state"
+ },
+ "query": {
+  "id": "formal_wages_state"
+ },
+ "id": "formal_wages_state",
+ "exclude_openapi": false,
+ "manual_trigger": "",
+ "title": "Monthly Formal Sector Wages by State",
+ "description": "Number of formal employees and median monthly wages of employees who are Malaysian citizens by state.",
+ "link_parquet": "https://storage.dosm.gov.my/labour/formal_wages_state.parquet",
+ "link_csv": "https://storage.dosm.gov.my/labour/formal_wages_state.csv",
+ "link_preview": null,
+ "link_editions": null,
+ "frequency": "MONTHLY",
+ "data_source": [
+  "DOSM"
+ ],
+ "fields": [
+  {
+   "name": "date",
+   "title": "Date",
+   "description": "[Date] The date in YYYY-MM-DD format, with DD set to 01 since the data is at monthly frequency"
+  },
+  {
+   "name": "state",
+   "title": "State",
+   "description": "[String] Malaysia, or one of the 16 states and federal territories; state refers to the state where the employer is located"
+  },
+  {
+   "name": "employees",
+   "title": "Employees",
+   "description": "[Integer] Number of formal employees; an employee with more than one job is counted once"
+  },
+  {
+   "name": "wages_median",
+   "title": "Median Wage",
+   "description": "[Integer, RM] Median monthly wage; half of formal employees earn less than this amount. Wages refer to all remuneration in money paid to employees in the reference month, including bonuses, commissions and allowances. They exclude service charges, overtime payments, gratuities, retirement benefits, retrenchment or termination benefits and travelling allowances. Wages are recorded on an accrual basis, i.e. in the month the work was done, regardless of when payment was made. For an employee with more than one job, wages from all jobs are summed."
+  }
+ ],
+ "data_as_of": "2026-06",
+ "last_updated": "2026-10-27 13:00",
+ "next_update": "2027-01-31 13:00",
+ "methodology": "Conceptually, formal employees are persons who work under a contract of service or apprenticeship with an employer and receive remuneration for the work done. Non-standard employment, such as the self-employed, gig workers, own-account workers and unpaid family workers, is not covered.\n\nConsequently, data on formal sector wages is compiled from administrative records, primarily the mandatory retirement savings contributions to the Employees Provident Fund (EPF) and social security contributions to the Social Security Organisation (SOCSO).",
+ "caveat": "The most recent 15 months of data are subject to revision if more complete contribution data are received. Employee numbers are rounded to the nearest hundred until December 2025.",
+ "publication": "The [Employee Wages Statistics (Formal Sector) Report, Second Quarter 2026](https://open.dosm.gov.my/publications/formal_wages_2026-q2), the latest edition of the quarterly formal sector wages statistics published by DOSM.",
+ "translations": {
+  "y1": "Value",
+  "date": "Month",
+  "johor": "Johor",
+  "kedah": "Kedah",
+  "perak": "Perak",
+  "sabah": "Sabah",
+  "state": "State",
+  "melaka": "Melaka",
+  "pahang": "Pahang",
+  "perlis": "Perlis",
+  "sarawak": "Sarawak",
+  "kelantan": "Kelantan",
+  "malaysia": "Malaysia",
+  "selangor": "Selangor",
+  "employees": "Employees",
+  "terengganu": "Terengganu",
+  "w-p-labuan": "W.P. Labuan",
+  "pulau-pinang": "Pulau Pinang",
+  "wages_median": "Median Wage",
+  "w-p-putrajaya": "W.P. Putrajaya",
+  "negeri-sembilan": "Negeri Sembilan",
+  "w-p-kuala-lumpur": "W.P. Kuala Lumpur"
+ },
+ "related_datasets": [],
+ "dataviz_set": [
+  {
+   "dataviz_id": "table",
+   "title": "Table",
+   "chart_type": "TABLE",
+   "config": {
+    "precision": 0,
+    "filter_columns": [
+     "state"
+    ],
+    "freeze_columns": [
+     "state"
+    ]
+   }
+  },
+  {
+   "dataviz_id": "employees",
+   "title": "Employees",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "employees"
+     ]
+    },
+    "operation": "SUM",
+    "precision": 0,
+    "filter_columns": [
+     "state"
+    ]
+   }
+  },
+  {
+   "dataviz_id": "wages_median",
+   "title": "Median Wage",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "wages_median"
+     ]
+    },
+    "operation": "SUM",
+    "precision": 0,
+    "filter_columns": [
+     "state"
+    ]
+   }
+  }
+ ],
+ "dropdown": [
+  {
+   "name": "state",
+   "selected": "malaysia",
+   "options": [
+    "malaysia",
+    "johor",
+    "kedah",
+    "kelantan",
+    "melaka",
+    "negeri-sembilan",
+    "pahang",
+    "pulau-pinang",
+    "perak",
+    "perlis",
+    "selangor",
+    "terengganu",
+    "sabah",
+    "sarawak",
+    "w-p-kuala-lumpur",
+    "w-p-labuan",
+    "w-p-putrajaya"
+   ]
+  }
+ ],
+ "data": [
+  {
+   "state": "Malaysia",
+   "date": "2022-01-01",
+   "employees": 6325700,
+   "wages_median": 2582
+  },
+  {
+   "state": "Malaysia",
+   "date": "2022-02-01",
+   "employees": 6346800,
+   "wages_median": 2382
+  },
+  {
+   "state": "Malaysia",
+   "date": "2022-03-01",
+   "employees": 6395400,
+   "wages_median": 2400
+  },
+  {
+   "state": "Malaysia",
+   "date": "2022-04-01",
+   "employees": 6426900,
+   "wages_median": 2500
+  },
+  {
+   "state": "Malaysia",
+   "date": "2022-05-01",
+   "employees": 6434100,
+   "wages_median": 2445
+  },
+  {
+   "state": "Malaysia",
+   "date": "2022-06-01",
+   "employees": 6495500,
+   "wages_median": 2478
+  },
+  {
+   "state": "Malaysia",
+   "date": "2022-07-01",
+   "employees": 6535400,
+   "wages_median": 2464
+  },
+  {
+   "state": "Malaysia",
+   "date": "2022-08-01",
+   "employees": 6580000,
+   "wages_median": 2464
+  },
+  {
+   "state": "Malaysia",
+   "date": "2022-09-01",
+   "employees": 6591000,
+   "wages_median": 2464
+  },
+  {
+   "state": "Malaysia",
+   "date": "2022-10-01",
+   "employees": 6581100,
+   "wages_median": 2500
+  },
+  {
+   "state": "Malaysia",
+   "date": "2022-11-01",
+   "employees": 6561300,
+   "wages_median": 2500
+  },
+  {
+   "state": "Malaysia",
+   "date": "2022-12-01",
+   "employees": 6555100,
+   "wages_median": 2764
+  },
+  {
+   "state": "Malaysia",
+   "date": "2023-01-01",
+   "employees": 6502500,
+   "wages_median": 2800
+  },
+  {
+   "state": "Malaysia",
+   "date": "2023-02-01",
+   "employees": 6432800,
+   "wages_median": 2564
+  },
+  {
+   "state": "Malaysia",
+   "date": "2023-03-01",
+   "employees": 6450600,
+   "wages_median": 2600
+  },
+  {
+   "state": "Malaysia",
+   "date": "2023-04-01",
+   "employees": 6602500,
+   "wages_median": 2664
+  },
+  {
+   "state": "Malaysia",
+   "date": "2023-05-01",
+   "employees": 6582800,
+   "wages_median": 2582
+  },
+  {
+   "state": "Malaysia",
+   "date": "2023-06-01",
+   "employees": 6599800,
+   "wages_median": 2600
+  },
+  {
+   "state": "Malaysia",
+   "date": "2023-07-01",
+   "employees": 6661400,
+   "wages_median": 2582
+  },
+  {
+   "state": "Malaysia",
+   "date": "2023-08-01",
+   "employees": 6665000,
+   "wages_median": 2600
+  },
+  {
+   "state": "Malaysia",
+   "date": "2023-09-01",
+   "employees": 6678000,
+   "wages_median": 2600
+  },
+  {
+   "state": "Malaysia",
+   "date": "2023-10-01",
+   "employees": 6704100,
+   "wages_median": 2600
+  },
+  {
+   "state": "Malaysia",
+   "date": "2023-11-01",
+   "employees": 6678300,
+   "wages_median": 2600
+  },
+  {
+   "state": "Malaysia",
+   "date": "2023-12-01",
+   "employees": 6674900,
+   "wages_median": 2900
+  },
+  {
+   "state": "Malaysia",
+   "date": "2024-01-01",
+   "employees": 6622700,
+   "wages_median": 2945
+  },
+  {
+   "state": "Malaysia",
+   "date": "2024-02-01",
+   "employees": 6538100,
+   "wages_median": 2782
+  },
+  {
+   "state": "Malaysia",
+   "date": "2024-03-01",
+   "employees": 6547900,
+   "wages_median": 2844
+  },
+  {
+   "state": "Malaysia",
+   "date": "2024-04-01",
+   "employees": 6728000,
+   "wages_median": 2764
+  },
+  {
+   "state": "Malaysia",
+   "date": "2024-05-01",
+   "employees": 6717000,
+   "wages_median": 2700
+  },
+  {
+   "state": "Malaysia",
+   "date": "2024-06-01",
+   "employees": 6731000,
+   "wages_median": 2745
+  },
+  {
+   "state": "Malaysia",
+   "date": "2024-07-01",
+   "employees": 6801000,
+   "wages_median": 2745
+  },
+  {
+   "state": "Malaysia",
+   "date": "2024-08-01",
+   "employees": 6808800,
+   "wages_median": 2745
+  },
+  {
+   "state": "Malaysia",
+   "date": "2024-09-01",
+   "employees": 6817000,
+   "wages_median": 2745
+  },
+  {
+   "state": "Malaysia",
+   "date": "2024-10-01",
+   "employees": 6842100,
+   "wages_median": 2764
+  },
+  {
+   "state": "Malaysia",
+   "date": "2024-11-01",
+   "employees": 6829100,
+   "wages_median": 2764
+  },
+  {
+   "state": "Malaysia",
+   "date": "2024-12-01",
+   "employees": 6831400,
+   "wages_median": 3045
+  },
+  {
+   "state": "Malaysia",
+   "date": "2025-01-01",
+   "employees": 6825500,
+   "wages_median": 3064
+  },
+  {
+   "state": "Malaysia",
+   "date": "2025-02-01",
+   "employees": 6763500,
+   "wages_median": 2875
+  },
+  {
+   "state": "Malaysia",
+   "date": "2025-03-01",
+   "employees": 6786800,
+   "wages_median": 3000
+  },
+  {
+   "state": "Malaysia",
+   "date": "2025-04-01",
+   "employees": 6946800,
+   "wages_median": 2864
+  },
+  {
+   "state": "Malaysia",
+   "date": "2025-05-01",
+   "employees": 6952900,
+   "wages_median": 2845
+  },
+  {
+   "state": "Malaysia",
+   "date": "2025-06-01",
+   "employees": 6969700,
+   "wages_median": 2864
+  },
+  {
+   "state": "Malaysia",
+   "date": "2025-07-01",
+   "employees": 7035900,
+   "wages_median": 2864
+  },
+  {
+   "state": "Malaysia",
+   "date": "2025-08-01",
+   "employees": 7045800,
+   "wages_median": 2864
+  },
+  {
+   "state": "Malaysia",
+   "date": "2025-09-01",
+   "employees": 7056400,
+   "wages_median": 2864
+  },
+  {
+   "state": "Malaysia",
+   "date": "2025-10-01",
+   "employees": 7065200,
+   "wages_median": 2882
+  },
+  {
+   "state": "Malaysia",
+   "date": "2025-11-01",
+   "employees": 7070300,
+   "wages_median": 2882
+  },
+  {
+   "state": "Malaysia",
+   "date": "2025-12-01",
+   "employees": 7080500,
+   "wages_median": 3167
+  },
+  {
+   "state": "Malaysia",
+   "date": "2026-01-01",
+   "employees": 7074779,
+   "wages_median": 3073
+  },
+  {
+   "state": "Malaysia",
+   "date": "2026-02-01",
+   "employees": 7023906,
+   "wages_median": 3027
+  },
+  {
+   "state": "Malaysia",
+   "date": "2026-03-01",
+   "employees": 7048071,
+   "wages_median": 3027
+  },
+  {
+   "state": "Malaysia",
+   "date": "2026-04-01",
+   "employees": 7158718,
+   "wages_median": 3000
+  },
+  {
+   "state": "Malaysia",
+   "date": "2026-05-01",
+   "employees": 7185802,
+   "wages_median": 2964
+  },
+  {
+   "state": "Malaysia",
+   "date": "2026-06-01",
+   "employees": 7196639,
+   "wages_median": 3000
+  }
+ ],
+ "_nextI18Next": {
+  "initialI18nStore": {
+   "en-GB": {
+    "catalogue": {
+     "header": "Data Catalogue",
+     "header_category_govt": "Malaysia's official open data portal",
+     "header_category_agency": "{{ agency }}'s official open data portal",
+     "description": "Your one-stop interface to browse Malaysia's wealth of open data. This page will consistently grow in depth and breadth with high-quality data from federal and state agencies in Malaysia.",
+     "description_agency": "Your one-stop interface to browse open data from {{ agency }}. This page will grow over time as we expand the quality and quantity of our open data.",
+     "description_opendosm": "Your one-stop interface to browse our wealth of open data. This page will consistently grow in depth and breadth, providing richer and more varied data from the various divisions of DOSM.",
+     "description_databnm": "Multi-format downloads, exploratory dataviz, and programmatic access - pick your preferred method of freely using our data. Pay particular attention to the metadata to gain a deeper understanding of a dataset's scope, use, and limitations, and write to data@bnm.gov.my if you want to discuss or request anything further!",
+     "dataset_count": "{{ count }} data series, and counting",
+     "download": "Download",
+     "category": "Category",
+     "chart": "Chart",
+     "table": "Table",
+     "filter": "Filter",
+     "period": "Frequency",
+     "frequency": "Frequency",
+     "geography": "Geography",
+     "demography": "Demography",
+     "begin": "Begin",
+     "end": "End",
+     "source": "Data Source",
+     "desktop": "Desktop",
+     "mobile": "Mobile",
+     "settings": "Settings",
+     "embed": "Embed",
+     "embed_code": "Embed Code",
+     "view_full_chart": "View full chart",
+     "placeholder": {
+      "source": "Select agency",
+      "search": "Search for dataset",
+      "demography": "Data contains"
+     },
+     "filter_options": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "yearly": "Yearly",
+      "intraday": "Intraday",
+      "infrequent": "Infrequent",
+      "as_required": "As Required",
+      "one_off": "One-Off",
+      "state": "State",
+      "dun": "DUN",
+      "national": "National",
+      "parlimen": "Parliament",
+      "district": "District",
+      "sex": "Sex",
+      "ethnicity": "Ethnicity",
+      "age": "Age",
+      "religion": "Religion",
+      "nationality": "Nationality",
+      "disability": "Disability status",
+      "marital": "Marital status"
+     },
+     "image": {
+      "title": "Image (PNG)",
+      "desc": "Suitable for general digital use."
+     },
+     "vector": {
+      "title": "Vector Graphic (SVG)",
+      "desc": "Suitable for high quality prints or further image editing."
+     },
+     "csv": {
+      "title": "Full Dataset (CSV)",
+      "desc": "Recommended for individuals seeking an Excel-friendly format."
+     },
+     "parquet": {
+      "title": "Full Dataset (Parquet)",
+      "desc": "Recommended for data scientists seeking to work with data via code."
+     },
+     "geojson": {
+      "title": "GeoJSON (JSON)",
+      "desc": "Open standard format for plotting geographical features on maps."
+     },
+     "header_1": "How is this data produced?",
+     "header_2": "What caveats I should bear in mind when using this data?",
+     "header_3": "Publication(s) using this data",
+     "header_4": "Related Datasets",
+     "meta_desc": "Dataset description",
+     "meta_def": "Variable definitions",
+     "meta_chart_above": "(Chart above)",
+     "meta_all_dataset": "In the entire dataset:",
+     "meta_variable": "Variable",
+     "meta_variable_name": "Name in Dataset",
+     "meta_data_type": "Data type",
+     "meta_definition": "Definition",
+     "meta_source": "Data source(s)",
+     "meta_url": "URLs to dataset",
+     "meta_license": "License",
+     "code": "Code",
+     "code_desc": "Connect directly to the data with Python.",
+     "code_note": "If not already installed, do",
+     "code_comments": {
+      "geojson_1": "# the first URL gives you 15dp accuracy (highest possible) \n# the _LIGHT URL gives you 5dp accuracy, sufficient for visuals but not analysis \n# the _LIGHT URL is over 90% smaller in size, hence the tradeoff",
+      "geojson_2": "# Uncomment below to maintain a rectangular map, but remove the whitespace caused by the South China Sea",
+      "geojson_3": "# Uncomment below to change from rectangular --> square, for a more compact visual"
+     },
+     "sample_query": {
+      "section_title": "Sample OpenAPI query",
+      "desc1": "The following code is an example of how to make an API query to retrieve the data catalogue mentioned above. You can use different programming languages by switching the code accordingly. For a complete guide on possible query parameters and syntax, please refer to the ",
+      "link1": "official Open API Documentation",
+      "desc2": "Additionally, you can experiment with the code interactively and send requests at the ",
+      "link2": "Example Requests section",
+      "unavailable": "This data catalog is not available through OpenAPI as the nature of the data makes it unsuitable for API access. For the full dataset, please use the provided download link as shown in the above section."
+     },
+     "license_text": "This data is made open under the Creative Commons Attribution 4.0 International License (CC BY 4.0). A copy of the license is available "
+    },
+    "common": {
+     "site": {
+      "name": "data.gov.my",
+      "description": "Your one-stop interface to browse Malaysia's wealth of open data!"
+     },
+     "error": {
+      "404": {
+       "title": "Oops, we cannot find the page you're looking for.",
+       "description": "Is your URL incorrect?",
+       "legacy": "If you're looking for a dataset that was available via the old site, you may head to ",
+       "reason": "Error code: 404 -- Page not found"
+      },
+      "500": {
+       "title": "Oops, something went terribly wrong.",
+       "description": "We are sorry for this incident.",
+       "reason": "Error code: 500 -- Server error"
+      },
+      "output": "Output",
+      "disclaimer": "*Not an actual terminal / console.",
+      "toast": {
+       "request_failure": "Oops! Unable to load requested data",
+       "image_download_failure": "Oops! Unable to download requested image",
+       "form_submission_failure": "Oops! Unable to process form submission",
+       "try_again": "Please try again later",
+       "reach_support": "Please check again or reach out to support for assistance"
+      }
+     },
+     "common": {
+      "state": "State",
+      "district": "District",
+      "type": "Type",
+      "name": "Name",
+      "previous": "Previous",
+      "next": "Next",
+      "in": " in ",
+      "yr": "yr",
+      "views_one": "view",
+      "views_other": "views",
+      "downloads_one": "download",
+      "downloads_other": "downloads",
+      "page_of": "{{ current }} of {{ total }}",
+      "data_for": "Data for {{ state }}",
+      "data_of": "Data as of {{ date }}",
+      "latest": "Latest ({{ date }})",
+      "last_updated": "Last updated: {{ date }}",
+      "next_update": "Next update: {{ date }}",
+      "slider": "",
+      "zoom": "Zoom into my area",
+      "clear": "Clear",
+      "clear_selection": "Clear selection",
+      "clear_all": "Clear all",
+      "reset": "Reset",
+      "reset_default": "Reset to default",
+      "close": "Close",
+      "select": "Select",
+      "here": "Here",
+      "no_entries": "No entries found",
+      "check_out": "Check out",
+      "no_data": "No data",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "maximum": "Maximum",
+      "minimum": "Minimum",
+      "sort": "Sort",
+      "asc_order": "Ascending order",
+      "desc_order": "Descending order",
+      "play": "Play",
+      "pause": "Pause",
+      "indicator": "Indicator",
+      "available_at": "Available at",
+      "accessed": "Accessed",
+      "last_modified": "Last modified",
+      "cited": "cited",
+      "available_from": "Available from",
+      "ranking": "Ranking ({{ count, number }})",
+      "charts": {
+       "heatmap": "Heatmap",
+       "table": "Table"
+      },
+      "banner": "",
+      "opendosm_banner": ""
+     },
+     "time": {
+      "daily_7d": "Daily (7d avg)",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "yearly": "Yearly"
+     },
+     "placeholder": {
+      "all": "All",
+      "search": "Search",
+      "state": "Select state",
+      "state_first": "Select a state first",
+      "district": "Select district",
+      "facility": "Select facility",
+      "facility_type": "Select facility type",
+      "no_results": "No results",
+      "loading": "Loading..."
+     },
+     "nav": {
+      "home": "Home",
+      "dashboards": "Dashboards",
+      "catalogue": "Data Catalogue",
+      "api_docs": "API Docs",
+      "about": "About",
+      "data_request": "Data Request",
+      "community": "Community",
+      "helpdesk": "Helpdesk",
+      "progress": "Progress",
+      "legacy": "Legacy Site",
+      "publications": "Publications",
+      "national_summary_data_page": "NSDP",
+      "pmo": "Prime Minister's Department",
+      "gov": "Government of Malaysia",
+      "open_source": "Open Source",
+      "open_data_portal": "Open Data Portal",
+      "frontend": "Frontend Repo: NextJS",
+      "backend": "Backend Repo: Django",
+      "uiux": "UI + UX Design: Figma",
+      "mampu": "MAMPU",
+      "open_data": "Open Data",
+      "public_open_data": "Public Sector Open Data",
+      "bond_sukuk": " Bond & Sukuk Info (BIX)",
+      "guiding_principles": "Guiding Principles",
+      "terms_of_use": "Terms of Use",
+      "ai": "AI Helper: OpenAI",
+      "moh_github": "MoH GitHub",
+      "jc3_climate": "Climate Data (JC3)",
+      "faq": "FAQ"
+     },
+     "components": {
+      "theme": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "brought_by": "Brought to you by",
+      "brought_by_the": "Brought to you by the",
+      "product_by_division": "A open data product by the",
+      "visit_portal": "Visit our portal",
+      "click_to_explore": "Click to explore",
+      "ovs": "Malaysian-born Overseas",
+      "try_datagpt": "Try the new DataGPT"
+     },
+     "categories": {
+      "construction": "Construction",
+      "democracy": "Democracy",
+      "demography": "Demography",
+      "digitalisation": "Digitalisation",
+      "economy": "Economy",
+      "education": "Education",
+      "environment": "Environment",
+      "financial_sector": "Financial Sector",
+      "government_programs": "Government Programs",
+      "healthcare": "Healthcare",
+      "public_finances": "Public Finances",
+      "public_safety": "Public Safety",
+      "transportation": "Transportation",
+      "national_accounts": "National Accounts",
+      "services": "Services",
+      "summary": "Summary Page",
+      "public_administration": "Public Administration",
+      "labour_markets": "Labour Market",
+      "producer_price": "Producer Prices",
+      "households": "Households",
+      "trade": "Trade"
+     },
+     "home": {
+      "category": "Malaysia's official open data portal",
+      "title": "High frequency. High granularity. High impact.",
+      "description": "Your one-stop centre to browse Malaysia's wealth of open data. Whether you're a regular citizen looking for information, a researcher looking for material, or an application developer looking for an API, we've got you covered. Our mission is to make Malaysia the #1 data-driven country in the world.",
+      "section_1": {
+       "title": "Explore our hottest dashboards!",
+       "description": "These dashboards have been getting attention, but don't forget to check out our full collection of dashboards!"
+      },
+      "section_2": {
+       "title": "Study our most popular datasets!",
+       "description": "To search for something specific, use our data catalogue - it allows you to download or programmatically access our datasets.",
+       "past_24h": "24 hours",
+       "past_month": "1 month",
+       "all_time": "All-time",
+       "dashboards": "Dashboards",
+       "datasets_available": "Datasets available",
+       "resource_views": "Resource views",
+       "resource_downloads": "Resource downloads",
+       "top_dashboards": "Most viewed dashboards",
+       "top_catalogues": "Most viewed datasets",
+       "top_files": "Most downloaded (data)",
+       "top_images": "Most downloaded (graphics)"
+      },
+      "section_3": {
+       "title": "Usage of data.gov.my",
+       "daily": "Daily",
+       "total": "Total"
+      },
+      "keys": {
+       "users": "Daily OpenAPI Usage",
+       "views": "Daily Views",
+       "downloads": "Daily Downloads"
+      }
+     }
+    },
+    "agencies": {
+     "aadk": {
+      "full": "National Anti-Drugs Agency",
+      "abbr": "AADK"
+     },
+     "audit": {
+      "full": "National Audit Department",
+      "abbr": "AUDIT"
+     },
+     "bnm": {
+      "full": "Central Bank of Malaysia",
+      "abbr": "BNM"
+     },
+     "bomba": {
+      "full": "Fire and Rescue Department of Malaysia",
+      "abbr": "BOMBA"
+     },
+     "doa": {
+      "full": "Department of Agriculture",
+      "abbr": "DOA"
+     },
+     "dosm": {
+      "full": "Department of Statistics Malaysia",
+      "abbr": "DOSM"
+     },
+     "epf": {
+      "full": "Employees Provident Fund",
+      "abbr": "EPF"
+     },
+     "epu": {
+      "full": "Ministry of the Economy",
+      "abbr": "EPU"
+     },
+     "govt": {
+      "full": "Government of Malaysia",
+      "abbr": "GOVT"
+     },
+     "icujpm": {
+      "full": "Internal Coordination Unit",
+      "abbr": "ICUJPM"
+     },
+     "imigresen": {
+      "full": "Immigration Department of Malaysia",
+      "abbr": "Imigresen"
+     },
+     "jakoa": {
+      "full": "Department of Orang Asli Development",
+      "abbr": "JAKOA"
+     },
+     "janm": {
+      "full": "Accountant-General's Department",
+      "abbr": "JANM"
+     },
+     "jas": {
+      "full": "Department of Environment",
+      "abbr": "JAS"
+     },
+     "jbg": {
+      "full": "Legal Aid Department",
+      "abbr": "JBG"
+     },
+     "jdn": {
+      "full": "Jabatan Digital Negara",
+      "abbr": "JDN"
+     },
+     "jpa": {
+      "full": "Public Service Department",
+      "abbr": "JPA"
+     },
+     "jpj": {
+      "full": "Road Transport Department",
+      "abbr": "JPJ"
+     },
+     "jpn": {
+      "full": "National Registration Department",
+      "abbr": "JPN"
+     },
+     "jps": {
+      "full": "Department of Irrigation and Drainage",
+      "abbr": "JPS"
+     },
+     "jmg": {
+      "full": "Department of Mineral and Geoscience",
+      "abbr": "JMG"
+     },
+     "kd": {
+      "full": "Ministry of Digital",
+      "abbr": "MOD"
+     },
+     "kdn": {
+      "full": "Ministry of Home Affairs",
+      "abbr": "KDN"
+     },
+     "kpdn": {
+      "full": "Ministry of Domestic Trade",
+      "abbr": "KPDN"
+     },
+     "kpkt": {
+      "full": "Ministry of Housing & Local Government",
+      "abbr": "KPKT"
+     },
+     "ktmb": {
+      "full": "Malayan Railways Limited",
+      "abbr": "KTMB"
+     },
+     "kwap": {
+      "full": "Retirement Fund Incorporated",
+      "abbr": "KWAP"
+     },
+     "lhdn": {
+      "full": "Inland Revenue Board of Malaysia",
+      "abbr": "LHDN"
+     },
+     "mafs": {
+      "full": "Ministry of Agriculture and Food Security",
+      "abbr": "MAFS"
+     },
+     "mampu": {
+      "full": "Malaysian Administrative Modernisation and Management Planning Unit",
+      "abbr": "MAMPU"
+     },
+     "mcmc": {
+      "full": "Malaysian Communications and Multimedia Commission",
+      "abbr": "MCMC"
+     },
+     "mers-999": {
+      "full": "Malaysian Emergency Response Services 999",
+      "abbr": "MERS 999"
+     },
+     "met": {
+      "full": "Malaysian Meteorology Department",
+      "abbr": "Met"
+     },
+     "moe": {
+      "full": "Ministry of Education",
+      "abbr": "MOE"
+     },
+     "mof": {
+      "full": "Ministry of Finance",
+      "abbr": "MOF"
+     },
+     "moh": {
+      "full": "Ministry of Health Malaysia",
+      "abbr": "MOH"
+     },
+     "mohe": {
+      "full": "Ministry of Higher Education",
+      "abbr": "MOHE"
+     },
+     "mot": {
+      "full": "Ministry of Transport",
+      "abbr": "MOT"
+     },
+     "mynic": {
+      "full": "Malaysian Network Information Centre Berhad",
+      "abbr": "MYNIC"
+     },
+     "mysa": {
+      "full": "Malaysian Space Agency",
+      "abbr": "MYSA"
+     },
+     "napic": {
+      "full": "National Property Information Centre",
+      "abbr": "NAPIC"
+     },
+     "npra": {
+      "full": "National Pharmaceutical Regulatory Agency",
+      "abbr": "NPRA"
+     },
+     "nres": {
+      "full": "Ministry of Natural Resources & Environmental Sustainability",
+      "abbr": "NRES"
+     },
+     "ntrc": {
+      "full": "National Transplant Resource Centre",
+      "abbr": "NTRC"
+     },
+     "parlimen": {
+      "full": "Parliament of Malaysia",
+      "abbr": "Parlimen"
+     },
+     "paynet": {
+      "full": "Payments Network Malaysia Sdn Bhd",
+      "abbr": "PayNet"
+     },
+     "penjara": {
+      "full": "Prison Department",
+      "abbr": "Penjara"
+     },
+     "perikanan": {
+      "full": "Department of Fisheries",
+      "abbr": "Perikanan"
+     },
+     "pdn": {
+      "full": "National Blood Centre",
+      "abbr": "PDN"
+     },
+     "pdrm": {
+      "full": "Royal Malaysia Police",
+      "abbr": "PDRM"
+     },
+     "perhutanan": {
+      "full": "Forestry Department of Peninsular Malaysia",
+      "abbr": "Perhutanan"
+     },
+     "perkeso": {
+      "full": "Social Security Organization",
+      "abbr": "PERKESO"
+     },
+     "phcorp": {
+      "full": "ProtectHealth Corporation",
+      "abbr": "PHCorp"
+     },
+     "prasarana": {
+      "full": "Prasarana Malaysia",
+      "abbr": "Prasarana"
+     },
+     "sesb": {
+      "full": "Sabah Electricity Sdn. Bhd.",
+      "abbr": "SESB"
+     },
+     "spr": {
+      "full": "Election Commission of Malaysia",
+      "abbr": "SPR"
+     },
+     "span": {
+      "full": "The National Water Services Commission",
+      "abbr": "SPAN"
+     },
+     "ssm": {
+      "full": "Companies Commission of Malaysia",
+      "abbr": "SSM"
+     },
+     "st": {
+      "full": "Energy Commission of Malaysia",
+      "abbr": "ST"
+     },
+     "swk-energy": {
+      "full": "Sarawak Energy Berhad",
+      "abbr": "SWK-ENERGY"
+     },
+     "tnb": {
+      "full": "Tenaga Nasional Berhad",
+      "abbr": "TNB"
+     },
+     "unhcr": {
+      "full": "United Nations High Commissioner for Refugees",
+      "abbr": "UNHCR"
+     }
+    },
+    "division": {
+     "bipd": {
+      "full": "Integration and Data Management Division",
+      "abbr": "BIPD"
+     },
+     "bkp": {
+      "full": "Management Services Division",
+      "abbr": "BKP"
+     },
+     "bmp": {
+      "full": "Methology & Research Division",
+      "abbr": "BMP"
+     },
+     "bpan": {
+      "full": "National Accounts Division",
+      "abbr": "BPAN"
+     },
+     "bpe": {
+      "full": "Economic Indicators Division",
+      "abbr": "BPE"
+     },
+     "bphpp": {
+      "full": "Price, Income & Expenditure Statistics Division",
+      "abbr": "BPHPP"
+     },
+     "bpip": {
+      "full": "Balance of Payments Statistics Division",
+      "abbr": "BPIP"
+     },
+     "bpksa": {
+      "full": "Strategic Communication & International Division",
+      "abbr": "BPKSA"
+     },
+     "bpm": {
+      "full": "Information Management Division",
+      "abbr": "BPM"
+     },
+     "bpp": {
+      "full": "Services Statistics Division",
+      "abbr": "BPP"
+     },
+     "bppa": {
+      "full": "International Trade Statistics Division",
+      "abbr": "BPPA"
+     },
+     "bppas": {
+      "full": "Agricultural & Environment Statistics Division",
+      "abbr": "BPPAS"
+     },
+     "bppd": {
+      "full": "Population & Demographic Statistics Division",
+      "abbr": "BPPD"
+     },
+     "bppib": {
+      "full": "Industrial Production & Construction Division",
+      "abbr": "BPPIB"
+     },
+     "bptms": {
+      "full": "Manpower & Social Statistics Division",
+      "abbr": "BPTMS"
+     },
+     "ilsm": {
+      "full": "Malaysia Statistical Training Institute",
+      "abbr": "ILSM"
+     },
+     "mbls": {
+      "full": "Malaysian Bureau of Labour Statistics",
+      "abbr": "MBLS"
+     },
+     "kpdn": {
+      "full": "Ministry of Domestic Trade",
+      "abbr": "KPDN"
+     }
+    },
+    "dashboards": {
+     "header": "Dashboards",
+     "description": "Your one-stop interface to explore data-driven insights and analytics on all areas of the public sector, powered by the data made open on this site.",
+     "description_agency": "Your one-stop interface to explore data-driven insights and analytics on the core work of {{ agency }}, powered by the data they make open on this site.",
+     "source_placeholder": "Agency",
+     "search_placeholder": "Search for dashboards",
+     "section1_title": "Most popular Dashboards",
+     "section2_title": "All dashboards",
+     "tabs": {
+      "thematic": "By Theme",
+      "most_popular": "Most Popular",
+      "recent_updated": "Recently Updated"
+     },
+     "categories": {
+      "healthcare": "Healthcare",
+      "transport": "Transport",
+      "demography": "Demography",
+      "public-finances": "Public Finances",
+      "public-administration": "Public Administration",
+      "economy": "Economy",
+      "public-safety": "Public Safety",
+      "financial-sector": "Financial Sector",
+      "democracy": "Democracy",
+      "environment": "Environment",
+      "digitalisation": "Digitalisation",
+      "government-programs": "Government Programs",
+      "education": "Education",
+      "infectious-diseases": "Infectious Diseases",
+      "healthcare-resources": "Healthcare Resources",
+      "healthcare-programs": "Healthcare Programs",
+      "national-accounts": "National Accounts",
+      "services": "Services",
+      "labour_markets": "Labour Market",
+      "producer_price": "Producer Prices",
+      "trade": "Trade"
+     },
+     "dashboards": {
+      "birthday-explorer": {
+       "name": "Birthday Popularity",
+       "description": "Interactive explorer of birth registration data since 1920, allowing you to discover fun facts about your date of birth!"
+      },
+      "orang-asli": {
+       "name": "The Indigenous Peoples",
+       "description": "Annual kampung-level census of Peninsular Malaysia's original inhabitants, with breakdowns by key demographics."
+      },
+      "immigration": {
+       "name": "Immigration",
+       "description": "Monthly foreign arrivals in Malaysia by nationality."
+      },
+      "ktmb-explorer": {
+       "name": "KTMB Explorer",
+       "description": "Interactive explorer of daily ridership on KTMB services, allowing you to explore ridership from any origin to any destination!"
+      },
+      "rapid-explorer": {
+       "name": "Rapid Rail Explorer",
+       "description": "Interactive explorer of daily Rapid Rail ridership, allowing you to explore any origin-destination pairing!"
+      },
+      "rapid-bus-rail": {
+       "name": "Rapid Rail Explorer",
+       "description": "Interactive explorer of daily ridership on Rapid Rail services, allowing you to explore ridership from any origin to any destination!"
+      },
+      "car-popularity": {
+       "name": "Car Popularity Explorer",
+       "description": "Interactive explorer of car registration data, allowing you to discover trends for any maker or model!"
+      },
+      "vehicle-registrations": {
+       "name": "Vehicle Registrations",
+       "description": "Macro view of vehicle registrations for policymakers, with breakdowns by fuel type and vehicle type."
+      },
+      "public-transportation": {
+       "name": "Public Transportation",
+       "description": "Monthly ridership data from all key public transport operators nationwide, with breakdowns by service."
+      },
+      "covid-19": {
+       "name": "COVID-19",
+       "description": "Weekly surveillance of COVID-19 in Malaysia at state level, covering cases, hospitalisations, and deaths."
+      },
+      "covid-vaccination": {
+       "name": "COVID-19 Vaccination",
+       "description": "Daily COVID-19 vaccination activity by dose type and age group, including vaccination coverage rates across the country."
+      },
+      "blood-donation": {
+       "name": "Blood Donation",
+       "description": "Daily blood donation activity at national and state level, with breakdowns by key demographics including blood type."
+      },
+      "organ-donation": {
+       "name": "Organ Donation",
+       "description": "Daily organ donation pledges and nationwide pledger rates, with breakdowns by key demographics."
+      },
+      "peka-b40": {
+       "name": "Peka B40",
+       "description": "Daily screenings under the PeKA B40 program, including screening rates for the target population across the country."
+      },
+      "hospital-bed-utilisation": {
+       "name": "Hospital Bed Utilisation",
+       "description": "Daily bed utilisation at hospital level, covering utilisation for critical and non-critical care beds on a daily basis."
+      },
+      "weather-and-climate": {
+       "name": "Weather and Climate",
+       "description": "10 years of rainfall and temperature data from the 42 major weather stations in Malaysia."
+      },
+      "income-taxation": {
+       "name": "Income Taxation",
+       "description": "Interactive explorer of granular income tax data, allowing you to compare yourself against other Malaysian taxpayers!"
+      },
+      "jobless-claims": {
+       "name": "Jobless Claims",
+       "description": "Daily claims from the Employment Insurance System (EIS), with breakdowns by key demographics."
+      },
+      "social-security": {
+       "name": "Jobless Claims",
+       "description": "Daily claims from the Employment Insurance System (EIS), with breakdowns by key demographics."
+      },
+      "business-creation-destruction": {
+       "name": "Business Creation and Destruction",
+       "description": "Monthly trends in business creation and destruction, derived from SSM's authoritative database of businesses and companies."
+      },
+      "international-reserves": {
+       "name": "International Reserves",
+       "description": "Biweekly surveillance of Bank Negara Malaysia's international reserves, covering key sufficiency indicators."
+      },
+      "reserve-money": {
+       "name": "Reserve Money",
+       "description": "Monthly evolution of key reserve money measures, including factors affecting reserve money."
+      },
+      "money-supply": {
+       "name": "Money Supply",
+       "description": "Monthly evolution of the money supply, covering M1, M2, M3, and their components."
+      },
+      "currency-in-circulation": {
+       "name": "Currency in Circulation",
+       "description": "Monthly evolution of currency in circulation, with breakdowns by denomination of notes and coins."
+      },
+      "household-debt": {
+       "name": "Household Debt",
+       "description": "Monthly surveillance of lending activity, covering loans applied, approved, disbursed and repaid, broken down by purpose."
+      },
+      "interest-rates": {
+       "name": "Interest Rates",
+       "description": "Monthly surveillance of key interest rates, including the OPR, base lending rate, and fixed deposit rate."
+      },
+      "electronic-payments": {
+       "name": "Electronic Payments",
+       "description": "Monthly surveillance of e-payments in Malaysia, covering key payment instruments, channels, and systems."
+      },
+      "exchange-rates": {
+       "name": "Exchange Rates",
+       "description": "Daily rate of exchange of MYR against currencies of 24 major trading partners, including USA, China, UK, and Singapore."
+      },
+      "drug-addiction": {
+       "name": "Drug Addiction",
+       "description": "Annual data on drug and substance abuses cases, with breakdowns by key demographics and drug category."
+      },
+      "fire-and-rescue": {
+       "name": "Fire and Rescue",
+       "description": "Monthly data on fire and rescue operations at national and state level, broken down by incident type."
+      },
+      "internet-penetration": {
+       "name": "Internet Penetration",
+       "description": "Monthly broadband traffic and internet penetration data, broken down by type of broadband."
+      },
+      "retirement-readiness": {
+       "name": "Retirement Readiness",
+       "description": "—"
+      },
+      "sekolahku": {
+       "name": "Sekolahku",
+       "description": "—"
+      },
+      "name-popularity": {
+       "name": "Baby Name Popularity",
+       "description": "—"
+      },
+      "refugee-situation": {
+       "name": "Malaysia's Refugee Situation",
+       "description": "—"
+      },
+      "healthcare-facilities": {
+       "name": "Healthcare Facilities",
+       "description": "—"
+      },
+      "covidnow-data": {
+       "name": "Data on COVIDNOW",
+       "description": "—"
+      },
+      "emergency-response": {
+       "name": "Emergency Response",
+       "description": "—"
+      },
+      "circle-of-life": {
+       "name": "The Circle of Life",
+       "description": "—"
+      },
+      "civil-service": {
+       "name": "The Civil Service",
+       "description": "—"
+      },
+      "crime": {
+       "name": "Crime",
+       "description": "—"
+      },
+      "election-explorer": {
+       "name": "Election Explorer",
+       "description": "—"
+      },
+      "flood-warning": {
+       "name": "Flood Warning",
+       "description": "—"
+      },
+      "government-site-tracker": {
+       "name": "Government Site Tracker",
+       "description": "—"
+      },
+      "ipr": {
+       "name": "The People's Income Initiative (IPR)",
+       "description": "—"
+      },
+      "passport-and-passes": {
+       "name": "Passport and Passes",
+       "description": "—"
+      },
+      "poverty": {
+       "name": "Poverty",
+       "description": "—"
+      },
+      "public-contracting": {
+       "name": "Public Contracting",
+       "description": "—"
+      },
+      "public-pension": {
+       "name": "Public Pensions",
+       "description": "—"
+      },
+      "gdp": {
+       "name": "Gross Domestic Product (GDP)",
+       "description": "Quarterly economic growth, covering real and nominal GDP by expenditure and economic activity."
+      },
+      "consumer-prices": {
+       "name": "Consumer Prices",
+       "description": "Monthly CPI inflation at national and state level, covering headline CPI, core CPI, and CPI by category."
+      },
+      "labour-market": {
+       "name": "Labour Markets",
+       "description": "Monthly Labour Force Survey (LFS) report, covering unemployment, participation, and nature of employment."
+      },
+      "composite-index": {
+       "name": "Composite Indices",
+       "description": "Monthly leading, coincident, and lagging indicators for the Malaysian economy's performance."
+      },
+      "composite-indices": {
+       "name": "Composite Indices",
+       "description": "Monthly leading, coincident, and lagging indicators of the Malaysian economy's performance."
+      },
+      "wholesale-retail": {
+       "name": "Wholesale & Retail Trade",
+       "description": "Monthly wholesale and retail trade performance, including the performance of motor vehicle sales."
+      },
+      "wholesale-retail-trade": {
+       "name": "Wholesale & Retail Trade",
+       "description": "Monthly wholesale and retail trade performance, including the performance of motor vehicle sales."
+      },
+      "industrial-production": {
+       "name": "Industrial Production",
+       "description": "Monthly industrial production performance, covering mining, manufacturing, and electricity production."
+      },
+      "producer-prices": {
+       "name": "Producer Prices",
+       "description": "Monthly PPI inflation, covering producer prices for all main economic sectors except services and construction."
+      },
+      "kawasanku": {
+       "name": "Kawasanku",
+       "description": "Census 2020 data at national, state, district, parliament, and state legislative assembly (DUN) level."
+      },
+      "iip": {
+       "name": "International Investment Position (IIP)",
+       "description": "Quarterly statement of Malaysia's external financial assets and liabilities; the IIP shows stocks while the BOP shows flows."
+      },
+      "international-investment-position": {
+       "name": "International Investment Position (IIP)",
+       "description": "Quarterly statement of Malaysia's external financial assets and liabilities; the IIP shows stocks while the BOP shows flows."
+      },
+      "bop": {
+       "name": "Balance of Payments",
+       "description": "Quarterly statement of Malaysia's transactions with other nations; the BOP shows flows while the IIP shows stocks."
+      },
+      "balance-of-payments": {
+       "name": "Balance of Payments",
+       "description": "Quarterly statement of Malaysia's transactions with other nations; the BOP shows flows while the IIP shows stocks."
+      },
+      "manufacturing-statistics": {
+       "name": "Manufacturing Statistics",
+       "description": "Monthly performance of manufacturing subsectors, covering sales, employment, and wages."
+      },
+      "labour-productivity": {
+       "name": "Labour Productivity",
+       "description": "Quarterly labour productivity across all key economic sectors, covering time-based and worker-based productivity."
+      },
+      "formal-sector-wages": {
+       "name": "Formal Sector Wages",
+       "description": "Quarterly formal sector wages at national and state level, based on administrative data from EPF and SOCSO"
+      },
+      "services-statistics": {
+       "name": "Services Statistics",
+       "description": "Quarterly performance of services sub-sectors, covering sales, employment, and wages."
+      },
+      "services-producer-prices": {
+       "name": "Services Producer Prices",
+       "description": "Quarterly producer prices in the services sector, complementing the PPI which does not cover the services sector."
+      },
+      "construction-statistics": {
+       "name": "Construction Statistics",
+       "description": "Quarterly surveillance of construction projects in the public and private sectors."
+      },
+      "household-income-expenditure": {
+       "name": "Household Income & Expenditure",
+       "description": "Household income and expenditure at national, state and district level, updated with the latest data from the 2022 survey."
+      },
+      "population": {
+       "name": "Population of Malaysia",
+       "description": "Annual population of Malaysia from 1970 to the present, including vital statistics on births and deaths."
+      },
+      "external-trade": {
+       "name": "External Trade",
+       "description": "Monthly external trade statistics and indices, covering exports, imports, the trade balance, and terms of trade."
+      },
+      "life-expectancy": {
+       "name": "Life Expectancy",
+       "description": "Annual data on life expectancy from 1957 to the present, with breakdowns by state and demographic group."
+      },
+      "wellbeing": {
+       "name": "Well-Being",
+       "description": "Annual well-being of Malaysians from 2000 to the present, covering key economic and social components."
+      },
+      "padu-tracker": {
+       "name": "Pangkalan Data Utama (PADU)",
+       "description": "—"
+      },
+      "digital-economy": {
+       "name": "Digital Economy",
+       "description": "Annual performance of e-commerce and the ICT sector, as well as businesses' and households' usage of ICT tools."
+      },
+      "house-prices": {
+       "name": "House Prices",
+       "description": "This dashboard uses NAPIC’s authoritative data to give you an easy way to understand house price trends."
+      }
+     }
+    }
+   }
+  },
+  "initialLocale": "en-GB",
+  "ns": [
+   "catalogue",
+   "common",
+   "agencies",
+   "division",
+   "dashboards"
+  ],
+  "userConfig": null
+ },
+ "_source_base": "https://open.dosm.gov.my"
+}

@@ -1,0 +1,17 @@
+{
+ "id": "hh_income_state",
+ "title": "Household Income by State",
+ "description": "Mean and median gross monthly household income by state from 1970 to 2024.",
+ "frequency": "YEARLY",
+ "data_as_of": "2024",
+ "last_updated": "2025-12-31 12:00",
+ "next_update": "—",
+ "data_source": [
+  "DOSM"
+ ],
+ "methodology": "Data on individual salaries and wages [in the formal economy](https://open.dosm.gov.my/dashboard/formal-sector-wages) is easy to obtain from administrative records. However, data on household income is more difficult to tabulate, as it requires the correct definition of a statistical household, as well as the inclusion of non-salary sources of income such as property income, dividends, and interest. For this reason, it requires the use of a representative survey or census.\n\n In Malaysia, data on household income (as well as expenditure and access to basic amenities) is collected through the Household Income and Expenditure Survey (HIES), which is conducted at least twice within any 5-year period. The data shown here was tabulated from household-level HIES records spanning 1970 to 2024 (the latest edition). For a full description of the methodology, please refer to the [technical notes](https://open.dosm.gov.my/publications/technical-notes/hies-technotes).",
+ "caveat": "This data presents nominal values, i.e. they have not been adjusted for inflation. Furthermore, given that the data is produced from surveys spanning over half a century, the following methodological changes should be noted:\n - Data for 1970 and 1974 refers to Peninsular Malaysia only. 1976 was the first year in which Sabah and Sarawak were included in the survey.\n - Data from 1989 onwards refers to Malaysian citizens only. Although non-citizens are also included in the surveys, the official statistics (which form the basis for national welfare policy) are based on citizens only\n - Kuala Lumpur was gazzeted as a Federal Territory on 1 February 1974. Accordingly, data for W.P. Kuala Lumpur is only available from 1976. Prior to that, data for residents of W.P. Kuala Lumpur was included under Selangor.\n - Labuan was gazetted as a Federal Territory on 16 April 1984. However, due to limitations in sampling, data for W.P. Labuan is only available from 2007. Prior to that, data for residents of W.P. Labuan was included under Sabah.\n - Putrajaya was gazzeted as a Federal Territory on 1 February 2001. However, due to limitations in sampling, data for W.P. Putrajaya is only available from 2007. Prior to that, data for residents of W.P. Putrajaya was included under Selangor.",
+ "link_parquet": "https://storage.dosm.gov.my/hies/hh_income_state.parquet",
+ "editions": [],
+ "source_base": "https://open.dosm.gov.my"
+}

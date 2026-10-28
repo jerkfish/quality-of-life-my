@@ -1,0 +1,1 @@
+{"meta": {"catalogue_id": "hies_malaysia_percentile", "data_as_of": "2024", "last_updated": "2025-10-08 12:00", "next_update": "TBC", "data_source": ["DOSM"], "update_frequency": "YEARLY", "total": 1, "limit": 1}, "data": [{"date": "2024-01-01", "income": 1334.0, "variable": "mean", "percentile": 1}]}

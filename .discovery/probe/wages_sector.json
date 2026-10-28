@@ -1,0 +1,1 @@
+{"meta": {"catalogue_id": "wages_sector", "data_as_of": "2025", "last_updated": "2026-09-21 12:00", "next_update": "2027-09-30 12:00", "data_source": ["DOSM"], "update_frequency": "YEARLY", "total": 1, "limit": 1}, "data": [{"sex": "both", "date": "2010-01-01", "sector": "overall", "recipients": 7149.2, "wages_mean": 1936, "wages_median": 1500}]}

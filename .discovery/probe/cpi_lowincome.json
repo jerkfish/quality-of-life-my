@@ -1,0 +1,1 @@
+{"meta": {"catalogue_id": "cpi_lowincome", "data_as_of": "2026-09", "last_updated": "2026-10-19 13:12", "next_update": "2026-11-19 12:30", "data_source": ["DOSM"], "update_frequency": "MONTHLY", "total": 1, "limit": 1}, "data": [{"date": "2010-01-01", "index": 99.3, "division": "overall"}]}

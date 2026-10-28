@@ -1,0 +1,1 @@
+{"meta": {"catalogue_id": "hies_state", "data_as_of": "2024", "last_updated": "2025-12-31 12:00", "next_update": "\u2014", "data_source": ["DOSM"], "update_frequency": "YEARLY", "total": 1, "limit": 1}, "data": [{"date": "2022-01-01", "gini": 0.366, "state": "Johor", "poverty": 4.6, "income_mean": 8517, "income_median": 6879, "expenditure_mean": 5342}]}

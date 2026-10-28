@@ -1,0 +1,265 @@
+{
+ "generated_at": "2026-10-28T14:26:30+00:00",
+ "started_at": "2026-10-28T14:26:30+00:00",
+ "pipeline_version": "0.1.0",
+ "source": "DOSM / data.gov.my open data (CC BY 4.0)",
+ "datasets": {
+  "cpi_headline": {
+   "tier": "core",
+   "title": "Monthly CPI by Division (2-digit)",
+   "as_of": "2026-09",
+   "last_updated": "2026-10-19 13:12",
+   "next_update": "2026-11-19 12:30",
+   "upstream_source": [
+    "DOSM"
+   ],
+   "report": {
+    "dataset_id": "cpi_headline",
+    "rows": 7854,
+    "date_min": "1980-01-01",
+    "date_max": "2026-09-01",
+    "entities": {
+     "division": 14
+    },
+    "duplicate_keys": 0,
+    "null_counts": {
+     "index": 1464
+    },
+    "issues": [
+     {
+      "level": "warning",
+      "code": "null_values",
+      "message": "'index' has 1464 null value(s); carried through as gaps."
+     }
+    ]
+   }
+  },
+  "cpi_state": {
+   "tier": "core",
+   "title": "Monthly CPI by State & Division (2-digit)",
+   "as_of": "2026-09",
+   "last_updated": "2026-10-19 13:12",
+   "next_update": "2026-11-19 12:30",
+   "upstream_source": [
+    "DOSM"
+   ],
+   "report": {
+    "dataset_id": "cpi_state",
+    "rows": 45024,
+    "date_min": "2010-01-01",
+    "date_max": "2026-09-01",
+    "entities": {
+     "state": 16,
+     "division": 14
+    },
+    "duplicate_keys": 0,
+    "null_counts": {},
+    "issues": []
+   }
+  },
+  "cpi_3d": {
+   "tier": "core",
+   "title": "Monthly CPI by Group (3-digit)",
+   "as_of": "2026-09",
+   "last_updated": "2026-10-19 13:12",
+   "next_update": "2026-11-19 12:30",
+   "upstream_source": [
+    "DOSM"
+   ],
+   "report": {
+    "dataset_id": "cpi_3d",
+    "rows": 9447,
+    "date_min": "2010-01-01",
+    "date_max": "2026-09-01",
+    "entities": {
+     "group": 47
+    },
+    "duplicate_keys": 0,
+    "null_counts": {
+     "index": 240
+    },
+    "issues": [
+     {
+      "level": "warning",
+      "code": "null_values",
+      "message": "'index' has 240 null value(s); carried through as gaps."
+     }
+    ]
+   }
+  },
+  "cpi_strata": {
+   "tier": "support",
+   "title": "Monthly CPI by Strata & Division (2-digit)",
+   "as_of": "2026-09",
+   "last_updated": "2026-10-19 13:12",
+   "next_update": "2026-11-19 12:30",
+   "upstream_source": [
+    "DOSM"
+   ],
+   "report": {
+    "dataset_id": "cpi_strata",
+    "rows": 5628,
+    "date_min": "2010-01-01",
+    "date_max": "2026-09-01",
+    "entities": {
+     "division": 14,
+     "strata": 2
+    },
+    "duplicate_keys": 0,
+    "null_counts": {},
+    "issues": []
+   }
+  },
+  "mcoicop": {
+   "tier": "core",
+   "title": "MCOICOP",
+   "as_of": "2018",
+   "last_updated": "2024-04-16",
+   "next_update": "—",
+   "upstream_source": [
+    "DOSM"
+   ],
+   "report": {
+    "dataset_id": "mcoicop",
+    "rows": 343,
+    "date_min": null,
+    "date_max": null,
+    "entities": {
+     "digits": 5,
+     "division": 14,
+     "group": 48,
+     "class": 102,
+     "subclass": 182
+    },
+    "duplicate_keys": 0,
+    "null_counts": {},
+    "issues": []
+   }
+  },
+  "wages_state": {
+   "tier": "core",
+   "title": "Annual Salaries & Wages by State & Sex",
+   "as_of": "2025",
+   "last_updated": "2026-09-21 12:00",
+   "next_update": "2027-09-30 12:00",
+   "upstream_source": [
+    "DOSM"
+   ],
+   "report": {
+    "dataset_id": "wages_state",
+    "rows": 816,
+    "date_min": "2010-01-01",
+    "date_max": "2025-01-01",
+    "entities": {
+     "state": 17,
+     "sex": 3
+    },
+    "duplicate_keys": 0,
+    "null_counts": {},
+    "issues": []
+   }
+  },
+  "wages_real_state_citizen": {
+   "tier": "core",
+   "title": "Annual Real Salaries & Wages of Citizens by State",
+   "as_of": "2025",
+   "last_updated": "2026-09-21 12:00",
+   "next_update": "2027-09-30 12:00",
+   "upstream_source": [
+    "DOSM"
+   ],
+   "report": {
+    "dataset_id": "wages_real_state_citizen",
+    "rows": 272,
+    "date_min": "2010-01-01",
+    "date_max": "2025-01-01",
+    "entities": {
+     "state": 17
+    },
+    "duplicate_keys": 0,
+    "null_counts": {},
+    "issues": []
+   }
+  },
+  "hh_income_state": {
+   "tier": "core",
+   "title": "Household Income by State (HIES)",
+   "as_of": "2024",
+   "last_updated": "2025-12-31 12:00",
+   "next_update": "—",
+   "upstream_source": [
+    "DOSM"
+   ],
+   "report": {
+    "dataset_id": "hh_income_state",
+    "rows": 319,
+    "date_min": "1970-01-01",
+    "date_max": "2024-01-01",
+    "entities": {
+     "state": 16
+    },
+    "duplicate_keys": 0,
+    "null_counts": {
+     "income_median": 11
+    },
+    "issues": [
+     {
+      "level": "warning",
+      "code": "null_values",
+      "message": "'income_median' has 11 null value(s); carried through as gaps."
+     }
+    ]
+   }
+  },
+  "hh_income": {
+   "tier": "core",
+   "title": "Household Income (Malaysia)",
+   "as_of": "2024",
+   "last_updated": "2025-12-31 12:00",
+   "next_update": "—",
+   "upstream_source": [
+    "DOSM"
+   ],
+   "report": {
+    "dataset_id": "hh_income",
+    "rows": 22,
+    "date_min": "1970-01-01",
+    "date_max": "2024-01-01",
+    "entities": {},
+    "duplicate_keys": 0,
+    "null_counts": {},
+    "issues": []
+   }
+  }
+ },
+ "artifacts": {
+  "cpi_national.json": {
+   "bytes": 57646,
+   "sha256": "857188737279139a00e70b934160591e24953ddc95db81578990cb0c4c9e0c6f"
+  },
+  "cpi_state.json": {
+   "bytes": 316367,
+   "sha256": "f82a05e489931433e26244c07c715e288d27df3d727a5317dd86b1c98c47c066"
+  },
+  "cpi_groups.json": {
+   "bytes": 71942,
+   "sha256": "57bf9258487d78217abe1c8b9b3b790b8281b03edd512fbbe86ad0b388786213"
+  },
+  "cpi_strata.json": {
+   "bytes": 41440,
+   "sha256": "3aa400109b6fa3bd86343d5f9aad818366889a1f1ed9839547b6b6c09d7cd36c"
+  },
+  "real_wages.json": {
+   "bytes": 42338,
+   "sha256": "095658660d0714058a7dd83a76399a22cf074a3e4f16641e3b490c084f3e469f"
+  },
+  "household_income.json": {
+   "bytes": 16925,
+   "sha256": "9a084e3e5fcece1833a33e51f06e0d15c84c272453cb2318a8a04b484dcffec7"
+  },
+  "regional.json": {
+   "bytes": 6871,
+   "sha256": "d177a913a6c5c36bd668affc40f6fc9b9e633a37dd8e906b00eef7993d2ea00c"
+  }
+ }
+}

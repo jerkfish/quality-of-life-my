@@ -1,0 +1,3212 @@
+{
+ "meta": {
+  "id": "lfs_month",
+  "type": "data-catalogue",
+  "category": null,
+  "agency": "DOSM"
+ },
+ "params": {
+  "id": "lfs_month"
+ },
+ "query": {
+  "id": "lfs_month"
+ },
+ "id": "lfs_month",
+ "exclude_openapi": false,
+ "manual_trigger": "2026-10-09 12:27:05.173045",
+ "title": "Monthly Principal Labour Force Statistics",
+ "description": "Monthly principal labour force statistics, including unemployment and participation rates.",
+ "link_parquet": "https://storage.dosm.gov.my/labour/lfs_month.parquet",
+ "link_csv": "https://storage.dosm.gov.my/labour/lfs_month.csv",
+ "link_preview": null,
+ "link_editions": null,
+ "frequency": "MONTHLY",
+ "data_source": [
+  "DOSM"
+ ],
+ "fields": [
+  {
+   "name": "date",
+   "title": "Date",
+   "description": "[Date] The date in YYYY-MM-DD format, with DD set to 01 since the data is at monthly frequency"
+  },
+  {
+   "name": "lf",
+   "title": "Labour Force Size",
+   "description": "[Float] The number (in thousands) of employed and unemployed individuals. This figure also represents the number of people participating in the labour force."
+  },
+  {
+   "name": "lf_employed",
+   "title": "Employed Persons",
+   "description": "[Float] The number (in thousands) of people who worked at least one hour for pay, profit or family gain, in thousands of people"
+  },
+  {
+   "name": "lf_unemployed",
+   "title": "Unemployed Persons",
+   "description": "[Float] The number (in thousands) of people who did not work but were looking for work or available to work"
+  },
+  {
+   "name": "lf_outside",
+   "title": "Persons outside Labour Force",
+   "description": "[Float] The number (in thousands) of people not classified as employed or unemployed, including housewives, students, early retired, disabled persons and those not interested in looking for a job"
+  },
+  {
+   "name": "u_rate",
+   "title": "Unemployment Rate",
+   "description": "[Float] Ratio of unemployed to labour force size"
+  },
+  {
+   "name": "p_rate",
+   "title": "Participation Rate",
+   "description": "[Float] Ratio of the labour force size to the working-age (15-64) population"
+  },
+  {
+   "name": "ep_ratio",
+   "title": "Employment-Population Ratio",
+   "description": "[Float] Ratio of the number of employed people to the working-age (15-64) population"
+  }
+ ],
+ "data_as_of": "2026-08",
+ "last_updated": "2026-10-09 12:30",
+ "next_update": "2026-11-11 12:30",
+ "methodology": "This data is produced based on the Labour Force Survey (LFS), which is designed to collect representative data on the labour force at national and state level. Consistency in methodology has been maintained to ensure that the data is comparable over time. Survey findings are a monthly, quarterly and annual basis. For a full description of the methodology, please refer to the [Technical Notes](https://open.dosm.gov.my/publications/technical-notes/lfs-technotes).",
+ "caveat": "Data prior to 2025 is compiled in concordance with population data from the 2010 Census. Data from 2025 onwards is compiled in concordance with population data from the 2020 Census. As such, you may observe a trend break in the series due to the different references used. Furthermore, sums of each category may not always equal to the totals shown in related tables because of independent rounding to one decimal place. However, the differences are not obvious.",
+ "publication": "The [Labour Force Report, Aug 2026](https://open.dosm.gov.my/publications/labour_month_2026-08), the latest edition of the monthly labour force statistics published by DOSM. OpenDOSM also features a [dashboard on the labour force](https://open.dosm.gov.my/dashboard/labour-market).",
+ "translations": {
+  "lf": "Labour Force Size",
+  "y1": "Value",
+  "date": "Date",
+  "p_rate": "Participation Rate",
+  "u_rate": "Unemployment Rate",
+  "ep_ratio": "Employment-Population Ratio",
+  "lf_outside": "Outside Labour Force",
+  "lf_employed": "Employed Persons",
+  "lf_unemployed": "Unemployed Persons"
+ },
+ "related_datasets": [],
+ "dataviz_set": [
+  {
+   "dataviz_id": "ep_ratio",
+   "title": "Employment-Population Ratio",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "ep_ratio"
+     ]
+    },
+    "operation": "SUM",
+    "precision": 0,
+    "filter_columns": []
+   }
+  },
+  {
+   "dataviz_id": "lf",
+   "title": "Labour Force Size",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "lf"
+     ]
+    },
+    "operation": "SUM",
+    "precision": 0,
+    "filter_columns": []
+   }
+  },
+  {
+   "dataviz_id": "lf_employed",
+   "title": "Employed",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "lf_employed"
+     ]
+    },
+    "operation": "SUM",
+    "precision": 0,
+    "filter_columns": []
+   }
+  },
+  {
+   "dataviz_id": "lf_unemployed",
+   "title": "Unemployed",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "lf_unemployed"
+     ]
+    },
+    "operation": "SUM",
+    "precision": 0,
+    "filter_columns": []
+   }
+  },
+  {
+   "dataviz_id": "lf_outside",
+   "title": "Outside Labour Force",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "lf_outside"
+     ]
+    },
+    "operation": "SUM",
+    "precision": 0,
+    "filter_columns": []
+   }
+  },
+  {
+   "dataviz_id": "table",
+   "title": "Table",
+   "chart_type": "TABLE",
+   "config": {
+    "precision": 1,
+    "filter_columns": [],
+    "freeze_columns": [
+     "date"
+    ]
+   }
+  },
+  {
+   "dataviz_id": "u_rate",
+   "title": "Unemployment Rate",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "u_rate"
+     ]
+    },
+    "operation": "SUM",
+    "precision": 0,
+    "filter_columns": []
+   }
+  },
+  {
+   "dataviz_id": "p_rate",
+   "title": "Participation Rate",
+   "chart_type": "TIMESERIES",
+   "config": {
+    "format": {
+     "x": "date",
+     "y": [
+      "p_rate"
+     ]
+    },
+    "operation": "SUM",
+    "precision": 0,
+    "filter_columns": []
+   }
+  }
+ ],
+ "dropdown": [],
+ "data": [
+  {
+   "date": "2010-01-01",
+   "lf": 12367.9,
+   "lf_employed": 11931.2,
+   "lf_unemployed": 436.7,
+   "lf_outside": 6927.5,
+   "p_rate": 64.1,
+   "ep_ratio": 61.8,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2010-02-01",
+   "lf": 12059.8,
+   "lf_employed": 11632.3,
+   "lf_unemployed": 427.4,
+   "lf_outside": 7225.1,
+   "p_rate": 62.5,
+   "ep_ratio": 60.3,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2010-03-01",
+   "lf": 12324.2,
+   "lf_employed": 11895.9,
+   "lf_unemployed": 428.3,
+   "lf_outside": 6993,
+   "p_rate": 63.8,
+   "ep_ratio": 61.6,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2010-04-01",
+   "lf": 12512,
+   "lf_employed": 12133.5,
+   "lf_unemployed": 378.5,
+   "lf_outside": 6894.5,
+   "p_rate": 64.5,
+   "ep_ratio": 62.5,
+   "u_rate": 3
+  },
+  {
+   "date": "2010-05-01",
+   "lf": 12197.6,
+   "lf_employed": 11798.9,
+   "lf_unemployed": 398.7,
+   "lf_outside": 7186,
+   "p_rate": 62.9,
+   "ep_ratio": 60.9,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2010-06-01",
+   "lf": 12331.8,
+   "lf_employed": 11882.2,
+   "lf_unemployed": 449.6,
+   "lf_outside": 7065,
+   "p_rate": 63.6,
+   "ep_ratio": 61.3,
+   "u_rate": 3.6
+  },
+  {
+   "date": "2010-07-01",
+   "lf": 12516.2,
+   "lf_employed": 12099.5,
+   "lf_unemployed": 416.7,
+   "lf_outside": 6900.5,
+   "p_rate": 64.5,
+   "ep_ratio": 62.3,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2010-08-01",
+   "lf": 12320.9,
+   "lf_employed": 11936.5,
+   "lf_unemployed": 384.3,
+   "lf_outside": 7157.9,
+   "p_rate": 63.2,
+   "ep_ratio": 61.3,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2010-09-01",
+   "lf": 12289.9,
+   "lf_employed": 11912.1,
+   "lf_unemployed": 377.8,
+   "lf_outside": 7194.4,
+   "p_rate": 63.1,
+   "ep_ratio": 61.1,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2010-10-01",
+   "lf": 12689.5,
+   "lf_employed": 12342.6,
+   "lf_unemployed": 346.8,
+   "lf_outside": 6846.7,
+   "p_rate": 65,
+   "ep_ratio": 63.2,
+   "u_rate": 2.7
+  },
+  {
+   "date": "2010-11-01",
+   "lf": 12277.5,
+   "lf_employed": 11874.1,
+   "lf_unemployed": 403.4,
+   "lf_outside": 7298.3,
+   "p_rate": 62.7,
+   "ep_ratio": 60.7,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2010-12-01",
+   "lf": 12822.3,
+   "lf_employed": 12418.3,
+   "lf_unemployed": 404.1,
+   "lf_outside": 6722.3,
+   "p_rate": 65.6,
+   "ep_ratio": 63.5,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2011-01-01",
+   "lf": 12804.2,
+   "lf_employed": 12376,
+   "lf_unemployed": 428.2,
+   "lf_outside": 6881.6,
+   "p_rate": 65,
+   "ep_ratio": 62.9,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2011-02-01",
+   "lf": 12618.9,
+   "lf_employed": 12245.3,
+   "lf_unemployed": 373.6,
+   "lf_outside": 7110.3,
+   "p_rate": 64,
+   "ep_ratio": 62.1,
+   "u_rate": 3
+  },
+  {
+   "date": "2011-03-01",
+   "lf": 12862.2,
+   "lf_employed": 12491.8,
+   "lf_unemployed": 370.4,
+   "lf_outside": 6940.1,
+   "p_rate": 65,
+   "ep_ratio": 63.1,
+   "u_rate": 2.9
+  },
+  {
+   "date": "2011-04-01",
+   "lf": 12921.7,
+   "lf_employed": 12537.1,
+   "lf_unemployed": 384.6,
+   "lf_outside": 6930.6,
+   "p_rate": 65.1,
+   "ep_ratio": 63.2,
+   "u_rate": 3
+  },
+  {
+   "date": "2011-05-01",
+   "lf": 12726.6,
+   "lf_employed": 12330.3,
+   "lf_unemployed": 396.3,
+   "lf_outside": 7133.2,
+   "p_rate": 64.1,
+   "ep_ratio": 62.1,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2011-06-01",
+   "lf": 12782.7,
+   "lf_employed": 12372.6,
+   "lf_unemployed": 410.1,
+   "lf_outside": 7073.7,
+   "p_rate": 64.4,
+   "ep_ratio": 62.3,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2011-07-01",
+   "lf": 12967.4,
+   "lf_employed": 12581.5,
+   "lf_unemployed": 385.9,
+   "lf_outside": 6920.5,
+   "p_rate": 65.2,
+   "ep_ratio": 63.3,
+   "u_rate": 3
+  },
+  {
+   "date": "2011-08-01",
+   "lf": 12887.9,
+   "lf_employed": 12486.7,
+   "lf_unemployed": 401.2,
+   "lf_outside": 7038.6,
+   "p_rate": 64.7,
+   "ep_ratio": 62.7,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2011-09-01",
+   "lf": 12875.9,
+   "lf_employed": 12456.9,
+   "lf_unemployed": 419,
+   "lf_outside": 7032.2,
+   "p_rate": 64.7,
+   "ep_ratio": 62.6,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2011-10-01",
+   "lf": 12938.2,
+   "lf_employed": 12550.1,
+   "lf_unemployed": 388.1,
+   "lf_outside": 7045.7,
+   "p_rate": 64.7,
+   "ep_ratio": 62.8,
+   "u_rate": 3
+  },
+  {
+   "date": "2011-11-01",
+   "lf": 12722.4,
+   "lf_employed": 12323.7,
+   "lf_unemployed": 398.7,
+   "lf_outside": 7245.7,
+   "p_rate": 63.7,
+   "ep_ratio": 61.7,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2011-12-01",
+   "lf": 13092.1,
+   "lf_employed": 12687.2,
+   "lf_unemployed": 404.9,
+   "lf_outside": 6997.3,
+   "p_rate": 65.2,
+   "ep_ratio": 63.2,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2012-01-01",
+   "lf": 13191.6,
+   "lf_employed": 12781.3,
+   "lf_unemployed": 410.4,
+   "lf_outside": 6878.5,
+   "p_rate": 65.7,
+   "ep_ratio": 63.7,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2012-02-01",
+   "lf": 13054.5,
+   "lf_employed": 12645.6,
+   "lf_unemployed": 408.9,
+   "lf_outside": 7042.3,
+   "p_rate": 65,
+   "ep_ratio": 62.9,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2012-03-01",
+   "lf": 13295.4,
+   "lf_employed": 12893.8,
+   "lf_unemployed": 401.6,
+   "lf_outside": 6897.3,
+   "p_rate": 65.8,
+   "ep_ratio": 63.8,
+   "u_rate": 3
+  },
+  {
+   "date": "2012-04-01",
+   "lf": 13331.8,
+   "lf_employed": 12936.9,
+   "lf_unemployed": 394.8,
+   "lf_outside": 6851.3,
+   "p_rate": 66,
+   "ep_ratio": 64.1,
+   "u_rate": 3
+  },
+  {
+   "date": "2012-05-01",
+   "lf": 13245.6,
+   "lf_employed": 12861.2,
+   "lf_unemployed": 384.4,
+   "lf_outside": 6952.9,
+   "p_rate": 65.6,
+   "ep_ratio": 63.7,
+   "u_rate": 2.9
+  },
+  {
+   "date": "2012-06-01",
+   "lf": 13232.5,
+   "lf_employed": 12811.4,
+   "lf_unemployed": 421,
+   "lf_outside": 7013.7,
+   "p_rate": 65.4,
+   "ep_ratio": 63.3,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2012-07-01",
+   "lf": 13511.7,
+   "lf_employed": 13093.3,
+   "lf_unemployed": 418.4,
+   "lf_outside": 6777.3,
+   "p_rate": 66.6,
+   "ep_ratio": 64.5,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2012-08-01",
+   "lf": 13313.6,
+   "lf_employed": 12963.4,
+   "lf_unemployed": 350.2,
+   "lf_outside": 7039.9,
+   "p_rate": 65.4,
+   "ep_ratio": 63.7,
+   "u_rate": 2.6
+  },
+  {
+   "date": "2012-09-01",
+   "lf": 13408.5,
+   "lf_employed": 12984.5,
+   "lf_unemployed": 424,
+   "lf_outside": 6993.2,
+   "p_rate": 65.7,
+   "ep_ratio": 63.6,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2012-10-01",
+   "lf": 13341.4,
+   "lf_employed": 12908.9,
+   "lf_unemployed": 432.6,
+   "lf_outside": 7056.2,
+   "p_rate": 65.4,
+   "ep_ratio": 63.3,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2012-11-01",
+   "lf": 13429.2,
+   "lf_employed": 13044.6,
+   "lf_unemployed": 384.6,
+   "lf_outside": 7094.6,
+   "p_rate": 65.4,
+   "ep_ratio": 63.6,
+   "u_rate": 2.9
+  },
+  {
+   "date": "2012-12-01",
+   "lf": 13538.6,
+   "lf_employed": 13114.3,
+   "lf_unemployed": 424.3,
+   "lf_outside": 7060.6,
+   "p_rate": 65.7,
+   "ep_ratio": 63.7,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2013-01-01",
+   "lf": 13569.6,
+   "lf_employed": 13109.8,
+   "lf_unemployed": 459.8,
+   "lf_outside": 7035.5,
+   "p_rate": 65.9,
+   "ep_ratio": 63.6,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2013-02-01",
+   "lf": 13598.8,
+   "lf_employed": 13195.9,
+   "lf_unemployed": 402.9,
+   "lf_outside": 7119.8,
+   "p_rate": 65.6,
+   "ep_ratio": 63.7,
+   "u_rate": 3
+  },
+  {
+   "date": "2013-03-01",
+   "lf": 13684.4,
+   "lf_employed": 13241.7,
+   "lf_unemployed": 442.6,
+   "lf_outside": 7116.7,
+   "p_rate": 65.8,
+   "ep_ratio": 63.7,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2013-04-01",
+   "lf": 13835.6,
+   "lf_employed": 13422.9,
+   "lf_unemployed": 412.8,
+   "lf_outside": 6922.7,
+   "p_rate": 66.6,
+   "ep_ratio": 64.7,
+   "u_rate": 3
+  },
+  {
+   "date": "2013-05-01",
+   "lf": 13815.3,
+   "lf_employed": 13368.9,
+   "lf_unemployed": 446.4,
+   "lf_outside": 7005.6,
+   "p_rate": 66.4,
+   "ep_ratio": 64.2,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2013-06-01",
+   "lf": 14217.1,
+   "lf_employed": 13816.9,
+   "lf_unemployed": 400.2,
+   "lf_outside": 6668.6,
+   "p_rate": 68.1,
+   "ep_ratio": 66.2,
+   "u_rate": 2.8
+  },
+  {
+   "date": "2013-07-01",
+   "lf": 14194.6,
+   "lf_employed": 13763,
+   "lf_unemployed": 431.6,
+   "lf_outside": 6655.9,
+   "p_rate": 68.1,
+   "ep_ratio": 66,
+   "u_rate": 3
+  },
+  {
+   "date": "2013-08-01",
+   "lf": 14176.6,
+   "lf_employed": 13734.2,
+   "lf_unemployed": 442.4,
+   "lf_outside": 6689.8,
+   "p_rate": 67.9,
+   "ep_ratio": 65.8,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2013-09-01",
+   "lf": 14309.4,
+   "lf_employed": 13859.5,
+   "lf_unemployed": 449.9,
+   "lf_outside": 6557.3,
+   "p_rate": 68.6,
+   "ep_ratio": 66.4,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2013-10-01",
+   "lf": 14169.2,
+   "lf_employed": 13699.1,
+   "lf_unemployed": 470.1,
+   "lf_outside": 6746.3,
+   "p_rate": 67.7,
+   "ep_ratio": 65.5,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2013-11-01",
+   "lf": 14220.9,
+   "lf_employed": 13730.4,
+   "lf_unemployed": 490.5,
+   "lf_outside": 6716.2,
+   "p_rate": 67.9,
+   "ep_ratio": 65.6,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2013-12-01",
+   "lf": 14276.5,
+   "lf_employed": 13836.2,
+   "lf_unemployed": 440.3,
+   "lf_outside": 6724.2,
+   "p_rate": 68,
+   "ep_ratio": 65.9,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2014-01-01",
+   "lf": 14244.4,
+   "lf_employed": 13775.9,
+   "lf_unemployed": 468.5,
+   "lf_outside": 6734.7,
+   "p_rate": 67.9,
+   "ep_ratio": 65.7,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2014-02-01",
+   "lf": 14249.9,
+   "lf_employed": 13788,
+   "lf_unemployed": 462,
+   "lf_outside": 6808.7,
+   "p_rate": 67.7,
+   "ep_ratio": 65.5,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2014-03-01",
+   "lf": 14198.4,
+   "lf_employed": 13768.3,
+   "lf_unemployed": 430.1,
+   "lf_outside": 6956.1,
+   "p_rate": 67.1,
+   "ep_ratio": 65.1,
+   "u_rate": 3
+  },
+  {
+   "date": "2014-04-01",
+   "lf": 14206.7,
+   "lf_employed": 13793.2,
+   "lf_unemployed": 413.5,
+   "lf_outside": 6849.4,
+   "p_rate": 67.5,
+   "ep_ratio": 65.5,
+   "u_rate": 2.9
+  },
+  {
+   "date": "2014-05-01",
+   "lf": 14430.2,
+   "lf_employed": 14023,
+   "lf_unemployed": 407.2,
+   "lf_outside": 6693.2,
+   "p_rate": 68.3,
+   "ep_ratio": 66.4,
+   "u_rate": 2.8
+  },
+  {
+   "date": "2014-06-01",
+   "lf": 14373.4,
+   "lf_employed": 13967,
+   "lf_unemployed": 406.4,
+   "lf_outside": 6826.6,
+   "p_rate": 67.8,
+   "ep_ratio": 65.9,
+   "u_rate": 2.8
+  },
+  {
+   "date": "2014-07-01",
+   "lf": 14333.4,
+   "lf_employed": 13935.8,
+   "lf_unemployed": 397.6,
+   "lf_outside": 6846.2,
+   "p_rate": 67.7,
+   "ep_ratio": 65.8,
+   "u_rate": 2.8
+  },
+  {
+   "date": "2014-08-01",
+   "lf": 14266.3,
+   "lf_employed": 13881.4,
+   "lf_unemployed": 384.9,
+   "lf_outside": 6934.1,
+   "p_rate": 67.3,
+   "ep_ratio": 65.5,
+   "u_rate": 2.7
+  },
+  {
+   "date": "2014-09-01",
+   "lf": 14440.2,
+   "lf_employed": 14058.4,
+   "lf_unemployed": 381.8,
+   "lf_outside": 6763.7,
+   "p_rate": 68.1,
+   "ep_ratio": 66.3,
+   "u_rate": 2.6
+  },
+  {
+   "date": "2014-10-01",
+   "lf": 14403.1,
+   "lf_employed": 14023.3,
+   "lf_unemployed": 379.9,
+   "lf_outside": 6926.7,
+   "p_rate": 67.5,
+   "ep_ratio": 65.7,
+   "u_rate": 2.6
+  },
+  {
+   "date": "2014-11-01",
+   "lf": 14404.1,
+   "lf_employed": 14025.4,
+   "lf_unemployed": 378.7,
+   "lf_outside": 6887.1,
+   "p_rate": 67.6,
+   "ep_ratio": 65.9,
+   "u_rate": 2.6
+  },
+  {
+   "date": "2014-12-01",
+   "lf": 14512,
+   "lf_employed": 14060.2,
+   "lf_unemployed": 451.7,
+   "lf_outside": 6784.8,
+   "p_rate": 68.1,
+   "ep_ratio": 66,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2015-01-01",
+   "lf": 14442,
+   "lf_employed": 13991.8,
+   "lf_unemployed": 450.3,
+   "lf_outside": 6923.7,
+   "p_rate": 67.6,
+   "ep_ratio": 65.5,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2015-02-01",
+   "lf": 14554.7,
+   "lf_employed": 14092.9,
+   "lf_unemployed": 461.8,
+   "lf_outside": 6847.8,
+   "p_rate": 68,
+   "ep_ratio": 65.8,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2015-03-01",
+   "lf": 14601.2,
+   "lf_employed": 14160.5,
+   "lf_unemployed": 440.7,
+   "lf_outside": 6839.3,
+   "p_rate": 68.1,
+   "ep_ratio": 66,
+   "u_rate": 3
+  },
+  {
+   "date": "2015-04-01",
+   "lf": 14569.5,
+   "lf_employed": 14136.2,
+   "lf_unemployed": 433.3,
+   "lf_outside": 6890.2,
+   "p_rate": 67.9,
+   "ep_ratio": 65.9,
+   "u_rate": 3
+  },
+  {
+   "date": "2015-05-01",
+   "lf": 14575,
+   "lf_employed": 14126.7,
+   "lf_unemployed": 448.3,
+   "lf_outside": 6933.5,
+   "p_rate": 67.8,
+   "ep_ratio": 65.7,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2015-06-01",
+   "lf": 14609.9,
+   "lf_employed": 14146.7,
+   "lf_unemployed": 463.2,
+   "lf_outside": 6896.2,
+   "p_rate": 67.9,
+   "ep_ratio": 65.8,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2015-07-01",
+   "lf": 14579.1,
+   "lf_employed": 14106.2,
+   "lf_unemployed": 472.9,
+   "lf_outside": 6937.7,
+   "p_rate": 67.8,
+   "ep_ratio": 65.6,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2015-08-01",
+   "lf": 14685.1,
+   "lf_employed": 14214.6,
+   "lf_unemployed": 470.5,
+   "lf_outside": 6871.5,
+   "p_rate": 68.1,
+   "ep_ratio": 65.9,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2015-09-01",
+   "lf": 14642,
+   "lf_employed": 14151.7,
+   "lf_unemployed": 490.3,
+   "lf_outside": 6925.4,
+   "p_rate": 67.9,
+   "ep_ratio": 65.6,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2015-10-01",
+   "lf": 14665.9,
+   "lf_employed": 14184.7,
+   "lf_unemployed": 481.3,
+   "lf_outside": 6894.8,
+   "p_rate": 68,
+   "ep_ratio": 65.8,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2015-11-01",
+   "lf": 14687.2,
+   "lf_employed": 14215.7,
+   "lf_unemployed": 471.5,
+   "lf_outside": 6945,
+   "p_rate": 67.9,
+   "ep_ratio": 65.7,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2015-12-01",
+   "lf": 14690,
+   "lf_employed": 14185.7,
+   "lf_unemployed": 504.3,
+   "lf_outside": 6945.3,
+   "p_rate": 67.9,
+   "ep_ratio": 65.6,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2016-01-01",
+   "lf": 14652,
+   "lf_employed": 14150.5,
+   "lf_unemployed": 501.5,
+   "lf_outside": 6984.2,
+   "p_rate": 67.7,
+   "ep_ratio": 65.4,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2016-02-01",
+   "lf": 14703.3,
+   "lf_employed": 14196.9,
+   "lf_unemployed": 506.4,
+   "lf_outside": 7063.1,
+   "p_rate": 67.6,
+   "ep_ratio": 65.2,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2016-03-01",
+   "lf": 14710.1,
+   "lf_employed": 14200.7,
+   "lf_unemployed": 509.5,
+   "lf_outside": 6964,
+   "p_rate": 67.9,
+   "ep_ratio": 65.5,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2016-04-01",
+   "lf": 14675.3,
+   "lf_employed": 14163.7,
+   "lf_unemployed": 511.5,
+   "lf_outside": 7012.5,
+   "p_rate": 67.7,
+   "ep_ratio": 65.3,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2016-05-01",
+   "lf": 14705,
+   "lf_employed": 14200.2,
+   "lf_unemployed": 504.8,
+   "lf_outside": 7021.1,
+   "p_rate": 67.7,
+   "ep_ratio": 65.4,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2016-06-01",
+   "lf": 14720.1,
+   "lf_employed": 14218.4,
+   "lf_unemployed": 501.8,
+   "lf_outside": 7036.5,
+   "p_rate": 67.7,
+   "ep_ratio": 65.4,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2016-07-01",
+   "lf": 14729,
+   "lf_employed": 14212.8,
+   "lf_unemployed": 516.2,
+   "lf_outside": 7008.4,
+   "p_rate": 67.8,
+   "ep_ratio": 65.4,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2016-08-01",
+   "lf": 14822.2,
+   "lf_employed": 14306.9,
+   "lf_unemployed": 515.2,
+   "lf_outside": 7053.3,
+   "p_rate": 67.8,
+   "ep_ratio": 65.4,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2016-09-01",
+   "lf": 14762.2,
+   "lf_employed": 14249.6,
+   "lf_unemployed": 512.6,
+   "lf_outside": 7084.3,
+   "p_rate": 67.6,
+   "ep_ratio": 65.2,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2016-10-01",
+   "lf": 14765.1,
+   "lf_employed": 14253.4,
+   "lf_unemployed": 511.7,
+   "lf_outside": 7071.1,
+   "p_rate": 67.6,
+   "ep_ratio": 65.3,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2016-11-01",
+   "lf": 14827.9,
+   "lf_employed": 14317.2,
+   "lf_unemployed": 510.7,
+   "lf_outside": 7081.8,
+   "p_rate": 67.7,
+   "ep_ratio": 65.3,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2016-12-01",
+   "lf": 14788.9,
+   "lf_employed": 14276.7,
+   "lf_unemployed": 512.2,
+   "lf_outside": 7072.8,
+   "p_rate": 67.6,
+   "ep_ratio": 65.3,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2017-01-01",
+   "lf": 14880.9,
+   "lf_employed": 14366.8,
+   "lf_unemployed": 514.1,
+   "lf_outside": 7090.4,
+   "p_rate": 67.7,
+   "ep_ratio": 65.4,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2017-02-01",
+   "lf": 14916.7,
+   "lf_employed": 14401.8,
+   "lf_unemployed": 514.8,
+   "lf_outside": 7086.9,
+   "p_rate": 67.8,
+   "ep_ratio": 65.4,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2017-03-01",
+   "lf": 14932.5,
+   "lf_employed": 14421.7,
+   "lf_unemployed": 510.8,
+   "lf_outside": 7121.8,
+   "p_rate": 67.7,
+   "ep_ratio": 65.4,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2017-04-01",
+   "lf": 14941.5,
+   "lf_employed": 14429.6,
+   "lf_unemployed": 511.9,
+   "lf_outside": 7122.5,
+   "p_rate": 67.7,
+   "ep_ratio": 65.4,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2017-05-01",
+   "lf": 14961.9,
+   "lf_employed": 14454.4,
+   "lf_unemployed": 507.5,
+   "lf_outside": 7120.8,
+   "p_rate": 67.8,
+   "ep_ratio": 65.5,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2017-06-01",
+   "lf": 15027.6,
+   "lf_employed": 14519.9,
+   "lf_unemployed": 507.7,
+   "lf_outside": 7141.1,
+   "p_rate": 67.8,
+   "ep_ratio": 65.5,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2017-07-01",
+   "lf": 15016.4,
+   "lf_employed": 14497.4,
+   "lf_unemployed": 519,
+   "lf_outside": 7150.4,
+   "p_rate": 67.7,
+   "ep_ratio": 65.4,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2017-08-01",
+   "lf": 15030.2,
+   "lf_employed": 14513.4,
+   "lf_unemployed": 516.9,
+   "lf_outside": 7138.4,
+   "p_rate": 67.8,
+   "ep_ratio": 65.5,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2017-09-01",
+   "lf": 15058.8,
+   "lf_employed": 14544.3,
+   "lf_unemployed": 514.5,
+   "lf_outside": 7122.1,
+   "p_rate": 67.9,
+   "ep_ratio": 65.6,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2017-10-01",
+   "lf": 15090.4,
+   "lf_employed": 14581.7,
+   "lf_unemployed": 508.8,
+   "lf_outside": 7117.7,
+   "p_rate": 68,
+   "ep_ratio": 65.7,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2017-11-01",
+   "lf": 15084,
+   "lf_employed": 14578.9,
+   "lf_unemployed": 505.1,
+   "lf_outside": 7121.4,
+   "p_rate": 67.9,
+   "ep_ratio": 65.6,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2017-12-01",
+   "lf": 15145.9,
+   "lf_employed": 14640.1,
+   "lf_unemployed": 505.8,
+   "lf_outside": 7084.1,
+   "p_rate": 68.1,
+   "ep_ratio": 65.9,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2018-01-01",
+   "lf": 15187,
+   "lf_employed": 14670.5,
+   "lf_unemployed": 516.5,
+   "lf_outside": 7074.8,
+   "p_rate": 68.2,
+   "ep_ratio": 65.9,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2018-02-01",
+   "lf": 15230,
+   "lf_employed": 14721.5,
+   "lf_unemployed": 508.5,
+   "lf_outside": 7112.3,
+   "p_rate": 68.2,
+   "ep_ratio": 65.9,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2018-03-01",
+   "lf": 15241.2,
+   "lf_employed": 14732.5,
+   "lf_unemployed": 508.7,
+   "lf_outside": 7115,
+   "p_rate": 68.2,
+   "ep_ratio": 65.9,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2018-04-01",
+   "lf": 15313.1,
+   "lf_employed": 14803.1,
+   "lf_unemployed": 510,
+   "lf_outside": 7130.9,
+   "p_rate": 68.2,
+   "ep_ratio": 66,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2018-05-01",
+   "lf": 15357.5,
+   "lf_employed": 14852.6,
+   "lf_unemployed": 504.8,
+   "lf_outside": 7097.1,
+   "p_rate": 68.4,
+   "ep_ratio": 66.1,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2018-06-01",
+   "lf": 15379,
+   "lf_employed": 14863.2,
+   "lf_unemployed": 515.8,
+   "lf_outside": 7062.2,
+   "p_rate": 68.5,
+   "ep_ratio": 66.2,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2018-07-01",
+   "lf": 15401,
+   "lf_employed": 14882.4,
+   "lf_unemployed": 518.6,
+   "lf_outside": 7044.5,
+   "p_rate": 68.6,
+   "ep_ratio": 66.3,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2018-08-01",
+   "lf": 15421.4,
+   "lf_employed": 14896.5,
+   "lf_unemployed": 525,
+   "lf_outside": 7133.9,
+   "p_rate": 68.4,
+   "ep_ratio": 66,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2018-09-01",
+   "lf": 15442.9,
+   "lf_employed": 14926.5,
+   "lf_unemployed": 516.4,
+   "lf_outside": 7096.8,
+   "p_rate": 68.5,
+   "ep_ratio": 66.2,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2018-10-01",
+   "lf": 15450,
+   "lf_employed": 14937.1,
+   "lf_unemployed": 512.9,
+   "lf_outside": 7093.7,
+   "p_rate": 68.5,
+   "ep_ratio": 66.3,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2018-11-01",
+   "lf": 15457.5,
+   "lf_employed": 14941.3,
+   "lf_unemployed": 516.2,
+   "lf_outside": 7151.2,
+   "p_rate": 68.4,
+   "ep_ratio": 66.1,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2018-12-01",
+   "lf": 15500.1,
+   "lf_employed": 14986,
+   "lf_unemployed": 514.2,
+   "lf_outside": 7120.1,
+   "p_rate": 68.5,
+   "ep_ratio": 66.2,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2019-01-01",
+   "lf": 15508.5,
+   "lf_employed": 14992.8,
+   "lf_unemployed": 515.6,
+   "lf_outside": 7095.9,
+   "p_rate": 68.6,
+   "ep_ratio": 66.3,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2019-02-01",
+   "lf": 15543.2,
+   "lf_employed": 15026.8,
+   "lf_unemployed": 516.4,
+   "lf_outside": 7145.9,
+   "p_rate": 68.5,
+   "ep_ratio": 66.2,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2019-03-01",
+   "lf": 15556.6,
+   "lf_employed": 15035.2,
+   "lf_unemployed": 521.3,
+   "lf_outside": 7169.4,
+   "p_rate": 68.4,
+   "ep_ratio": 66.2,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2019-04-01",
+   "lf": 15613.1,
+   "lf_employed": 15089.8,
+   "lf_unemployed": 523.3,
+   "lf_outside": 7184.4,
+   "p_rate": 68.5,
+   "ep_ratio": 66.2,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2019-05-01",
+   "lf": 15642.3,
+   "lf_employed": 15122.5,
+   "lf_unemployed": 519.8,
+   "lf_outside": 7190,
+   "p_rate": 68.5,
+   "ep_ratio": 66.2,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2019-06-01",
+   "lf": 15655.9,
+   "lf_employed": 15134.6,
+   "lf_unemployed": 521.4,
+   "lf_outside": 7156.7,
+   "p_rate": 68.6,
+   "ep_ratio": 66.3,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2019-07-01",
+   "lf": 15704.6,
+   "lf_employed": 15179.8,
+   "lf_unemployed": 524.8,
+   "lf_outside": 7207.7,
+   "p_rate": 68.5,
+   "ep_ratio": 66.2,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2019-08-01",
+   "lf": 15706,
+   "lf_employed": 15185.8,
+   "lf_unemployed": 520.2,
+   "lf_outside": 7172.4,
+   "p_rate": 68.6,
+   "ep_ratio": 66.4,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2019-09-01",
+   "lf": 15751.2,
+   "lf_employed": 15229.9,
+   "lf_unemployed": 521.4,
+   "lf_outside": 7159.8,
+   "p_rate": 68.7,
+   "ep_ratio": 66.5,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2019-10-01",
+   "lf": 15777.7,
+   "lf_employed": 15265.6,
+   "lf_unemployed": 512.1,
+   "lf_outside": 7175,
+   "p_rate": 68.7,
+   "ep_ratio": 66.5,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2019-11-01",
+   "lf": 15828.9,
+   "lf_employed": 15315,
+   "lf_unemployed": 513.9,
+   "lf_outside": 7174.2,
+   "p_rate": 68.8,
+   "ep_ratio": 66.6,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2019-12-01",
+   "lf": 15803,
+   "lf_employed": 15286,
+   "lf_unemployed": 517,
+   "lf_outside": 7129.8,
+   "p_rate": 68.9,
+   "ep_ratio": 66.7,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2020-01-01",
+   "lf": 15829.3,
+   "lf_employed": 15317.6,
+   "lf_unemployed": 511.7,
+   "lf_outside": 7128.9,
+   "p_rate": 68.9,
+   "ep_ratio": 66.7,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2020-02-01",
+   "lf": 15869.8,
+   "lf_employed": 15344.5,
+   "lf_unemployed": 525.2,
+   "lf_outside": 7224,
+   "p_rate": 68.7,
+   "ep_ratio": 66.4,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2020-03-01",
+   "lf": 15842.9,
+   "lf_employed": 15232.4,
+   "lf_unemployed": 610.5,
+   "lf_outside": 7239.8,
+   "p_rate": 68.6,
+   "ep_ratio": 66,
+   "u_rate": 3.8
+  },
+  {
+   "date": "2020-04-01",
+   "lf": 15712.2,
+   "lf_employed": 14933.4,
+   "lf_unemployed": 778.8,
+   "lf_outside": 7345.1,
+   "p_rate": 68.1,
+   "ep_ratio": 64.8,
+   "u_rate": 5
+  },
+  {
+   "date": "2020-05-01",
+   "lf": 15714,
+   "lf_employed": 14887.9,
+   "lf_unemployed": 826.1,
+   "lf_outside": 7392.1,
+   "p_rate": 68,
+   "ep_ratio": 64.4,
+   "u_rate": 5.3
+  },
+  {
+   "date": "2020-06-01",
+   "lf": 15763.5,
+   "lf_employed": 14990.2,
+   "lf_unemployed": 773.2,
+   "lf_outside": 7398.5,
+   "p_rate": 68.1,
+   "ep_ratio": 64.7,
+   "u_rate": 4.9
+  },
+  {
+   "date": "2020-07-01",
+   "lf": 15818.5,
+   "lf_employed": 15073.4,
+   "lf_unemployed": 745.1,
+   "lf_outside": 7399.8,
+   "p_rate": 68.1,
+   "ep_ratio": 64.9,
+   "u_rate": 4.7
+  },
+  {
+   "date": "2020-08-01",
+   "lf": 15895.1,
+   "lf_employed": 15153.5,
+   "lf_unemployed": 741.6,
+   "lf_outside": 7351.5,
+   "p_rate": 68.4,
+   "ep_ratio": 65.2,
+   "u_rate": 4.7
+  },
+  {
+   "date": "2020-09-01",
+   "lf": 15930.6,
+   "lf_employed": 15193.1,
+   "lf_unemployed": 737.5,
+   "lf_outside": 7359.8,
+   "p_rate": 68.4,
+   "ep_ratio": 65.2,
+   "u_rate": 4.6
+  },
+  {
+   "date": "2020-10-01",
+   "lf": 15955.3,
+   "lf_employed": 15207.1,
+   "lf_unemployed": 748.2,
+   "lf_outside": 7347.7,
+   "p_rate": 68.5,
+   "ep_ratio": 65.3,
+   "u_rate": 4.7
+  },
+  {
+   "date": "2020-11-01",
+   "lf": 15960.5,
+   "lf_employed": 15196.1,
+   "lf_unemployed": 764.4,
+   "lf_outside": 7374.8,
+   "p_rate": 68.4,
+   "ep_ratio": 65.1,
+   "u_rate": 4.8
+  },
+  {
+   "date": "2020-12-01",
+   "lf": 15988.3,
+   "lf_employed": 15215.4,
+   "lf_unemployed": 772.9,
+   "lf_outside": 7372.2,
+   "p_rate": 68.4,
+   "ep_ratio": 65.1,
+   "u_rate": 4.8
+  },
+  {
+   "date": "2021-01-01",
+   "lf": 16019.8,
+   "lf_employed": 15237.3,
+   "lf_unemployed": 782.5,
+   "lf_outside": 7366.2,
+   "p_rate": 68.5,
+   "ep_ratio": 65.2,
+   "u_rate": 4.9
+  },
+  {
+   "date": "2021-02-01",
+   "lf": 16048.2,
+   "lf_employed": 15270.6,
+   "lf_unemployed": 777.5,
+   "lf_outside": 7371.4,
+   "p_rate": 68.5,
+   "ep_ratio": 65.2,
+   "u_rate": 4.8
+  },
+  {
+   "date": "2021-03-01",
+   "lf": 16082.5,
+   "lf_employed": 15329.3,
+   "lf_unemployed": 753.2,
+   "lf_outside": 7363.7,
+   "p_rate": 68.6,
+   "ep_ratio": 65.4,
+   "u_rate": 4.7
+  },
+  {
+   "date": "2021-04-01",
+   "lf": 16094.7,
+   "lf_employed": 15352,
+   "lf_unemployed": 742.7,
+   "lf_outside": 7376.8,
+   "p_rate": 68.6,
+   "ep_ratio": 65.4,
+   "u_rate": 4.6
+  },
+  {
+   "date": "2021-05-01",
+   "lf": 16098.9,
+   "lf_employed": 15370.8,
+   "lf_unemployed": 728.1,
+   "lf_outside": 7398,
+   "p_rate": 68.5,
+   "ep_ratio": 65.4,
+   "u_rate": 4.5
+  },
+  {
+   "date": "2021-06-01",
+   "lf": 16066.2,
+   "lf_employed": 15297.5,
+   "lf_unemployed": 768.7,
+   "lf_outside": 7456.8,
+   "p_rate": 68.3,
+   "ep_ratio": 65,
+   "u_rate": 4.8
+  },
+  {
+   "date": "2021-07-01",
+   "lf": 16072.9,
+   "lf_employed": 15294.8,
+   "lf_unemployed": 778.2,
+   "lf_outside": 7475.4,
+   "p_rate": 68.3,
+   "ep_ratio": 65,
+   "u_rate": 4.8
+  },
+  {
+   "date": "2021-08-01",
+   "lf": 16125.4,
+   "lf_employed": 15376.6,
+   "lf_unemployed": 748.8,
+   "lf_outside": 7448.5,
+   "p_rate": 68.4,
+   "ep_ratio": 65.2,
+   "u_rate": 4.6
+  },
+  {
+   "date": "2021-09-01",
+   "lf": 16193.1,
+   "lf_employed": 15463.5,
+   "lf_unemployed": 729.6,
+   "lf_outside": 7405.9,
+   "p_rate": 68.6,
+   "ep_ratio": 65.5,
+   "u_rate": 4.5
+  },
+  {
+   "date": "2021-10-01",
+   "lf": 16259.6,
+   "lf_employed": 15554.6,
+   "lf_unemployed": 705,
+   "lf_outside": 7364.5,
+   "p_rate": 68.8,
+   "ep_ratio": 65.8,
+   "u_rate": 4.3
+  },
+  {
+   "date": "2021-11-01",
+   "lf": 16304.7,
+   "lf_employed": 15610.3,
+   "lf_unemployed": 694.4,
+   "lf_outside": 7344.4,
+   "p_rate": 68.9,
+   "ep_ratio": 66,
+   "u_rate": 4.3
+  },
+  {
+   "date": "2021-12-01",
+   "lf": 16336.2,
+   "lf_employed": 15648.6,
+   "lf_unemployed": 687.6,
+   "lf_outside": 7337.8,
+   "p_rate": 69,
+   "ep_ratio": 66.1,
+   "u_rate": 4.2
+  },
+  {
+   "date": "2022-01-01",
+   "lf": 16366.4,
+   "lf_employed": 15686.1,
+   "lf_unemployed": 680.4,
+   "lf_outside": 7332.1,
+   "p_rate": 69.1,
+   "ep_ratio": 66.2,
+   "u_rate": 4.2
+  },
+  {
+   "date": "2022-02-01",
+   "lf": 16402.7,
+   "lf_employed": 15730.9,
+   "lf_unemployed": 671.8,
+   "lf_outside": 7320.7,
+   "p_rate": 69.1,
+   "ep_ratio": 66.3,
+   "u_rate": 4.1
+  },
+  {
+   "date": "2022-03-01",
+   "lf": 16438.5,
+   "lf_employed": 15769.4,
+   "lf_unemployed": 669.2,
+   "lf_outside": 7309.7,
+   "p_rate": 69.2,
+   "ep_ratio": 66.4,
+   "u_rate": 4.1
+  },
+  {
+   "date": "2022-04-01",
+   "lf": 16502.8,
+   "lf_employed": 15853.5,
+   "lf_unemployed": 649.3,
+   "lf_outside": 7270.2,
+   "p_rate": 69.4,
+   "ep_ratio": 66.7,
+   "u_rate": 3.9
+  },
+  {
+   "date": "2022-05-01",
+   "lf": 16537.8,
+   "lf_employed": 15900,
+   "lf_unemployed": 637.7,
+   "lf_outside": 7260.1,
+   "p_rate": 69.5,
+   "ep_ratio": 66.8,
+   "u_rate": 3.9
+  },
+  {
+   "date": "2022-06-01",
+   "lf": 16566.9,
+   "lf_employed": 15936.3,
+   "lf_unemployed": 630.6,
+   "lf_outside": 7255.5,
+   "p_rate": 69.5,
+   "ep_ratio": 66.9,
+   "u_rate": 3.8
+  },
+  {
+   "date": "2022-07-01",
+   "lf": 16599.2,
+   "lf_employed": 15978.4,
+   "lf_unemployed": 620.7,
+   "lf_outside": 7247.9,
+   "p_rate": 69.6,
+   "ep_ratio": 67,
+   "u_rate": 3.7
+  },
+  {
+   "date": "2022-08-01",
+   "lf": 16629.7,
+   "lf_employed": 16017.7,
+   "lf_unemployed": 612,
+   "lf_outside": 7242,
+   "p_rate": 69.7,
+   "ep_ratio": 67.1,
+   "u_rate": 3.7
+  },
+  {
+   "date": "2022-09-01",
+   "lf": 16657.2,
+   "lf_employed": 16052.2,
+   "lf_unemployed": 605,
+   "lf_outside": 7239.2,
+   "p_rate": 69.7,
+   "ep_ratio": 67.2,
+   "u_rate": 3.6
+  },
+  {
+   "date": "2022-10-01",
+   "lf": 16683.5,
+   "lf_employed": 16081.5,
+   "lf_unemployed": 602,
+   "lf_outside": 7237.3,
+   "p_rate": 69.7,
+   "ep_ratio": 67.2,
+   "u_rate": 3.6
+  },
+  {
+   "date": "2022-11-01",
+   "lf": 16709.4,
+   "lf_employed": 16108.6,
+   "lf_unemployed": 600.9,
+   "lf_outside": 7235.7,
+   "p_rate": 69.8,
+   "ep_ratio": 67.3,
+   "u_rate": 3.6
+  },
+  {
+   "date": "2022-12-01",
+   "lf": 16730,
+   "lf_employed": 16130.4,
+   "lf_unemployed": 599.6,
+   "lf_outside": 7239.5,
+   "p_rate": 69.8,
+   "ep_ratio": 67.3,
+   "u_rate": 3.6
+  },
+  {
+   "date": "2023-01-01",
+   "lf": 16755.4,
+   "lf_employed": 16159.3,
+   "lf_unemployed": 596.1,
+   "lf_outside": 7238.3,
+   "p_rate": 69.8,
+   "ep_ratio": 67.3,
+   "u_rate": 3.6
+  },
+  {
+   "date": "2023-02-01",
+   "lf": 16781.2,
+   "lf_employed": 16189.3,
+   "lf_unemployed": 591.9,
+   "lf_outside": 7236.7,
+   "p_rate": 69.9,
+   "ep_ratio": 67.4,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2023-03-01",
+   "lf": 16811.7,
+   "lf_employed": 16223,
+   "lf_unemployed": 588.7,
+   "lf_outside": 7230.6,
+   "p_rate": 69.9,
+   "ep_ratio": 67.5,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2023-04-01",
+   "lf": 16838.4,
+   "lf_employed": 16251.4,
+   "lf_unemployed": 586.9,
+   "lf_outside": 7228.2,
+   "p_rate": 70,
+   "ep_ratio": 67.5,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2023-05-01",
+   "lf": 16864.1,
+   "lf_employed": 16279.5,
+   "lf_unemployed": 584.6,
+   "lf_outside": 7226.8,
+   "p_rate": 70,
+   "ep_ratio": 67.6,
+   "u_rate": 3.5
+  },
+  {
+   "date": "2023-06-01",
+   "lf": 16889.4,
+   "lf_employed": 16307.8,
+   "lf_unemployed": 581.7,
+   "lf_outside": 7225.7,
+   "p_rate": 70,
+   "ep_ratio": 67.6,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2023-07-01",
+   "lf": 16914.2,
+   "lf_employed": 16335,
+   "lf_unemployed": 579.2,
+   "lf_outside": 7225,
+   "p_rate": 70.1,
+   "ep_ratio": 67.7,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2023-08-01",
+   "lf": 16932.1,
+   "lf_employed": 16354.9,
+   "lf_unemployed": 577.3,
+   "lf_outside": 7231.3,
+   "p_rate": 70.1,
+   "ep_ratio": 67.7,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2023-09-01",
+   "lf": 16948.8,
+   "lf_employed": 16375.1,
+   "lf_unemployed": 573.7,
+   "lf_outside": 7238.9,
+   "p_rate": 70.1,
+   "ep_ratio": 67.7,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2023-10-01",
+   "lf": 16974.1,
+   "lf_employed": 16403.2,
+   "lf_unemployed": 570.9,
+   "lf_outside": 7237.6,
+   "p_rate": 70.1,
+   "ep_ratio": 67.7,
+   "u_rate": 3.4
+  },
+  {
+   "date": "2023-11-01",
+   "lf": 17000.4,
+   "lf_employed": 16431.1,
+   "lf_unemployed": 569.2,
+   "lf_outside": 7235.4,
+   "p_rate": 70.1,
+   "ep_ratio": 67.8,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2023-12-01",
+   "lf": 17025.5,
+   "lf_employed": 16457.7,
+   "lf_unemployed": 567.8,
+   "lf_outside": 7234.3,
+   "p_rate": 70.2,
+   "ep_ratio": 67.8,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2024-01-01",
+   "lf": 16789.3,
+   "lf_employed": 16229.4,
+   "lf_unemployed": 559.9,
+   "lf_outside": 7026.8,
+   "p_rate": 70.5,
+   "ep_ratio": 68.1,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2024-02-01",
+   "lf": 16822.6,
+   "lf_employed": 16265.7,
+   "lf_unemployed": 556.9,
+   "lf_outside": 7039,
+   "p_rate": 70.5,
+   "ep_ratio": 68.2,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2024-03-01",
+   "lf": 16853.1,
+   "lf_employed": 16296.6,
+   "lf_unemployed": 556.6,
+   "lf_outside": 7054,
+   "p_rate": 70.5,
+   "ep_ratio": 68.2,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2024-04-01",
+   "lf": 16920.9,
+   "lf_employed": 16364.4,
+   "lf_unemployed": 556.5,
+   "lf_outside": 7032,
+   "p_rate": 70.6,
+   "ep_ratio": 68.3,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2024-05-01",
+   "lf": 16947.6,
+   "lf_employed": 16393.5,
+   "lf_unemployed": 554.1,
+   "lf_outside": 7051,
+   "p_rate": 70.6,
+   "ep_ratio": 68.3,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2024-06-01",
+   "lf": 16972.2,
+   "lf_employed": 16418.5,
+   "lf_unemployed": 553.7,
+   "lf_outside": 7072.3,
+   "p_rate": 70.6,
+   "ep_ratio": 68.3,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2024-07-01",
+   "lf": 16997.3,
+   "lf_employed": 16444.2,
+   "lf_unemployed": 553.2,
+   "lf_outside": 7092.8,
+   "p_rate": 70.6,
+   "ep_ratio": 68.3,
+   "u_rate": 3.3
+  },
+  {
+   "date": "2024-08-01",
+   "lf": 17034.2,
+   "lf_employed": 16482.8,
+   "lf_unemployed": 551.4,
+   "lf_outside": 7102.4,
+   "p_rate": 70.6,
+   "ep_ratio": 68.3,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2024-09-01",
+   "lf": 17065.1,
+   "lf_employed": 16516.3,
+   "lf_unemployed": 548.8,
+   "lf_outside": 7118.3,
+   "p_rate": 70.6,
+   "ep_ratio": 68.3,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2024-10-01",
+   "lf": 17095.5,
+   "lf_employed": 16549.8,
+   "lf_unemployed": 545.7,
+   "lf_outside": 7134.7,
+   "p_rate": 70.6,
+   "ep_ratio": 68.3,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2024-11-01",
+   "lf": 17127.5,
+   "lf_employed": 16585.7,
+   "lf_unemployed": 541.8,
+   "lf_outside": 7150.3,
+   "p_rate": 70.5,
+   "ep_ratio": 68.3,
+   "u_rate": 3.2
+  },
+  {
+   "date": "2024-12-01",
+   "lf": 17168.4,
+   "lf_employed": 16629.9,
+   "lf_unemployed": 538.5,
+   "lf_outside": 7156.8,
+   "p_rate": 70.6,
+   "ep_ratio": 68.4,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2025-01-01",
+   "lf": 17093.4,
+   "lf_employed": 16561.2,
+   "lf_unemployed": 532.2,
+   "lf_outside": 7110.5,
+   "p_rate": 70.6,
+   "ep_ratio": 68.4,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2025-02-01",
+   "lf": 17118.4,
+   "lf_employed": 16588.2,
+   "lf_unemployed": 530.2,
+   "lf_outside": 7104.4,
+   "p_rate": 70.7,
+   "ep_ratio": 68.5,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2025-03-01",
+   "lf": 17132.2,
+   "lf_employed": 16604.2,
+   "lf_unemployed": 528,
+   "lf_outside": 7107.4,
+   "p_rate": 70.7,
+   "ep_ratio": 68.5,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2025-04-01",
+   "lf": 17148.5,
+   "lf_employed": 16623.2,
+   "lf_unemployed": 525.4,
+   "lf_outside": 7105.3,
+   "p_rate": 70.7,
+   "ep_ratio": 68.5,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2025-05-01",
+   "lf": 17166.1,
+   "lf_employed": 16642.1,
+   "lf_unemployed": 524,
+   "lf_outside": 7101.8,
+   "p_rate": 70.7,
+   "ep_ratio": 68.6,
+   "u_rate": 3.1
+  },
+  {
+   "date": "2025-06-01",
+   "lf": 17185.9,
+   "lf_employed": 16664.2,
+   "lf_unemployed": 521.7,
+   "lf_outside": 7096.8,
+   "p_rate": 70.8,
+   "ep_ratio": 68.6,
+   "u_rate": 3
+  },
+  {
+   "date": "2025-07-01",
+   "lf": 17190.6,
+   "lf_employed": 16669.5,
+   "lf_unemployed": 521.1,
+   "lf_outside": 7105.8,
+   "p_rate": 70.8,
+   "ep_ratio": 68.6,
+   "u_rate": 3
+  },
+  {
+   "date": "2025-08-01",
+   "lf": 17203.5,
+   "lf_employed": 16684.5,
+   "lf_unemployed": 519,
+   "lf_outside": 7106.3,
+   "p_rate": 70.8,
+   "ep_ratio": 68.6,
+   "u_rate": 3
+  },
+  {
+   "date": "2025-09-01",
+   "lf": 17544.8,
+   "lf_employed": 17026.3,
+   "lf_unemployed": 518.6,
+   "lf_outside": 7209.3,
+   "p_rate": 70.9,
+   "ep_ratio": 68.8,
+   "u_rate": 3
+  },
+  {
+   "date": "2025-10-01",
+   "lf": 17579,
+   "lf_employed": 17060.1,
+   "lf_unemployed": 518.9,
+   "lf_outside": 7218.2,
+   "p_rate": 70.9,
+   "ep_ratio": 68.8,
+   "u_rate": 3
+  },
+  {
+   "date": "2025-11-01",
+   "lf": 17610.9,
+   "lf_employed": 17092.5,
+   "lf_unemployed": 518.4,
+   "lf_outside": 7218.9,
+   "p_rate": 70.9,
+   "ep_ratio": 68.8,
+   "u_rate": 2.9
+  },
+  {
+   "date": "2025-12-01",
+   "lf": 17272.3,
+   "lf_employed": 16764.3,
+   "lf_unemployed": 508,
+   "lf_outside": 7132.6,
+   "p_rate": 70.8,
+   "ep_ratio": 68.7,
+   "u_rate": 2.9
+  },
+  {
+   "date": "2026-01-01",
+   "lf": 17281,
+   "lf_employed": 16771.4,
+   "lf_unemployed": 509.6,
+   "lf_outside": 7105.6,
+   "p_rate": 70.9,
+   "ep_ratio": 68.8,
+   "u_rate": 2.9
+  },
+  {
+   "date": "2026-02-01",
+   "lf": 17297.6,
+   "lf_employed": 16790.9,
+   "lf_unemployed": 506.8,
+   "lf_outside": 7102.9,
+   "p_rate": 70.9,
+   "ep_ratio": 68.8,
+   "u_rate": 2.9
+  },
+  {
+   "date": "2026-03-01",
+   "lf": 17313,
+   "lf_employed": 16804,
+   "lf_unemployed": 509,
+   "lf_outside": 7101.2,
+   "p_rate": 70.9,
+   "ep_ratio": 68.8,
+   "u_rate": 2.9
+  },
+  {
+   "date": "2026-04-01",
+   "lf": 17327.6,
+   "lf_employed": 16815.8,
+   "lf_unemployed": 511.8,
+   "lf_outside": 7100.8,
+   "p_rate": 70.9,
+   "ep_ratio": 68.8,
+   "u_rate": 3
+  },
+  {
+   "date": "2026-05-01",
+   "lf": 17338.2,
+   "lf_employed": 16824.8,
+   "lf_unemployed": 513.4,
+   "lf_outside": 7103.4,
+   "p_rate": 70.9,
+   "ep_ratio": 68.8,
+   "u_rate": 3
+  },
+  {
+   "date": "2026-06-01",
+   "lf": 17344.9,
+   "lf_employed": 16827.1,
+   "lf_unemployed": 517.8,
+   "lf_outside": 7109.8,
+   "p_rate": 70.9,
+   "ep_ratio": 68.8,
+   "u_rate": 3
+  },
+  {
+   "date": "2026-07-01",
+   "lf": 17365.9,
+   "lf_employed": 16845.6,
+   "lf_unemployed": 520.3,
+   "lf_outside": 7110.5,
+   "p_rate": 70.9,
+   "ep_ratio": 68.8,
+   "u_rate": 3
+  },
+  {
+   "date": "2026-08-01",
+   "lf": 17386,
+   "lf_employed": 16874.4,
+   "lf_unemployed": 511.6,
+   "lf_outside": 7106,
+   "p_rate": 71,
+   "ep_ratio": 68.9,
+   "u_rate": 2.9
+  }
+ ],
+ "_nextI18Next": {
+  "initialI18nStore": {
+   "en-GB": {
+    "catalogue": {
+     "header": "Data Catalogue",
+     "header_category_govt": "Malaysia's official open data portal",
+     "header_category_agency": "{{ agency }}'s official open data portal",
+     "description": "Your one-stop interface to browse Malaysia's wealth of open data. This page will consistently grow in depth and breadth with high-quality data from federal and state agencies in Malaysia.",
+     "description_agency": "Your one-stop interface to browse open data from {{ agency }}. This page will grow over time as we expand the quality and quantity of our open data.",
+     "description_opendosm": "Your one-stop interface to browse our wealth of open data. This page will consistently grow in depth and breadth, providing richer and more varied data from the various divisions of DOSM.",
+     "description_databnm": "Multi-format downloads, exploratory dataviz, and programmatic access - pick your preferred method of freely using our data. Pay particular attention to the metadata to gain a deeper understanding of a dataset's scope, use, and limitations, and write to data@bnm.gov.my if you want to discuss or request anything further!",
+     "dataset_count": "{{ count }} data series, and counting",
+     "download": "Download",
+     "category": "Category",
+     "chart": "Chart",
+     "table": "Table",
+     "filter": "Filter",
+     "period": "Frequency",
+     "frequency": "Frequency",
+     "geography": "Geography",
+     "demography": "Demography",
+     "begin": "Begin",
+     "end": "End",
+     "source": "Data Source",
+     "desktop": "Desktop",
+     "mobile": "Mobile",
+     "settings": "Settings",
+     "embed": "Embed",
+     "embed_code": "Embed Code",
+     "view_full_chart": "View full chart",
+     "placeholder": {
+      "source": "Select agency",
+      "search": "Search for dataset",
+      "demography": "Data contains"
+     },
+     "filter_options": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "yearly": "Yearly",
+      "intraday": "Intraday",
+      "infrequent": "Infrequent",
+      "as_required": "As Required",
+      "one_off": "One-Off",
+      "state": "State",
+      "dun": "DUN",
+      "national": "National",
+      "parlimen": "Parliament",
+      "district": "District",
+      "sex": "Sex",
+      "ethnicity": "Ethnicity",
+      "age": "Age",
+      "religion": "Religion",
+      "nationality": "Nationality",
+      "disability": "Disability status",
+      "marital": "Marital status"
+     },
+     "image": {
+      "title": "Image (PNG)",
+      "desc": "Suitable for general digital use."
+     },
+     "vector": {
+      "title": "Vector Graphic (SVG)",
+      "desc": "Suitable for high quality prints or further image editing."
+     },
+     "csv": {
+      "title": "Full Dataset (CSV)",
+      "desc": "Recommended for individuals seeking an Excel-friendly format."
+     },
+     "parquet": {
+      "title": "Full Dataset (Parquet)",
+      "desc": "Recommended for data scientists seeking to work with data via code."
+     },
+     "geojson": {
+      "title": "GeoJSON (JSON)",
+      "desc": "Open standard format for plotting geographical features on maps."
+     },
+     "header_1": "How is this data produced?",
+     "header_2": "What caveats I should bear in mind when using this data?",
+     "header_3": "Publication(s) using this data",
+     "header_4": "Related Datasets",
+     "meta_desc": "Dataset description",
+     "meta_def": "Variable definitions",
+     "meta_chart_above": "(Chart above)",
+     "meta_all_dataset": "In the entire dataset:",
+     "meta_variable": "Variable",
+     "meta_variable_name": "Name in Dataset",
+     "meta_data_type": "Data type",
+     "meta_definition": "Definition",
+     "meta_source": "Data source(s)",
+     "meta_url": "URLs to dataset",
+     "meta_license": "License",
+     "code": "Code",
+     "code_desc": "Connect directly to the data with Python.",
+     "code_note": "If not already installed, do",
+     "code_comments": {
+      "geojson_1": "# the first URL gives you 15dp accuracy (highest possible) \n# the _LIGHT URL gives you 5dp accuracy, sufficient for visuals but not analysis \n# the _LIGHT URL is over 90% smaller in size, hence the tradeoff",
+      "geojson_2": "# Uncomment below to maintain a rectangular map, but remove the whitespace caused by the South China Sea",
+      "geojson_3": "# Uncomment below to change from rectangular --> square, for a more compact visual"
+     },
+     "sample_query": {
+      "section_title": "Sample OpenAPI query",
+      "desc1": "The following code is an example of how to make an API query to retrieve the data catalogue mentioned above. You can use different programming languages by switching the code accordingly. For a complete guide on possible query parameters and syntax, please refer to the ",
+      "link1": "official Open API Documentation",
+      "desc2": "Additionally, you can experiment with the code interactively and send requests at the ",
+      "link2": "Example Requests section",
+      "unavailable": "This data catalog is not available through OpenAPI as the nature of the data makes it unsuitable for API access. For the full dataset, please use the provided download link as shown in the above section."
+     },
+     "license_text": "This data is made open under the Creative Commons Attribution 4.0 International License (CC BY 4.0). A copy of the license is available "
+    },
+    "common": {
+     "site": {
+      "name": "data.gov.my",
+      "description": "Your one-stop interface to browse Malaysia's wealth of open data!"
+     },
+     "error": {
+      "404": {
+       "title": "Oops, we cannot find the page you're looking for.",
+       "description": "Is your URL incorrect?",
+       "legacy": "If you're looking for a dataset that was available via the old site, you may head to ",
+       "reason": "Error code: 404 -- Page not found"
+      },
+      "500": {
+       "title": "Oops, something went terribly wrong.",
+       "description": "We are sorry for this incident.",
+       "reason": "Error code: 500 -- Server error"
+      },
+      "output": "Output",
+      "disclaimer": "*Not an actual terminal / console.",
+      "toast": {
+       "request_failure": "Oops! Unable to load requested data",
+       "image_download_failure": "Oops! Unable to download requested image",
+       "form_submission_failure": "Oops! Unable to process form submission",
+       "try_again": "Please try again later",
+       "reach_support": "Please check again or reach out to support for assistance"
+      }
+     },
+     "common": {
+      "state": "State",
+      "district": "District",
+      "type": "Type",
+      "name": "Name",
+      "previous": "Previous",
+      "next": "Next",
+      "in": " in ",
+      "yr": "yr",
+      "views_one": "view",
+      "views_other": "views",
+      "downloads_one": "download",
+      "downloads_other": "downloads",
+      "page_of": "{{ current }} of {{ total }}",
+      "data_for": "Data for {{ state }}",
+      "data_of": "Data as of {{ date }}",
+      "latest": "Latest ({{ date }})",
+      "last_updated": "Last updated: {{ date }}",
+      "next_update": "Next update: {{ date }}",
+      "slider": "",
+      "zoom": "Zoom into my area",
+      "clear": "Clear",
+      "clear_selection": "Clear selection",
+      "clear_all": "Clear all",
+      "reset": "Reset",
+      "reset_default": "Reset to default",
+      "close": "Close",
+      "select": "Select",
+      "here": "Here",
+      "no_entries": "No entries found",
+      "check_out": "Check out",
+      "no_data": "No data",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "maximum": "Maximum",
+      "minimum": "Minimum",
+      "sort": "Sort",
+      "asc_order": "Ascending order",
+      "desc_order": "Descending order",
+      "play": "Play",
+      "pause": "Pause",
+      "indicator": "Indicator",
+      "available_at": "Available at",
+      "accessed": "Accessed",
+      "last_modified": "Last modified",
+      "cited": "cited",
+      "available_from": "Available from",
+      "ranking": "Ranking ({{ count, number }})",
+      "charts": {
+       "heatmap": "Heatmap",
+       "table": "Table"
+      },
+      "banner": "",
+      "opendosm_banner": ""
+     },
+     "time": {
+      "daily_7d": "Daily (7d avg)",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "yearly": "Yearly"
+     },
+     "placeholder": {
+      "all": "All",
+      "search": "Search",
+      "state": "Select state",
+      "state_first": "Select a state first",
+      "district": "Select district",
+      "facility": "Select facility",
+      "facility_type": "Select facility type",
+      "no_results": "No results",
+      "loading": "Loading..."
+     },
+     "nav": {
+      "home": "Home",
+      "dashboards": "Dashboards",
+      "catalogue": "Data Catalogue",
+      "api_docs": "API Docs",
+      "about": "About",
+      "data_request": "Data Request",
+      "community": "Community",
+      "helpdesk": "Helpdesk",
+      "progress": "Progress",
+      "legacy": "Legacy Site",
+      "publications": "Publications",
+      "national_summary_data_page": "NSDP",
+      "pmo": "Prime Minister's Department",
+      "gov": "Government of Malaysia",
+      "open_source": "Open Source",
+      "open_data_portal": "Open Data Portal",
+      "frontend": "Frontend Repo: NextJS",
+      "backend": "Backend Repo: Django",
+      "uiux": "UI + UX Design: Figma",
+      "mampu": "MAMPU",
+      "open_data": "Open Data",
+      "public_open_data": "Public Sector Open Data",
+      "bond_sukuk": " Bond & Sukuk Info (BIX)",
+      "guiding_principles": "Guiding Principles",
+      "terms_of_use": "Terms of Use",
+      "ai": "AI Helper: OpenAI",
+      "moh_github": "MoH GitHub",
+      "jc3_climate": "Climate Data (JC3)",
+      "faq": "FAQ"
+     },
+     "components": {
+      "theme": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "brought_by": "Brought to you by",
+      "brought_by_the": "Brought to you by the",
+      "product_by_division": "A open data product by the",
+      "visit_portal": "Visit our portal",
+      "click_to_explore": "Click to explore",
+      "ovs": "Malaysian-born Overseas",
+      "try_datagpt": "Try the new DataGPT"
+     },
+     "categories": {
+      "construction": "Construction",
+      "democracy": "Democracy",
+      "demography": "Demography",
+      "digitalisation": "Digitalisation",
+      "economy": "Economy",
+      "education": "Education",
+      "environment": "Environment",
+      "financial_sector": "Financial Sector",
+      "government_programs": "Government Programs",
+      "healthcare": "Healthcare",
+      "public_finances": "Public Finances",
+      "public_safety": "Public Safety",
+      "transportation": "Transportation",
+      "national_accounts": "National Accounts",
+      "services": "Services",
+      "summary": "Summary Page",
+      "public_administration": "Public Administration",
+      "labour_markets": "Labour Market",
+      "producer_price": "Producer Prices",
+      "households": "Households",
+      "trade": "Trade"
+     },
+     "home": {
+      "category": "Malaysia's official open data portal",
+      "title": "High frequency. High granularity. High impact.",
+      "description": "Your one-stop centre to browse Malaysia's wealth of open data. Whether you're a regular citizen looking for information, a researcher looking for material, or an application developer looking for an API, we've got you covered. Our mission is to make Malaysia the #1 data-driven country in the world.",
+      "section_1": {
+       "title": "Explore our hottest dashboards!",
+       "description": "These dashboards have been getting attention, but don't forget to check out our full collection of dashboards!"
+      },
+      "section_2": {
+       "title": "Study our most popular datasets!",
+       "description": "To search for something specific, use our data catalogue - it allows you to download or programmatically access our datasets.",
+       "past_24h": "24 hours",
+       "past_month": "1 month",
+       "all_time": "All-time",
+       "dashboards": "Dashboards",
+       "datasets_available": "Datasets available",
+       "resource_views": "Resource views",
+       "resource_downloads": "Resource downloads",
+       "top_dashboards": "Most viewed dashboards",
+       "top_catalogues": "Most viewed datasets",
+       "top_files": "Most downloaded (data)",
+       "top_images": "Most downloaded (graphics)"
+      },
+      "section_3": {
+       "title": "Usage of data.gov.my",
+       "daily": "Daily",
+       "total": "Total"
+      },
+      "keys": {
+       "users": "Daily OpenAPI Usage",
+       "views": "Daily Views",
+       "downloads": "Daily Downloads"
+      }
+     }
+    },
+    "agencies": {
+     "aadk": {
+      "full": "National Anti-Drugs Agency",
+      "abbr": "AADK"
+     },
+     "audit": {
+      "full": "National Audit Department",
+      "abbr": "AUDIT"
+     },
+     "bnm": {
+      "full": "Central Bank of Malaysia",
+      "abbr": "BNM"
+     },
+     "bomba": {
+      "full": "Fire and Rescue Department of Malaysia",
+      "abbr": "BOMBA"
+     },
+     "doa": {
+      "full": "Department of Agriculture",
+      "abbr": "DOA"
+     },
+     "dosm": {
+      "full": "Department of Statistics Malaysia",
+      "abbr": "DOSM"
+     },
+     "epf": {
+      "full": "Employees Provident Fund",
+      "abbr": "EPF"
+     },
+     "epu": {
+      "full": "Ministry of the Economy",
+      "abbr": "EPU"
+     },
+     "govt": {
+      "full": "Government of Malaysia",
+      "abbr": "GOVT"
+     },
+     "icujpm": {
+      "full": "Internal Coordination Unit",
+      "abbr": "ICUJPM"
+     },
+     "imigresen": {
+      "full": "Immigration Department of Malaysia",
+      "abbr": "Imigresen"
+     },
+     "jakoa": {
+      "full": "Department of Orang Asli Development",
+      "abbr": "JAKOA"
+     },
+     "janm": {
+      "full": "Accountant-General's Department",
+      "abbr": "JANM"
+     },
+     "jas": {
+      "full": "Department of Environment",
+      "abbr": "JAS"
+     },
+     "jbg": {
+      "full": "Legal Aid Department",
+      "abbr": "JBG"
+     },
+     "jdn": {
+      "full": "Jabatan Digital Negara",
+      "abbr": "JDN"
+     },
+     "jpa": {
+      "full": "Public Service Department",
+      "abbr": "JPA"
+     },
+     "jpj": {
+      "full": "Road Transport Department",
+      "abbr": "JPJ"
+     },
+     "jpn": {
+      "full": "National Registration Department",
+      "abbr": "JPN"
+     },
+     "jps": {
+      "full": "Department of Irrigation and Drainage",
+      "abbr": "JPS"
+     },
+     "jmg": {
+      "full": "Department of Mineral and Geoscience",
+      "abbr": "JMG"
+     },
+     "kd": {
+      "full": "Ministry of Digital",
+      "abbr": "MOD"
+     },
+     "kdn": {
+      "full": "Ministry of Home Affairs",
+      "abbr": "KDN"
+     },
+     "kpdn": {
+      "full": "Ministry of Domestic Trade",
+      "abbr": "KPDN"
+     },
+     "kpkt": {
+      "full": "Ministry of Housing & Local Government",
+      "abbr": "KPKT"
+     },
+     "ktmb": {
+      "full": "Malayan Railways Limited",
+      "abbr": "KTMB"
+     },
+     "kwap": {
+      "full": "Retirement Fund Incorporated",
+      "abbr": "KWAP"
+     },
+     "lhdn": {
+      "full": "Inland Revenue Board of Malaysia",
+      "abbr": "LHDN"
+     },
+     "mafs": {
+      "full": "Ministry of Agriculture and Food Security",
+      "abbr": "MAFS"
+     },
+     "mampu": {
+      "full": "Malaysian Administrative Modernisation and Management Planning Unit",
+      "abbr": "MAMPU"
+     },
+     "mcmc": {
+      "full": "Malaysian Communications and Multimedia Commission",
+      "abbr": "MCMC"
+     },
+     "mers-999": {
+      "full": "Malaysian Emergency Response Services 999",
+      "abbr": "MERS 999"
+     },
+     "met": {
+      "full": "Malaysian Meteorology Department",
+      "abbr": "Met"
+     },
+     "moe": {
+      "full": "Ministry of Education",
+      "abbr": "MOE"
+     },
+     "mof": {
+      "full": "Ministry of Finance",
+      "abbr": "MOF"
+     },
+     "moh": {
+      "full": "Ministry of Health Malaysia",
+      "abbr": "MOH"
+     },
+     "mohe": {
+      "full": "Ministry of Higher Education",
+      "abbr": "MOHE"
+     },
+     "mot": {
+      "full": "Ministry of Transport",
+      "abbr": "MOT"
+     },
+     "mynic": {
+      "full": "Malaysian Network Information Centre Berhad",
+      "abbr": "MYNIC"
+     },
+     "mysa": {
+      "full": "Malaysian Space Agency",
+      "abbr": "MYSA"
+     },
+     "napic": {
+      "full": "National Property Information Centre",
+      "abbr": "NAPIC"
+     },
+     "npra": {
+      "full": "National Pharmaceutical Regulatory Agency",
+      "abbr": "NPRA"
+     },
+     "nres": {
+      "full": "Ministry of Natural Resources & Environmental Sustainability",
+      "abbr": "NRES"
+     },
+     "ntrc": {
+      "full": "National Transplant Resource Centre",
+      "abbr": "NTRC"
+     },
+     "parlimen": {
+      "full": "Parliament of Malaysia",
+      "abbr": "Parlimen"
+     },
+     "paynet": {
+      "full": "Payments Network Malaysia Sdn Bhd",
+      "abbr": "PayNet"
+     },
+     "penjara": {
+      "full": "Prison Department",
+      "abbr": "Penjara"
+     },
+     "perikanan": {
+      "full": "Department of Fisheries",
+      "abbr": "Perikanan"
+     },
+     "pdn": {
+      "full": "National Blood Centre",
+      "abbr": "PDN"
+     },
+     "pdrm": {
+      "full": "Royal Malaysia Police",
+      "abbr": "PDRM"
+     },
+     "perhutanan": {
+      "full": "Forestry Department of Peninsular Malaysia",
+      "abbr": "Perhutanan"
+     },
+     "perkeso": {
+      "full": "Social Security Organization",
+      "abbr": "PERKESO"
+     },
+     "phcorp": {
+      "full": "ProtectHealth Corporation",
+      "abbr": "PHCorp"
+     },
+     "prasarana": {
+      "full": "Prasarana Malaysia",
+      "abbr": "Prasarana"
+     },
+     "sesb": {
+      "full": "Sabah Electricity Sdn. Bhd.",
+      "abbr": "SESB"
+     },
+     "spr": {
+      "full": "Election Commission of Malaysia",
+      "abbr": "SPR"
+     },
+     "span": {
+      "full": "The National Water Services Commission",
+      "abbr": "SPAN"
+     },
+     "ssm": {
+      "full": "Companies Commission of Malaysia",
+      "abbr": "SSM"
+     },
+     "st": {
+      "full": "Energy Commission of Malaysia",
+      "abbr": "ST"
+     },
+     "swk-energy": {
+      "full": "Sarawak Energy Berhad",
+      "abbr": "SWK-ENERGY"
+     },
+     "tnb": {
+      "full": "Tenaga Nasional Berhad",
+      "abbr": "TNB"
+     },
+     "unhcr": {
+      "full": "United Nations High Commissioner for Refugees",
+      "abbr": "UNHCR"
+     }
+    },
+    "division": {
+     "bipd": {
+      "full": "Integration and Data Management Division",
+      "abbr": "BIPD"
+     },
+     "bkp": {
+      "full": "Management Services Division",
+      "abbr": "BKP"
+     },
+     "bmp": {
+      "full": "Methology & Research Division",
+      "abbr": "BMP"
+     },
+     "bpan": {
+      "full": "National Accounts Division",
+      "abbr": "BPAN"
+     },
+     "bpe": {
+      "full": "Economic Indicators Division",
+      "abbr": "BPE"
+     },
+     "bphpp": {
+      "full": "Price, Income & Expenditure Statistics Division",
+      "abbr": "BPHPP"
+     },
+     "bpip": {
+      "full": "Balance of Payments Statistics Division",
+      "abbr": "BPIP"
+     },
+     "bpksa": {
+      "full": "Strategic Communication & International Division",
+      "abbr": "BPKSA"
+     },
+     "bpm": {
+      "full": "Information Management Division",
+      "abbr": "BPM"
+     },
+     "bpp": {
+      "full": "Services Statistics Division",
+      "abbr": "BPP"
+     },
+     "bppa": {
+      "full": "International Trade Statistics Division",
+      "abbr": "BPPA"
+     },
+     "bppas": {
+      "full": "Agricultural & Environment Statistics Division",
+      "abbr": "BPPAS"
+     },
+     "bppd": {
+      "full": "Population & Demographic Statistics Division",
+      "abbr": "BPPD"
+     },
+     "bppib": {
+      "full": "Industrial Production & Construction Division",
+      "abbr": "BPPIB"
+     },
+     "bptms": {
+      "full": "Manpower & Social Statistics Division",
+      "abbr": "BPTMS"
+     },
+     "ilsm": {
+      "full": "Malaysia Statistical Training Institute",
+      "abbr": "ILSM"
+     },
+     "mbls": {
+      "full": "Malaysian Bureau of Labour Statistics",
+      "abbr": "MBLS"
+     },
+     "kpdn": {
+      "full": "Ministry of Domestic Trade",
+      "abbr": "KPDN"
+     }
+    },
+    "dashboards": {
+     "header": "Dashboards",
+     "description": "Your one-stop interface to explore data-driven insights and analytics on all areas of the public sector, powered by the data made open on this site.",
+     "description_agency": "Your one-stop interface to explore data-driven insights and analytics on the core work of {{ agency }}, powered by the data they make open on this site.",
+     "source_placeholder": "Agency",
+     "search_placeholder": "Search for dashboards",
+     "section1_title": "Most popular Dashboards",
+     "section2_title": "All dashboards",
+     "tabs": {
+      "thematic": "By Theme",
+      "most_popular": "Most Popular",
+      "recent_updated": "Recently Updated"
+     },
+     "categories": {
+      "healthcare": "Healthcare",
+      "transport": "Transport",
+      "demography": "Demography",
+      "public-finances": "Public Finances",
+      "public-administration": "Public Administration",
+      "economy": "Economy",
+      "public-safety": "Public Safety",
+      "financial-sector": "Financial Sector",
+      "democracy": "Democracy",
+      "environment": "Environment",
+      "digitalisation": "Digitalisation",
+      "government-programs": "Government Programs",
+      "education": "Education",
+      "infectious-diseases": "Infectious Diseases",
+      "healthcare-resources": "Healthcare Resources",
+      "healthcare-programs": "Healthcare Programs",
+      "national-accounts": "National Accounts",
+      "services": "Services",
+      "labour_markets": "Labour Market",
+      "producer_price": "Producer Prices",
+      "trade": "Trade"
+     },
+     "dashboards": {
+      "birthday-explorer": {
+       "name": "Birthday Popularity",
+       "description": "Interactive explorer of birth registration data since 1920, allowing you to discover fun facts about your date of birth!"
+      },
+      "orang-asli": {
+       "name": "The Indigenous Peoples",
+       "description": "Annual kampung-level census of Peninsular Malaysia's original inhabitants, with breakdowns by key demographics."
+      },
+      "immigration": {
+       "name": "Immigration",
+       "description": "Monthly foreign arrivals in Malaysia by nationality."
+      },
+      "ktmb-explorer": {
+       "name": "KTMB Explorer",
+       "description": "Interactive explorer of daily ridership on KTMB services, allowing you to explore ridership from any origin to any destination!"
+      },
+      "rapid-explorer": {
+       "name": "Rapid Rail Explorer",
+       "description": "Interactive explorer of daily Rapid Rail ridership, allowing you to explore any origin-destination pairing!"
+      },
+      "rapid-bus-rail": {
+       "name": "Rapid Rail Explorer",
+       "description": "Interactive explorer of daily ridership on Rapid Rail services, allowing you to explore ridership from any origin to any destination!"
+      },
+      "car-popularity": {
+       "name": "Car Popularity Explorer",
+       "description": "Interactive explorer of car registration data, allowing you to discover trends for any maker or model!"
+      },
+      "vehicle-registrations": {
+       "name": "Vehicle Registrations",
+       "description": "Macro view of vehicle registrations for policymakers, with breakdowns by fuel type and vehicle type."
+      },
+      "public-transportation": {
+       "name": "Public Transportation",
+       "description": "Monthly ridership data from all key public transport operators nationwide, with breakdowns by service."
+      },
+      "covid-19": {
+       "name": "COVID-19",
+       "description": "Weekly surveillance of COVID-19 in Malaysia at state level, covering cases, hospitalisations, and deaths."
+      },
+      "covid-vaccination": {
+       "name": "COVID-19 Vaccination",
+       "description": "Daily COVID-19 vaccination activity by dose type and age group, including vaccination coverage rates across the country."
+      },
+      "blood-donation": {
+       "name": "Blood Donation",
+       "description": "Daily blood donation activity at national and state level, with breakdowns by key demographics including blood type."
+      },
+      "organ-donation": {
+       "name": "Organ Donation",
+       "description": "Daily organ donation pledges and nationwide pledger rates, with breakdowns by key demographics."
+      },
+      "peka-b40": {
+       "name": "Peka B40",
+       "description": "Daily screenings under the PeKA B40 program, including screening rates for the target population across the country."
+      },
+      "hospital-bed-utilisation": {
+       "name": "Hospital Bed Utilisation",
+       "description": "Daily bed utilisation at hospital level, covering utilisation for critical and non-critical care beds on a daily basis."
+      },
+      "weather-and-climate": {
+       "name": "Weather and Climate",
+       "description": "10 years of rainfall and temperature data from the 42 major weather stations in Malaysia."
+      },
+      "income-taxation": {
+       "name": "Income Taxation",
+       "description": "Interactive explorer of granular income tax data, allowing you to compare yourself against other Malaysian taxpayers!"
+      },
+      "jobless-claims": {
+       "name": "Jobless Claims",
+       "description": "Daily claims from the Employment Insurance System (EIS), with breakdowns by key demographics."
+      },
+      "social-security": {
+       "name": "Jobless Claims",
+       "description": "Daily claims from the Employment Insurance System (EIS), with breakdowns by key demographics."
+      },
+      "business-creation-destruction": {
+       "name": "Business Creation and Destruction",
+       "description": "Monthly trends in business creation and destruction, derived from SSM's authoritative database of businesses and companies."
+      },
+      "international-reserves": {
+       "name": "International Reserves",
+       "description": "Biweekly surveillance of Bank Negara Malaysia's international reserves, covering key sufficiency indicators."
+      },
+      "reserve-money": {
+       "name": "Reserve Money",
+       "description": "Monthly evolution of key reserve money measures, including factors affecting reserve money."
+      },
+      "money-supply": {
+       "name": "Money Supply",
+       "description": "Monthly evolution of the money supply, covering M1, M2, M3, and their components."
+      },
+      "currency-in-circulation": {
+       "name": "Currency in Circulation",
+       "description": "Monthly evolution of currency in circulation, with breakdowns by denomination of notes and coins."
+      },
+      "household-debt": {
+       "name": "Household Debt",
+       "description": "Monthly surveillance of lending activity, covering loans applied, approved, disbursed and repaid, broken down by purpose."
+      },
+      "interest-rates": {
+       "name": "Interest Rates",
+       "description": "Monthly surveillance of key interest rates, including the OPR, base lending rate, and fixed deposit rate."
+      },
+      "electronic-payments": {
+       "name": "Electronic Payments",
+       "description": "Monthly surveillance of e-payments in Malaysia, covering key payment instruments, channels, and systems."
+      },
+      "exchange-rates": {
+       "name": "Exchange Rates",
+       "description": "Daily rate of exchange of MYR against currencies of 24 major trading partners, including USA, China, UK, and Singapore."
+      },
+      "drug-addiction": {
+       "name": "Drug Addiction",
+       "description": "Annual data on drug and substance abuses cases, with breakdowns by key demographics and drug category."
+      },
+      "fire-and-rescue": {
+       "name": "Fire and Rescue",
+       "description": "Monthly data on fire and rescue operations at national and state level, broken down by incident type."
+      },
+      "internet-penetration": {
+       "name": "Internet Penetration",
+       "description": "Monthly broadband traffic and internet penetration data, broken down by type of broadband."
+      },
+      "retirement-readiness": {
+       "name": "Retirement Readiness",
+       "description": "—"
+      },
+      "sekolahku": {
+       "name": "Sekolahku",
+       "description": "—"
+      },
+      "name-popularity": {
+       "name": "Baby Name Popularity",
+       "description": "—"
+      },
+      "refugee-situation": {
+       "name": "Malaysia's Refugee Situation",
+       "description": "—"
+      },
+      "healthcare-facilities": {
+       "name": "Healthcare Facilities",
+       "description": "—"
+      },
+      "covidnow-data": {
+       "name": "Data on COVIDNOW",
+       "description": "—"
+      },
+      "emergency-response": {
+       "name": "Emergency Response",
+       "description": "—"
+      },
+      "circle-of-life": {
+       "name": "The Circle of Life",
+       "description": "—"
+      },
+      "civil-service": {
+       "name": "The Civil Service",
+       "description": "—"
+      },
+      "crime": {
+       "name": "Crime",
+       "description": "—"
+      },
+      "election-explorer": {
+       "name": "Election Explorer",
+       "description": "—"
+      },
+      "flood-warning": {
+       "name": "Flood Warning",
+       "description": "—"
+      },
+      "government-site-tracker": {
+       "name": "Government Site Tracker",
+       "description": "—"
+      },
+      "ipr": {
+       "name": "The People's Income Initiative (IPR)",
+       "description": "—"
+      },
+      "passport-and-passes": {
+       "name": "Passport and Passes",
+       "description": "—"
+      },
+      "poverty": {
+       "name": "Poverty",
+       "description": "—"
+      },
+      "public-contracting": {
+       "name": "Public Contracting",
+       "description": "—"
+      },
+      "public-pension": {
+       "name": "Public Pensions",
+       "description": "—"
+      },
+      "gdp": {
+       "name": "Gross Domestic Product (GDP)",
+       "description": "Quarterly economic growth, covering real and nominal GDP by expenditure and economic activity."
+      },
+      "consumer-prices": {
+       "name": "Consumer Prices",
+       "description": "Monthly CPI inflation at national and state level, covering headline CPI, core CPI, and CPI by category."
+      },
+      "labour-market": {
+       "name": "Labour Markets",
+       "description": "Monthly Labour Force Survey (LFS) report, covering unemployment, participation, and nature of employment."
+      },
+      "composite-index": {
+       "name": "Composite Indices",
+       "description": "Monthly leading, coincident, and lagging indicators for the Malaysian economy's performance."
+      },
+      "composite-indices": {
+       "name": "Composite Indices",
+       "description": "Monthly leading, coincident, and lagging indicators of the Malaysian economy's performance."
+      },
+      "wholesale-retail": {
+       "name": "Wholesale & Retail Trade",
+       "description": "Monthly wholesale and retail trade performance, including the performance of motor vehicle sales."
+      },
+      "wholesale-retail-trade": {
+       "name": "Wholesale & Retail Trade",
+       "description": "Monthly wholesale and retail trade performance, including the performance of motor vehicle sales."
+      },
+      "industrial-production": {
+       "name": "Industrial Production",
+       "description": "Monthly industrial production performance, covering mining, manufacturing, and electricity production."
+      },
+      "producer-prices": {
+       "name": "Producer Prices",
+       "description": "Monthly PPI inflation, covering producer prices for all main economic sectors except services and construction."
+      },
+      "kawasanku": {
+       "name": "Kawasanku",
+       "description": "Census 2020 data at national, state, district, parliament, and state legislative assembly (DUN) level."
+      },
+      "iip": {
+       "name": "International Investment Position (IIP)",
+       "description": "Quarterly statement of Malaysia's external financial assets and liabilities; the IIP shows stocks while the BOP shows flows."
+      },
+      "international-investment-position": {
+       "name": "International Investment Position (IIP)",
+       "description": "Quarterly statement of Malaysia's external financial assets and liabilities; the IIP shows stocks while the BOP shows flows."
+      },
+      "bop": {
+       "name": "Balance of Payments",
+       "description": "Quarterly statement of Malaysia's transactions with other nations; the BOP shows flows while the IIP shows stocks."
+      },
+      "balance-of-payments": {
+       "name": "Balance of Payments",
+       "description": "Quarterly statement of Malaysia's transactions with other nations; the BOP shows flows while the IIP shows stocks."
+      },
+      "manufacturing-statistics": {
+       "name": "Manufacturing Statistics",
+       "description": "Monthly performance of manufacturing subsectors, covering sales, employment, and wages."
+      },
+      "labour-productivity": {
+       "name": "Labour Productivity",
+       "description": "Quarterly labour productivity across all key economic sectors, covering time-based and worker-based productivity."
+      },
+      "formal-sector-wages": {
+       "name": "Formal Sector Wages",
+       "description": "Quarterly formal sector wages at national and state level, based on administrative data from EPF and SOCSO"
+      },
+      "services-statistics": {
+       "name": "Services Statistics",
+       "description": "Quarterly performance of services sub-sectors, covering sales, employment, and wages."
+      },
+      "services-producer-prices": {
+       "name": "Services Producer Prices",
+       "description": "Quarterly producer prices in the services sector, complementing the PPI which does not cover the services sector."
+      },
+      "construction-statistics": {
+       "name": "Construction Statistics",
+       "description": "Quarterly surveillance of construction projects in the public and private sectors."
+      },
+      "household-income-expenditure": {
+       "name": "Household Income & Expenditure",
+       "description": "Household income and expenditure at national, state and district level, updated with the latest data from the 2022 survey."
+      },
+      "population": {
+       "name": "Population of Malaysia",
+       "description": "Annual population of Malaysia from 1970 to the present, including vital statistics on births and deaths."
+      },
+      "external-trade": {
+       "name": "External Trade",
+       "description": "Monthly external trade statistics and indices, covering exports, imports, the trade balance, and terms of trade."
+      },
+      "life-expectancy": {
+       "name": "Life Expectancy",
+       "description": "Annual data on life expectancy from 1957 to the present, with breakdowns by state and demographic group."
+      },
+      "wellbeing": {
+       "name": "Well-Being",
+       "description": "Annual well-being of Malaysians from 2000 to the present, covering key economic and social components."
+      },
+      "padu-tracker": {
+       "name": "Pangkalan Data Utama (PADU)",
+       "description": "—"
+      },
+      "digital-economy": {
+       "name": "Digital Economy",
+       "description": "Annual performance of e-commerce and the ICT sector, as well as businesses' and households' usage of ICT tools."
+      },
+      "house-prices": {
+       "name": "House Prices",
+       "description": "This dashboard uses NAPIC’s authoritative data to give you an easy way to understand house price trends."
+      }
+     }
+    }
+   }
+  },
+  "initialLocale": "en-GB",
+  "ns": [
+   "catalogue",
+   "common",
+   "agencies",
+   "division",
+   "dashboards"
+  ],
+  "userConfig": null
+ },
+ "_source_base": "https://open.dosm.gov.my"
+}

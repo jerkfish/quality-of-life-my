@@ -1,0 +1,235 @@
+population_malaysia	Population Table: Malaysia	Population at national level from 1970 to 2026, by sex, age group and ethnicity. The preview table shows data for the latest year only, but you may download the data in full.
+population_state	Population Table: States	Population at state level from 1970 to 2026, by sex, age group and ethnicity. The preview table shows data for the latest year only, but you may download the data in full.
+population_district	Population Table: Administrative Districts	Population at district level from 2020 to 2026, by sex, age group and ethnicity. The preview table shows data for the latest year only, but you may download the data in full.
+population_parlimen	Population Table: Parliamentary Constituencies	Population at parliamentary constituency level from 2020 to 2022, with breakdowns by sex and nationality. The preview table shows data for the latest year only, but you may download the data in full.
+population_dun	Population Table: State Legislative Assemblies (DUNs)	Population at state legislative assembly (DUN) level from 2020 to 2022, with breakdowns by sex and nationality. The preview table shows data for the latest year only, but you may download the data in full.
+births_annual	Annual Live Births	Annual number of births with signs of life upon delivery.
+births_annual_state	Annual Live Births by State	Annual number of births with signs of life upon delivery, by state.
+births_annual_sex_ethnic	Annual Live Births by Sex & Ethnicity	Annual number of births with signs of life upon delivery, with breakdowns by sex and ethnic group.
+births_annual_sex_ethnic_state	Annual Live Births by State, Sex, & Ethnicity	Annual number of births with signs of life upon delivery, with breakdowns by sex, ethnic group and state.
+births_district_sex	Annual Live Births by District & Sex	Annual number of births with signs of life upon delivery, by district and sex.
+stillbirths	Annual Stillbirths	Annual number of stillbirths recorded by the Ministry of Health.
+stillbirths_state	Annual Stillbirths by State	Annual number of stillbirths recorded by the Ministry of Health, by state.
+deaths	Annual Deaths	Annual number of deaths registered with JPN.
+deaths_state	Annual Deaths by State	Annual number of deaths registered with JPN, by state.
+deaths_sex_ethnic	Annual Deaths by Sex & Ethnicity	Annual number of deaths, with breakdowns by sex and ethnic group.
+deaths_sex_ethnic_state	Annual Deaths by State, Sex, & Ethnicity	Annual number of deaths, with breakdowns by sex, ethnic group and state.
+deaths_district_sex	Annual Deaths by District & Sex	Annual number and rate of deaths by administrative district and sex.
+deaths_early_childhood	Annual Early Childhood Deaths	Annual number of deaths aged less than 5 year old, broken down into perinatal, neonatal, infant and toddler deaths.
+deaths_early_childhood_sex	Annual Early Childhood Deaths by Sex	Annual number of deaths aged less than 5 year old by sex, broken down into neonatal and infant deaths.
+deaths_early_childhood_state	Annual Early Childhood Deaths by State	Annual number of deaths aged less than 5 year old by state, broken down into perinatal, neonatal, infant and toddler deaths.
+deaths_early_childhood_state_sex	Annual Early Childhood Deaths by State & Sex	Annual number of deaths aged less than 5 year old by state and sex, broken down into neonatal and infant deaths.
+deaths_maternal	Annual Maternal Deaths	Annual number of deaths of women during pregnancy or childbirth.
+deaths_maternal_state	Annual Maternal Deaths by State	Annual number of deaths of women during pregnancy or childbirth, by state.
+marriages	Annual Marriages	Number of marriages registered annually in Malaysia, including marriage rates per 1,000 unmarried population.
+marriages_age	Annual Marriage by Age Group	Number of marriages registered annually in Malaysia by age group, including marriage rates per 1,000 unmarried population.
+marriages_state	Annual Marriages by State	Number of marriages registered annually by state of residence, including marriage rates per 1,000 unmarried population.
+marriages_state_age	Annual Marriage by State & Age Group	Number of marriages registered annually by state and age group, including marriage rates per 1,000 unmarried population.
+life_expectancy	Life Expectancy by Sex & Ethnicity	Life expectancy at birth in Malaysia, with breakdowns by sex and ethnic group.
+life_expectancy_state	Life Expectancy by State & Sex	Life expectancy at birth by state and sex.
+life_expectancy_state_ethnic	Life Expectancy by State, Sex, & Ethnicity	Life expectancy at birth by state, sex and ethnic group.
+life_expectancy_district	Life Expectancy by District & Sex	Life expectancy at birth by administrative district and sex.
+lifetables	Life Tables by Sex & Ethnicity	Abridged life tables for Malaysia by sex, ethnic group and age group. The preview table shows data for the latest year only, but you may download the data in full.
+lifetables_state	Life Tables by State & Sex	Abridged life tables by state, sex and age group. The preview table shows data for the latest year only, but you may download the data in full.
+lifetables_district	Life Tables by District & Sex	Abridged life tables by administrative district, sex and age group. The preview table shows data for the latest year only, but you may download the data in full.
+fertility	TFR and ASFR	Total fertility rate (TFR) and age-specific fertility rates (ASFR) from 1958 to the present at national level.
+fertility_state	TFR and ASFR by State	Total fertility rate (TFR) and age-specific fertility rates (ASFR) by state.
+hh_profile	Number of Households and Living Quarters	Number of households and living quarters in Malaysia from 1970 to 2024.
+hh_profile_state	Number of Households and Living Quarters by State	Number of households and living quarters by state from 1970 to 2024.
+hh_income	Household Income	Mean and median monthly gross household income in Malaysia from 1970 to 2024.
+hies_malaysia_percentile	Household Income by Percentile	Percentile-resolution household income data at national level.
+hh_income_state	Household Income by State	Mean and median gross monthly household income by state from 1970 to 2024.
+hies_state_percentile	Household Income by State & Percentile	Percentile-resolution household income data at state level.
+hh_income_district	Household Income by Administrative District	Mean and median gross monthly household income by administrative district from 2019 to 2024.
+hh_income_parlimen	Household Income by Parliament	Mean and median gross monthly household income by parliamentary constituency from 2019 to 2024.
+hh_income_dun	Household Income by DUN	Mean and median gross monthly household income by DUN constituency from 2019 to 2024.
+hh_poverty	Poverty	Poverty rates in Malaysia from 1970 to 2024.
+hh_poverty_state	Poverty by State	Poverty rates by state from 1970 to 2024.
+hh_poverty_district	Poverty by Administrative District	Poverty rates by administrative district from 2019 to 2024.
+hh_poverty_parlimen	Poverty by Parliament	Poverty rates by parliamentary constituency from 2019 to 2024.
+hh_poverty_dun	Poverty by DUN	Poverty rates by DUN constituency from 2019 to 2024.
+hh_inequality	Income Inequality	Gini coefficient for Malaysia from 1970 to 2024.
+hh_inequality_state	Income Inequality by State	Gini coefficient by state from 1974 to 2024.
+hh_inequality_district	Income Inequality by District	Gini coefficient by administrative district from 2019 to 2024.
+hh_inequality_parlimen	Income Inequality by Parliament	Gini coefficient by parliamentary constituency from 2019 to 2024.
+hh_inequality_dun	Income Inequality by DUN	Gini coefficient at DUN constituency level from 2019 to 2024.
+hies_state	Household Income and Expenditure: States	This dataset tabulates household-level income, expenditure, poverty, and income inequality at state level. It is based on the Household Income & Expenditure Surveys (HIES) carried in 2022.
+hies_district	Household Income and Expenditure: Administrative Districts	This dataset tabulates household-level income, expenditure, poverty, and income inequality at administrative district level. It is based on the Household Income & Expenditure Surveys (HIES) carried in 2022.
+hh_expenditure_parlimen	Household Expenditure by Parliament	Mean gross monthly household expenditure by parliamentary constituency from 2019 to 2024.
+hh_expenditure_dun	Household Expenditure by DUN	Mean gross monthly household expenditure by DUN constituency from 2019 to 2024.
+hh_access_amenities	Access to Basic Amenities by State & District	Proportion of households with access to basic amenities such as electricity, piped water, and sanitary latrines by state and district.
+hh_access_internet	Household Access to Internet by State & Strata	Percentage of households with access to the Internet by state and strata.
+icths_internet_sex	Internet Use by State & Sex	Percentage of individuals using the Internet by state and sex.
+icths_internet_strata	Internet Use by State & Strata	Percentage of individuals using the Internet by state and strata.
+icths_internet_device	Internet Use by Type of Portable Device	Percentage of individuals using the Internet by type of portable device used, by state and strata.
+icths_mobile_sex	Mobile Phone Ownership by State & Sex	Percentage of individuals owning a mobile phone by state and sex.
+gdp_gni_annual_nominal	Annual Nominal GDP & GNI: 1947 to Present	Long time series of annual nominal gross domestic product (GDP) and gross national income (GNI), including per capita values.
+gdp_gni_annual_real	Annual Real GDP & GNI: 1970 to Present	Long time series of annual real gross domestic product (GDP) and gross national income (GNI), including per capita values.
+gdp_annual_nominal_supply	Annual Nominal GDP by Economic Sector	Annual gross domestic product (GDP) at current prices for the 5 main economic sectors.
+gdp_annual_nominal_supply_granular	Annual Nominal GDP by Economic Subsector	Annual gross domestic product (GDP) at current prices by economic subsector. The table provides a preview of the full dataset using the latest year's data only.
+gdp_annual_nominal_demand	Annual Nominal GDP by Expenditure Type	Annual gross domestic product (GDP) at current prices, by expenditure type.
+gdp_annual_nominal_demand_granular	Annual Nominal GDP by Expenditure Subtype	Annual gross domestic product (GDP) at current prices, by expenditure type and subtype. The table provides a preview of the full dataset using the latest year's data only.
+gdp_annual_nominal_income	Annual Nominal GDP by Income Component	Annual gross domestic product (GDP) at current prices, by income component.
+gdp_annual_real_supply	Annual Real GDP by Economic Sector	Annual gross domestic product (GDP) at constant 2015 prices for the 5 main economic sectors.
+gdp_annual_real_supply_granular	Annual Real GDP by Economic Subsector	Annual gross domestic product (GDP) at constant 2015 prices by economic subsector. The table provides a preview of the full dataset using the latest year's data only.
+gdp_annual_real_demand	Annual Real GDP by Expenditure Type	Annual gross domestic product (GDP) at constant 2015 prices, by expenditure type.
+gdp_annual_real_demand_granular	Annual Real GDP by Expenditure Subtype	Annual gross domestic product (GDP) at constant 2015 prices, by expenditure type and subtype. The table provides a preview of the full dataset using the latest year's data only.
+gdp_qtr_nominal	Quarterly Nominal GDP	Quarterly gross domestic product (GDP) at current prices.
+gdp_qtr_nominal_supply	Quarterly Nominal GDP by Economic Sector	Quarterly gross domestic product (GDP) at current prices for the 5 main economic sectors.
+gdp_qtr_nominal_supply_granular	Quarterly Nominal GDP by Economic Subsector	Quarterly gross domestic product (GDP) at current prices by economic subsector. The table provides a preview of the full dataset using the latest year's data only.
+gdp_qtr_nominal_demand	Quarterly Nominal GDP by Expenditure Type	Quarterly gross domestic product (GDP) at current prices, by expenditure type.
+gdp_qtr_nominal_demand_granular	Quarterly Nominal GDP by Expenditure Subtype	Quarterly gross domestic product (GDP) at current prices, by expenditure type and subtype. The table provides a preview of the full dataset using the latest year's data only.
+gdp_qtr_real	Quarterly Real GDP	Quarterly gross domestic product (GDP) at constant 2015 prices.
+gdp_qtr_real_supply	Quarterly Real GDP by Economic Sector	Quarterly gross domestic product (GDP) at constant 2015 prices for the 5 main economic sectors.
+gdp_qtr_real_supply_granular	Quarterly Real GDP by Economic Subsector	Quarterly gross domestic product (GDP) at constant 2015 prices by economic subsector. The table provides a preview of the full dataset using the latest year's data only.
+gdp_qtr_real_demand	Quarterly Real GDP by Expenditure Type	Quarterly gross domestic product (GDP) at constant 2015 prices, by expenditure type.
+gdp_qtr_real_demand_granular	Quarterly Real GDP by Expenditure Subtype	Quarterly gross domestic product (GDP) at constant 2015 prices, by expenditure type and subtype. The table provides a preview of the full dataset using the latest year's data only.
+gdp_qtr_real_sa	Quarterly Real GDP (Seasonally Adjusted)	Seasonally adjusted quarterly gross domestic product (GDP) at constant 2015 prices.
+gdp_qtr_real_sa_supply	Quarterly Real GDP (Seasonally Adjusted) by Economic Sector	Seasonally adjusted quarterly gross domestic product (GDP) at constant 2015 prices for the 5 main economic sectors.
+gdp_qtr_real_sa_demand	Quarterly Real GDP (Seasonally Adjusted) by Expenditure Type	Seasonally adjusted quarterly gross domestic product (GDP) at constant 2015 prices, by expenditure type.
+gdp_state_real_supply	Annual Real GDP by State & Economic Sector	Annual state-level gross domestic product (GDP) at constant 2015 prices for the 5 main economic sectors.
+gdp_district_real_supply	Annual Real GDP by District & Economic Sector	Annual district-level gross domestic product (GDP) at constant 2015 prices for the 5 main economic sectors.
+gdp_lookup	Lookup Table: GDP	Lookup table, to be left-joined against other GDP datasets if specified.
+bop_balance	Balance of Key BOP Components	Overall balance of the 4 main components of Malaysia's balance of payments (BOP).
+fdi_flows	Foreign Direct Investment (FDI) Flows	Inflows, outflows, and net flows of foreign direct investment (FDI) into Malaysia.
+schools_district	Public Education Institutions by District	Number of primary, secondary, and tertiary public education institutions at national, state, and district level.
+teachers_district	Teachers in Government Schools by District	Number of teachers in primary and secondary government schools at national, state, and district level.
+lecturers_uni	Lecturers in Public Universities by Citizenship & Sex	Number of lecturers in public universities at national and state level, broken down by citizenship and sex.
+enrolment_school_district	Enrolment in Government Schools by District	Number of students enrolled in primary, secondary, and post-secondary government schools at national, state, and district level.
+completion_school_state	School Completion Rates by State	Proportion of students who complete primary, lower secondary, and upper secondary education at national and state level.
+completion_school_district	School Completion Rates by District	Proportion of students who complete primary, lower secondary, and upper secondary education at state and district level.
+crime_district	Crimes by District & Crime Type	Number of crimes in Malaysia by district, crime category, and type of crime.
+prisoners_state	Prisoners by State and Sex	Number of prisoners in Malaysia by state and sex from 2017 to 2024.
+prisoners_prison	Prisoners by Prison Centre and Sex	Number of prisoners in Malaysia by prison centre and sex from 2017 to 2024.
+lfs_month	Monthly Principal Labour Force Statistics	Monthly principal labour force statistics, including unemployment and participation rates.
+lfs_month_sa	Monthly Principal Labour Force Statistics, Seasonally Adjusted	Seasonally adjusted monthly principal labour force statistics, including unemployment and participation rates.
+lfs_month_status	Monthly Employment by Status in Employment	Breakdown of employment into employers, employees, own-account workers and unpaid family workers.
+lfs_month_duration	Monthly Unemployment by Duration	Breakdown of monthly unemployed figures by duration of unemployment.
+lfs_month_youth	Monthly Youth Unemployment	Monthly unemployment statistics focusing on the 15-30 age group.
+lfs_qtr	Quarterly Principal Labour Force Statistics	Quarterly principal labour force statistics, including unemployment and participation rates.
+lfs_qtr_sru_age	Quarterly Skills-Related Underemployment by Age	Number and proportion of working individuals with tertiary education working in a semi-skilled or low-skilled job, broken down by age group.
+lfs_qtr_sru_sex	Quarterly Skills-Related Underemployment by Sex	Number and proportion of working individuals with tertiary education working in a semi-skilled or low-skilled job, broken down by sex.
+lfs_qtr_tru_age	Quarterly Time-Related Underemployment by Age	Number and proportion of working individuals who worked less than 30 hours per week even though they were willing to work more, i.e. due to unavailability of work.
+lfs_qtr_tru_sex	Quarterly Time-Related Underemployment by Sex	Number and proportion of working individuals who worked less than 30 hours per week even though they were willing to work more, i.e. due to unavailability of work.
+lfs_qtr_state	Quarterly Principal Labour Force Statistics by State	Quarterly principal labour force statistics by state, including unemployment and participation rates.
+lfs_year	Annual Principal Labour Force Statistics	Annual principal labour force statistics, including unemployment and participation rates.
+lfs_year_sex	Annual Principal Labour Force Statistics by Sex	Annual principal labour force statistics by sex, including unemployment and participation rates.
+lfs_state_sex	Annual Principal Labour Force Statistics by State & Sex	Annual principal labour force statistics at state level by sex, including unemployment and participation rates.
+lfs_district	Annual Principal Labour Force Statistics by District	Annual principal labour force statistics at district level, including unemployment and participation rates.
+lfs_parlimen	Annual Principal Labour Force Statistics by Parliament	Annual principal labour force statistics at Parliament constituency level, including unemployment and participation rates.
+lfs_dun	Annual Principal Labour Force Statistics by DUN	Annual principal labour force statistics at DUN constituency level, including unemployment and participation rates.
+employment_sector	Employment by MSIC Sector and Sex	Annual distribution of employment by MSIC sector and sex.
+wages_age	Annual Salaries & Wages by Age Group & Sex	Number of recipients, median and mean monthly salaries & wages of employees who are Malaysian citizens by age group and sex.
+wages_education	Annual Salaries & Wages by Educational Attainment & Sex	Number of recipients, median and mean monthly salaries & wages of employees who are Malaysian citizens by educational attainment and sex.
+wages_certificate	Annual Salaries & Wages by Highest Certificate & Sex	Number of recipients, median and mean monthly salaries & wages of employees who are Malaysian citizens by highest certificate obtained and sex.
+wages_strata	Annual Salaries & Wages by Strata & Sex	Number of recipients, median and mean monthly salaries & wages of employees who are Malaysian citizens by strata and sex.
+wages_state	Annual Salaries & Wages by State & Sex	Number of recipients, median and mean monthly salaries & wages of employees who are Malaysian citizens by state and sex.
+wages_occupation	Annual Salaries & Wages by Occupation & Sex	Number of recipients, median and mean monthly salaries & wages of employees who are Malaysian citizens by occupation and sex.
+wages_skill	Annual Salaries & Wages by Skill Category & Sex	Number of recipients, median and mean monthly salaries & wages of employees who are Malaysian citizens by skill category and sex.
+wages_industry	Annual Salaries & Wages by Industry & Sex	Number of recipients, median and mean monthly salaries & wages of employees who are Malaysian citizens by industry and sex.
+wages_sector	Annual Salaries & Wages by Sector & Sex	Number of recipients, median and mean monthly salaries & wages of employees who are Malaysian citizens by sector and sex.
+wages_ethnicity	Annual Salaries & Wages by Ethnicity & Sex	Number of recipients, median and mean monthly salaries & wages of all employees, both Malaysian citizens and non-citizens, by ethnic group and sex.
+wages_noncitizen	Annual Salaries & Wages of Non-Citizens by Sex & Strata	Number of recipients, median and mean monthly salaries & wages of employees who are non-citizens, by sex and by strata.
+wages_noncitizen_education	Annual Salaries & Wages of Non-Citizens by Educational Attainment	Number of recipients, median and mean monthly salaries & wages of employees who are non-citizens by educational attainment.
+wages_real_state	Annual Real Salaries & Wages by State	Real median and mean monthly salaries & wages of all employees, both Malaysian citizens and non-citizens, by state, at 2010 prices.
+wages_real_state_citizen	Annual Real Salaries & Wages of Citizens by State	Real median and mean monthly salaries & wages of employees who are Malaysian citizens by state, at 2010 prices.
+formal_wages	Monthly Formal Sector Wages by Sex, Ethnicity & Age	Number of formal employees and median monthly wages of employees who are Malaysian citizens, overall and by sex, ethnicity or age group.
+formal_wages_msic	Monthly Formal Sector Wages by Economic Activity	Number of formal employees and median monthly wages of employees who are Malaysian citizens by economic sector and sub-sector.
+formal_wages_msic_age	Monthly Formal Sector Wages by Economic Activity & Age	Number of formal employees and median monthly wages of employees who are Malaysian citizens by economic sector and age group.
+formal_wages_state	Monthly Formal Sector Wages by State	Number of formal employees and median monthly wages of employees who are Malaysian citizens by state.
+formal_wages_band	Monthly Formal Sector Employees by Wage Band	Number of formal employees who are Malaysian citizens by monthly wage band.
+formal_wages_percentile	Monthly Formal Sector Wage Percentiles	Monthly wages of formal employees who are Malaysian citizens at the 10th to 90th percentiles.
+productivity_annual	Annual Productivity by Economic Sector	Annual labour productivity by economic sector, with metrics on value added per worker, value added per hour worked, and total hours worked.
+productivity_annual_priority	Annual Productivity for Priority Subsectors	Annual labour productivity for 14 priority subsectors, with metrics on value added per worker, value added per hour worked, and total hours worked.
+productivity_qtr	Quarterly Productivity by Economic Sector	Quarterly labour productivity by economic sector, with metrics on value added per worker, value added per hour worked, and total hours worked.
+productivity_lookup	Lookup Table: Labour Productivity	Lookup table, to be left-joined against other productivity datasets if specified.
+cpi_annual	Annual CPI by Division (2-digit)	National-level CPI for 13 main groups of goods and services, from 1960 to the present day.
+cpi_annual_inflation	Annual CPI Inflation by Division (2-digit)	National-level CPI inflation for 13 main groups of goods and services, from 1961 to the present.
+cpi_headline	Monthly CPI by Division (2-digit)	National-level CPI for 13 main groups of goods and services.
+cpi_headline_inflation	Monthly CPI Inflation by Division (2-digit)	National-level CPI inflation for 13 main groups of goods and services
+cpi_core	Monthly Core CPI by Division (2-digit)	National-level core CPI for 13 main groups of goods and services.
+cpi_core_inflation	Monthly Core CPI Inflation by Division (2-digit)	National-level core CPI inflation for 13 main groups of goods and services.
+cpi_state	Monthly CPI by State & Division (2-digit)	State-level CPI for 13 main groups of goods and services.
+cpi_state_inflation	Monthly CPI Inflation by State & Division (2-digit)	State-level CPI inflation for 13 main groups of goods and services
+cpi_3d	Monthly CPI by Group (3-digit)	National-level CPI at group granularity. The table below provides a preview of the full dataset using the latest month of data only.
+cpi_4d	Monthly CPI by Class (4-digit)	National-level CPI at class granularity. The table below provides a preview of the full dataset using the latest month of data only.
+cpi_5d	Monthly CPI by Subclass (5-digit)	National-level CPI at subclass granularity. The table below provides a preview of the full dataset using the latest month of data only.
+cpi_strata	Monthly CPI by Strata & Division (2-digit)	CPI by strata (urban/rural) for 13 main groups of goods and services.
+cpi_lowincome	Monthly CPI for Low-Income Households	National-level CPI for low-income households (< RM3000 per month) across 13 main groups of goods and services.
+pricecatcher	PriceCatcher: Transactional Records	The table below provides a preview of the full dataset, which contains over a million price records per month. We recommend that you download and work with the data in your preferred coding environment - Microsoft Excel will likely be insufficient due to the size of the dataset. This data should be used in conjuction with the Item Lookup and Premise Lookup tables.
+lookup_premise	PriceCatcher: Premise Lookup	Lookup table, to be left-joined against premise code in the main PriceCatcher data.
+lookup_item	PriceCatcher: Item Lookup	Lookup table, to be left-joined against item code in the main PriceCatcher data.
+ppi	Monthly Producer Price Index (PPI)	Monthly headline producer price index (PPI), with and without seasonal adjustment.
+ppi_1d	Monthly PPI by Section (1 digit)	Monthly producer price index (PPI) by MSIC section (1 digit), with and without seasonal adjustment.
+ppi_2d	Monthly PPI by Division (2 digit)	Monthly producer price index (PPI) by MSIC division (2 digit). The table provides a preview of the full dataset using the latest month of data only.
+ppi_3d	Monthly PPI by Group (3 digit)	Monthly producer price index (PPI) by MSIC group (3 digit). The table provides a preview of the full dataset using the latest month of data only.
+ppi_sitc	Monthly PPI by SITC Section (1 digit)	Monthly producer price index (PPI) by SITC section (1 digit).
+ppi_sop	Monthly PPI by Stage of Processing	Monthly producer price index (PPI) by stage of processing, per the SITC classification.
+sppi	Headline Services Producer Price Index (SPPI)	Headline services producer price index (SPPI), covering 8 key services sub-sectors.
+sppi_1d	SPPI by Section (1 digit)	Services producer price index (SPPI) by MSIC section (1 digit).
+sppi_2d	SPPI by Division (2 digits)	Services producer price index (SPPI) by MSIC division (2 digits).
+sppi_3d	SPPI by Group (3 digits)	Services producer price index (SPPI) by MSIC group (3 digits). The table provides a preview of the full dataset using the most recent 4 quarters of data.
+fuelprice	Price of Petroleum & Diesel	Weekly retail prices of RON95 petrol, RON97 petrol, and diesel in Malaysia.
+bci_building_peninsular	Building Materials Cost Index: Peninsular Malaysia	Monthly building materials cost index for Peninsular Malaysia, by category of building and region, excluding and including steel bars.
+bci_building_sabah_sarawak	Building Materials Cost Index: Sabah & Sarawak	Monthly building materials cost index for Sabah & Sarawak, by category of building and region, excluding and including steel bars.
+bci_materials_peninsular	Building Materials Unit Price Index: Peninsular Malaysia	Monthly unit price index of building materials for Peninsular Malaysia, by material and region.
+bci_materials_sabah_sarawak	Building Materials Unit Price Index: Sabah & Sarawak	Monthly unit price index of building materials for Sabah & Sarawak, by material and region.
+bci_civil_peninsular	Civil Engineering Materials Prices: Peninsular Malaysia	Monthly average unit prices of civil engineering materials for Peninsular Malaysia, by item and region.
+bci_civil_sabah_sarawak	Civil Engineering Materials Prices: Sabah & Sarawak	Monthly average unit prices of civil engineering materials for Sabah & Sarawak, by item and region.
+bci_mechelec_peninsular	Mechanical & Electrical Unit Price Index: Peninsular Malaysia	Monthly unit price index of mechanical and electrical items for Peninsular Malaysia.
+bci_mechelec_sabah_sarawak	Mechanical & Electrical Unit Price Index: Sabah & Sarawak	Monthly unit price index of mechanical and electrical items for Sabah & Sarawak.
+iowrt	Headline Wholesale & Retail Trade	Overall performance of the wholesale & retail trade subsectors, covering sales value and volume.
+iowrt_2d	Wholesale & Retail Trade by Division (2 digit)	Performance of the wholesale & retail trade subsectors by MSIC division (2 digit), covering sales value and volume.
+iowrt_3d	Wholesale & Retail Trade by Group (3 digit)	Performance of the wholesale & retail trade subsectors by MSIC group (3 digit), covering sales value and volume. The table provides a preview of the full dataset using the latest month of data only.
+ipi	Industrial Production Index (IPI)	Real output of the three main industrial sectors, namely mining, manufacturing and electricity.
+ipi_1d	IPI by Section (1 digit)	Real output of the three main industrial sectors by MSIC section (1 digit).
+ipi_2d	IPI by Division (2 digit)	Real output of the three main industrial sectors by MSIC division (2 digit). The table provides a preview of the full dataset using the latest month of data only.
+ipi_3d	IPI by Group (3 digit)	Real output of the three main industrial sectors by MSIC group (3 digit). The table provides a preview of the full dataset using the latest month of data only.
+ipi_5d	IPI by Item (5 digit)	Real output of the three main industrial sectors by MSIC item (5 digit). The table provides a preview of the full dataset using the latest month of data only.
+ipi_export	IPI for Export-Oriented Divisions (2 digit)	Real output of the three main industrial sectors for specific MSIC divisions (2 digit) which are critical for Malaysia's export performance. The table provides a preview of the full dataset using the latest month of data only.
+ipi_domestic	IPI for Domestic-Oriented Divisions (2 digit)	Real output of the three main industrial sectors for specific MSIC divisions (2 digit) which are critical for Malaysia's domestic economic performance. The table provides a preview of the full dataset using the latest month of data only.
+crops_state	Crop Area and Production by State	Production and planted area of crops by state from 2014 to 2024, broken down by crop type.
+crops_district_area	Crop Area by District	Planted area of crops by district, broken down by crop type and species. The table shows a preview of the dataset using the first 100 rows only, as the full dataset is over 10,000 rows in size.
+crops_district_production	Crop Production by District	Production of crops by district, broken down by crop type and species. The table shows a preview of the dataset using the first 100 rows only, as the full dataset is over 10,000 rows in size.
+timber_production	Production of Major Timber Products by State	Production of major timber products by state from 2000 to 2023, broken down by product type.
+fish_landings	Monthly Landings of Marine Fish by State	Monthly landings of marine fish by state and coast from 2005 to 2025.
+fish_landings_gear	Annual Landings of Marine Fish by State & Fishing Gear	Annual landings of marine fish by state, coast and fishing gear group.
+fish_landings_species	Annual Landings of Marine Fish by State & Species	Annual landings of marine fish by state, coast and species.
+fish_landings_value	Annual Value of Marine Fish Landings by State & Grade	Annual landings and wholesale and retail value of marine fish landings by state, coast, category and grade of fish.
+fish_landings_inland	Annual Landings & Value of Freshwater Fish from Inland Fisheries by State & Waterbody	Annual landings, wholesale value and retail value of freshwater fish caught in public waterbodies (inland fisheries), by state and type of waterbody.
+fish_prices	Monthly Prices of Marine Fish by Market Level & Species	Monthly average ex-vessel, wholesale and retail prices of fresh marine fish in Malaysia by species, in RM per kg.
+fishers	Annual Number of Fishers by State & Fishing Gear	Annual number of fishers working on licensed fishing vessels by state, coast and fishing gear group.
+fishing_vessels	Annual Number of Licensed Fishing Vessels by State, Engine Type & Horsepower	Annual number of licensed powered fishing vessels by state, coast, engine type and horsepower class.
+aquaculture_production	Annual Aquaculture Production by State & Culture System	Annual aquaculture production and its wholesale and retail value by state and culture system.
+aquaculture_production_species	Annual Aquaculture Production by Species	Annual aquaculture production in Malaysia and its wholesale and retail value by environment and species.
+seaweed_production	Monthly Seaweed Production by State	Monthly production of farmed seaweed by state, with its wholesale and retail value.
+mineral_extraction	Extraction of Minerals by State and Commodity	Annual extraction of mineral commodities by state from 2016 to 2021.
+trade_headline	Headline Monthly Trade in Goods	Monthly exports, imports, total trade, and trade balance statistics for Malaysia.
+trade_sitc_1d	Monthly Trade by SITC Section (1 digit)	Monthly exports and imports by SITC commodity sections.
+trade_enduse_bec	Monthly Retained Imports by End Use and BEC	Monthly retained imports by end use and Broad Economic Categories (BEC).
+tradeidx	Monthly Trade Indices by SITC Section	Monthly unit value and volume indices of exports and imports, and the terms of trade, by SITC section.
+tradeidx_annual	Annual Trade Indices by SITC Section	Annual unit value and volume indices of exports and imports, and the terms of trade, by SITC section.
+tradeidx_sa	Monthly Trade Volume Indices (Seasonally Adjusted)	Monthly seasonally adjusted volume indices of total exports and imports.
+forest_reserve	Area of Permanent Forest Reserves	The area of permanent forest reserves as of year-end.
+forest_reserve_state	Area of Permanent Forest Reserves by State	The area of permanent forest reserves as of year-end, by state.
+electricity_consumption	Monthly Electricity Consumption	Monthly electricity consumption by sector.
+electricity_supply	Monthly Electricity Supply	Monthly electricity supply by sector.
+energy_supply_commodity	Primary Energy Supply by Commodity	Annual primary energy supply in Malaysia, by energy commodity.
+energy_consumption_commodity	Final Energy Consumption by Commodity	Annual final energy consumption in Malaysia, by energy commodity.
+energy_consumption_sector	Final Energy Consumption by Sector	Annual final energy consumption in Malaysia, by sector of use.
+water_consumption	Water Consumption by State and Sector	Annual water consumption by state, broken down into domestic and non-domestic sectors.
+water_production	Water Production by State	Annual water production by state.
+water_access	Access to Treated Water by State & Strata	Annual access of households to treated piped water by state and strata.
+air_pollution	Monthly Air Pollution	Average monthly concentration of key air pollutants.
+ghg_emissions	Greenhouse Gas Emissions	Annual greenhouse gas (GHG) emissions by source.
+water_pollution_basin	River Basin Pollution Monitoring	Proportion of river basins classified as clean, slightly polluted, or polluted based on 3 primary indicators of water pollution.
+economic_indicators	Malaysian Economic Indicators	Indices for the purpose of monitoring Malaysia's economic situation on a monthly basis, consisting of leading, lagging, and coincidence indicators.
+msic	MSIC	This table provides a complete lookup for the MSIC (Malaysian Standard Industrial Classification) 2008, as applied and used in data publications in Malaysia. The MSIC is primarily used by the Department of Statistics Malaysia (DOSM), for the purpose of categorising economic data, such as during the production of GDP data.
+mcoicop	MCOICOP	This table provides a complete lookup for 2, 3, 4, and 5-digit codes under Malaysia's COICOP (Classification of Individual Consumption According to Purpose), as applied and used in data publications in Malaysia. The MCOICOP is primarily used by the Department of Statistics Malaysia (DOSM), for instance when categorising and analysing consumer price inflation.
+sitc	SITC	This table provides a partial lookup for codes under the Standard International Trade Classification (SITC) Revision 4, as applied and used by publications in Malaysia. The SITC is primarily used by the Department of Statistics Malaysia (DOSM), for instance when categorising and analysing external trade and commodity data.
+sitc_sop	SITC: Stage of Processing	This table provides a complete lookup for the classification of stage of processing, as applied and used by publications in Malaysia, primarily by DOSM.
+bec	Broad Economic Categories (BEC)	This table provides a lookup for codes under the Broad Economic Categories (BEC) classification, as applied and used by publications in Malaysia. The BEC is primarily used by the Department of Statistics Malaysia (DOSM), for instance when categorising and analysing imports by end-use.
+usage_metrics	Daily Usage Metrics for data.gov.my	Total views, OpenAPI hits, and downloads for data.gov.my
+usage_metrics_openapi	Daily OpenAPI Hits by Endpoint	Daily GET requests made to api.data.gov.my, disaggregated by endpoint.
+usage_metrics_openapi_cumul	Cumulative OpenAPI Hits by Endpoint	Total GET requests made to api.data.gov.my, disaggregated by endpoint.
+arc_dosm	DOSM's Advance Release Calendar	Release date and metadata for all DOSM's publications in 2026.

@@ -1,0 +1,1 @@
+{"meta": {"catalogue_id": "wages_real_state", "data_as_of": "2025", "last_updated": "2026-09-21 12:00", "next_update": "2027-09-30 12:00", "data_source": ["DOSM"], "update_frequency": "YEARLY", "total": 1, "limit": 1}, "data": [{"date": "2010-01-01", "state": "Malaysia", "wages_mean_real": 1792, "wages_median_real": 1300}]}

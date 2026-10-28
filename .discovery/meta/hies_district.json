@@ -1,0 +1,4388 @@
+{
+ "meta": {
+  "id": "hies_district",
+  "type": "data-catalogue",
+  "category": null,
+  "agency": "DOSM"
+ },
+ "params": {
+  "id": "hies_district"
+ },
+ "query": {
+  "id": "hies_district"
+ },
+ "id": "hies_district",
+ "exclude_openapi": false,
+ "manual_trigger": "",
+ "title": "Household Income and Expenditure: Administrative Districts",
+ "description": "This dataset tabulates household-level income, expenditure, poverty, and income inequality at administrative district level. It is based on the Household Income & Expenditure Surveys (HIES) carried in 2022.",
+ "link_parquet": "https://storage.dosm.gov.my/hies/hies_district.parquet",
+ "link_csv": "https://storage.dosm.gov.my/hies/hies_district.csv",
+ "link_preview": "https://storage.dosm.gov.my/hies/hies_district.parquet",
+ "link_editions": null,
+ "frequency": "YEARLY",
+ "data_source": [
+  "DOSM"
+ ],
+ "fields": [
+  {
+   "name": "date",
+   "title": "Date",
+   "description": "[Date] The date in YYYY-MM-DD format, with MM-DD set to 01-01 as this is annual data"
+  },
+  {
+   "name": "state",
+   "title": "State",
+   "description": "[Categorical] One of 16 states"
+  },
+  {
+   "name": "district",
+   "title": "District",
+   "description": "[Categorical] One of 160 administrative districts, including the 4 states (Perlis and the 3 Federal Territories) which do not have subdivisions"
+  },
+  {
+   "name": "income_mean",
+   "title": "Mean Income",
+   "description": "[Integer] Average (across households) gross monthly household income, in RM"
+  },
+  {
+   "name": "income_median",
+   "title": "Median Income",
+   "description": "[Integer] Median (across households) gross monthly household income, in RM"
+  },
+  {
+   "name": "expenditure_mean",
+   "title": "Mean Expenditure",
+   "description": "[Integer] Average (across households) gross monthly household expenditure, in RM"
+  },
+  {
+   "name": "gini",
+   "title": "Gini Coefficient",
+   "description": "[Float] Gini coefficient, with higher values indicating greater inequality of income between households"
+  },
+  {
+   "name": "poverty",
+   "title": "Poverty Rate",
+   "description": "[Float] Proportion of households with monthly income below the Poverty Line Income (PLI)"
+  }
+ ],
+ "data_as_of": "2024",
+ "last_updated": "2025-12-31 12:00",
+ "next_update": "—",
+ "methodology": "This data is is based on Household Income Surveys (HIS) and Household Income & Expenditure Surveys (HIES) carried out from 1970 to 2024, the latest of which is HIES 2022. The survey is carried out at least twice in a rolling five-year period to produce representative data regarding income, poverty and access to basic amenities for Malaysian households.",
+ "caveat": "For a full account of the relative standard errors for the survey as well as the detailed survey methodology, please refer to the [HIES Technical Notes](https://storage.googleapis.com/dosm-public-publications/technote_hies_income_en.pdf).",
+ "publication": "The [Household Income & Expenditure Survey Report, 2022](https://storage.googleapis.com/dosm-public-publications/multiyear_2022_hies.pdf).",
+ "translations": {
+  "date": "Date",
+  "state": "State",
+  "district": "District"
+ },
+ "related_datasets": [],
+ "dataviz_set": [
+  {
+   "dataviz_id": "table",
+   "title": "Table",
+   "chart_type": "TABLE",
+   "config": {
+    "precision": {
+     "columns": {
+      "gini": 3,
+      "poverty": 1
+     },
+     "default": 0
+    },
+    "filter_columns": [],
+    "freeze_columns": []
+   }
+  },
+  {
+   "dataviz_id": "income_mean",
+   "title": "Mean Income (RM)",
+   "chart_type": "CHOROPLETH",
+   "config": {
+    "color": "blues",
+    "format": {
+     "x": "district",
+     "y": "income_mean"
+    },
+    "geojson": "district",
+    "precision": 0
+   }
+  },
+  {
+   "dataviz_id": "income_median",
+   "title": "Median Income (RM)",
+   "chart_type": "CHOROPLETH",
+   "config": {
+    "color": "blues",
+    "format": {
+     "x": "district",
+     "y": "income_median"
+    },
+    "geojson": "district",
+    "precision": 0
+   }
+  },
+  {
+   "dataviz_id": "expenditure_mean",
+   "title": "Mean Expenditure (RM)",
+   "chart_type": "CHOROPLETH",
+   "config": {
+    "color": "purples",
+    "format": {
+     "x": "district",
+     "y": "expenditure_mean"
+    },
+    "geojson": "district",
+    "precision": 0
+   }
+  },
+  {
+   "dataviz_id": "gini",
+   "title": "Gini Coefficient",
+   "chart_type": "CHOROPLETH",
+   "config": {
+    "color": "reds",
+    "format": {
+     "x": "district",
+     "y": "gini"
+    },
+    "geojson": "district",
+    "precision": 3
+   }
+  },
+  {
+   "dataviz_id": "poverty",
+   "title": "Poverty Rate (%)",
+   "chart_type": "CHOROPLETH",
+   "config": {
+    "color": "reds",
+    "format": {
+     "x": "district",
+     "y": "poverty"
+    },
+    "geojson": "district",
+    "precision": 1
+   }
+  }
+ ],
+ "dropdown": [],
+ "data": [
+  {
+   "date": "2022-01-01",
+   "state": "Johor",
+   "district": "Batu Pahat",
+   "income_mean": 7419,
+   "income_median": 6347,
+   "expenditure_mean": 4570,
+   "gini": 0.338,
+   "poverty": 5.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Johor",
+   "district": "Batu Pahat",
+   "income_mean": 9006,
+   "income_median": 7555,
+   "expenditure_mean": 5153,
+   "gini": 0.316,
+   "poverty": 2.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Johor",
+   "district": "Johor Bahru",
+   "income_mean": 9869,
+   "income_median": 8232,
+   "expenditure_mean": 6139,
+   "gini": 0.358,
+   "poverty": 3.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Johor",
+   "district": "Johor Bahru",
+   "income_mean": 10975,
+   "income_median": 8977,
+   "expenditure_mean": 6764,
+   "gini": 0.35,
+   "poverty": 1.9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Johor",
+   "district": "Kluang",
+   "income_mean": 6461,
+   "income_median": 5204,
+   "expenditure_mean": 4399,
+   "gini": 0.354,
+   "poverty": 7.2
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Johor",
+   "district": "Kluang",
+   "income_mean": 6616,
+   "income_median": 6158,
+   "expenditure_mean": 4748,
+   "gini": 0.292,
+   "poverty": 5.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Johor",
+   "district": "Kota Tinggi",
+   "income_mean": 7529,
+   "income_median": 6227,
+   "expenditure_mean": 4498,
+   "gini": 0.343,
+   "poverty": 5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Johor",
+   "district": "Kota Tinggi",
+   "income_mean": 8106,
+   "income_median": 6284,
+   "expenditure_mean": 4949,
+   "gini": 0.379,
+   "poverty": 4.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Johor",
+   "district": "Mersing",
+   "income_mean": 5426,
+   "income_median": 4445,
+   "expenditure_mean": 4032,
+   "gini": 0.339,
+   "poverty": 12.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Johor",
+   "district": "Mersing",
+   "income_mean": 6014,
+   "income_median": 5335,
+   "expenditure_mean": 4274,
+   "gini": 0.263,
+   "poverty": 6.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Johor",
+   "district": "Muar",
+   "income_mean": 7572,
+   "income_median": 5724,
+   "expenditure_mean": 4740,
+   "gini": 0.394,
+   "poverty": 6.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Johor",
+   "district": "Muar",
+   "income_mean": 8401,
+   "income_median": 7334,
+   "expenditure_mean": 5541,
+   "gini": 0.306,
+   "poverty": 2.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Johor",
+   "district": "Pontian",
+   "income_mean": 6913,
+   "income_median": 5616,
+   "expenditure_mean": 4535,
+   "gini": 0.361,
+   "poverty": 5.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Johor",
+   "district": "Pontian",
+   "income_mean": 7011,
+   "income_median": 5685,
+   "expenditure_mean": 4856,
+   "gini": 0.341,
+   "poverty": 2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Johor",
+   "district": "Segamat",
+   "income_mean": 6578,
+   "income_median": 5318,
+   "expenditure_mean": 4426,
+   "gini": 0.34,
+   "poverty": 7.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Johor",
+   "district": "Segamat",
+   "income_mean": 7348,
+   "income_median": 6451,
+   "expenditure_mean": 4870,
+   "gini": 0.292,
+   "poverty": 3.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Johor",
+   "district": "Kulai",
+   "income_mean": 9177,
+   "income_median": 7460,
+   "expenditure_mean": 5646,
+   "gini": 0.337,
+   "poverty": 0.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Johor",
+   "district": "Kulai",
+   "income_mean": 10296,
+   "income_median": 8406,
+   "expenditure_mean": 6254,
+   "gini": 0.319,
+   "poverty": 0.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Johor",
+   "district": "Tangkak",
+   "income_mean": 7093,
+   "income_median": 5622,
+   "expenditure_mean": 4198,
+   "gini": 0.371,
+   "poverty": 6.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Johor",
+   "district": "Tangkak",
+   "income_mean": 7524,
+   "income_median": 6374,
+   "expenditure_mean": 4673,
+   "gini": 0.306,
+   "poverty": 4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kedah",
+   "district": "Baling",
+   "income_mean": 4263,
+   "income_median": 3400,
+   "expenditure_mean": 2732,
+   "gini": 0.347,
+   "poverty": 14.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kedah",
+   "district": "Baling",
+   "income_mean": 4345,
+   "income_median": 3367,
+   "expenditure_mean": 3041,
+   "gini": 0.324,
+   "poverty": 14.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kedah",
+   "district": "Bandar Baharu",
+   "income_mean": 4565,
+   "income_median": 3922,
+   "expenditure_mean": 2751,
+   "gini": 0.291,
+   "poverty": 3.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kedah",
+   "district": "Bandar Baharu",
+   "income_mean": 4835,
+   "income_median": 4310,
+   "expenditure_mean": 3006,
+   "gini": 0.339,
+   "poverty": 5.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kedah",
+   "district": "Kota Setar",
+   "income_mean": 5959,
+   "income_median": 4751,
+   "expenditure_mean": 4253,
+   "gini": 0.348,
+   "poverty": 5.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kedah",
+   "district": "Kota Setar",
+   "income_mean": 6034,
+   "income_median": 5208,
+   "expenditure_mean": 4495,
+   "gini": 0.328,
+   "poverty": 5.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kedah",
+   "district": "Kuala Muda",
+   "income_mean": 5624,
+   "income_median": 4200,
+   "expenditure_mean": 3840,
+   "gini": 0.404,
+   "poverty": 13.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kedah",
+   "district": "Kuala Muda",
+   "income_mean": 5729,
+   "income_median": 4953,
+   "expenditure_mean": 3869,
+   "gini": 0.333,
+   "poverty": 11.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kedah",
+   "district": "Kubang Pasu",
+   "income_mean": 6221,
+   "income_median": 5201,
+   "expenditure_mean": 4062,
+   "gini": 0.325,
+   "poverty": 3.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kedah",
+   "district": "Kubang Pasu",
+   "income_mean": 6313,
+   "income_median": 5312,
+   "expenditure_mean": 4478,
+   "gini": 0.317,
+   "poverty": 4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kedah",
+   "district": "Kulim",
+   "income_mean": 5636,
+   "income_median": 4498,
+   "expenditure_mean": 3647,
+   "gini": 0.359,
+   "poverty": 11.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kedah",
+   "district": "Kulim",
+   "income_mean": 6395,
+   "income_median": 5236,
+   "expenditure_mean": 4054,
+   "gini": 0.349,
+   "poverty": 8.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kedah",
+   "district": "Langkawi",
+   "income_mean": 6087,
+   "income_median": 5250,
+   "expenditure_mean": 3680,
+   "gini": 0.302,
+   "poverty": 5.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kedah",
+   "district": "Langkawi",
+   "income_mean": 6278,
+   "income_median": 5083,
+   "expenditure_mean": 4356,
+   "gini": 0.335,
+   "poverty": 6
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kedah",
+   "district": "Padang Terap",
+   "income_mean": 4858,
+   "income_median": 3902,
+   "expenditure_mean": 3751,
+   "gini": 0.323,
+   "poverty": 8.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kedah",
+   "district": "Padang Terap",
+   "income_mean": 5062,
+   "income_median": 3954,
+   "expenditure_mean": 3872,
+   "gini": 0.292,
+   "poverty": 8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kedah",
+   "district": "Sik",
+   "income_mean": 5053,
+   "income_median": 3703,
+   "expenditure_mean": 3530,
+   "gini": 0.333,
+   "poverty": 4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kedah",
+   "district": "Sik",
+   "income_mean": 5107,
+   "income_median": 4438,
+   "expenditure_mean": 3675,
+   "gini": 0.325,
+   "poverty": 8.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kedah",
+   "district": "Yan",
+   "income_mean": 4637,
+   "income_median": 4080,
+   "expenditure_mean": 3339,
+   "gini": 0.291,
+   "poverty": 6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kedah",
+   "district": "Yan",
+   "income_mean": 5272,
+   "income_median": 4695,
+   "expenditure_mean": 3859,
+   "gini": 0.293,
+   "poverty": 7.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kedah",
+   "district": "Pendang",
+   "income_mean": 4986,
+   "income_median": 3801,
+   "expenditure_mean": 3562,
+   "gini": 0.349,
+   "poverty": 7.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kedah",
+   "district": "Pendang",
+   "income_mean": 5464,
+   "income_median": 4592,
+   "expenditure_mean": 3914,
+   "gini": 0.347,
+   "poverty": 7.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kedah",
+   "district": "Pokok Sena",
+   "income_mean": 5494,
+   "income_median": 4668,
+   "expenditure_mean": 4033,
+   "gini": 0.31,
+   "poverty": 7.2
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kedah",
+   "district": "Pokok Sena",
+   "income_mean": 5736,
+   "income_median": 5163,
+   "expenditure_mean": 4257,
+   "gini": 0.27,
+   "poverty": 7.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kelantan",
+   "district": "Bachok",
+   "income_mean": 4811,
+   "income_median": 3625,
+   "expenditure_mean": 3282,
+   "gini": 0.374,
+   "poverty": 12.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kelantan",
+   "district": "Bachok",
+   "income_mean": 5149,
+   "income_median": 4187,
+   "expenditure_mean": 3579,
+   "gini": 0.349,
+   "poverty": 11.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kelantan",
+   "district": "Kota Bharu",
+   "income_mean": 5693,
+   "income_median": 4330,
+   "expenditure_mean": 3886,
+   "gini": 0.384,
+   "poverty": 10.5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kelantan",
+   "district": "Kota Bharu",
+   "income_mean": 6180,
+   "income_median": 4729,
+   "expenditure_mean": 4329,
+   "gini": 0.361,
+   "poverty": 9.9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kelantan",
+   "district": "Machang",
+   "income_mean": 4987,
+   "income_median": 3429,
+   "expenditure_mean": 3267,
+   "gini": 0.414,
+   "poverty": 12
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kelantan",
+   "district": "Machang",
+   "income_mean": 5237,
+   "income_median": 4156,
+   "expenditure_mean": 3411,
+   "gini": 0.331,
+   "poverty": 7.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kelantan",
+   "district": "Pasir Mas",
+   "income_mean": 4602,
+   "income_median": 3508,
+   "expenditure_mean": 3225,
+   "gini": 0.362,
+   "poverty": 9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kelantan",
+   "district": "Pasir Mas",
+   "income_mean": 4975,
+   "income_median": 3591,
+   "expenditure_mean": 3581,
+   "gini": 0.365,
+   "poverty": 8.6
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kelantan",
+   "district": "Pasir Puteh",
+   "income_mean": 4712,
+   "income_median": 3453,
+   "expenditure_mean": 3525,
+   "gini": 0.378,
+   "poverty": 15.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kelantan",
+   "district": "Pasir Puteh",
+   "income_mean": 5070,
+   "income_median": 4853,
+   "expenditure_mean": 3749,
+   "gini": 0.302,
+   "poverty": 11.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kelantan",
+   "district": "Tanah Merah",
+   "income_mean": 4177,
+   "income_median": 2991,
+   "expenditure_mean": 3247,
+   "gini": 0.377,
+   "poverty": 17.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kelantan",
+   "district": "Tanah Merah",
+   "income_mean": 4922,
+   "income_median": 3638,
+   "expenditure_mean": 3632,
+   "gini": 0.363,
+   "poverty": 14.9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kelantan",
+   "district": "Tumpat",
+   "income_mean": 4741,
+   "income_median": 3749,
+   "expenditure_mean": 3831,
+   "gini": 0.367,
+   "poverty": 13.5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kelantan",
+   "district": "Tumpat",
+   "income_mean": 4991,
+   "income_median": 3904,
+   "expenditure_mean": 4181,
+   "gini": 0.334,
+   "poverty": 12.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kelantan",
+   "district": "Gua Musang",
+   "income_mean": 4473,
+   "income_median": 3342,
+   "expenditure_mean": 3625,
+   "gini": 0.36,
+   "poverty": 18.5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kelantan",
+   "district": "Gua Musang",
+   "income_mean": 4684,
+   "income_median": 3871,
+   "expenditure_mean": 3726,
+   "gini": 0.302,
+   "poverty": 16.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kelantan",
+   "district": "Kuala Krai",
+   "income_mean": 3798,
+   "income_median": 2763,
+   "expenditure_mean": 2853,
+   "gini": 0.399,
+   "poverty": 22.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kelantan",
+   "district": "Kuala Krai",
+   "income_mean": 3872,
+   "income_median": 2994,
+   "expenditure_mean": 2863,
+   "gini": 0.342,
+   "poverty": 20.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kelantan",
+   "district": "Jeli",
+   "income_mean": 3735,
+   "income_median": 2906,
+   "expenditure_mean": 2746,
+   "gini": 0.35,
+   "poverty": 11.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kelantan",
+   "district": "Jeli",
+   "income_mean": 3829,
+   "income_median": 3008,
+   "expenditure_mean": 3062,
+   "gini": 0.315,
+   "poverty": 10.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Kelantan",
+   "district": "Kecil Lojing",
+   "income_mean": 3153,
+   "income_median": 2630,
+   "expenditure_mean": 2720,
+   "gini": 0.365,
+   "poverty": 43.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Kelantan",
+   "district": "Kecil Lojing",
+   "income_mean": 3511,
+   "income_median": 3385,
+   "expenditure_mean": 2953,
+   "gini": 0.218,
+   "poverty": 20
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Melaka",
+   "district": "Alor Gajah",
+   "income_mean": 7235,
+   "income_median": 5611,
+   "expenditure_mean": 5338,
+   "gini": 0.343,
+   "poverty": 4.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Melaka",
+   "district": "Alor Gajah",
+   "income_mean": 7855,
+   "income_median": 6308,
+   "expenditure_mean": 5745,
+   "gini": 0.327,
+   "poverty": 4.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Melaka",
+   "district": "Jasin",
+   "income_mean": 7145,
+   "income_median": 5895,
+   "expenditure_mean": 5005,
+   "gini": 0.332,
+   "poverty": 5.5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Melaka",
+   "district": "Jasin",
+   "income_mean": 7755,
+   "income_median": 6401,
+   "expenditure_mean": 5654,
+   "gini": 0.298,
+   "poverty": 1.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Melaka",
+   "district": "Melaka Tengah",
+   "income_mean": 8593,
+   "income_median": 6557,
+   "expenditure_mean": 6015,
+   "gini": 0.383,
+   "poverty": 3.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Melaka",
+   "district": "Melaka Tengah",
+   "income_mean": 9232,
+   "income_median": 7415,
+   "expenditure_mean": 6527,
+   "gini": 0.373,
+   "poverty": 2.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Jelebu",
+   "income_mean": 4445,
+   "income_median": 3636,
+   "expenditure_mean": 3457,
+   "gini": 0.326,
+   "poverty": 7.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Jelebu",
+   "income_mean": 4664,
+   "income_median": 3713,
+   "expenditure_mean": 3811,
+   "gini": 0.313,
+   "poverty": 6.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Kuala Pilah",
+   "income_mean": 4509,
+   "income_median": 3471,
+   "expenditure_mean": 3567,
+   "gini": 0.346,
+   "poverty": 6.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Kuala Pilah",
+   "income_mean": 4888,
+   "income_median": 3996,
+   "expenditure_mean": 3809,
+   "gini": 0.324,
+   "poverty": 6.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Port Dickson",
+   "income_mean": 6054,
+   "income_median": 4805,
+   "expenditure_mean": 4500,
+   "gini": 0.345,
+   "poverty": 4.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Port Dickson",
+   "income_mean": 6280,
+   "income_median": 5342,
+   "expenditure_mean": 4709,
+   "gini": 0.324,
+   "poverty": 4.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Rembau",
+   "income_mean": 5544,
+   "income_median": 4655,
+   "expenditure_mean": 3897,
+   "gini": 0.344,
+   "poverty": 3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Rembau",
+   "income_mean": 5723,
+   "income_median": 4894,
+   "expenditure_mean": 4226,
+   "gini": 0.339,
+   "poverty": 2.6
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Seremban",
+   "income_mean": 7900,
+   "income_median": 6384,
+   "expenditure_mean": 5225,
+   "gini": 0.354,
+   "poverty": 3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Seremban",
+   "income_mean": 8395,
+   "income_median": 6472,
+   "expenditure_mean": 5686,
+   "gini": 0.368,
+   "poverty": 2.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Tampin",
+   "income_mean": 5097,
+   "income_median": 4012,
+   "expenditure_mean": 3750,
+   "gini": 0.347,
+   "poverty": 7.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Tampin",
+   "income_mean": 5715,
+   "income_median": 4367,
+   "expenditure_mean": 4238,
+   "gini": 0.349,
+   "poverty": 7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Jempol",
+   "income_mean": 4848,
+   "income_median": 3830,
+   "expenditure_mean": 3608,
+   "gini": 0.331,
+   "poverty": 8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Negeri Sembilan",
+   "district": "Jempol",
+   "income_mean": 5777,
+   "income_median": 4291,
+   "expenditure_mean": 4113,
+   "gini": 0.364,
+   "poverty": 7.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pahang",
+   "district": "Bentong",
+   "income_mean": 5563,
+   "income_median": 4691,
+   "expenditure_mean": 4386,
+   "gini": 0.244,
+   "poverty": 2.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pahang",
+   "district": "Bentong",
+   "income_mean": 6278,
+   "income_median": 5015,
+   "expenditure_mean": 4631,
+   "gini": 0.286,
+   "poverty": 2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pahang",
+   "district": "Cameron Highlands",
+   "income_mean": 6265,
+   "income_median": 5221,
+   "expenditure_mean": 4229,
+   "gini": 0.272,
+   "poverty": 1.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pahang",
+   "district": "Cameron Highlands",
+   "income_mean": 6895,
+   "income_median": 5655,
+   "expenditure_mean": 4672,
+   "gini": 0.294,
+   "poverty": 5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pahang",
+   "district": "Jerantut",
+   "income_mean": 4537,
+   "income_median": 3781,
+   "expenditure_mean": 3326,
+   "gini": 0.29,
+   "poverty": 8.6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pahang",
+   "district": "Jerantut",
+   "income_mean": 5220,
+   "income_median": 4231,
+   "expenditure_mean": 3732,
+   "gini": 0.319,
+   "poverty": 8.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pahang",
+   "district": "Kuantan",
+   "income_mean": 6938,
+   "income_median": 5926,
+   "expenditure_mean": 4724,
+   "gini": 0.306,
+   "poverty": 4.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pahang",
+   "district": "Kuantan",
+   "income_mean": 7008,
+   "income_median": 5520,
+   "expenditure_mean": 4969,
+   "gini": 0.332,
+   "poverty": 3.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pahang",
+   "district": "Lipis",
+   "income_mean": 4959,
+   "income_median": 4115,
+   "expenditure_mean": 4016,
+   "gini": 0.28,
+   "poverty": 9.2
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pahang",
+   "district": "Lipis",
+   "income_mean": 5276,
+   "income_median": 4611,
+   "expenditure_mean": 4278,
+   "gini": 0.237,
+   "poverty": 9.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pahang",
+   "district": "Pekan",
+   "income_mean": 4780,
+   "income_median": 4053,
+   "expenditure_mean": 3429,
+   "gini": 0.303,
+   "poverty": 11.6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pahang",
+   "district": "Pekan",
+   "income_mean": 5098,
+   "income_median": 4344,
+   "expenditure_mean": 3799,
+   "gini": 0.277,
+   "poverty": 10.9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pahang",
+   "district": "Raub",
+   "income_mean": 5445,
+   "income_median": 4375,
+   "expenditure_mean": 4247,
+   "gini": 0.257,
+   "poverty": 2.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pahang",
+   "district": "Raub",
+   "income_mean": 5940,
+   "income_median": 4427,
+   "expenditure_mean": 4675,
+   "gini": 0.335,
+   "poverty": 3.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pahang",
+   "district": "Temerloh",
+   "income_mean": 5180,
+   "income_median": 4283,
+   "expenditure_mean": 3580,
+   "gini": 0.291,
+   "poverty": 6.6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pahang",
+   "district": "Temerloh",
+   "income_mean": 5521,
+   "income_median": 4595,
+   "expenditure_mean": 3684,
+   "gini": 0.319,
+   "poverty": 6.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pahang",
+   "district": "Rompin",
+   "income_mean": 5103,
+   "income_median": 4148,
+   "expenditure_mean": 3695,
+   "gini": 0.329,
+   "poverty": 12
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pahang",
+   "district": "Rompin",
+   "income_mean": 5429,
+   "income_median": 4760,
+   "expenditure_mean": 3966,
+   "gini": 0.279,
+   "poverty": 8.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pahang",
+   "district": "Maran",
+   "income_mean": 5036,
+   "income_median": 4319,
+   "expenditure_mean": 3586,
+   "gini": 0.288,
+   "poverty": 8.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pahang",
+   "district": "Maran",
+   "income_mean": 5088,
+   "income_median": 4470,
+   "expenditure_mean": 3764,
+   "gini": 0.257,
+   "poverty": 7.9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pahang",
+   "district": "Bera",
+   "income_mean": 4567,
+   "income_median": 3866,
+   "expenditure_mean": 3453,
+   "gini": 0.256,
+   "poverty": 8.5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pahang",
+   "district": "Bera",
+   "income_mean": 4997,
+   "income_median": 4269,
+   "expenditure_mean": 3548,
+   "gini": 0.361,
+   "poverty": 9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pulau Pinang",
+   "district": "Seberang Perai Tengah",
+   "income_mean": 8056,
+   "income_median": 6220,
+   "expenditure_mean": 5008,
+   "gini": 0.377,
+   "poverty": 2.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pulau Pinang",
+   "district": "Seberang Perai Utara",
+   "income_mean": 7330,
+   "income_median": 6103,
+   "expenditure_mean": 4432,
+   "gini": 0.35,
+   "poverty": 3.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pulau Pinang",
+   "district": "Seberang Perai Selatan",
+   "income_mean": 7472,
+   "income_median": 6231,
+   "expenditure_mean": 4665,
+   "gini": 0.36,
+   "poverty": 3.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pulau Pinang",
+   "district": "Timur Laut",
+   "income_mean": 8727,
+   "income_median": 6714,
+   "expenditure_mean": 5890,
+   "gini": 0.38,
+   "poverty": 0.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pulau Pinang",
+   "district": "Timur Laut",
+   "income_mean": 9993,
+   "income_median": 7745,
+   "expenditure_mean": 6416,
+   "gini": 0.398,
+   "poverty": 0.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Pulau Pinang",
+   "district": "Barat Daya",
+   "income_mean": 9254,
+   "income_median": 7247,
+   "expenditure_mean": 6003,
+   "gini": 0.357,
+   "poverty": 1.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pulau Pinang",
+   "district": "Barat Daya",
+   "income_mean": 10231,
+   "income_median": 8919,
+   "expenditure_mean": 6222,
+   "gini": 0.368,
+   "poverty": 0.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Batang Padang",
+   "income_mean": 5178,
+   "income_median": 3953,
+   "expenditure_mean": 3710,
+   "gini": 0.37,
+   "poverty": 13.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Batang Padang",
+   "income_mean": 5433,
+   "income_median": 4339,
+   "expenditure_mean": 3722,
+   "gini": 0.354,
+   "poverty": 11.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Manjung",
+   "income_mean": 6318,
+   "income_median": 5135,
+   "expenditure_mean": 3912,
+   "gini": 0.354,
+   "poverty": 3.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Manjung",
+   "income_mean": 6612,
+   "income_median": 5380,
+   "expenditure_mean": 4387,
+   "gini": 0.346,
+   "poverty": 3.9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Kinta",
+   "income_mean": 6308,
+   "income_median": 5037,
+   "expenditure_mean": 4383,
+   "gini": 0.358,
+   "poverty": 3.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Kinta",
+   "income_mean": 6758,
+   "income_median": 5136,
+   "expenditure_mean": 4648,
+   "gini": 0.391,
+   "poverty": 3.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Kerian",
+   "income_mean": 5276,
+   "income_median": 3996,
+   "expenditure_mean": 3615,
+   "gini": 0.364,
+   "poverty": 8.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Kerian",
+   "income_mean": 5590,
+   "income_median": 4554,
+   "expenditure_mean": 3807,
+   "gini": 0.305,
+   "poverty": 7.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Kuala Kangsar",
+   "income_mean": 5176,
+   "income_median": 3813,
+   "expenditure_mean": 3488,
+   "gini": 0.391,
+   "poverty": 13
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Kuala Kangsar",
+   "income_mean": 5489,
+   "income_median": 3977,
+   "expenditure_mean": 4005,
+   "gini": 0.357,
+   "poverty": 11.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Larut Dan Matang",
+   "income_mean": 5400,
+   "income_median": 4029,
+   "expenditure_mean": 3798,
+   "gini": 0.365,
+   "poverty": 9.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Hilir Perak",
+   "income_mean": 5203,
+   "income_median": 4199,
+   "expenditure_mean": 3386,
+   "gini": 0.39,
+   "poverty": 14.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Hilir Perak",
+   "income_mean": 5599,
+   "income_median": 4347,
+   "expenditure_mean": 3711,
+   "gini": 0.36,
+   "poverty": 12.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Hulu Perak",
+   "income_mean": 4891,
+   "income_median": 3467,
+   "expenditure_mean": 2889,
+   "gini": 0.399,
+   "poverty": 16.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Hulu Perak",
+   "income_mean": 4980,
+   "income_median": 3701,
+   "expenditure_mean": 3270,
+   "gini": 0.331,
+   "poverty": 13.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Perak Tengah",
+   "income_mean": 5956,
+   "income_median": 4564,
+   "expenditure_mean": 3744,
+   "gini": 0.391,
+   "poverty": 11.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Perak Tengah",
+   "income_mean": 6027,
+   "income_median": 4685,
+   "expenditure_mean": 3956,
+   "gini": 0.354,
+   "poverty": 10.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Kampar",
+   "income_mean": 5087,
+   "income_median": 4347,
+   "expenditure_mean": 3276,
+   "gini": 0.306,
+   "poverty": 4.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Kampar",
+   "income_mean": 5608,
+   "income_median": 4538,
+   "expenditure_mean": 3753,
+   "gini": 0.37,
+   "poverty": 4.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Muallim",
+   "income_mean": 6122,
+   "income_median": 5015,
+   "expenditure_mean": 4374,
+   "gini": 0.359,
+   "poverty": 9.2
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Muallim",
+   "income_mean": 6229,
+   "income_median": 4856,
+   "expenditure_mean": 4517,
+   "gini": 0.35,
+   "poverty": 7.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Bagan Datuk",
+   "income_mean": 5160,
+   "income_median": 4076,
+   "expenditure_mean": 3150,
+   "gini": 0.361,
+   "poverty": 12.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Bagan Datuk",
+   "income_mean": 5326,
+   "income_median": 4134,
+   "expenditure_mean": 3543,
+   "gini": 0.361,
+   "poverty": 11.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perak",
+   "district": "Selama",
+   "income_mean": 4439,
+   "income_median": 3673,
+   "expenditure_mean": 3150,
+   "gini": 0.299,
+   "poverty": 5.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Selama",
+   "income_mean": 5019,
+   "income_median": 3827,
+   "expenditure_mean": 3779,
+   "gini": 0.337,
+   "poverty": 10.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Perlis",
+   "district": "Perlis",
+   "income_mean": 5664,
+   "income_median": 4713,
+   "expenditure_mean": 3834,
+   "gini": 0.336,
+   "poverty": 4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Selangor",
+   "district": "Gombak",
+   "income_mean": 13523,
+   "income_median": 10180,
+   "expenditure_mean": 6673,
+   "gini": 0.392,
+   "poverty": 2.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Selangor",
+   "district": "Gombak",
+   "income_mean": 14168,
+   "income_median": 10777,
+   "expenditure_mean": 7326,
+   "gini": 0.366,
+   "poverty": 2.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Selangor",
+   "district": "Klang",
+   "income_mean": 10278,
+   "income_median": 8203,
+   "expenditure_mean": 6622,
+   "gini": 0.347,
+   "poverty": 2.2
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Selangor",
+   "district": "Klang",
+   "income_mean": 10912,
+   "income_median": 8837,
+   "expenditure_mean": 6927,
+   "gini": 0.299,
+   "poverty": 1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Selangor",
+   "district": "Kuala Langat",
+   "income_mean": 11048,
+   "income_median": 10093,
+   "expenditure_mean": 5621,
+   "gini": 0.277,
+   "poverty": 0.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Selangor",
+   "district": "Kuala Langat",
+   "income_mean": 11714,
+   "income_median": 10583,
+   "expenditure_mean": 6123,
+   "gini": 0.16,
+   "poverty": 0.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Selangor",
+   "district": "Kuala Selangor",
+   "income_mean": 9410,
+   "income_median": 7644,
+   "expenditure_mean": 5543,
+   "gini": 0.346,
+   "poverty": 2.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Selangor",
+   "district": "Kuala Selangor",
+   "income_mean": 10584,
+   "income_median": 8046,
+   "expenditure_mean": 5974,
+   "gini": 0.35,
+   "poverty": 1.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Selangor",
+   "district": "Petaling",
+   "income_mean": 12760,
+   "income_median": 9618,
+   "expenditure_mean": 7721,
+   "gini": 0.392,
+   "poverty": 1.6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Selangor",
+   "district": "Petaling",
+   "income_mean": 14422,
+   "income_median": 10688,
+   "expenditure_mean": 8210,
+   "gini": 0.387,
+   "poverty": 1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Selangor",
+   "district": "Sabak Bernam",
+   "income_mean": 6930,
+   "income_median": 5533,
+   "expenditure_mean": 5128,
+   "gini": 0.321,
+   "poverty": 5.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Selangor",
+   "district": "Sabak Bernam",
+   "income_mean": 8033,
+   "income_median": 6941,
+   "expenditure_mean": 5621,
+   "gini": 0.268,
+   "poverty": 2.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Selangor",
+   "district": "Sepang",
+   "income_mean": 13673,
+   "income_median": 12608,
+   "expenditure_mean": 6976,
+   "gini": 0.229,
+   "poverty": 0
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Selangor",
+   "district": "Sepang",
+   "income_mean": 15906,
+   "income_median": 11131,
+   "expenditure_mean": 7676,
+   "gini": 0.332,
+   "poverty": 0.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Selangor",
+   "district": "Ulu Langat",
+   "income_mean": 13386,
+   "income_median": 11210,
+   "expenditure_mean": 6289,
+   "gini": 0.326,
+   "poverty": 0.5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Selangor",
+   "district": "Ulu Langat",
+   "income_mean": 13822,
+   "income_median": 11404,
+   "expenditure_mean": 6758,
+   "gini": 0.219,
+   "poverty": 0.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Selangor",
+   "district": "Ulu Selangor",
+   "income_mean": 8779,
+   "income_median": 7678,
+   "expenditure_mean": 4604,
+   "gini": 0.297,
+   "poverty": 1.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Selangor",
+   "district": "Ulu Selangor",
+   "income_mean": 9499,
+   "income_median": 8485,
+   "expenditure_mean": 5425,
+   "gini": 0.299,
+   "poverty": 0.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Terengganu",
+   "district": "Besut",
+   "income_mean": 6285,
+   "income_median": 4743,
+   "expenditure_mean": 4191,
+   "gini": 0.33,
+   "poverty": 12.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Terengganu",
+   "district": "Besut",
+   "income_mean": 6747,
+   "income_median": 5820,
+   "expenditure_mean": 4339,
+   "gini": 0.311,
+   "poverty": 13.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Terengganu",
+   "district": "Dungun",
+   "income_mean": 7902,
+   "income_median": 6356,
+   "expenditure_mean": 5215,
+   "gini": 0.308,
+   "poverty": 2.2
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Terengganu",
+   "district": "Dungun",
+   "income_mean": 8055,
+   "income_median": 7156,
+   "expenditure_mean": 5833,
+   "gini": 0.308,
+   "poverty": 4.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Terengganu",
+   "district": "Kemaman",
+   "income_mean": 8381,
+   "income_median": 6425,
+   "expenditure_mean": 4978,
+   "gini": 0.378,
+   "poverty": 4.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Terengganu",
+   "district": "Kemaman",
+   "income_mean": 8973,
+   "income_median": 7709,
+   "expenditure_mean": 5644,
+   "gini": 0.319,
+   "poverty": 3.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Terengganu",
+   "district": "Kuala Terengganu",
+   "income_mean": 7109,
+   "income_median": 5872,
+   "expenditure_mean": 4881,
+   "gini": 0.3,
+   "poverty": 5.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Terengganu",
+   "district": "Kuala Terengganu",
+   "income_mean": 7279,
+   "income_median": 6615,
+   "expenditure_mean": 5264,
+   "gini": 0.267,
+   "poverty": 4.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Terengganu",
+   "district": "Marang",
+   "income_mean": 6357,
+   "income_median": 5291,
+   "expenditure_mean": 4675,
+   "gini": 0.325,
+   "poverty": 9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Terengganu",
+   "district": "Marang",
+   "income_mean": 6807,
+   "income_median": 6246,
+   "expenditure_mean": 5141,
+   "gini": 0.281,
+   "poverty": 7.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Terengganu",
+   "district": "Hulu Terengganu",
+   "income_mean": 5821,
+   "income_median": 5090,
+   "expenditure_mean": 4332,
+   "gini": 0.293,
+   "poverty": 10.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Terengganu",
+   "district": "Setiu",
+   "income_mean": 6030,
+   "income_median": 5211,
+   "expenditure_mean": 4017,
+   "gini": 0.275,
+   "poverty": 7.5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Terengganu",
+   "district": "Setiu",
+   "income_mean": 6359,
+   "income_median": 6125,
+   "expenditure_mean": 4314,
+   "gini": 0.214,
+   "poverty": 4.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Terengganu",
+   "district": "Kuala Nerus",
+   "income_mean": 7983,
+   "income_median": 6800,
+   "expenditure_mean": 5224,
+   "gini": 0.273,
+   "poverty": 1.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Terengganu",
+   "district": "Kuala Nerus",
+   "income_mean": 8385,
+   "income_median": 7304,
+   "expenditure_mean": 5498,
+   "gini": 0.282,
+   "poverty": 1.6
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Tawau",
+   "income_mean": 6315,
+   "income_median": 4783,
+   "expenditure_mean": 3118,
+   "gini": 0.388,
+   "poverty": 14.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Tawau",
+   "income_mean": 6751,
+   "income_median": 4852,
+   "expenditure_mean": 3182,
+   "gini": 0.389,
+   "poverty": 13.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Lahad Datu",
+   "income_mean": 5995,
+   "income_median": 4457,
+   "expenditure_mean": 3346,
+   "gini": 0.388,
+   "poverty": 23.5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Lahad Datu",
+   "income_mean": 6557,
+   "income_median": 5526,
+   "expenditure_mean": 3571,
+   "gini": 0.286,
+   "poverty": 13.6
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Semporna",
+   "income_mean": 5098,
+   "income_median": 4093,
+   "expenditure_mean": 2466,
+   "gini": 0.341,
+   "poverty": 28
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Semporna",
+   "income_mean": 5604,
+   "income_median": 4059,
+   "expenditure_mean": 2567,
+   "gini": 0.411,
+   "poverty": 30.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Sandakan",
+   "income_mean": 6030,
+   "income_median": 4828,
+   "expenditure_mean": 3315,
+   "gini": 0.347,
+   "poverty": 17.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Sandakan",
+   "income_mean": 6648,
+   "income_median": 5314,
+   "expenditure_mean": 3677,
+   "gini": 0.355,
+   "poverty": 15.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Kinabatangan",
+   "income_mean": 5543,
+   "income_median": 4162,
+   "expenditure_mean": 2394,
+   "gini": 0.392,
+   "poverty": 28.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Kinabatangan",
+   "income_mean": 5632,
+   "income_median": 4897,
+   "expenditure_mean": 2482,
+   "gini": 0.308,
+   "poverty": 26.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Beluran",
+   "income_mean": 4501,
+   "income_median": 3131,
+   "expenditure_mean": 2301,
+   "gini": 0.399,
+   "poverty": 37.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Beluran",
+   "income_mean": 4993,
+   "income_median": 4436,
+   "expenditure_mean": 2750,
+   "gini": 0.314,
+   "poverty": 33
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Kota Kinabalu",
+   "income_mean": 8388,
+   "income_median": 5957,
+   "expenditure_mean": 4427,
+   "gini": 0.431,
+   "poverty": 10.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Kota Kinabalu",
+   "income_mean": 8715,
+   "income_median": 5896,
+   "expenditure_mean": 4726,
+   "gini": 0.426,
+   "poverty": 12
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Ranau",
+   "income_mean": 5270,
+   "income_median": 4058,
+   "expenditure_mean": 2894,
+   "gini": 0.375,
+   "poverty": 25.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Ranau",
+   "income_mean": 5330,
+   "income_median": 3470,
+   "expenditure_mean": 2905,
+   "gini": 0.441,
+   "poverty": 23.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Kota Belud",
+   "income_mean": 4949,
+   "income_median": 3429,
+   "expenditure_mean": 2791,
+   "gini": 0.425,
+   "poverty": 27.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Kota Belud",
+   "income_mean": 5007,
+   "income_median": 3512,
+   "expenditure_mean": 2920,
+   "gini": 0.361,
+   "poverty": 26.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Tuaran",
+   "income_mean": 5166,
+   "income_median": 3921,
+   "expenditure_mean": 3133,
+   "gini": 0.366,
+   "poverty": 25.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Tuaran",
+   "income_mean": 5388,
+   "income_median": 4277,
+   "expenditure_mean": 3185,
+   "gini": 0.342,
+   "poverty": 23.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Penampang",
+   "income_mean": 7491,
+   "income_median": 6265,
+   "expenditure_mean": 4194,
+   "gini": 0.33,
+   "poverty": 6.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Penampang",
+   "income_mean": 7550,
+   "income_median": 6090,
+   "expenditure_mean": 4234,
+   "gini": 0.348,
+   "poverty": 5.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Papar",
+   "income_mean": 5980,
+   "income_median": 4871,
+   "expenditure_mean": 3494,
+   "gini": 0.341,
+   "poverty": 16.2
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Papar",
+   "income_mean": 6038,
+   "income_median": 5177,
+   "expenditure_mean": 3613,
+   "gini": 0.313,
+   "poverty": 12
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Kudat",
+   "income_mean": 4049,
+   "income_median": 2994,
+   "expenditure_mean": 3080,
+   "gini": 0.369,
+   "poverty": 34.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Kudat",
+   "income_mean": 4571,
+   "income_median": 3249,
+   "expenditure_mean": 3206,
+   "gini": 0.385,
+   "poverty": 35.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Kota Marudu",
+   "income_mean": 4031,
+   "income_median": 2677,
+   "expenditure_mean": 2951,
+   "gini": 0.419,
+   "poverty": 49.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Kota Marudu",
+   "income_mean": 4685,
+   "income_median": 2877,
+   "expenditure_mean": 3466,
+   "gini": 0.421,
+   "poverty": 40
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Pitas",
+   "income_mean": 3406,
+   "income_median": 2329,
+   "expenditure_mean": 2562,
+   "gini": 0.386,
+   "poverty": 52.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Pitas",
+   "income_mean": 4121,
+   "income_median": 2785,
+   "expenditure_mean": 3472,
+   "gini": 0.411,
+   "poverty": 50
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Beaufort",
+   "income_mean": 4902,
+   "income_median": 4018,
+   "expenditure_mean": 3141,
+   "gini": 0.338,
+   "poverty": 19.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Beaufort",
+   "income_mean": 5048,
+   "income_median": 4070,
+   "expenditure_mean": 3545,
+   "gini": 0.373,
+   "poverty": 20.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Kuala Penyu",
+   "income_mean": 4311,
+   "income_median": 3487,
+   "expenditure_mean": 2777,
+   "gini": 0.324,
+   "poverty": 17.6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Kuala Penyu",
+   "income_mean": 4750,
+   "income_median": 3733,
+   "expenditure_mean": 2826,
+   "gini": 0.375,
+   "poverty": 14.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Sipitang",
+   "income_mean": 5479,
+   "income_median": 4182,
+   "expenditure_mean": 3093,
+   "gini": 0.36,
+   "poverty": 22.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Sipitang",
+   "income_mean": 5548,
+   "income_median": 4606,
+   "expenditure_mean": 3341,
+   "gini": 0.306,
+   "poverty": 15.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Tenom",
+   "income_mean": 5217,
+   "income_median": 4045,
+   "expenditure_mean": 3267,
+   "gini": 0.336,
+   "poverty": 15.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Tenom",
+   "income_mean": 5410,
+   "income_median": 4161,
+   "expenditure_mean": 3504,
+   "gini": 0.336,
+   "poverty": 12.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Nabawan",
+   "income_mean": 5016,
+   "income_median": 4110,
+   "expenditure_mean": 3228,
+   "gini": 0.311,
+   "poverty": 27.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Nabawan",
+   "income_mean": 5146,
+   "income_median": 4361,
+   "expenditure_mean": 3553,
+   "gini": 0.314,
+   "poverty": 25.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Keningau",
+   "income_mean": 5979,
+   "income_median": 4502,
+   "expenditure_mean": 3478,
+   "gini": 0.36,
+   "poverty": 18.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Keningau",
+   "income_mean": 6033,
+   "income_median": 4801,
+   "expenditure_mean": 3542,
+   "gini": 0.322,
+   "poverty": 12.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Tambunan",
+   "income_mean": 5113,
+   "income_median": 4055,
+   "expenditure_mean": 3278,
+   "gini": 0.337,
+   "poverty": 9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Tambunan",
+   "income_mean": 5361,
+   "income_median": 4854,
+   "expenditure_mean": 3508,
+   "gini": 0.3,
+   "poverty": 8.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Kunak",
+   "income_mean": 5838,
+   "income_median": 4480,
+   "expenditure_mean": 2755,
+   "gini": 0.352,
+   "poverty": 25.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Kunak",
+   "income_mean": 6608,
+   "income_median": 4539,
+   "expenditure_mean": 2797,
+   "gini": 0.484,
+   "poverty": 29.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Tongod",
+   "income_mean": 4019,
+   "income_median": 2856,
+   "expenditure_mean": 2445,
+   "gini": 0.347,
+   "poverty": 50.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Tongod",
+   "income_mean": 4090,
+   "income_median": 3470,
+   "expenditure_mean": 2465,
+   "gini": 0.344,
+   "poverty": 41.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Putatan",
+   "income_mean": 7110,
+   "income_median": 5699,
+   "expenditure_mean": 4047,
+   "gini": 0.351,
+   "poverty": 12.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Putatan",
+   "income_mean": 7377,
+   "income_median": 6563,
+   "expenditure_mean": 4188,
+   "gini": 0.289,
+   "poverty": 6.9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Telupid",
+   "income_mean": 4819,
+   "income_median": 3953,
+   "expenditure_mean": 2538,
+   "gini": 0.321,
+   "poverty": 20.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Telupid",
+   "income_mean": 4877,
+   "income_median": 4489,
+   "expenditure_mean": 2659,
+   "gini": 0.267,
+   "poverty": 22
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sabah",
+   "district": "Kalabakan",
+   "income_mean": 4938,
+   "income_median": 3931,
+   "expenditure_mean": 2019,
+   "gini": 0.368,
+   "poverty": 33.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Kalabakan",
+   "income_mean": 5174,
+   "income_median": 3304,
+   "expenditure_mean": 2257,
+   "gini": 0.447,
+   "poverty": 26.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Kuching",
+   "income_mean": 7588,
+   "income_median": 5968,
+   "expenditure_mean": 4687,
+   "gini": 0.376,
+   "poverty": 9.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Kuching",
+   "income_mean": 8237,
+   "income_median": 6741,
+   "expenditure_mean": 5184,
+   "gini": 0.349,
+   "poverty": 7.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Bau",
+   "income_mean": 5621,
+   "income_median": 4735,
+   "expenditure_mean": 3581,
+   "gini": 0.36,
+   "poverty": 8.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Bau",
+   "income_mean": 5843,
+   "income_median": 4885,
+   "expenditure_mean": 3965,
+   "gini": 0.327,
+   "poverty": 6.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Lundu",
+   "income_mean": 4935,
+   "income_median": 3692,
+   "expenditure_mean": 3161,
+   "gini": 0.352,
+   "poverty": 13.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Lundu",
+   "income_mean": 5170,
+   "income_median": 3918,
+   "expenditure_mean": 3370,
+   "gini": 0.345,
+   "poverty": 12.9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Samarahan",
+   "income_mean": 7123,
+   "income_median": 5953,
+   "expenditure_mean": 4475,
+   "gini": 0.324,
+   "poverty": 7.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Samarahan",
+   "income_mean": 7965,
+   "income_median": 6785,
+   "expenditure_mean": 4973,
+   "gini": 0.322,
+   "poverty": 6.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Serian",
+   "income_mean": 4988,
+   "income_median": 4074,
+   "expenditure_mean": 3515,
+   "gini": 0.345,
+   "poverty": 14.6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Serian",
+   "income_mean": 5113,
+   "income_median": 4082,
+   "expenditure_mean": 3594,
+   "gini": 0.326,
+   "poverty": 11.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Simunjan",
+   "income_mean": 3917,
+   "income_median": 3196,
+   "expenditure_mean": 2874,
+   "gini": 0.314,
+   "poverty": 17.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Simunjan",
+   "income_mean": 4246,
+   "income_median": 3365,
+   "expenditure_mean": 3130,
+   "gini": 0.311,
+   "poverty": 14.9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Sri Aman",
+   "income_mean": 4881,
+   "income_median": 3704,
+   "expenditure_mean": 3071,
+   "gini": 0.395,
+   "poverty": 8.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Sri Aman",
+   "income_mean": 5349,
+   "income_median": 3967,
+   "expenditure_mean": 3378,
+   "gini": 0.383,
+   "poverty": 6.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Lubok Antu",
+   "income_mean": 4129,
+   "income_median": 3548,
+   "expenditure_mean": 3178,
+   "gini": 0.352,
+   "poverty": 14.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Betong",
+   "income_mean": 4422,
+   "income_median": 3685,
+   "expenditure_mean": 2849,
+   "gini": 0.305,
+   "poverty": 9.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Betong",
+   "income_mean": 4572,
+   "income_median": 4074,
+   "expenditure_mean": 2877,
+   "gini": 0.269,
+   "poverty": 7.6
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Saratok",
+   "income_mean": 4621,
+   "income_median": 3763,
+   "expenditure_mean": 2974,
+   "gini": 0.29,
+   "poverty": 7.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Saratok",
+   "income_mean": 4796,
+   "income_median": 3418,
+   "expenditure_mean": 3127,
+   "gini": 0.352,
+   "poverty": 5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Sarikei",
+   "income_mean": 5440,
+   "income_median": 3528,
+   "expenditure_mean": 3078,
+   "gini": 0.449,
+   "poverty": 20.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Sarikei",
+   "income_mean": 5792,
+   "income_median": 4675,
+   "expenditure_mean": 3849,
+   "gini": 0.355,
+   "poverty": 17.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Maradong",
+   "income_mean": 4117,
+   "income_median": 3259,
+   "expenditure_mean": 2674,
+   "gini": 0.362,
+   "poverty": 19.5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Maradong",
+   "income_mean": 4208,
+   "income_median": 3472,
+   "expenditure_mean": 2864,
+   "gini": 0.303,
+   "poverty": 16.9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Daro",
+   "income_mean": 4368,
+   "income_median": 3373,
+   "expenditure_mean": 2997,
+   "gini": 0.389,
+   "poverty": 32.5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Daro",
+   "income_mean": 4913,
+   "income_median": 3806,
+   "expenditure_mean": 3076,
+   "gini": 0.326,
+   "poverty": 26.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Julau",
+   "income_mean": 3548,
+   "income_median": 2652,
+   "expenditure_mean": 2842,
+   "gini": 0.374,
+   "poverty": 31.2
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Julau",
+   "income_mean": 4363,
+   "income_median": 3264,
+   "expenditure_mean": 3401,
+   "gini": 0.36,
+   "poverty": 26.6
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Sibu",
+   "income_mean": 6645,
+   "income_median": 5248,
+   "expenditure_mean": 4366,
+   "gini": 0.374,
+   "poverty": 10.2
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Sibu",
+   "income_mean": 6842,
+   "income_median": 5737,
+   "expenditure_mean": 4490,
+   "gini": 0.32,
+   "poverty": 6.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Dalat",
+   "income_mean": 4841,
+   "income_median": 4057,
+   "expenditure_mean": 3044,
+   "gini": 0.315,
+   "poverty": 11.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Dalat",
+   "income_mean": 5416,
+   "income_median": 4614,
+   "expenditure_mean": 3079,
+   "gini": 0.355,
+   "poverty": 10.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Mukah",
+   "income_mean": 5962,
+   "income_median": 4623,
+   "expenditure_mean": 3615,
+   "gini": 0.386,
+   "poverty": 14
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Mukah",
+   "income_mean": 6373,
+   "income_median": 5169,
+   "expenditure_mean": 3650,
+   "gini": 0.34,
+   "poverty": 11.9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Kanowit",
+   "income_mean": 3711,
+   "income_median": 2648,
+   "expenditure_mean": 2940,
+   "gini": 0.386,
+   "poverty": 24.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Kanowit",
+   "income_mean": 4549,
+   "income_median": 3511,
+   "expenditure_mean": 3240,
+   "gini": 0.343,
+   "poverty": 21.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Bintulu",
+   "income_mean": 9645,
+   "income_median": 8567,
+   "expenditure_mean": 4990,
+   "gini": 0.318,
+   "poverty": 3.5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Bintulu",
+   "income_mean": 10480,
+   "income_median": 8317,
+   "expenditure_mean": 5073,
+   "gini": 0.369,
+   "poverty": 3.7
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Tatau",
+   "income_mean": 5617,
+   "income_median": 4787,
+   "expenditure_mean": 3066,
+   "gini": 0.303,
+   "poverty": 5.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Tatau",
+   "income_mean": 5807,
+   "income_median": 4409,
+   "expenditure_mean": 3071,
+   "gini": 0.308,
+   "poverty": 2.6
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Kapit",
+   "income_mean": 4053,
+   "income_median": 2902,
+   "expenditure_mean": 3315,
+   "gini": 0.366,
+   "poverty": 20.6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Kapit",
+   "income_mean": 4326,
+   "income_median": 3259,
+   "expenditure_mean": 3683,
+   "gini": 0.346,
+   "poverty": 15.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Song",
+   "income_mean": 3477,
+   "income_median": 2926,
+   "expenditure_mean": 2841,
+   "gini": 0.322,
+   "poverty": 15.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Song",
+   "income_mean": 4077,
+   "income_median": 3052,
+   "expenditure_mean": 2939,
+   "gini": 0.344,
+   "poverty": 11.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Belaga",
+   "income_mean": 4239,
+   "income_median": 3587,
+   "expenditure_mean": 2224,
+   "gini": 0.33,
+   "poverty": 19.5
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Belaga",
+   "income_mean": 4903,
+   "income_median": 3977,
+   "expenditure_mean": 2757,
+   "gini": 0.313,
+   "poverty": 13.6
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Miri",
+   "income_mean": 7932,
+   "income_median": 6449,
+   "expenditure_mean": 4333,
+   "gini": 0.342,
+   "poverty": 6.3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Miri",
+   "income_mean": 8166,
+   "income_median": 6600,
+   "expenditure_mean": 4609,
+   "gini": 0.307,
+   "poverty": 3.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Marudi",
+   "income_mean": 5373,
+   "income_median": 4234,
+   "expenditure_mean": 2557,
+   "gini": 0.361,
+   "poverty": 12.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Marudi",
+   "income_mean": 5430,
+   "income_median": 4519,
+   "expenditure_mean": 2705,
+   "gini": 0.309,
+   "poverty": 4.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Limbang",
+   "income_mean": 5148,
+   "income_median": 4023,
+   "expenditure_mean": 3184,
+   "gini": 0.351,
+   "poverty": 14.6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Limbang",
+   "income_mean": 5202,
+   "income_median": 4060,
+   "expenditure_mean": 3457,
+   "gini": 0.385,
+   "poverty": 14.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Lawas",
+   "income_mean": 4476,
+   "income_median": 3183,
+   "expenditure_mean": 2934,
+   "gini": 0.406,
+   "poverty": 18.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Lawas",
+   "income_mean": 5050,
+   "income_median": 3929,
+   "expenditure_mean": 3241,
+   "gini": 0.35,
+   "poverty": 14.6
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Matu",
+   "income_mean": 4362,
+   "income_median": 3354,
+   "expenditure_mean": 2811,
+   "gini": 0.369,
+   "poverty": 20.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Matu",
+   "income_mean": 4417,
+   "income_median": 3891,
+   "expenditure_mean": 2992,
+   "gini": 0.308,
+   "poverty": 9.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Asajaya",
+   "income_mean": 4557,
+   "income_median": 3929,
+   "expenditure_mean": 3039,
+   "gini": 0.301,
+   "poverty": 17.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Asajaya",
+   "income_mean": 5165,
+   "income_median": 4447,
+   "expenditure_mean": 3598,
+   "gini": 0.326,
+   "poverty": 14
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Pakan",
+   "income_mean": 3936,
+   "income_median": 3546,
+   "expenditure_mean": 3076,
+   "gini": 0.312,
+   "poverty": 17.6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Pakan",
+   "income_mean": 4473,
+   "income_median": 3742,
+   "expenditure_mean": 3444,
+   "gini": 0.306,
+   "poverty": 14.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Selangau",
+   "income_mean": 4128,
+   "income_median": 3005,
+   "expenditure_mean": 2798,
+   "gini": 0.393,
+   "poverty": 19.6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Selangau",
+   "income_mean": 4688,
+   "income_median": 4170,
+   "expenditure_mean": 2947,
+   "gini": 0.291,
+   "poverty": 17.2
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Tebedu",
+   "income_mean": 3218,
+   "income_median": 2579,
+   "expenditure_mean": 2397,
+   "gini": 0.312,
+   "poverty": 26.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Tebedu",
+   "income_mean": 3375,
+   "income_median": 3024,
+   "expenditure_mean": 2639,
+   "gini": 0.249,
+   "poverty": 25.8
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Pusa",
+   "income_mean": 3395,
+   "income_median": 3124,
+   "expenditure_mean": 2389,
+   "gini": 0.225,
+   "poverty": 17.2
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Pusa",
+   "income_mean": 4155,
+   "income_median": 3276,
+   "expenditure_mean": 2736,
+   "gini": 0.339,
+   "poverty": 14.6
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Kabong",
+   "income_mean": 4002,
+   "income_median": 3500,
+   "expenditure_mean": 3215,
+   "gini": 0.314,
+   "poverty": 8.6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Kabong",
+   "income_mean": 4136,
+   "income_median": 3407,
+   "expenditure_mean": 3225,
+   "gini": 0.289,
+   "poverty": 4.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Tanjung Manis",
+   "income_mean": 4017,
+   "income_median": 3300,
+   "expenditure_mean": 2899,
+   "gini": 0.334,
+   "poverty": 20.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Tanjung Manis",
+   "income_mean": 4457,
+   "income_median": 3837,
+   "expenditure_mean": 2902,
+   "gini": 0.303,
+   "poverty": 15.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Sebauh",
+   "income_mean": 5120,
+   "income_median": 4428,
+   "expenditure_mean": 2660,
+   "gini": 0.303,
+   "poverty": 4.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Sebauh",
+   "income_mean": 5726,
+   "income_median": 4636,
+   "expenditure_mean": 3311,
+   "gini": 0.295,
+   "poverty": 2.9
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Bukit Mabong",
+   "income_mean": 3509,
+   "income_median": 2948,
+   "expenditure_mean": 2853,
+   "gini": 0.297,
+   "poverty": 8.2
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Bukit Mabong",
+   "income_mean": 3783,
+   "income_median": 2589,
+   "expenditure_mean": 3363,
+   "gini": 0.333,
+   "poverty": 6.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Subis",
+   "income_mean": 6390,
+   "income_median": 5194,
+   "expenditure_mean": 2756,
+   "gini": 0.341,
+   "poverty": 4.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Subis",
+   "income_mean": 6475,
+   "income_median": 5531,
+   "expenditure_mean": 3967,
+   "gini": 0.274,
+   "poverty": 2.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Beluru",
+   "income_mean": 4873,
+   "income_median": 4164,
+   "expenditure_mean": 2386,
+   "gini": 0.302,
+   "poverty": 13.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Beluru",
+   "income_mean": 4927,
+   "income_median": 4346,
+   "expenditure_mean": 2844,
+   "gini": 0.238,
+   "poverty": 10.1
+  },
+  {
+   "date": "2022-01-01",
+   "state": "Sarawak",
+   "district": "Telang Usan",
+   "income_mean": 4692,
+   "income_median": 3870,
+   "expenditure_mean": 2578,
+   "gini": 0.311,
+   "poverty": 6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Telang Usan",
+   "income_mean": 4795,
+   "income_median": 4281,
+   "expenditure_mean": 2824,
+   "gini": 0.229,
+   "poverty": 1.3
+  },
+  {
+   "date": "2022-01-01",
+   "state": "W.P. Kuala Lumpur",
+   "district": "W.P. Kuala Lumpur",
+   "income_mean": 13325,
+   "income_median": 10234,
+   "expenditure_mean": 7823,
+   "gini": 0.38,
+   "poverty": 1.4
+  },
+  {
+   "date": "2022-01-01",
+   "state": "W.P. Labuan",
+   "district": "W.P. Labuan",
+   "income_mean": 8250,
+   "income_median": 6904,
+   "expenditure_mean": 4176,
+   "gini": 0.3,
+   "poverty": 2.5
+  },
+  {
+   "date": "2022-01-01",
+   "state": "W.P. Putrajaya",
+   "district": "W.P. Putrajaya",
+   "income_mean": 13473,
+   "income_median": 10056,
+   "expenditure_mean": 8897,
+   "gini": 0.368,
+   "poverty": 0.1
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pulau Pinang",
+   "district": "S.P.Tengah",
+   "income_mean": 8413,
+   "income_median": 6892,
+   "expenditure_mean": 5419,
+   "gini": 0.346,
+   "poverty": 2.8
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pulau Pinang",
+   "district": "S.P.Utara",
+   "income_mean": 8101,
+   "income_median": 6810,
+   "expenditure_mean": 5232,
+   "gini": 0.343,
+   "poverty": 3.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Pulau Pinang",
+   "district": "S.P. Selatan",
+   "income_mean": 8234,
+   "income_median": 6822,
+   "expenditure_mean": 5391,
+   "gini": 0.352,
+   "poverty": 3
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Perak",
+   "district": "Larut & Matang",
+   "income_mean": 6024,
+   "income_median": 4843,
+   "expenditure_mean": 4174,
+   "gini": 0.335,
+   "poverty": 9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Terengganu",
+   "district": "Hulu",
+   "income_mean": 6360,
+   "income_median": 6134,
+   "expenditure_mean": 4554,
+   "gini": 0.255,
+   "poverty": 6.6
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sabah",
+   "district": "Membakut",
+   "income_mean": 4997,
+   "income_median": 4037,
+   "expenditure_mean": 3075,
+   "gini": 0.357,
+   "poverty": 27.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Lubok antu",
+   "income_mean": 4820,
+   "income_median": 4169,
+   "expenditure_mean": 3564,
+   "gini": 0.311,
+   "poverty": 13
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Gedong",
+   "income_mean": 5013,
+   "income_median": 3329,
+   "expenditure_mean": 2950,
+   "gini": 0.392,
+   "poverty": 16.7
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Sebuyau",
+   "income_mean": 3603,
+   "income_median": 2717,
+   "expenditure_mean": 2462,
+   "gini": 0.31,
+   "poverty": 21.4
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Siburan",
+   "income_mean": 6368,
+   "income_median": 5217,
+   "expenditure_mean": 4088,
+   "gini": 0.335,
+   "poverty": 4.2
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Pantu",
+   "income_mean": 2988,
+   "income_median": 2525,
+   "expenditure_mean": 2371,
+   "gini": 0.222,
+   "poverty": 10.9
+  },
+  {
+   "date": "2024-01-01",
+   "state": "Sarawak",
+   "district": "Lingga",
+   "income_mean": 3663,
+   "income_median": 2999,
+   "expenditure_mean": 2412,
+   "gini": 0.27,
+   "poverty": 6.3
+  }
+ ],
+ "_nextI18Next": {
+  "initialI18nStore": {
+   "en-GB": {
+    "catalogue": {
+     "header": "Data Catalogue",
+     "header_category_govt": "Malaysia's official open data portal",
+     "header_category_agency": "{{ agency }}'s official open data portal",
+     "description": "Your one-stop interface to browse Malaysia's wealth of open data. This page will consistently grow in depth and breadth with high-quality data from federal and state agencies in Malaysia.",
+     "description_agency": "Your one-stop interface to browse open data from {{ agency }}. This page will grow over time as we expand the quality and quantity of our open data.",
+     "description_opendosm": "Your one-stop interface to browse our wealth of open data. This page will consistently grow in depth and breadth, providing richer and more varied data from the various divisions of DOSM.",
+     "description_databnm": "Multi-format downloads, exploratory dataviz, and programmatic access - pick your preferred method of freely using our data. Pay particular attention to the metadata to gain a deeper understanding of a dataset's scope, use, and limitations, and write to data@bnm.gov.my if you want to discuss or request anything further!",
+     "dataset_count": "{{ count }} data series, and counting",
+     "download": "Download",
+     "category": "Category",
+     "chart": "Chart",
+     "table": "Table",
+     "filter": "Filter",
+     "period": "Frequency",
+     "frequency": "Frequency",
+     "geography": "Geography",
+     "demography": "Demography",
+     "begin": "Begin",
+     "end": "End",
+     "source": "Data Source",
+     "desktop": "Desktop",
+     "mobile": "Mobile",
+     "settings": "Settings",
+     "embed": "Embed",
+     "embed_code": "Embed Code",
+     "view_full_chart": "View full chart",
+     "placeholder": {
+      "source": "Select agency",
+      "search": "Search for dataset",
+      "demography": "Data contains"
+     },
+     "filter_options": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "yearly": "Yearly",
+      "intraday": "Intraday",
+      "infrequent": "Infrequent",
+      "as_required": "As Required",
+      "one_off": "One-Off",
+      "state": "State",
+      "dun": "DUN",
+      "national": "National",
+      "parlimen": "Parliament",
+      "district": "District",
+      "sex": "Sex",
+      "ethnicity": "Ethnicity",
+      "age": "Age",
+      "religion": "Religion",
+      "nationality": "Nationality",
+      "disability": "Disability status",
+      "marital": "Marital status"
+     },
+     "image": {
+      "title": "Image (PNG)",
+      "desc": "Suitable for general digital use."
+     },
+     "vector": {
+      "title": "Vector Graphic (SVG)",
+      "desc": "Suitable for high quality prints or further image editing."
+     },
+     "csv": {
+      "title": "Full Dataset (CSV)",
+      "desc": "Recommended for individuals seeking an Excel-friendly format."
+     },
+     "parquet": {
+      "title": "Full Dataset (Parquet)",
+      "desc": "Recommended for data scientists seeking to work with data via code."
+     },
+     "geojson": {
+      "title": "GeoJSON (JSON)",
+      "desc": "Open standard format for plotting geographical features on maps."
+     },
+     "header_1": "How is this data produced?",
+     "header_2": "What caveats I should bear in mind when using this data?",
+     "header_3": "Publication(s) using this data",
+     "header_4": "Related Datasets",
+     "meta_desc": "Dataset description",
+     "meta_def": "Variable definitions",
+     "meta_chart_above": "(Chart above)",
+     "meta_all_dataset": "In the entire dataset:",
+     "meta_variable": "Variable",
+     "meta_variable_name": "Name in Dataset",
+     "meta_data_type": "Data type",
+     "meta_definition": "Definition",
+     "meta_source": "Data source(s)",
+     "meta_url": "URLs to dataset",
+     "meta_license": "License",
+     "code": "Code",
+     "code_desc": "Connect directly to the data with Python.",
+     "code_note": "If not already installed, do",
+     "code_comments": {
+      "geojson_1": "# the first URL gives you 15dp accuracy (highest possible) \n# the _LIGHT URL gives you 5dp accuracy, sufficient for visuals but not analysis \n# the _LIGHT URL is over 90% smaller in size, hence the tradeoff",
+      "geojson_2": "# Uncomment below to maintain a rectangular map, but remove the whitespace caused by the South China Sea",
+      "geojson_3": "# Uncomment below to change from rectangular --> square, for a more compact visual"
+     },
+     "sample_query": {
+      "section_title": "Sample OpenAPI query",
+      "desc1": "The following code is an example of how to make an API query to retrieve the data catalogue mentioned above. You can use different programming languages by switching the code accordingly. For a complete guide on possible query parameters and syntax, please refer to the ",
+      "link1": "official Open API Documentation",
+      "desc2": "Additionally, you can experiment with the code interactively and send requests at the ",
+      "link2": "Example Requests section",
+      "unavailable": "This data catalog is not available through OpenAPI as the nature of the data makes it unsuitable for API access. For the full dataset, please use the provided download link as shown in the above section."
+     },
+     "license_text": "This data is made open under the Creative Commons Attribution 4.0 International License (CC BY 4.0). A copy of the license is available "
+    },
+    "common": {
+     "site": {
+      "name": "data.gov.my",
+      "description": "Your one-stop interface to browse Malaysia's wealth of open data!"
+     },
+     "error": {
+      "404": {
+       "title": "Oops, we cannot find the page you're looking for.",
+       "description": "Is your URL incorrect?",
+       "legacy": "If you're looking for a dataset that was available via the old site, you may head to ",
+       "reason": "Error code: 404 -- Page not found"
+      },
+      "500": {
+       "title": "Oops, something went terribly wrong.",
+       "description": "We are sorry for this incident.",
+       "reason": "Error code: 500 -- Server error"
+      },
+      "output": "Output",
+      "disclaimer": "*Not an actual terminal / console.",
+      "toast": {
+       "request_failure": "Oops! Unable to load requested data",
+       "image_download_failure": "Oops! Unable to download requested image",
+       "form_submission_failure": "Oops! Unable to process form submission",
+       "try_again": "Please try again later",
+       "reach_support": "Please check again or reach out to support for assistance"
+      }
+     },
+     "common": {
+      "state": "State",
+      "district": "District",
+      "type": "Type",
+      "name": "Name",
+      "previous": "Previous",
+      "next": "Next",
+      "in": " in ",
+      "yr": "yr",
+      "views_one": "view",
+      "views_other": "views",
+      "downloads_one": "download",
+      "downloads_other": "downloads",
+      "page_of": "{{ current }} of {{ total }}",
+      "data_for": "Data for {{ state }}",
+      "data_of": "Data as of {{ date }}",
+      "latest": "Latest ({{ date }})",
+      "last_updated": "Last updated: {{ date }}",
+      "next_update": "Next update: {{ date }}",
+      "slider": "",
+      "zoom": "Zoom into my area",
+      "clear": "Clear",
+      "clear_selection": "Clear selection",
+      "clear_all": "Clear all",
+      "reset": "Reset",
+      "reset_default": "Reset to default",
+      "close": "Close",
+      "select": "Select",
+      "here": "Here",
+      "no_entries": "No entries found",
+      "check_out": "Check out",
+      "no_data": "No data",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "maximum": "Maximum",
+      "minimum": "Minimum",
+      "sort": "Sort",
+      "asc_order": "Ascending order",
+      "desc_order": "Descending order",
+      "play": "Play",
+      "pause": "Pause",
+      "indicator": "Indicator",
+      "available_at": "Available at",
+      "accessed": "Accessed",
+      "last_modified": "Last modified",
+      "cited": "cited",
+      "available_from": "Available from",
+      "ranking": "Ranking ({{ count, number }})",
+      "charts": {
+       "heatmap": "Heatmap",
+       "table": "Table"
+      },
+      "banner": "",
+      "opendosm_banner": ""
+     },
+     "time": {
+      "daily_7d": "Daily (7d avg)",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "yearly": "Yearly"
+     },
+     "placeholder": {
+      "all": "All",
+      "search": "Search",
+      "state": "Select state",
+      "state_first": "Select a state first",
+      "district": "Select district",
+      "facility": "Select facility",
+      "facility_type": "Select facility type",
+      "no_results": "No results",
+      "loading": "Loading..."
+     },
+     "nav": {
+      "home": "Home",
+      "dashboards": "Dashboards",
+      "catalogue": "Data Catalogue",
+      "api_docs": "API Docs",
+      "about": "About",
+      "data_request": "Data Request",
+      "community": "Community",
+      "helpdesk": "Helpdesk",
+      "progress": "Progress",
+      "legacy": "Legacy Site",
+      "publications": "Publications",
+      "national_summary_data_page": "NSDP",
+      "pmo": "Prime Minister's Department",
+      "gov": "Government of Malaysia",
+      "open_source": "Open Source",
+      "open_data_portal": "Open Data Portal",
+      "frontend": "Frontend Repo: NextJS",
+      "backend": "Backend Repo: Django",
+      "uiux": "UI + UX Design: Figma",
+      "mampu": "MAMPU",
+      "open_data": "Open Data",
+      "public_open_data": "Public Sector Open Data",
+      "bond_sukuk": " Bond & Sukuk Info (BIX)",
+      "guiding_principles": "Guiding Principles",
+      "terms_of_use": "Terms of Use",
+      "ai": "AI Helper: OpenAI",
+      "moh_github": "MoH GitHub",
+      "jc3_climate": "Climate Data (JC3)",
+      "faq": "FAQ"
+     },
+     "components": {
+      "theme": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "brought_by": "Brought to you by",
+      "brought_by_the": "Brought to you by the",
+      "product_by_division": "A open data product by the",
+      "visit_portal": "Visit our portal",
+      "click_to_explore": "Click to explore",
+      "ovs": "Malaysian-born Overseas",
+      "try_datagpt": "Try the new DataGPT"
+     },
+     "categories": {
+      "construction": "Construction",
+      "democracy": "Democracy",
+      "demography": "Demography",
+      "digitalisation": "Digitalisation",
+      "economy": "Economy",
+      "education": "Education",
+      "environment": "Environment",
+      "financial_sector": "Financial Sector",
+      "government_programs": "Government Programs",
+      "healthcare": "Healthcare",
+      "public_finances": "Public Finances",
+      "public_safety": "Public Safety",
+      "transportation": "Transportation",
+      "national_accounts": "National Accounts",
+      "services": "Services",
+      "summary": "Summary Page",
+      "public_administration": "Public Administration",
+      "labour_markets": "Labour Market",
+      "producer_price": "Producer Prices",
+      "households": "Households",
+      "trade": "Trade"
+     },
+     "home": {
+      "category": "Malaysia's official open data portal",
+      "title": "High frequency. High granularity. High impact.",
+      "description": "Your one-stop centre to browse Malaysia's wealth of open data. Whether you're a regular citizen looking for information, a researcher looking for material, or an application developer looking for an API, we've got you covered. Our mission is to make Malaysia the #1 data-driven country in the world.",
+      "section_1": {
+       "title": "Explore our hottest dashboards!",
+       "description": "These dashboards have been getting attention, but don't forget to check out our full collection of dashboards!"
+      },
+      "section_2": {
+       "title": "Study our most popular datasets!",
+       "description": "To search for something specific, use our data catalogue - it allows you to download or programmatically access our datasets.",
+       "past_24h": "24 hours",
+       "past_month": "1 month",
+       "all_time": "All-time",
+       "dashboards": "Dashboards",
+       "datasets_available": "Datasets available",
+       "resource_views": "Resource views",
+       "resource_downloads": "Resource downloads",
+       "top_dashboards": "Most viewed dashboards",
+       "top_catalogues": "Most viewed datasets",
+       "top_files": "Most downloaded (data)",
+       "top_images": "Most downloaded (graphics)"
+      },
+      "section_3": {
+       "title": "Usage of data.gov.my",
+       "daily": "Daily",
+       "total": "Total"
+      },
+      "keys": {
+       "users": "Daily OpenAPI Usage",
+       "views": "Daily Views",
+       "downloads": "Daily Downloads"
+      }
+     }
+    },
+    "agencies": {
+     "aadk": {
+      "full": "National Anti-Drugs Agency",
+      "abbr": "AADK"
+     },
+     "audit": {
+      "full": "National Audit Department",
+      "abbr": "AUDIT"
+     },
+     "bnm": {
+      "full": "Central Bank of Malaysia",
+      "abbr": "BNM"
+     },
+     "bomba": {
+      "full": "Fire and Rescue Department of Malaysia",
+      "abbr": "BOMBA"
+     },
+     "doa": {
+      "full": "Department of Agriculture",
+      "abbr": "DOA"
+     },
+     "dosm": {
+      "full": "Department of Statistics Malaysia",
+      "abbr": "DOSM"
+     },
+     "epf": {
+      "full": "Employees Provident Fund",
+      "abbr": "EPF"
+     },
+     "epu": {
+      "full": "Ministry of the Economy",
+      "abbr": "EPU"
+     },
+     "govt": {
+      "full": "Government of Malaysia",
+      "abbr": "GOVT"
+     },
+     "icujpm": {
+      "full": "Internal Coordination Unit",
+      "abbr": "ICUJPM"
+     },
+     "imigresen": {
+      "full": "Immigration Department of Malaysia",
+      "abbr": "Imigresen"
+     },
+     "jakoa": {
+      "full": "Department of Orang Asli Development",
+      "abbr": "JAKOA"
+     },
+     "janm": {
+      "full": "Accountant-General's Department",
+      "abbr": "JANM"
+     },
+     "jas": {
+      "full": "Department of Environment",
+      "abbr": "JAS"
+     },
+     "jbg": {
+      "full": "Legal Aid Department",
+      "abbr": "JBG"
+     },
+     "jdn": {
+      "full": "Jabatan Digital Negara",
+      "abbr": "JDN"
+     },
+     "jpa": {
+      "full": "Public Service Department",
+      "abbr": "JPA"
+     },
+     "jpj": {
+      "full": "Road Transport Department",
+      "abbr": "JPJ"
+     },
+     "jpn": {
+      "full": "National Registration Department",
+      "abbr": "JPN"
+     },
+     "jps": {
+      "full": "Department of Irrigation and Drainage",
+      "abbr": "JPS"
+     },
+     "jmg": {
+      "full": "Department of Mineral and Geoscience",
+      "abbr": "JMG"
+     },
+     "kd": {
+      "full": "Ministry of Digital",
+      "abbr": "MOD"
+     },
+     "kdn": {
+      "full": "Ministry of Home Affairs",
+      "abbr": "KDN"
+     },
+     "kpdn": {
+      "full": "Ministry of Domestic Trade",
+      "abbr": "KPDN"
+     },
+     "kpkt": {
+      "full": "Ministry of Housing & Local Government",
+      "abbr": "KPKT"
+     },
+     "ktmb": {
+      "full": "Malayan Railways Limited",
+      "abbr": "KTMB"
+     },
+     "kwap": {
+      "full": "Retirement Fund Incorporated",
+      "abbr": "KWAP"
+     },
+     "lhdn": {
+      "full": "Inland Revenue Board of Malaysia",
+      "abbr": "LHDN"
+     },
+     "mafs": {
+      "full": "Ministry of Agriculture and Food Security",
+      "abbr": "MAFS"
+     },
+     "mampu": {
+      "full": "Malaysian Administrative Modernisation and Management Planning Unit",
+      "abbr": "MAMPU"
+     },
+     "mcmc": {
+      "full": "Malaysian Communications and Multimedia Commission",
+      "abbr": "MCMC"
+     },
+     "mers-999": {
+      "full": "Malaysian Emergency Response Services 999",
+      "abbr": "MERS 999"
+     },
+     "met": {
+      "full": "Malaysian Meteorology Department",
+      "abbr": "Met"
+     },
+     "moe": {
+      "full": "Ministry of Education",
+      "abbr": "MOE"
+     },
+     "mof": {
+      "full": "Ministry of Finance",
+      "abbr": "MOF"
+     },
+     "moh": {
+      "full": "Ministry of Health Malaysia",
+      "abbr": "MOH"
+     },
+     "mohe": {
+      "full": "Ministry of Higher Education",
+      "abbr": "MOHE"
+     },
+     "mot": {
+      "full": "Ministry of Transport",
+      "abbr": "MOT"
+     },
+     "mynic": {
+      "full": "Malaysian Network Information Centre Berhad",
+      "abbr": "MYNIC"
+     },
+     "mysa": {
+      "full": "Malaysian Space Agency",
+      "abbr": "MYSA"
+     },
+     "napic": {
+      "full": "National Property Information Centre",
+      "abbr": "NAPIC"
+     },
+     "npra": {
+      "full": "National Pharmaceutical Regulatory Agency",
+      "abbr": "NPRA"
+     },
+     "nres": {
+      "full": "Ministry of Natural Resources & Environmental Sustainability",
+      "abbr": "NRES"
+     },
+     "ntrc": {
+      "full": "National Transplant Resource Centre",
+      "abbr": "NTRC"
+     },
+     "parlimen": {
+      "full": "Parliament of Malaysia",
+      "abbr": "Parlimen"
+     },
+     "paynet": {
+      "full": "Payments Network Malaysia Sdn Bhd",
+      "abbr": "PayNet"
+     },
+     "penjara": {
+      "full": "Prison Department",
+      "abbr": "Penjara"
+     },
+     "perikanan": {
+      "full": "Department of Fisheries",
+      "abbr": "Perikanan"
+     },
+     "pdn": {
+      "full": "National Blood Centre",
+      "abbr": "PDN"
+     },
+     "pdrm": {
+      "full": "Royal Malaysia Police",
+      "abbr": "PDRM"
+     },
+     "perhutanan": {
+      "full": "Forestry Department of Peninsular Malaysia",
+      "abbr": "Perhutanan"
+     },
+     "perkeso": {
+      "full": "Social Security Organization",
+      "abbr": "PERKESO"
+     },
+     "phcorp": {
+      "full": "ProtectHealth Corporation",
+      "abbr": "PHCorp"
+     },
+     "prasarana": {
+      "full": "Prasarana Malaysia",
+      "abbr": "Prasarana"
+     },
+     "sesb": {
+      "full": "Sabah Electricity Sdn. Bhd.",
+      "abbr": "SESB"
+     },
+     "spr": {
+      "full": "Election Commission of Malaysia",
+      "abbr": "SPR"
+     },
+     "span": {
+      "full": "The National Water Services Commission",
+      "abbr": "SPAN"
+     },
+     "ssm": {
+      "full": "Companies Commission of Malaysia",
+      "abbr": "SSM"
+     },
+     "st": {
+      "full": "Energy Commission of Malaysia",
+      "abbr": "ST"
+     },
+     "swk-energy": {
+      "full": "Sarawak Energy Berhad",
+      "abbr": "SWK-ENERGY"
+     },
+     "tnb": {
+      "full": "Tenaga Nasional Berhad",
+      "abbr": "TNB"
+     },
+     "unhcr": {
+      "full": "United Nations High Commissioner for Refugees",
+      "abbr": "UNHCR"
+     }
+    },
+    "division": {
+     "bipd": {
+      "full": "Integration and Data Management Division",
+      "abbr": "BIPD"
+     },
+     "bkp": {
+      "full": "Management Services Division",
+      "abbr": "BKP"
+     },
+     "bmp": {
+      "full": "Methology & Research Division",
+      "abbr": "BMP"
+     },
+     "bpan": {
+      "full": "National Accounts Division",
+      "abbr": "BPAN"
+     },
+     "bpe": {
+      "full": "Economic Indicators Division",
+      "abbr": "BPE"
+     },
+     "bphpp": {
+      "full": "Price, Income & Expenditure Statistics Division",
+      "abbr": "BPHPP"
+     },
+     "bpip": {
+      "full": "Balance of Payments Statistics Division",
+      "abbr": "BPIP"
+     },
+     "bpksa": {
+      "full": "Strategic Communication & International Division",
+      "abbr": "BPKSA"
+     },
+     "bpm": {
+      "full": "Information Management Division",
+      "abbr": "BPM"
+     },
+     "bpp": {
+      "full": "Services Statistics Division",
+      "abbr": "BPP"
+     },
+     "bppa": {
+      "full": "International Trade Statistics Division",
+      "abbr": "BPPA"
+     },
+     "bppas": {
+      "full": "Agricultural & Environment Statistics Division",
+      "abbr": "BPPAS"
+     },
+     "bppd": {
+      "full": "Population & Demographic Statistics Division",
+      "abbr": "BPPD"
+     },
+     "bppib": {
+      "full": "Industrial Production & Construction Division",
+      "abbr": "BPPIB"
+     },
+     "bptms": {
+      "full": "Manpower & Social Statistics Division",
+      "abbr": "BPTMS"
+     },
+     "ilsm": {
+      "full": "Malaysia Statistical Training Institute",
+      "abbr": "ILSM"
+     },
+     "mbls": {
+      "full": "Malaysian Bureau of Labour Statistics",
+      "abbr": "MBLS"
+     },
+     "kpdn": {
+      "full": "Ministry of Domestic Trade",
+      "abbr": "KPDN"
+     }
+    },
+    "dashboards": {
+     "header": "Dashboards",
+     "description": "Your one-stop interface to explore data-driven insights and analytics on all areas of the public sector, powered by the data made open on this site.",
+     "description_agency": "Your one-stop interface to explore data-driven insights and analytics on the core work of {{ agency }}, powered by the data they make open on this site.",
+     "source_placeholder": "Agency",
+     "search_placeholder": "Search for dashboards",
+     "section1_title": "Most popular Dashboards",
+     "section2_title": "All dashboards",
+     "tabs": {
+      "thematic": "By Theme",
+      "most_popular": "Most Popular",
+      "recent_updated": "Recently Updated"
+     },
+     "categories": {
+      "healthcare": "Healthcare",
+      "transport": "Transport",
+      "demography": "Demography",
+      "public-finances": "Public Finances",
+      "public-administration": "Public Administration",
+      "economy": "Economy",
+      "public-safety": "Public Safety",
+      "financial-sector": "Financial Sector",
+      "democracy": "Democracy",
+      "environment": "Environment",
+      "digitalisation": "Digitalisation",
+      "government-programs": "Government Programs",
+      "education": "Education",
+      "infectious-diseases": "Infectious Diseases",
+      "healthcare-resources": "Healthcare Resources",
+      "healthcare-programs": "Healthcare Programs",
+      "national-accounts": "National Accounts",
+      "services": "Services",
+      "labour_markets": "Labour Market",
+      "producer_price": "Producer Prices",
+      "trade": "Trade"
+     },
+     "dashboards": {
+      "birthday-explorer": {
+       "name": "Birthday Popularity",
+       "description": "Interactive explorer of birth registration data since 1920, allowing you to discover fun facts about your date of birth!"
+      },
+      "orang-asli": {
+       "name": "The Indigenous Peoples",
+       "description": "Annual kampung-level census of Peninsular Malaysia's original inhabitants, with breakdowns by key demographics."
+      },
+      "immigration": {
+       "name": "Immigration",
+       "description": "Monthly foreign arrivals in Malaysia by nationality."
+      },
+      "ktmb-explorer": {
+       "name": "KTMB Explorer",
+       "description": "Interactive explorer of daily ridership on KTMB services, allowing you to explore ridership from any origin to any destination!"
+      },
+      "rapid-explorer": {
+       "name": "Rapid Rail Explorer",
+       "description": "Interactive explorer of daily Rapid Rail ridership, allowing you to explore any origin-destination pairing!"
+      },
+      "rapid-bus-rail": {
+       "name": "Rapid Rail Explorer",
+       "description": "Interactive explorer of daily ridership on Rapid Rail services, allowing you to explore ridership from any origin to any destination!"
+      },
+      "car-popularity": {
+       "name": "Car Popularity Explorer",
+       "description": "Interactive explorer of car registration data, allowing you to discover trends for any maker or model!"
+      },
+      "vehicle-registrations": {
+       "name": "Vehicle Registrations",
+       "description": "Macro view of vehicle registrations for policymakers, with breakdowns by fuel type and vehicle type."
+      },
+      "public-transportation": {
+       "name": "Public Transportation",
+       "description": "Monthly ridership data from all key public transport operators nationwide, with breakdowns by service."
+      },
+      "covid-19": {
+       "name": "COVID-19",
+       "description": "Weekly surveillance of COVID-19 in Malaysia at state level, covering cases, hospitalisations, and deaths."
+      },
+      "covid-vaccination": {
+       "name": "COVID-19 Vaccination",
+       "description": "Daily COVID-19 vaccination activity by dose type and age group, including vaccination coverage rates across the country."
+      },
+      "blood-donation": {
+       "name": "Blood Donation",
+       "description": "Daily blood donation activity at national and state level, with breakdowns by key demographics including blood type."
+      },
+      "organ-donation": {
+       "name": "Organ Donation",
+       "description": "Daily organ donation pledges and nationwide pledger rates, with breakdowns by key demographics."
+      },
+      "peka-b40": {
+       "name": "Peka B40",
+       "description": "Daily screenings under the PeKA B40 program, including screening rates for the target population across the country."
+      },
+      "hospital-bed-utilisation": {
+       "name": "Hospital Bed Utilisation",
+       "description": "Daily bed utilisation at hospital level, covering utilisation for critical and non-critical care beds on a daily basis."
+      },
+      "weather-and-climate": {
+       "name": "Weather and Climate",
+       "description": "10 years of rainfall and temperature data from the 42 major weather stations in Malaysia."
+      },
+      "income-taxation": {
+       "name": "Income Taxation",
+       "description": "Interactive explorer of granular income tax data, allowing you to compare yourself against other Malaysian taxpayers!"
+      },
+      "jobless-claims": {
+       "name": "Jobless Claims",
+       "description": "Daily claims from the Employment Insurance System (EIS), with breakdowns by key demographics."
+      },
+      "social-security": {
+       "name": "Jobless Claims",
+       "description": "Daily claims from the Employment Insurance System (EIS), with breakdowns by key demographics."
+      },
+      "business-creation-destruction": {
+       "name": "Business Creation and Destruction",
+       "description": "Monthly trends in business creation and destruction, derived from SSM's authoritative database of businesses and companies."
+      },
+      "international-reserves": {
+       "name": "International Reserves",
+       "description": "Biweekly surveillance of Bank Negara Malaysia's international reserves, covering key sufficiency indicators."
+      },
+      "reserve-money": {
+       "name": "Reserve Money",
+       "description": "Monthly evolution of key reserve money measures, including factors affecting reserve money."
+      },
+      "money-supply": {
+       "name": "Money Supply",
+       "description": "Monthly evolution of the money supply, covering M1, M2, M3, and their components."
+      },
+      "currency-in-circulation": {
+       "name": "Currency in Circulation",
+       "description": "Monthly evolution of currency in circulation, with breakdowns by denomination of notes and coins."
+      },
+      "household-debt": {
+       "name": "Household Debt",
+       "description": "Monthly surveillance of lending activity, covering loans applied, approved, disbursed and repaid, broken down by purpose."
+      },
+      "interest-rates": {
+       "name": "Interest Rates",
+       "description": "Monthly surveillance of key interest rates, including the OPR, base lending rate, and fixed deposit rate."
+      },
+      "electronic-payments": {
+       "name": "Electronic Payments",
+       "description": "Monthly surveillance of e-payments in Malaysia, covering key payment instruments, channels, and systems."
+      },
+      "exchange-rates": {
+       "name": "Exchange Rates",
+       "description": "Daily rate of exchange of MYR against currencies of 24 major trading partners, including USA, China, UK, and Singapore."
+      },
+      "drug-addiction": {
+       "name": "Drug Addiction",
+       "description": "Annual data on drug and substance abuses cases, with breakdowns by key demographics and drug category."
+      },
+      "fire-and-rescue": {
+       "name": "Fire and Rescue",
+       "description": "Monthly data on fire and rescue operations at national and state level, broken down by incident type."
+      },
+      "internet-penetration": {
+       "name": "Internet Penetration",
+       "description": "Monthly broadband traffic and internet penetration data, broken down by type of broadband."
+      },
+      "retirement-readiness": {
+       "name": "Retirement Readiness",
+       "description": "—"
+      },
+      "sekolahku": {
+       "name": "Sekolahku",
+       "description": "—"
+      },
+      "name-popularity": {
+       "name": "Baby Name Popularity",
+       "description": "—"
+      },
+      "refugee-situation": {
+       "name": "Malaysia's Refugee Situation",
+       "description": "—"
+      },
+      "healthcare-facilities": {
+       "name": "Healthcare Facilities",
+       "description": "—"
+      },
+      "covidnow-data": {
+       "name": "Data on COVIDNOW",
+       "description": "—"
+      },
+      "emergency-response": {
+       "name": "Emergency Response",
+       "description": "—"
+      },
+      "circle-of-life": {
+       "name": "The Circle of Life",
+       "description": "—"
+      },
+      "civil-service": {
+       "name": "The Civil Service",
+       "description": "—"
+      },
+      "crime": {
+       "name": "Crime",
+       "description": "—"
+      },
+      "election-explorer": {
+       "name": "Election Explorer",
+       "description": "—"
+      },
+      "flood-warning": {
+       "name": "Flood Warning",
+       "description": "—"
+      },
+      "government-site-tracker": {
+       "name": "Government Site Tracker",
+       "description": "—"
+      },
+      "ipr": {
+       "name": "The People's Income Initiative (IPR)",
+       "description": "—"
+      },
+      "passport-and-passes": {
+       "name": "Passport and Passes",
+       "description": "—"
+      },
+      "poverty": {
+       "name": "Poverty",
+       "description": "—"
+      },
+      "public-contracting": {
+       "name": "Public Contracting",
+       "description": "—"
+      },
+      "public-pension": {
+       "name": "Public Pensions",
+       "description": "—"
+      },
+      "gdp": {
+       "name": "Gross Domestic Product (GDP)",
+       "description": "Quarterly economic growth, covering real and nominal GDP by expenditure and economic activity."
+      },
+      "consumer-prices": {
+       "name": "Consumer Prices",
+       "description": "Monthly CPI inflation at national and state level, covering headline CPI, core CPI, and CPI by category."
+      },
+      "labour-market": {
+       "name": "Labour Markets",
+       "description": "Monthly Labour Force Survey (LFS) report, covering unemployment, participation, and nature of employment."
+      },
+      "composite-index": {
+       "name": "Composite Indices",
+       "description": "Monthly leading, coincident, and lagging indicators for the Malaysian economy's performance."
+      },
+      "composite-indices": {
+       "name": "Composite Indices",
+       "description": "Monthly leading, coincident, and lagging indicators of the Malaysian economy's performance."
+      },
+      "wholesale-retail": {
+       "name": "Wholesale & Retail Trade",
+       "description": "Monthly wholesale and retail trade performance, including the performance of motor vehicle sales."
+      },
+      "wholesale-retail-trade": {
+       "name": "Wholesale & Retail Trade",
+       "description": "Monthly wholesale and retail trade performance, including the performance of motor vehicle sales."
+      },
+      "industrial-production": {
+       "name": "Industrial Production",
+       "description": "Monthly industrial production performance, covering mining, manufacturing, and electricity production."
+      },
+      "producer-prices": {
+       "name": "Producer Prices",
+       "description": "Monthly PPI inflation, covering producer prices for all main economic sectors except services and construction."
+      },
+      "kawasanku": {
+       "name": "Kawasanku",
+       "description": "Census 2020 data at national, state, district, parliament, and state legislative assembly (DUN) level."
+      },
+      "iip": {
+       "name": "International Investment Position (IIP)",
+       "description": "Quarterly statement of Malaysia's external financial assets and liabilities; the IIP shows stocks while the BOP shows flows."
+      },
+      "international-investment-position": {
+       "name": "International Investment Position (IIP)",
+       "description": "Quarterly statement of Malaysia's external financial assets and liabilities; the IIP shows stocks while the BOP shows flows."
+      },
+      "bop": {
+       "name": "Balance of Payments",
+       "description": "Quarterly statement of Malaysia's transactions with other nations; the BOP shows flows while the IIP shows stocks."
+      },
+      "balance-of-payments": {
+       "name": "Balance of Payments",
+       "description": "Quarterly statement of Malaysia's transactions with other nations; the BOP shows flows while the IIP shows stocks."
+      },
+      "manufacturing-statistics": {
+       "name": "Manufacturing Statistics",
+       "description": "Monthly performance of manufacturing subsectors, covering sales, employment, and wages."
+      },
+      "labour-productivity": {
+       "name": "Labour Productivity",
+       "description": "Quarterly labour productivity across all key economic sectors, covering time-based and worker-based productivity."
+      },
+      "formal-sector-wages": {
+       "name": "Formal Sector Wages",
+       "description": "Quarterly formal sector wages at national and state level, based on administrative data from EPF and SOCSO"
+      },
+      "services-statistics": {
+       "name": "Services Statistics",
+       "description": "Quarterly performance of services sub-sectors, covering sales, employment, and wages."
+      },
+      "services-producer-prices": {
+       "name": "Services Producer Prices",
+       "description": "Quarterly producer prices in the services sector, complementing the PPI which does not cover the services sector."
+      },
+      "construction-statistics": {
+       "name": "Construction Statistics",
+       "description": "Quarterly surveillance of construction projects in the public and private sectors."
+      },
+      "household-income-expenditure": {
+       "name": "Household Income & Expenditure",
+       "description": "Household income and expenditure at national, state and district level, updated with the latest data from the 2022 survey."
+      },
+      "population": {
+       "name": "Population of Malaysia",
+       "description": "Annual population of Malaysia from 1970 to the present, including vital statistics on births and deaths."
+      },
+      "external-trade": {
+       "name": "External Trade",
+       "description": "Monthly external trade statistics and indices, covering exports, imports, the trade balance, and terms of trade."
+      },
+      "life-expectancy": {
+       "name": "Life Expectancy",
+       "description": "Annual data on life expectancy from 1957 to the present, with breakdowns by state and demographic group."
+      },
+      "wellbeing": {
+       "name": "Well-Being",
+       "description": "Annual well-being of Malaysians from 2000 to the present, covering key economic and social components."
+      },
+      "padu-tracker": {
+       "name": "Pangkalan Data Utama (PADU)",
+       "description": "—"
+      },
+      "digital-economy": {
+       "name": "Digital Economy",
+       "description": "Annual performance of e-commerce and the ICT sector, as well as businesses' and households' usage of ICT tools."
+      },
+      "house-prices": {
+       "name": "House Prices",
+       "description": "This dashboard uses NAPIC’s authoritative data to give you an easy way to understand house price trends."
+      }
+     }
+    }
+   }
+  },
+  "initialLocale": "en-GB",
+  "ns": [
+   "catalogue",
+   "common",
+   "agencies",
+   "division",
+   "dashboards"
+  ],
+  "userConfig": null
+ },
+ "_source_base": "https://open.dosm.gov.my"
+}

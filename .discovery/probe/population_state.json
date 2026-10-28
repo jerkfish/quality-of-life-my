@@ -1,0 +1,1 @@
+{"meta": {"catalogue_id": "population_state", "data_as_of": "2023", "last_updated": "2023-07-31 12:00", "next_update": "2024-07-31 12:00", "data_source": ["DOSM"], "update_frequency": "YEARLY", "total": 1, "limit": 1}, "data": [{"age": "overall_age", "sex": "overall_sex", "date": "2020-01-01", "state": "Johor", "ethnicity": "overall_ethnicity", "population": 4009.7}]}

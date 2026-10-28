@@ -1,0 +1,17 @@
+{
+ "id": "wages_real_state_citizen",
+ "title": "Annual Real Salaries & Wages of Citizens by State",
+ "description": "Real median and mean monthly salaries & wages of employees who are Malaysian citizens by state, at 2010 prices.",
+ "frequency": "YEARLY",
+ "data_as_of": "2025",
+ "last_updated": "2026-09-21 12:00",
+ "next_update": "2027-09-30 12:00",
+ "data_source": [
+  "DOSM"
+ ],
+ "methodology": "This data is produced from the Salaries & Wages Survey (SWS), which DOSM conducts alongside the Labour Force Survey (LFS) through personal interviews with households in private living quarters, covering urban and rural areas in all states.\n\n**Salaries & wages** refer to the monthly wage rate received by employees in the public and private sectors from their principal job in the reference month, comprising:\n- basic wages\n- cost-of-living allowances\n- other guaranteed and regularly paid allowances in cash or in kind\n- overtime payments\n\nThey exclude bonuses, gratuities, family allowances and social security payments made by employers. The statistics cover employees aged 15-64; employers, own-account workers, unpaid family workers, domestic workers employed by households and casual workers are not covered.\n\nReal salaries & wages are nominal salaries & wages adjusted for inflation using the Consumer Price Index (CPI) of each state, and are expressed at 2010 prices: real salaries & wages = nominal salaries & wages x CPI (2010) / CPI (year).",
+ "caveat": "",
+ "link_parquet": "https://storage.dosm.gov.my/labour/wages_real_state_citizen.parquet",
+ "editions": [],
+ "source_base": "https://open.dosm.gov.my"
+}

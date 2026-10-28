@@ -1,0 +1,1 @@
+{"meta": {"catalogue_id": "ppi", "data_as_of": "2026-09", "last_updated": "2026-10-28 12:00", "next_update": "2026-11-27 12:00", "data_source": ["DOSM"], "update_frequency": "MONTHLY", "total": 1, "limit": 1}, "data": [{"date": "2010-01-01", "index": 98.4, "series": "abs", "index_sa": null}]}
