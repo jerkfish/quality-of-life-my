@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-28T14:54:14+00:00",
- "started_at": "2026-10-28T14:54:14+00:00",
+ "generated_at": "2026-10-28T15:30:21+00:00",
+ "started_at": "2026-10-28T15:25:50+00:00",
  "pipeline_version": "0.1.0",
  "source": "DOSM / data.gov.my open data (CC BY 4.0)",
  "datasets": {
@@ -324,6 +324,70 @@
      }
     ]
    }
+  },
+  "fuelprice": {
+   "tier": "support",
+   "title": "Price of Petroleum & Diesel",
+   "as_of": null,
+   "last_updated": null,
+   "next_update": null,
+   "upstream_source": [],
+   "report": {
+    "dataset_id": "fuelprice",
+    "rows": 967,
+    "date_min": "2017-03-30",
+    "date_max": "2026-10-22",
+    "entities": {
+     "series_type": 2
+    },
+    "duplicate_keys": 0,
+    "null_counts": {
+     "ron95_budi95": 856,
+     "ron95_skps": 856,
+     "diesel_skds": 718,
+     "diesel_budi": 934
+    },
+    "issues": [
+     {
+      "level": "warning",
+      "code": "null_values",
+      "message": "'ron95_budi95' has 856 null value(s); carried through as gaps."
+     },
+     {
+      "level": "warning",
+      "code": "null_values",
+      "message": "'ron95_skps' has 856 null value(s); carried through as gaps."
+     },
+     {
+      "level": "warning",
+      "code": "null_values",
+      "message": "'diesel_skds' has 718 null value(s); carried through as gaps."
+     },
+     {
+      "level": "warning",
+      "code": "null_values",
+      "message": "'diesel_budi' has 934 null value(s); carried through as gaps."
+     }
+    ]
+   }
+  },
+  "lfs_month": {
+   "tier": "support",
+   "title": "Monthly Principal Labour Force Statistics",
+   "as_of": null,
+   "last_updated": null,
+   "next_update": null,
+   "upstream_source": [],
+   "report": {
+    "dataset_id": "lfs_month",
+    "rows": 200,
+    "date_min": "2010-01-01",
+    "date_max": "2026-08-01",
+    "entities": {},
+    "duplicate_keys": 0,
+    "null_counts": {},
+    "issues": []
+   }
   }
  },
  "artifacts": {
@@ -362,6 +426,14 @@
   "pricecatcher/items.json": {
    "bytes": 919647,
    "sha256": "dcdbb012cf60ad56032346f8d312facf52f6dde6d1d54c8648c29b659d742080"
+  },
+  "anomalies.json": {
+   "bytes": 186467,
+   "sha256": "9d57d42b3f27d77e6c001796da46134e520c63d45ec981457ba0818605b02e93"
+  },
+  "forecast.json": {
+   "bytes": 57437,
+   "sha256": "30f23f0a390fb2a3e732baeb3ed37587305715009d9612cf96adf66c4a4e10c7"
   }
  }
 }

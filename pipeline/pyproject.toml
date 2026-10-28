@@ -14,6 +14,11 @@ dependencies = [
     # HTTP client for the fetch layer. Justified over stdlib urllib for real timeouts,
     # redirect handling, connection reuse and a clean retry story.
     "httpx>=0.27",
+    # ETS, SARIMA and STL decomposition for the forecast and anomaly stages. This is the only
+    # dependency that earns its weight by replacing a large amount of hand-rolled numerics;
+    # no scikit-learn, because the brief's third method (gradient boosting on lag features)
+    # is not needed to answer the question and would add ~30 MB.
+    "statsmodels>=0.14",
 ]
 
 [project.optional-dependencies]

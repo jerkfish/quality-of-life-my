@@ -383,7 +383,12 @@ DATASETS: dict[str, Dataset] = {
                 "diesel_eastmsia",
                 "ron95_budi95",
                 "ron95_skps",
+                "diesel_skds",
+                "diesel_budi",
             ),
+            notes="`series_type` splits a price LEVEL series from a WEEKLY CHANGE series that "
+            "reuses the same column names. Filter on it before treating ron95 as ringgit -- "
+            "mixing the two produces a confidently wrong percentage.",
         ),
         # ------------------------------------------------------- context (population/GDP)
         Dataset(

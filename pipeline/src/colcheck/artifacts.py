@@ -37,10 +37,13 @@ from . import __version__, registry
 from .contracts import DatasetReport, validate_frame
 from .fetch import CatalogueMeta, Fetcher, sha256_file
 from .transforms import cpi as cpi_t
+from .transforms import forecast as forecast_t
 from .transforms import income as income_t
 from .transforms import pricecatcher as pc_t
 from .transforms import wages as wages_t
+from .transforms.anomaly import AnomalyReport
 from .transforms.common import pivot_index, round_or_none
+from .transforms.forecast import ForecastResult
 
 # Analysis periods. Chosen by data availability, not to flatter the result -- the two
 # sources simply start in different years. Reported side by side in the UI.
@@ -451,6 +454,54 @@ def _load_existing_manifest(path: Path) -> dict[str, Any]:
         return {}
 
 
+def build_forecast(
+    results: list[ForecastResult], metas: dict[str, CatalogueMeta]
+) -> dict[str, Any]:
+    """Forecast artifact, one entry per series.
+
+    The `verdict` and `beats_baseline` fields are the point: the UI is required to show when
+    a model failed to beat the baseline, so that state has to be in the data, not inferred
+    from the absence of a field.
+    """
+    meta = metas.get("cpi_headline")
+    return {
+        "meta": {
+            "dataset": "cpi_headline",
+            "source": meta.data_source if meta else ["DOSM"],
+            "as_of": meta.data_as_of if meta else None,
+            "last_updated": meta.last_updated if meta else None,
+            "unit": "index (2010 = 100) for the path; percentage points for the rate",
+            "baseline": forecast_t.BASELINE_MODEL,
+            "scored_on": "year-on-year inflation rate, percentage points",
+            "method_note": (
+                "Every model is backtested with rolling-origin, expanding-window folds. "
+                "Nothing is trained on data that would not have been available at the time."
+            ),
+        },
+        "series": [result.model_dump() for result in results],
+    }
+
+
+def build_anomalies(
+    reports: list[AnomalyReport], metas: dict[str, CatalogueMeta]
+) -> dict[str, Any]:
+    meta = metas.get("cpi_headline")
+    return {
+        "meta": {
+            "dataset": "cpi_headline",
+            "source": meta.data_source if meta else ["DOSM"],
+            "as_of": meta.data_as_of if meta else None,
+            "last_updated": meta.last_updated if meta else None,
+            "method": "STL decomposition, robust z-scores on the remainder",
+            "note": (
+                "Flags are statistical, not explanatory. Coinciding movements in other series "
+                "are corroboration only and are never presented as causes."
+            ),
+        },
+        "series": [report.model_dump() for report in reports],
+    }
+
+
 def write_manifest(
     writer: ArtifactWriter,
     *,
@@ -498,10 +549,12 @@ def now_utc() -> datetime:
 __all__ = [
     "ArtifactWriter",
     "Fetcher",
+    "build_anomalies",
     "build_cpi_groups",
     "build_cpi_national",
     "build_cpi_state",
     "build_cpi_strata",
+    "build_forecast",
     "build_household_income",
     "build_pricecatcher",
     "build_real_wages",

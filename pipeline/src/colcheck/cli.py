@@ -18,7 +18,7 @@ from pathlib import Path
 
 from . import __version__
 from .contracts import ContractError
-from .runner import RunConfig, run_pipeline
+from .runner import FORECAST_FOLDS, RunConfig, run_pipeline
 
 log = logging.getLogger("colcheck")
 
@@ -71,6 +71,23 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="reduce only the N most recent PriceCatcher editions",
     )
+    run.add_argument(
+        "--skip-forecast",
+        action="store_true",
+        help="skip the forecast stage (the slowest analytical step, ~12s per series)",
+    )
+    run.add_argument(
+        "--forecast-limit",
+        type=int,
+        default=None,
+        help="forecast only the N highest-priority series (headline first)",
+    )
+    run.add_argument(
+        "--forecast-folds",
+        type=int,
+        default=FORECAST_FOLDS,
+        help="rolling-origin backtest folds per model",
+    )
     run.add_argument("-v", "--verbose", action="store_true")
     return p
 
@@ -93,6 +110,9 @@ def main(argv: list[str] | None = None) -> int:
         skip_pricecatcher=args.skip_pricecatcher,
         only_pricecatcher=args.only_pricecatcher,
         pricecatcher_limit=args.pricecatcher_limit,
+        skip_forecast=args.skip_forecast,
+        forecast_limit=args.forecast_limit,
+        forecast_folds=args.forecast_folds,
     )
 
     try:

@@ -8,6 +8,7 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any
 
 import pandas as pd
 
@@ -15,6 +16,9 @@ from . import artifacts, registry
 from .artifacts import ArtifactWriter
 from .contracts import ContractError, DatasetReport, validate_frame
 from .fetch import CatalogueMeta, Fetcher
+from .transforms import anomaly as anomaly_t
+from .transforms import cpi as cpi_t
+from .transforms import forecast as forecast_t
 from .transforms import pricecatcher as pc_t
 
 log = logging.getLogger(__name__)
@@ -34,6 +38,14 @@ CORE_DATASETS: tuple[str, ...] = (
 
 ITEM_DATASETS: tuple[str, ...] = ("lookup_item", "lookup_premise", "pricecatcher")
 
+# Fewer folds than the 12 used to be the ceiling: at ~12s per series, backtesting 14 series
+# needs to stay inside a sensible CI budget. Eight folds still spans eight different forecast
+# origins, which is enough to rank the models against each other.
+FORECAST_FOLDS = 8
+FORECAST_HORIZON = 12
+# Below this, a seasonal model has nothing to estimate; the division is skipped, not padded.
+MIN_SERIES_MONTHS = 120
+
 
 @dataclass
 class RunConfig:
@@ -45,6 +57,44 @@ class RunConfig:
     only_pricecatcher: bool = False
     # Cap the number of PriceCatcher editions. None means all.
     pricecatcher_limit: int | None = None
+    # Forecasting is the slowest analytical stage (~12s per series). None means the default
+    # set: national headline plus every CPI division.
+    skip_forecast: bool = False
+    forecast_limit: int | None = None
+    forecast_folds: int = FORECAST_FOLDS
+
+
+def _division_series(
+    cpi: pd.DataFrame, names: dict[str, Any] | None = None
+) -> list[tuple[str, str, pd.Series]]:
+    """Split a national CPI frame into one monthly index series per division.
+
+    Returns (series_id, label, series) with 'overall' first, then divisions by code.
+
+    Series are trimmed to their first non-null observation: divisions added after 1980 have a
+    run of leading nulls, and both STL and the seasonal models require a regular, gap-free
+    series. Trimming the head is safe; trimming from the middle would not be, and the
+    contract layer has already rejected any frame containing interior gaps in the key.
+    """
+    names = names or {}
+    ready: list[tuple[str, str, pd.Series]] = []
+    codes = sorted(c for c in cpi["division"].unique() if c != registry.CPI_OVERALL)
+    for code in [registry.CPI_OVERALL, *codes]:
+        block = cpi[cpi["division"] == code]
+        if block.empty:
+            continue
+        values = block.set_index(pd.to_datetime(block["date"]))["index"].sort_index().dropna()
+        if len(values) < MIN_SERIES_MONTHS:
+            log.warning(
+                "division %s has only %d usable months; skipping analysis", code, len(values)
+            )
+            continue
+        entry = names.get(code)
+        label = getattr(entry, "en", None) or (
+            "All items (headline)" if code == registry.CPI_OVERALL else code
+        )
+        ready.append((f"cpi_headline:{code}", label, values))
+    return ready
 
 
 @dataclass
@@ -97,6 +147,14 @@ class Runner:
 
         self.frames[dataset_id] = frame
         return frame
+
+    def _optional(self, dataset_id: str) -> pd.DataFrame | None:
+        """Load a dataset if it is reachable, otherwise carry on without it."""
+        try:
+            return self.load(dataset_id, catalogue_meta=False)
+        except Exception as exc:  # noqa: BLE001 - optional context, any failure is survivable
+            log.warning("%s unavailable, continuing without it: %s", dataset_id, exc)
+            return None
 
     # --------------------------------------------------------------- pricecatcher
 
@@ -239,6 +297,79 @@ class Runner:
         writer.write_json("real_wages.json", wages_artifact)
         writer.write_json("household_income.json", income_artifact)
         writer.write_json("regional.json", regional_artifact)
+
+        self._build_analysis(writer, cpi_headline)
+
+    def _build_analysis(self, writer: ArtifactWriter, cpi_headline: pd.DataFrame) -> None:
+        """Forecasting and anomaly detection.
+
+        Both run over the national headline series and every CPI division. Anomaly detection
+        is cheap; forecasting is not, so it can be skipped or truncated.
+        """
+        mcoicop = self.frames.get("mcoicop")
+        names = cpi_t.division_names(mcoicop) if mcoicop is not None else {}
+        series = _division_series(cpi_headline, names)
+        if not series:
+            log.warning("no CPI series available; skipping analysis stage")
+            return
+
+        chosen = (
+            series if self.config.forecast_limit is None else series[: self.config.forecast_limit]
+        )
+
+        # --- anomalies (fast) -----------------------------------------------------
+        # Corroborating series are optional: if either is unavailable the anomaly flags are
+        # still valid, they just carry less context. Failing the whole run over a nice-to-have
+        # would be the wrong trade.
+        fuelprice = self._optional("fuelprice")
+        lfs_month = self._optional("lfs_month")
+
+        reports = []
+        for name, label, values in series:
+            try:
+                reports.append(
+                    anomaly_t.build_report(
+                        values,
+                        series_id=name,
+                        label=label,
+                        fuelprice=fuelprice,
+                        lfs_month=lfs_month,
+                    )
+                )
+            except ValueError as exc:
+                log.warning("anomaly detection skipped for %s: %s", name, exc)
+        if reports:
+            writer.write_json("anomalies.json", artifacts.build_anomalies(reports, self.metas))
+
+        # --- forecasts (slow) -----------------------------------------------------
+        if self.config.skip_forecast:
+            log.info("Skipping forecast stage (--skip-forecast)")
+            return
+
+        results = []
+        for name, label, values in chosen:
+            try:
+                results.append(
+                    forecast_t.forecast_series(
+                        values,
+                        series_id=name,
+                        label=label,
+                        horizon=FORECAST_HORIZON,
+                        n_folds=self.config.forecast_folds,
+                    )
+                )
+            except ValueError as exc:
+                log.warning("forecast skipped for %s: %s", name, exc)
+            else:
+                last = results[-1]
+                log.info(
+                    "forecast %s: %s, %s",
+                    name,
+                    last.method,
+                    "beats baseline" if last.beats_baseline else "DOES NOT beat baseline",
+                )
+        if results:
+            writer.write_json("forecast.json", artifacts.build_forecast(results, self.metas))
 
     def _build_item_level(self, writer: ArtifactWriter) -> None:
         aggregate = self.build_pricecatcher_aggregate()

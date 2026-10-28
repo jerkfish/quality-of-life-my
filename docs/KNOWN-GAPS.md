@@ -49,8 +49,28 @@ DOSM says so explicitly and we repeat it in the UI. It powers item-level illustr
 `cpi_3d` has no state dimension. The finding holds nationally; a state-level version of it
 would need a different source.
 
-**G10 — Forecast and anomaly detection are not built yet.**
-Phases 2 and 3. The baseline-beats-model honesty requirement is planned but unproven.
+**G10 — Five of fourteen series cannot be forecast better than the baseline.**
+Divisions 03 (Clothing & Footwear), 05 (Furnishings), 07 (Transport), 11 (Restaurants &
+Accommodation) and 13 (Personal Care) fail to beat inflation persistence over the backtest
+window. The pipeline reports this rather than presenting a forecast anyway. It is a real
+result about forecastability, not a bug — but it does mean the forecast view is honest rather
+than uniformly useful.
+
+**G10a — Forecasts are national only.**
+No state-level or district-level forecasts. `cpi_state` could support them, but 16 states ×
+14 divisions × ~12 s per series is hours of CI. The national series and the 13 divisions are
+what ship.
+
+**G10b — SARIMA parameters are fixed, not searched.**
+`SARIMAX(1,1,1)(1,1,1,12)` for every series. Reproducible and statable in the methodology,
+but not optimal per division. A division where auto-ARIMA would pick a different order may be
+under-served.
+
+**G10c — Anomaly flags are unvalidated against an external event list.**
+The flags land on known episodes (2020 deflation, 2022 surge) without any hard-coded dates,
+which is corroboration. But we have not systematically checked them against a published
+timeline of Malaysian price events, so "the detector finds the right things" is supported by
+inspection rather than by a test that would catch a change.
 
 **G11 — Real-wage validation tolerance is 2 RM.**
 We reproduce DOSM's published real series to within 0.77 RM today. The tolerance is

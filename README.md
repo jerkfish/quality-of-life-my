@@ -7,8 +7,31 @@ A public web app built entirely on Malaysia's open data. All figures come from D
 [open.dosm.gov.my](https://open.dosm.gov.my) and [data.gov.my](https://data.gov.my). Nothing
 is modelled, interpolated, or invented.
 
-> **Status: Phase 1 (pipeline) complete.** No frontend, Worker, or eval harness yet.
+> **Status: Phase 2 (analyses) complete.** No frontend, Worker, or eval harness yet.
 > This README will lead with charts once they ship.
+
+## Forecast, reported honestly
+
+Headline CPI is forecast 12 months ahead with two models against a **persistence baseline**
+— "inflation stays what it was a year ago". Both are backtested with rolling-origin,
+expanding-window folds and scored on the year-on-year rate in percentage points.
+
+| Model | MAE (pp) | MAPE | RMSE (pp) |
+| --- | --- | --- | --- |
+| **ETS** (Holt-Winters) | **0.17** | 10.5% | 0.22 |
+| SARIMA(1,1,1)(1,1,1,12) | 0.18 | 10.9% | 0.24 |
+| *baseline:* inflation persistence | 0.46 | 31.5% | 0.53 |
+
+Measured over 96 backtested forecasts. ETS beats the baseline by roughly 2.7×, which is a real
+result — see [ADR 0002](docs/adr/0002-forecast-honestly-against-a-real-baseline.md) for why the
+textbook seasonal-naive baseline would have flattered this into meaninglessness.
+
+**It does not always win.** Across the national headline series and all 13 CPI divisions, **5
+of 14 do not beat the baseline** — Clothing & Footwear (03), Furnishings (05), Transport (07),
+Restaurants & Accommodation (11) and Personal Care (13). Those artifacts carry
+`beats_baseline: false`, a verdict, and a caveat telling the reader not to trust the
+projection. A forecast that loses to "same as last year" has no business being presented as
+insight, and saying so is a feature.
 
 ## What the data already says
 
@@ -57,9 +80,19 @@ pipeline/   Python data pipeline: fetch -> validate -> transform -> artifacts
 web/        Static site (Astro) — reads only the committed artifacts   [Phase 3]
 worker/     Cloudflare Worker — /api/ask agent loop                    [Phase 4]
 evals/      Agent evaluation harness                                   [Phase 4]
-docs/       DATA.md, ASSUMPTIONS.md, KNOWN-GAPS.md, METHODOLOGY.md, ADRs
+docs/       Documentation (below)
 data/       Versioned static data artifacts
 ```
+
+### Documentation
+
+| Document | What it covers |
+| --- | --- |
+| [docs/DATA.md](docs/DATA.md) | Dataset inventory, confirmed coverage, API mechanics, why parquet over REST |
+| [docs/METHODOLOGY.md](docs/METHODOLOGY.md) | Every formula, every assumption, and what would falsify each one |
+| [docs/KNOWN-GAPS.md](docs/KNOWN-GAPS.md) | What this does not do, cannot do, or has not verified |
+| [docs/ASSUMPTIONS.md](docs/ASSUMPTIONS.md) | Decisions taken without asking, and what to do if they are wrong |
+| [docs/adr/](docs/adr/) | Architecture decision records |
 
 ## How this is kept honest
 
@@ -71,7 +104,18 @@ data/       Versioned static data artifacts
   within 0.77 RM across all 16 states. That is a test, not a claim.
 - **Nothing is published until every check passes.** A failed run writes no artifacts.
 - **No interpolation, anywhere.** Survey-year gaps stay gaps; partial years are labelled.
-- Findings that contradict the expected narrative are reported as found — see finding 3.
+- **A forecast that loses to the baseline says so in the data**, not just in a comment.
+- Findings that contradict the expected narrative are reported as found — see finding 3, and
+  [ADR 0004](docs/adr/0004-report-inconvenient-results-as-found.md).
+
+## Anomaly detection
+
+STL decomposition with robust (MAD-scaled) residual scoring, plus binary segmentation for
+durable regime shifts. With no hard-coded dates, it independently isolates the 2020 deflation
+(z = −25.9) and the 2022 inflation surge, and finds four inflation regimes since 1981.
+
+Flags are **statistical, not explanatory**. Where a flag coincides with movement in an
+independently datable series, that is reported as corroboration and never as cause.
 
 ## Licence
 
