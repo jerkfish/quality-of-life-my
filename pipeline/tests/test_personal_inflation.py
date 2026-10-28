@@ -50,7 +50,9 @@ def test_weights_are_normalised_so_ringgit_amounts_work():
 
 def test_contributions_sum_to_the_personal_rate():
     basket = Basket(name="mixed", weights={"01": 70.0, "07": 30.0})
-    out = compute_personal_inflation(basket, {"01": 4.0, "07": 10.0}, headline_rate=2.0, names=NAMES)
+    out = compute_personal_inflation(
+        basket, {"01": 4.0, "07": 10.0}, headline_rate=2.0, names=NAMES
+    )
     assert sum(c.contribution_pp for c in out.contributions) == pytest.approx(out.personal_pct)
     assert sum(c.weight for c in out.contributions) == pytest.approx(1.0)
     # Sorted by weight, biggest first.
@@ -150,6 +152,8 @@ def test_inflation_by_division_cumulative():
 
 
 def test_inflation_by_division_requires_a_base_year():
-    df = pd.DataFrame({"date": pd.to_datetime(["2010-01-01"]), "division": ["01"], "index": [100.0]})
+    df = pd.DataFrame(
+        {"date": pd.to_datetime(["2010-01-01"]), "division": ["01"], "index": [100.0]}
+    )
     with pytest.raises(ValueError, match="base_year is required"):
         inflation_by_division(df)

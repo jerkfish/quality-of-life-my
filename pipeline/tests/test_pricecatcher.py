@@ -167,8 +167,13 @@ def test_aggregate_missing_premise_leaves_state_null_not_guessed():
         }
     )
     premises = pd.DataFrame(
-        {"premise_code": [10], "premise": ["A"], "premise_type": ["X"], "state": ["Johor"],
-         "district": ["JB"]}  # fmt: skip
+        {
+            "premise_code": [10],
+            "premise": ["A"],
+            "premise_type": ["X"],
+            "state": ["Johor"],
+            "district": ["JB"],
+        }  # fmt: skip
     )
     agg = pc.aggregate_edition(prices, items, premises)
     assert pd.isna(agg.iloc[0]["state"])

@@ -56,9 +56,12 @@ class RunResult:
 
 
 class Runner:
-    def __init__(self, config: RunConfig) -> None:
+    def __init__(self, config: RunConfig, *, fetcher: Fetcher | None = None) -> None:
         self.config = config
-        self.fetcher = Fetcher(config.raw_dir, config.meta_dir, offline=config.offline)
+        # Injectable so orchestration can be tested without the network. Everything else
+        # about the runner is deliberately side-effect free.
+        self.fetcher = fetcher or Fetcher(config.raw_dir, config.meta_dir, offline=config.offline)
+        self._owns_fetcher = fetcher is None
         self.reports: dict[str, DatasetReport] = {}
         self.metas: dict[str, CatalogueMeta] = {}
         self.frames: dict[str, pd.DataFrame] = {}
@@ -188,6 +191,35 @@ class Runner:
         hh_income_state = self.load("hh_income_state")
         hh_income = self.load("hh_income")
 
+        # Build everything first, validate, and only then write. Nothing is published until
+        # every check has passed -- otherwise a failed run leaves a half-updated data/ behind
+        # and the site silently serves a mix of old and new numbers.
+        wages_artifact = artifacts.build_real_wages(
+            wages_state,
+            cpi_state,
+            published_real,
+            self.metas.get("wages_state"),
+            self.metas.get("wages_real_state_citizen"),
+        )
+        income_artifact = artifacts.build_household_income(
+            hh_income_state, hh_income, cpi_state, cpi_headline, self.metas.get("hh_income_state")
+        )
+        wages_summary = pd.DataFrame(wages_artifact["summary"])
+        income_summary = pd.DataFrame(income_artifact["summary"])
+        regional_artifact = artifacts.build_regional(cpi_state, wages_summary, income_summary)
+
+        # --- the gate -------------------------------------------------------------
+        validation = wages_artifact["meta"]["validation_against_dosm"]
+        if not validation["passed"]:
+            raise ContractError(
+                "Real-wage validation against DOSM's published series FAILED: "
+                f"max|d_median|={validation['max_abs_diff_median']} RM "
+                f"(tolerance {validation['tolerance_rm']} RM). Either our deflation is wrong "
+                "or upstream changed the base year. Nothing was written."
+            )
+        log.info("Real-wage validation passed: %s", validation)
+
+        # --- publish --------------------------------------------------------------
         writer.write_json(
             "cpi_national.json",
             artifacts.build_cpi_national(cpi_headline, mcoicop, self.metas.get("cpi_headline")),
@@ -204,36 +236,9 @@ class Runner:
             "cpi_strata.json",
             artifacts.build_cpi_strata(cpi_strata, self.metas.get("cpi_strata")),
         )
-
-        wages_artifact = artifacts.build_real_wages(
-            wages_state,
-            cpi_state,
-            published_real,
-            self.metas.get("wages_state"),
-            self.metas.get("wages_real_state_citizen"),
-        )
         writer.write_json("real_wages.json", wages_artifact)
-
-        income_artifact = artifacts.build_household_income(
-            hh_income_state, hh_income, cpi_state, cpi_headline, self.metas.get("hh_income_state")
-        )
         writer.write_json("household_income.json", income_artifact)
-
-        wages_summary = pd.DataFrame(wages_artifact["summary"])
-        income_summary = pd.DataFrame(income_artifact["summary"])
-        writer.write_json(
-            "regional.json", artifacts.build_regional(cpi_state, wages_summary, income_summary)
-        )
-
-        validation = wages_artifact["meta"]["validation_against_dosm"]
-        if not validation["passed"]:
-            raise ContractError(
-                "Real-wage validation against DOSM's published series FAILED: "
-                f"max|d_median|={validation['max_abs_diff_median']} RM "
-                f"(tolerance {validation['tolerance_rm']} RM). Either our deflation is wrong "
-                "or upstream changed the base year. Not shipping artifacts."
-            )
-        log.info("Real-wage validation passed: %s", validation)
+        writer.write_json("regional.json", regional_artifact)
 
     def _build_item_level(self, writer: ArtifactWriter) -> None:
         aggregate = self.build_pricecatcher_aggregate()
@@ -245,7 +250,9 @@ class Runner:
         writer.write_json("pricecatcher/items.json", artifacts.build_pricecatcher(aggregate, items))
 
     def close(self) -> None:
-        self.fetcher.close()
+        # Only close a fetcher we created. A caller who injected one owns its lifecycle.
+        if self._owns_fetcher:
+            self.fetcher.close()
 
     def __enter__(self) -> Runner:
         return self

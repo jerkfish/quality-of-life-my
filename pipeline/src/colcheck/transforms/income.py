@@ -16,6 +16,29 @@ import pandas as pd
 
 from .common import annual_means, real_growth_pct
 
+SUMMARY_COLUMNS = (
+    "state",
+    "start_year",
+    "end_year",
+    "income_median_start",
+    "income_median_end",
+    "nominal_growth_pct",
+    "cumulative_inflation_pct",
+    "real_growth_pct",
+)
+
+
+def _summary_frame(rows: list[dict]) -> pd.DataFrame:
+    """Build the summary frame, with columns intact when there are no rows.
+
+    A source whose survey years stop overlapping the CPI period yields zero rows. Returning
+    a column-less frame there would crash the caller on the next line with a confusing
+    KeyError, so the empty case is shaped like the populated one.
+    """
+    if not rows:
+        return pd.DataFrame(columns=list(SUMMARY_COLUMNS))
+    return pd.DataFrame(rows).sort_values("real_growth_pct", ascending=False).reset_index(drop=True)
+
 
 def survey_years(income_state: pd.DataFrame) -> list[int]:
     """The years HIES actually covers, so the UI can render a stepped x-axis."""
@@ -81,7 +104,7 @@ def household_income_summary(
                 ),
             }
         )
-    return pd.DataFrame(rows).sort_values("real_growth_pct", ascending=False).reset_index(drop=True)
+    return _summary_frame(rows)
 
 
 def national_household_income(income: pd.DataFrame, cpi_headline: pd.DataFrame) -> pd.DataFrame:

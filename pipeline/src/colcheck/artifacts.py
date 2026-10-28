@@ -350,6 +350,15 @@ def build_regional(
     income_df = pd.DataFrame(income_rows)
 
     def spread(df: pd.DataFrame, col: str) -> dict[str, Any]:
+        """Min/max/spread for one metric.
+
+        Returns {} rather than raising when the column is absent or entirely null. That
+        happens legitimately: if a source's survey years stop overlapping the period, the
+        ranking is empty, and the site should render "no comparable data here" instead of
+        the whole build failing.
+        """
+        if col not in df.columns:
+            return {}
         s = df[col].dropna()
         if s.empty:
             return {}

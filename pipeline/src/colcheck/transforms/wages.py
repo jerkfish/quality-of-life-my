@@ -160,4 +160,21 @@ def real_wage_summary(
                 ),
             }
         )
+    # Shaped even when empty, for the same reason as the HIES summary: a column-less frame
+    # turns a "no overlapping years" situation into a confusing KeyError one line later.
+    if not rows:
+        return pd.DataFrame(
+            columns=[
+                "state",
+                "start_year",
+                "end_year",
+                "wages_median_start",
+                "wages_median_end",
+                "real_median_start",
+                "real_median_end",
+                "nominal_growth_pct",
+                "cumulative_inflation_pct",
+                "real_growth_pct",
+            ]  # fmt: skip
+        )
     return pd.DataFrame(rows).sort_values("real_growth_pct", ascending=False).reset_index(drop=True)

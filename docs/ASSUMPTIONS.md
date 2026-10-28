@@ -86,12 +86,22 @@ survey for the continuous annual/monthly series. They are different populations 
 different things; presenting both, and showing that they agree on the *shape* of the answer,
 is stronger evidence than picking one.
 
-**A18 — Git is local-only.** Confirmed at the Phase 0 gate. The repo has a pre-existing
-remote (`jerkfish/quality-of-life-my`) that I did not create, and the initial commit contains
-Phase 0 scratch files. We do not rewrite that history and we do not push; commits stay local
-until the user pushes. Branch remains `master`.
+**A18 — The user owns all git operations.** *(Superseded by explicit instruction on
+2026-10-28; the earlier "commits stay local" version is void.)*
 
-**A15 — English first, BM structure in place.** di18n keys from the start; BM translations for
+- **The agent does not commit, stage, push or amend anything.** The user commits and pushes
+  manually.
+- **No attribution lines of any kind**, and no co-authors other than `jerkfish`. Specifically
+  no `Co-Authored-By: Claude` trailer.
+- The agent does not rewrite history.
+
+Practical consequence: `.gitignore` must be correct and kept current, because the user's
+`git add -A` will otherwise sweep up build and cache output. `.cache/` (163 MB of downloaded
+upstream parquet) and `.discovery/` are ignored for exactly this reason. Note that a
+`.gitignore` entry does nothing for a file that is *already* tracked — those need
+`git rm --cached`.
+
+**A15 — English first, BM structure in place.** i18n keys from the start; BM translations for
 key UI strings only if time allows in Phase 5.
 
 **A16 — Conventional commits from the first commit**, since a clean history is an explicit

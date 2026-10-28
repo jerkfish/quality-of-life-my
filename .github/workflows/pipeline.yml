@@ -1,0 +1,114 @@
+name: pipeline
+
+# The site never calls data.gov.my. This workflow is the only thing that does: it fetches,
+# validates and reduces the upstream data into the static artifacts under data/, then
+# commits them. A human reviews the diff, which is where a wrong-looking number actually
+# gets caught.
+
+on:
+  schedule:
+    # DOSM publishes CPI around the 19th-22nd of each month. Run on the 25th so we are
+    # always picking up a complete release rather than racing it.
+    - cron: "17 3 25 * *"
+  workflow_dispatch:
+    inputs:
+      skip_pricecatcher:
+        description: "Skip the PriceCatcher stage (slow, ~130 MB of downloads)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pipeline-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: pipeline/uv.lock
+
+      - name: Install dependencies
+        working-directory: pipeline
+        run: uv sync --extra dev --frozen
+
+      - name: Lint
+        working-directory: pipeline
+        run: uv run ruff check src tests
+
+      - name: Format check
+        working-directory: pipeline
+        run: uv run ruff format --check src tests
+
+      - name: Unit tests
+        working-directory: pipeline
+        run: uv run pytest -m "not network" --cov=colcheck --cov-report=term-missing
+
+      # The contract tests. These are the point of the scheduled run: if DOSM renames a
+      # column, rebases the CPI, or changes which population a wage series covers, this step
+      # fails and the job stops before anything is published.
+      - name: Upstream contract tests
+        working-directory: pipeline
+        run: uv run pytest -m network -v
+
+      - name: Rebuild artifacts
+        working-directory: pipeline
+        run: |
+          if [ "${{ inputs.skip_pricecatcher }}" = "true" ]; then
+            uv run colcheck run --skip-pricecatcher
+          else
+            uv run colcheck run
+          fi
+
+      - name: Check for artifact drift
+        id: drift
+        run: |
+          if git diff --quiet -- data/; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No artifact changes."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --stat -- data/
+          fi
+
+      - name: Commit refreshed artifacts
+        if: steps.drift.outputs.changed == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git commit -m "chore(data): refresh artifacts from DOSM
+
+          Automated run of the data pipeline. Artifacts regenerated from
+          DOSM open data; see data/manifest.json for per-dataset as-of dates."
+          git push
+
+      - name: Summarise
+        if: always()
+        run: |
+          echo "### Pipeline run" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f data/manifest.json ]; then
+            python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          m = json.load(open("data/manifest.json"))
+          print(f"Generated: {m['generated_at']}  ·  pipeline {m['pipeline_version']}")
+          print()
+          print("| dataset | as of | last updated | rows | warnings |")
+          print("|---|---|---|---|---|")
+          for k, v in sorted(m["datasets"].items()):
+              r = v["report"]
+              warn = len(r["issues"]) - len([i for i in r["issues"] if i["level"] == "error"])
+              print(f"| `{k}` | {v['as_of']} | {v['last_updated']} | {r['rows']:,} | {warn} |")
+          PY
+          fi

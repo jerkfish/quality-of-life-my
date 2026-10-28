@@ -47,9 +47,7 @@ def fetcher(tmp_path_factory):
 
 @pytest.fixture(scope="module")
 def frames(fetcher) -> dict[str, pd.DataFrame]:
-    return {
-        ds_id: pd.read_parquet(fetcher.fetch_parquet(registry.get(ds_id))) for ds_id in CORE
-    }
+    return {ds_id: pd.read_parquet(fetcher.fetch_parquet(registry.get(ds_id))) for ds_id in CORE}
 
 
 @pytest.mark.parametrize("dataset_id", CORE)
@@ -135,8 +133,7 @@ def test_recorded_states_are_exactly_the_ones_upstream_publishes(frames):
         found = set(frames[ds_id]["state"].dropna().unique())
         expected = set(registry.STATES) | ({registry.MALAYSIA} if ds.allow_national else set())
         assert found == expected, (
-            f"{ds_id}: state set drifted: {found ^ expected}; "
-            f"allow_national={ds.allow_national}"
+            f"{ds_id}: state set drifted: {found ^ expected}; allow_national={ds.allow_national}"
         )
 
 
@@ -149,7 +146,7 @@ def test_hies_still_has_gaps_and_we_still_report_them(frames):
     """If HIES ever became annual, the 'no interpolation' guard could be relaxed -- but we
     should notice, not assume."""
     years = sorted(pd.to_datetime(frames["hh_income_state"]["date"]).dt.year.unique())
-    gaps = [b - a for a, b in zip(years, years[1:])]
+    gaps = [b - a for a, b in zip(years, years[1:], strict=False)]
     assert max(gaps) > 1, "HIES now appears continuous; revisit the gap-handling assumptions"
 
 

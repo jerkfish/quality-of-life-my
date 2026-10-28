@@ -19,7 +19,7 @@ def hies_state_frame() -> pd.DataFrame:
     Nominal +100%, inflation +25%, so real is (2.0 / 1.25 - 1) = +60%.
     """
     rows = []
-    for year, income_val, cpi_val in ((2012, 2000.0, 100.0), (2024, 4000.0, 125.0)):
+    for year, income_val, _cpi_val in ((2012, 2000.0, 100.0), (2024, 4000.0, 125.0)):
         rows.append(
             {
                 "state": "Johor",
