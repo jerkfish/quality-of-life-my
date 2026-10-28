@@ -1,0 +1,220 @@
+---
+/**
+ * The "ask the data" box.
+ *
+ * Three behaviours worth noting, all of which are about not overstating what this is:
+ *
+ *  - **Refusals are rendered as a distinct, calm state**, not as an error. Declining to
+ *    answer is the agent working correctly, and styling it as a failure would train people to
+ *    distrust the right behaviour.
+ *  - **Every answer shows its sources.** If the agent returned no citations, the UI says so
+ *    rather than showing an unsourced answer that looks identical to a sourced one.
+ *  - **The working is available.** The tool calls the agent made are shown on request, so a
+ *    reader can check that the number came from the data rather than from the model.
+ *
+ * The Worker URL comes from `PUBLIC_WORKER_URL` at build time. If it is not set the box still
+ * renders but explains that the feature is unavailable, rather than failing silently.
+ */
+
+const workerUrl = import.meta.env.PUBLIC_WORKER_URL ?? "https://colcheck-api.jerkfish123.workers.dev";
+const configured = Boolean(workerUrl);
+
+const EXAMPLES = [
+  "What is headline inflation in Malaysia right now?",
+  "Which state had the biggest real wage growth since 2010?",
+  "How much has eating out risen since 2010 compared with groceries?",
+  "What does a kilo of chicken cost in Sabah?",
+];
+---
+<section class="card ask" data-ask data-worker={workerUrl} aria-labelledby="ask-heading">
+  <h2 id="ask-heading" style="margin-top:0">Ask the data</h2>
+  <p style="margin-top:0">
+    Questions are answered by a model that has to look the figures up in the same dataset the
+    charts use. It has no memory of Malaysian statistics and will tell you when it cannot
+    answer. Every figure it gives comes with its source.
+  </p>
+
+  {
+    configured ? (
+      <>
+        <form data-ask-form>
+          <div class="field">
+            <label for="ask-input">Your question</label>
+            <textarea
+              id="ask-input"
+              data-ask-input
+              rows="2"
+              maxlength="500"
+              placeholder="e.g. Which state had the biggest real wage growth?"
+              style="width:100%;max-width:44rem;font:inherit;padding:.5rem;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg-raised);color:var(--fg)"
+            />
+          </div>
+          <div class="controls" style="margin-top:.6rem">
+            <button type="submit" class="primary" data-ask-submit>Ask</button>
+            <span class="badge" data-ask-count>0/500</span>
+          </div>
+        </form>
+
+        <div style="margin:.5rem 0 1rem">
+          <p style="font-size:.82rem;color:var(--fg-muted);margin-bottom:.35rem">Try one of these:</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.4rem">
+            {EXAMPLES.map((q) => (
+              <button type="button" class="theme-toggle" data-ask-example={q}>
+                {q}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div data-ask-output hidden aria-live="polite"></div>
+      </>
+    ) : (
+      <p class="data-note">
+        The question-answering service is not configured in this build.
+      </p>
+    )
+  }
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-ask]");
+  if (root) {
+    const worker = root.dataset.worker ?? "";
+    const form = root.querySelector<HTMLFormElement>("[data-ask-form]");
+    const input = root.querySelector<HTMLTextAreaElement>("[data-ask-input]");
+    const submit = root.querySelector<HTMLButtonElement>("[data-ask-submit]");
+    const counter = root.querySelector<HTMLElement>("[data-ask-count]");
+    const output = root.querySelector<HTMLElement>("[data-ask-output]");
+    const maxChars = 500;
+
+    const escapeHtml = (s: string) =>
+      s.replace(/[&<>"']/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] ?? c,
+      );
+
+    function renderBusy() {
+      if (!output) return;
+      output.hidden = false;
+      output.innerHTML = `<p class="chart-loading" style="min-height:auto;padding:1rem">Looking it up in the data…</p>`;
+      if (submit) submit.disabled = true;
+    }
+
+    interface Citation {
+      dataset: string;
+      source: string;
+      asOf: string | null;
+      range?: string;
+      note?: string;
+    }
+
+    interface TraceStep {
+      type: string;
+      name?: string;
+      arguments?: unknown;
+      ok?: boolean;
+      error?: string;
+    }
+
+    function renderAnswer(data: {
+      answer: string;
+      citations: Citation[];
+      refused: boolean;
+      model: string;
+      prompt_version: string;
+      trace: TraceStep[];
+    }) {
+      if (!output) return;
+      output.hidden = false;
+
+      const refused = data.refused;
+      // A refusal is a correct outcome, so it is rendered neutrally rather than as an error.
+      const wrapperClass = refused ? "callout" : "callout good";
+      const heading = refused ? "Not answerable from this data" : "Answer";
+
+      const sources =
+        data.citations.length > 0
+          ? `<div class="data-note"><p><strong>Sources</strong></p><ul style="margin:.25rem 0 0;padding-left:1.1rem">${data.citations
+              .map(
+                (c) =>
+                  `<li><code>${escapeHtml(c.dataset)}</code>${
+                    c.range ? ` · ${escapeHtml(c.range)}` : ""
+                  }${c.asOf ? ` · data as of ${escapeHtml(c.asOf)}` : ""}${
+                    c.note ? ` · ${escapeHtml(c.note)}` : ""
+                  }</li>`,
+              )
+              .join("")}</ul></div>`
+          : refused
+            ? ""
+            : `<div class="data-note"><p><strong>No sources were returned for this answer.</strong> Treat it with suspicion — every figure here should be traceable.</p></div>`;
+
+      const tools = data.trace.filter((s) => s.type === "tool_call").map((s) => s.name);
+      const working =
+        tools.length > 0
+          ? `<details style="margin-top:.6rem"><summary style="cursor:pointer;font-size:.82rem;color:var(--fg-muted)">How this was looked up (${tools.length} data call${tools.length === 1 ? "" : "s"})</summary>
+             <ul class="plain" style="font-size:.82rem;color:var(--fg-muted)">${tools
+               .map((t) => `<li><code>${escapeHtml(t ?? "")}</code></li>`)
+               .join("")}</ul></details>`
+          : "";
+
+      output.innerHTML = `
+        <div class="${wrapperClass}">
+          <h3>${heading}</h3>
+          <p style="white-space:pre-wrap">${escapeHtml(data.answer)}</p>
+          ${sources}
+          ${working}
+          <p class="data-note" style="margin-top:.5rem">Model <code>${escapeHtml(data.model)}</code> · prompt <code>${escapeHtml(data.prompt_version)}</code></p>
+        </div>`;
+    }
+
+    function renderError(message: string) {
+      if (!output) return;
+      output.hidden = false;
+      output.innerHTML = `<div class="callout warn"><h3>That did not work</h3><p>${escapeHtml(
+        message,
+      )}</p><p style="margin-bottom:0">The charts on this site do not depend on the model and are unaffected.</p></div>`;
+    }
+
+    async function ask(question: string) {
+      if (!question.trim()) return;
+      renderBusy();
+      try {
+        const response = await fetch(`${worker.replace(/\/$/, "")}/api/ask`, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ question }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          renderError(data.error ?? `The service returned ${response.status}.`);
+          return;
+        }
+        renderAnswer(data);
+      } catch {
+        renderError(
+          "The question-answering service could not be reached. It runs on a free tier and " +
+            "may be unavailable.",
+        );
+      } finally {
+        if (submit) submit.disabled = false;
+      }
+    }
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      void ask(input?.value ?? "");
+    });
+
+    input?.addEventListener("input", () => {
+      if (counter) counter.textContent = `${input.value.length}/${maxChars}`;
+    });
+
+    root.querySelectorAll<HTMLElement>("[data-ask-example]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const text = button.dataset.askExample ?? "";
+        if (input) input.value = text;
+        if (counter) counter.textContent = `${text.length}/${maxChars}`;
+        void ask(text);
+      });
+    });
+  }
+</script>

@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "colcheck-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+
+  // Workers AI. The binding is why no API key appears anywhere in this file: the Worker
+  // authenticates to the model through Cloudflare's own runtime, so there is no secret to
+  // leak, rotate, or accidentally commit.
+  "ai": {
+    "binding": "AI"
+  },
+
+  "vars": {
+    // Chosen by measurement, not by the model catalogue. Several models advertise
+    // "Function calling: Yes" and then never emit a tool call — see docs/ASSUMPTIONS.md A22.
+    // These three were verified to actually call tools against this Worker.
+    "MODEL": "@cf/meta/llama-3.1-8b-instruct-fp8",
+    "MODEL_COMPARISON": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    // Allowlist. Without it, `{"model": "..."}` in the request body lets any caller pick the
+    // most expensive model on the account and spend the owner's quota.
+    "ALLOWED_MODELS": "@cf/meta/llama-3.1-8b-instruct-fp8,@cf/meta/llama-3.3-70b-instruct-fp8-fast,@cf/qwen/qwen3-30b-a3b-fp8",
+    "MAX_QUESTION_CHARS": "500",
+    "MAX_TOOL_ITERATIONS": "6",
+    "RATE_LIMIT_PER_MINUTE": "8",
+    "RATE_LIMIT_PER_DAY": "120"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}

@@ -1,0 +1,9 @@
+[project]
+name = "colcheck-evals"
+version = "0.1.0"
+description = "Evaluation harness for the ask-the-data agent."
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pandas>=2.2", "pyarrow>=17"]

@@ -1,0 +1,102 @@
+---
+import Base from "../layouts/Base.astro";
+import AskBox from "../components/AskBox.astro";
+import { asOf, manifest } from "../lib/data";
+import { asOfLabel } from "../lib/format";
+
+const cpiAsOf = asOf(["cpi_national.json"]);
+const m = manifest();
+---
+<Base
+  title="Ask the data — Malaysia Cost-of-Living Reality Check"
+  description="Ask questions about Malaysian consumer prices, wages and household income. Answers are retrieved from the same data the charts use, with sources, or declined."
+>
+  <h1>Ask the data</h1>
+  <p class="lede">
+    A small agent that answers questions by looking figures up in the same dataset the charts
+    are built from. It cannot answer from memory, and it will tell you when it does not know.
+  </p>
+
+  <AskBox />
+
+  <h2>What it can and cannot do</h2>
+  <div class="grid">
+    <div class="card">
+      <h3 style="margin-top:0">It can</h3>
+      <ul class="plain">
+        <li>Report inflation for any category, nationally or by state</li>
+        <li>Rank the 16 states by inflation or real income growth</li>
+        <li>Work out a personalised inflation rate from your spending split</li>
+        <li>Show the 12-month CPI forecast, including where it fails</li>
+        <li>Find what a specific grocery item costs in each state</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">It cannot</h3>
+      <ul class="plain">
+        <li>Answer anything about another country</li>
+        <li>Say why something happened — this data shows what, not why</li>
+        <li>Go beyond the forecast horizon, or before 2010 for states</li>
+        <li>Give investment, legal or policy advice</li>
+        <li>Recall a figure it did not just look up</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>How it is kept honest</h2>
+  <p>
+    Three things make this more than a chatbot with a dataset attached:
+  </p>
+  <ul class="plain">
+    <li>
+      <strong>It cannot answer without retrieving.</strong> If the model produces an answer
+      without calling a single data tool, the answer is thrown away and replaced with a
+      refusal. A remembered number and an invented number are indistinguishable, and both are
+      unacceptable here, so the system makes the first impossible rather than merely discouraged.
+    </li>
+    <li>
+      <strong>Every figure carries its source.</strong> The tool results themselves carry the
+      citation — dataset, date range, and the date that data was published — so the source is
+      not something the model has to remember to mention.
+    </li>
+    <li>
+      <strong>Tool arguments are validated before execution.</strong> The model proposes, a
+      schema disposes. A call naming a state that does not exist is rejected with the list of
+      real ones, and a call naming a period outside the data is rejected rather than quietly
+      answering about a different period.
+    </li>
+  </ul>
+
+  <div class="callout warn">
+    <h3>This runs on a free tier</h3>
+    <p>
+      The model runs on Cloudflare Workers AI, which allows 10,000 neurons per day at no cost.
+      Questions are limited to 500 characters, rate limited per address, and each question may
+      make at most six data lookups. If the box stops responding, that is the daily allowance
+      rather than a fault. The charts, the calculator and every other page are static files and
+      keep working regardless.
+    </p>
+  </div>
+
+  <div class="callout">
+    <h3>Prompt injection</h3>
+    <p>
+      Anything inside a tool result is treated as data, never as an instruction. Item names and
+      any other text coming from the dataset are wrapped in explicit delimiters and the model is
+      told that content within them cannot change its task. The answer is rendered as plain
+      text, so nothing it returns can execute or restyle the page.
+    </p>
+  </div>
+
+  <div class="data-note">
+    <p>
+      The agent reads the same artifacts this site does, built {m.generated_at.slice(0, 10)} by
+      pipeline <code>v{m.pipeline_version}</code>. CPI as of {asOfLabel(cpiAsOf)}.
+    </p>
+    <p>
+      Answers are generated text and can be wrong even with the guardrails above. The
+      <a href="/methodology">methodology page</a> describes the underlying figures, which are
+      what you should cite.
+    </p>
+  </div>
+</Base>

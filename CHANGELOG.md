@@ -5,6 +5,62 @@ the project aims at [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added — Phase 4 (AI agent)
+- Cloudflare Worker at `/api/ask` implementing a bounded agent loop over seven typed tools,
+  deployed at https://colcheck-api.jerkfish123.workers.dev
+- Tool arguments validated with zod before execution; invalid calls are rejected with the
+  valid values so the model can recover, and repeated calls are replayed from cache rather
+  than re-executed
+- **A model that answers without calling a tool has its answer discarded.** This is what makes
+  "the LLM does not answer from memory" enforceable rather than merely requested
+- Every tool result carries its own citation (dataset, date range, as-of date), so sources do
+  not depend on the model remembering to mention them
+- `uv run colcheck bundle` produces a 415 KB (123 KB gzipped) trimmed data bundle compiled
+  into the Worker; every trim is recorded in the bundle's own `dropped_for_size`
+- Eval harness (`evals/`) with 26 cases: 17 numeric checked against ground truth computed in
+  pandas, 7 refusal, and 5 behavioural. Compares models from one command
+- Model allowlist, per-IP rate limiting, 500-character input cap, and a six-call tool budget
+- "Ask the data" page on the site, rendering answers with their Sources, refusals as a
+  distinct state rather than an error, and the tool calls behind each answer
+
+### Eval outcome
+- **Numeric accuracy 18%, against a 60% threshold.** The agent is not good enough yet, and the
+  README and `docs/KNOWN-GAPS.md` G24 say so with the breakdown. Refusals reach 86% (100% on
+  the larger model) and the food-split cases match the artifacts exactly.
+- Two models compared: llama-3.1-8b (cheap, 43% overall) and llama-3.3-70b (17x the cost,
+  39% overall, but 100% on refusals).
+
+### Fixed — Phase 4
+- **A `from` date past the end of the series returned the entire series.** `findIndex` returns
+  -1 for "not found" and `Math.max(0, -1)` turns that into "start at the beginning", so
+  asking for 2099 onwards silently returned 1980 onwards.
+- **Descriptions on optional tool fields were dropped.** `z.string().optional().describe(...)`
+  puts the description on the wrapper, and the schema converter unwrapped it away — so the
+  model was given a `state` field with no explanation of what to put in it.
+- **Optional fields took the whole function into the temporal dead zone.** Two charts failed
+  to render because a local named `base` shadowed `base(theme)`.
+- `/health` reported a hard-coded prompt version, so the version badge would have lied after
+  the first prompt change.
+- The eval harness scored prose refusals as fabrications, because a bare year in "I cannot
+  provide the reading for March 1994" counted as an invented number.
+- Cloudflare returns 403/1010 for Python's default user agent, which broke every eval request
+  before it reached the Worker.
+- **`mode: "cumulative"` rebased to the start of the window, not the base year.** The window
+  defaults to 1980, so a question about "since 2010" silently got a figure measured from 1980 —
+  while the tool's own schema said "percent change since 2010". Caught by the evals.
+- **`real: false` was ignored for household income**, so nominal and real figures were
+  identical and indistinguishable.
+- **`get_spending_group` matched "eating out" against "Outpatient care services"** because
+  "outpatient" contains "out", and tied "food at home" with "Food away from home" on a
+  substring match broken by array order. Now whole-word matching with an alias table.
+- **The assistant turn that requested tools carried no tool calls.** Pushing the model's prose
+  instead of its tool-call payload left the following `tool` messages referencing nothing, so
+  the agent received correct data and could not tell which request it answered. This presented
+  as a model failure and was a message-format bug.
+- Two genuine capability gaps closed: there was no tool exposing the national wage and
+  household-income series, and none exposing the 3-digit spending groups — which is what
+  "eating out versus groceries" needs.
+
 ### Added — Phase 3 (frontend)
 - Astro static site in `web/`, reading only the committed `data/` artifacts at build time.
   Nothing on the site can reach `data.gov.my`, by construction.

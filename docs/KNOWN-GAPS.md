@@ -84,7 +84,37 @@ tests; `429` and `5xx` handling is not.
 
 **G13 — `uv.lock` must be committed** for CI's `--frozen` install to be reproducible.
 
-**G14 — No Worker or eval harness yet.** Phase 4. The frontend shipped in Phase 3.
+**G14 — The Worker and eval harness shipped; R2 did not.** Phase 4. See ADR 0005 for why the
+agent's data is bundled rather than served from R2.
+
+**G18 — A data refresh needs a Worker redeploy.**
+The agent's data is compiled into the Worker. The pipeline commits refreshed artifacts
+monthly, but nothing redeploys the Worker, so the agent will serve stale data until someone
+runs `wrangler deploy`. The charts, which read the artifacts at build time, are unaffected.
+Wiring the deploy into the pipeline workflow is the fix.
+
+**G19 — The agent cannot see PriceCatcher's price history.**
+Only the latest month per state is bundled. "How has the price of chicken changed since 2022"
+is answerable from the site's data but not by the agent. It is a bundle-size trim, recorded in
+the bundle's own `dropped_for_size`.
+
+**G20 — Rate limiting does not survive an isolate boundary.**
+Per-IP counters are in-isolate memory. A request routed to a different isolate starts from
+zero. Adequate against a single script; not adequate against a distributed one.
+
+**G21 — The eval harness needs a deployed Worker.**
+It tests the running system, not the code. There is no offline mode, so evals cannot run in a
+PR check without deploying first. A useful middle ground would be a mode that exercises the
+tool layer directly, which `worker/tests/tools.test.ts` partly covers already.
+
+**G22 — No streaming.**
+Answers arrive in one piece. On a free-tier model with six tool calls that can be a visible
+pause. Streaming would be a real improvement to perceived latency.
+
+**G23 — Eval coverage is thin on behavioural properties.**
+The harness checks numbers against computed ground truth and checks refusals, which are the
+two that matter most. It does not systematically test prompt injection, long-input handling, or
+what happens when a tool returns malformed data.
 
 **G14a — i18n is a client-side toggle, not real localisation.**
 The Bahasa Malaysia dictionary covers navigation and key chrome only. Page bodies, chart
@@ -116,6 +146,30 @@ verified against a local preview build.
 
 **G15 — PriceCatcher raw is ~130 MB of downloads per full CI run.**
 Reduced to a 4.5 MB aggregate, but the scheduled job is not fast.
+
+**G24 — The agent's numeric accuracy is 18%, against a 60% threshold.**
+The largest open gap in the project. The harness measures it honestly and the README shows it.
+Diagnosed causes, largest first:
+
+1. **The model picks the wrong row from a ranked list.** Eight of fourteen numeric failures
+   called the right tool, received a correctly ordered ranking, and quoted a value from the
+   middle. `compare_states` already returns an explicit `rank` field and the model still misses
+   the ends. Workable fixes: return `best` and `worst` as named top-level fields beside the
+   list, or have the tool answer the extremum question directly.
+2. **The model refuses questions it can answer.** Six failures are declines to in-scope
+   questions; three came without calling any tool at all. This is partly self-inflicted:
+   tightening the scope rule to stop out-of-scope answers produced over-refusal on a small
+   model. There is a genuine tension between refusing too much and too little, and it needs
+   few-shot examples on both sides rather than more imperative rules.
+3. **Small-model tool discipline.** llama-3.1-8b calls tools inconsistently. The 70B scores
+   100% on refusals but costs roughly 17x more per token against a 10,000-neuron daily
+   allowance — the trade-off the eval table exists to expose rather than hide.
+
+**G25 — Some eval questions were ambiguous, and that cost measured accuracy.**
+"Food and beverage prices" can mean COICOP division 01 or 3-digit groups 001/011, and the model
+gave a defensible reading that the evaluator scored as wrong. Ground truth must not encode a
+convention the question does not state. The worst offenders were tightened, but the general
+problem stands: a question with two correct readings measures the evaluator.
 
 ## Things deliberately not done
 

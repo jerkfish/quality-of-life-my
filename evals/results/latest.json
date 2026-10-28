@@ -1,0 +1,491 @@
+{
+ "worker": "https://colcheck-api.jerkfish123.workers.dev",
+ "generated_at": "2026-10-28T17:31:53Z",
+ "ground_truth": {
+  "headline_latest_yoy": 1.775147928994092,
+  "headline_yoy_2023_06": 2.3547880690737877,
+  "food_latest_yoy": 1.8296529968454323,
+  "food_cumulative_since_2010": 61.41345112092673,
+  "transport_latest_yoy": 2.526487367563157,
+  "transport_cumulative_since_2010": 25.77903682719547,
+  "housing_latest_yoy": 1.4437689969604817,
+  "housing_cumulative_since_2010": 33.48887592700609,
+  "food_away_cumulative": 83.0,
+  "food_home_cumulative": 48.80000000000002,
+  "wage_national_real_growth": 45.614,
+  "wage_national_median_2025": 2940.0,
+  "income_national_real_growth": 276.9643738278384,
+  "wage_best_state_growth": 91.17,
+  "wage_worst_state_growth": 29.12,
+  "income_best_state_growth": 80.09,
+  "income_worst_state_growth": 24.36,
+  "inflation_spread_pp": 17.59,
+  "sabah_cumulative": 26.49999999999999,
+  "selangor_cumulative": 44.536134033508354,
+  "forecast_final_implied": 1.5208847120893543,
+  "forecast_mae": 0.17112272434160955,
+  "forecast_baseline_mae": 0.4580573662941318,
+  "n_series_not_beating_baseline": 5,
+  "anomaly_worst_z": 30.52196810913381,
+  "n_anomalies": 75,
+  "chicken_first_price": 9.02,
+  "chicken_last_price": 9.1,
+  "chicken_states_covered": 16
+ },
+ "summaries": {
+  "@cf/meta/llama-3.1-8b-instruct-fp8": {
+   "numeric": {
+    "passed": 3,
+    "total": 17,
+    "rate": 0.17647058823529413
+   },
+   "refusal": {
+    "passed": 6,
+    "total": 7,
+    "rate": 0.8571428571428571
+   },
+   "contains": {
+    "passed": 3,
+    "total": 4,
+    "rate": 0.75
+   },
+   "overall": {
+    "passed": 12,
+    "total": 28,
+    "rate": 0.42857142857142855
+   }
+  }
+ },
+ "results": {
+  "@cf/meta/llama-3.1-8b-instruct-fp8": [
+   {
+    "case_id": "headline_latest",
+    "kind": "numeric",
+    "question": "What is the current headline inflation rate in Malaysia?",
+    "passed": false,
+    "detail": "expected 1.78, got 3.68 (\u0394 1.90)",
+    "answer": "The current headline inflation rate in Malaysia is 3.68% (year-over-year).",
+    "expected": 1.775147928994092,
+    "observed": 3.68,
+    "tools_called": [
+     "get_cpi_series"
+    ],
+    "citations": 1,
+    "refused": false,
+    "ms": 5407
+   },
+   {
+    "case_id": "food_latest",
+    "kind": "numeric",
+    "question": "What is the inflation rate for food and beverages right now?",
+    "passed": false,
+    "detail": "expected 1.83, got 1.22 (\u0394 0.61)",
+    "answer": "The inflation rate for food and beverages right now is 1.22% in the last 12 months.",
+    "expected": 1.8296529968454323,
+    "observed": 1.22,
+    "tools_called": [
+     "get_spending_group"
+    ],
+    "citations": 1,
+    "refused": false,
+    "ms": 4906
+   },
+   {
+    "case_id": "transport_latest",
+    "kind": "numeric",
+    "question": "How much has transport inflation risen over the past year?",
+    "passed": false,
+    "detail": "no number found in the answer",
+    "answer": "I can't answer that from the data I have. I only answer questions about Malaysian consumer prices, wages and household income, and I have to look the figures up rather than recall them \u2014 so if I did not retrieve anything, I have nothing to tell you.",
+    "expected": 2.526487367563157,
+    "observed": null,
+    "tools_called": [
+     "get_cpi_series"
+    ],
+    "citations": 0,
+    "refused": true,
+    "ms": 16491
+   },
+   {
+    "case_id": "food_cumulative",
+    "kind": "numeric",
+    "question": "How much have food and beverage prices risen since 2010, up to the latest month?",
+    "passed": false,
+    "detail": "expected 61.41, got 48.80 (\u0394 12.61)",
+    "answer": "The food and beverage prices have risen by 48.8% since 2010, up to the latest month.",
+    "expected": 61.41345112092673,
+    "observed": 48.8,
+    "tools_called": [
+     "get_spending_group"
+    ],
+    "citations": 1,
+    "refused": false,
+    "ms": 5399
+   },
+   {
+    "case_id": "transport_cumulative",
+    "kind": "numeric",
+    "question": "By what percentage has transport become more expensive since 2010, up to the latest month?",
+    "passed": false,
+    "detail": "expected 25.78, got 27.90 (\u0394 2.12)",
+    "answer": "The transport category has become 27.9% more expensive since 2010, up to the latest month.",
+    "expected": 25.77903682719547,
+    "observed": 27.9,
+    "tools_called": [
+     "get_cpi_series"
+    ],
+    "citations": 1,
+    "refused": false,
+    "ms": 7935
+   },
+   {
+    "case_id": "food_away",
+    "kind": "numeric",
+    "question": "How much more expensive is eating out than in 2010, up to the latest month?",
+    "passed": true,
+    "detail": "expected 83.00, got 83.00 (\u0394 0.00)",
+    "answer": "The response to the question is:Eating out is 83% more expensive than in 2010, up to the latest month.",
+    "expected": 83.0,
+    "observed": 83.0,
+    "tools_called": [
+     "get_spending_group"
+    ],
+    "citations": 1,
+    "refused": false,
+    "ms": 6832
+   },
+   {
+    "case_id": "food_home",
+    "kind": "numeric",
+    "question": "How much have groceries for eating at home risen since 2010, up to the latest month?",
+    "passed": true,
+    "detail": "expected 48.80, got 48.80 (\u0394 0.00)",
+    "answer": "The groceries for eating at home have risen by 48.8% since 2010, up to the latest month.",
+    "expected": 48.80000000000002,
+    "observed": 48.8,
+    "tools_called": [
+     "get_spending_group"
+    ],
+    "citations": 1,
+    "refused": false,
+    "ms": 9961
+   },
+   {
+    "case_id": "wage_national",
+    "kind": "numeric",
+    "question": "How much have real median wages grown nationally since 2010?",
+    "passed": false,
+    "detail": "no number found in the answer",
+    "answer": "I can't answer that from the data I have. I only answer questions about Malaysian consumer prices, wages and household income, and I have to look the figures up rather than recall them \u2014 so if I did not retrieve anything, I have nothing to tell you.",
+    "expected": 45.614,
+    "observed": null,
+    "tools_called": [],
+    "citations": 0,
+    "refused": true,
+    "ms": 14751
+   },
+   {
+    "case_id": "income_national",
+    "kind": "numeric",
+    "question": "How much has real household income grown nationally?",
+    "passed": false,
+    "detail": "no number found in the answer",
+    "answer": "I couldn't find that in the data within the number of lookups allowed for one question. Try asking about a specific category, state or period.",
+    "expected": 276.9643738278384,
+    "observed": null,
+    "tools_called": [],
+    "citations": 0,
+    "refused": true,
+    "ms": 14767
+   },
+   {
+    "case_id": "wage_best",
+    "kind": "numeric",
+    "question": "Which state had the biggest real wage growth, and by how much?",
+    "passed": true,
+    "detail": "expected 91.17, got 91.17 (\u0394 0.00)",
+    "answer": "The state with the biggest real wage growth was Sarawak, with a growth of 91.17%.",
+    "expected": 91.17,
+    "observed": 91.17,
+    "tools_called": [
+     "compare_states"
+    ],
+    "citations": 2,
+    "refused": false,
+    "ms": 6160
+   },
+   {
+    "case_id": "wage_worst",
+    "kind": "numeric",
+    "question": "What was the smallest real wage growth of any state?",
+    "passed": false,
+    "detail": "expected 29.12, got 33.06 (\u0394 3.94)",
+    "answer": "The smallest real wage growth of any state was in Perlis, with a real growth of 33.06%.",
+    "expected": 29.12,
+    "observed": 33.06,
+    "tools_called": [
+     "compare_states"
+    ],
+    "citations": 2,
+    "refused": false,
+    "ms": 4328
+   },
+   {
+    "case_id": "income_worst",
+    "kind": "numeric",
+    "question": "Which state had the weakest real household income growth, and what was it?",
+    "passed": false,
+    "detail": "expected 24.36, got 29.85 (\u0394 5.49)",
+    "answer": "The state with the weakest real household income growth was Pahang, with a real growth rate of 29.85%.",
+    "expected": 24.36,
+    "observed": 29.85,
+    "tools_called": [
+     "compare_states"
+    ],
+    "citations": 1,
+    "refused": false,
+    "ms": 4706
+   },
+   {
+    "case_id": "inflation_spread",
+    "kind": "numeric",
+    "question": "How much does cumulative inflation differ between the highest and lowest state?",
+    "passed": false,
+    "detail": "expected 17.59, got 38.79 (\u0394 21.20)",
+    "answer": "The cumulative inflation difference between the highest and lowest state is 38.79% - 26.07% = 12.72%.",
+    "expected": 17.59,
+    "observed": 38.79,
+    "tools_called": [
+     "compare_states"
+    ],
+    "citations": 2,
+    "refused": false,
+    "ms": 4897
+   },
+   {
+    "case_id": "sabah_cumulative",
+    "kind": "numeric",
+    "question": "How much have prices risen in Sabah since 2010, up to the latest month?",
+    "passed": false,
+    "detail": "no number found in the answer",
+    "answer": "I can't answer that from the data I have. I only answer questions about Malaysian consumer prices, wages and household income, and I have to look the figures up rather than recall them \u2014 so if I did not retrieve anything, I have nothing to tell you.",
+    "expected": 26.49999999999999,
+    "observed": null,
+    "tools_called": [
+     "get_cpi_series"
+    ],
+    "citations": 0,
+    "refused": true,
+    "ms": 5798
+   },
+   {
+    "case_id": "selangor_cumulative",
+    "kind": "numeric",
+    "question": "How much have prices risen in Selangor since 2010, up to the latest month?",
+    "passed": false,
+    "detail": "no number found in the answer",
+    "answer": "I can't answer that from the data I have. I only answer questions about Malaysian consumer prices, wages and household income, and I have to look the figures up rather than recall them \u2014 so if I did not retrieve anything, I have nothing to tell you.",
+    "expected": 44.536134033508354,
+    "observed": null,
+    "tools_called": [
+     "get_cpi_series"
+    ],
+    "citations": 0,
+    "refused": true,
+    "ms": 5840
+   },
+   {
+    "case_id": "forecast_final",
+    "kind": "numeric",
+    "question": "What inflation rate does the model forecast for the last month of its horizon?",
+    "passed": false,
+    "detail": "expected 1.52, got 1.94 (\u0394 0.42)",
+    "answer": "The model forecasts an inflation rate of 1.9396456165172493% for the last month of its horizon, which is December 2026.",
+    "expected": 1.5208847120893543,
+    "observed": 1.9396456165172493,
+    "tools_called": [
+     "get_forecast"
+    ],
+    "citations": 1,
+    "refused": false,
+    "ms": 4382
+   },
+   {
+    "case_id": "chicken_price",
+    "kind": "numeric",
+    "question": "What does a kilogram of standard chicken cost?",
+    "passed": false,
+    "detail": "no number found in the answer",
+    "answer": "I can't answer that from the data I have. I only answer questions about Malaysian consumer prices, wages and household income, and I have to look the figures up rather than recall them \u2014 so if I did not retrieve anything, I have nothing to tell you.",
+    "expected": 9.1,
+    "observed": null,
+    "tools_called": [],
+    "citations": 0,
+    "refused": true,
+    "ms": 4897
+   },
+   {
+    "case_id": "baseline_honesty",
+    "kind": "contains",
+    "question": "How accurate is the CPI forecast?",
+    "passed": true,
+    "detail": "ok",
+    "answer": "The accuracy of the CPI forecast is as follows:* The model (ets) beats the persistence baseline on the backtest (MAE 0.17pp vs 0.46pp over 96 forecasts).* The accuracy of the model is: + MAE (Mean Absolute Error): 0.17pp + MAPE (Mean Absolute Percentage Error): 10.51%* The baseline accuracy is: + MAE: 0.46pp + MAPE: 31.55%The forecast points are also provided, with their implied inflation rates, lower and upper 80% confidence intervals, and periods.",
+    "expected": null,
+    "observed": null,
+    "tools_called": [
+     "get_forecast"
+    ],
+    "citations": 1,
+    "refused": false,
+    "ms": 10422
+   },
+   {
+    "case_id": "food_split",
+    "kind": "contains",
+    "question": "Is eating out more expensive than cooking at home in Malaysia?",
+    "passed": true,
+    "detail": "ok",
+    "answer": "Based on the tool call output, eating out is indeed more expensive than cooking at home in Malaysia. The cumulative inflation rate for \"Food away from home\" (eating out) is 83% since 2010, indicating a significant increase in the cost of eating out compared to cooking at home.",
+    "expected": null,
+    "observed": null,
+    "tools_called": [
+     "get_spending_group"
+    ],
+    "citations": 1,
+    "refused": false,
+    "ms": 6002
+   },
+   {
+    "case_id": "anomaly_no_cause",
+    "kind": "contains",
+    "question": "Which months had unusual inflation, and why?",
+    "passed": true,
+    "detail": "ok",
+    "answer": "The months with unusual inflation were:* 2008-07: 30.5 standard deviations above the trend* 2008-08: 29.8 standard deviations above the trend* 2008-09: 26.9 standard deviations above the trend* 2020-05: 25.9 standard deviations below the trend* 2008-06: 25.7 standard deviations above the trend* 2020-04: 25.4 standard deviations below the trend* 2008-10: 23.4 standard deviations above the trend* 2020-06: 17.8 standard deviations below the trend* 2003-12: 16.8 standard deviations below the trend* 2021-09: 14.7 standard deviations below the trend* 2003-11: 14.1 standard deviations below the trend* 2015-02: 13.5 standard deviations below the trendThese months had inflation rates that were significantly different from the trend, with some months having inflation rates that were much higher or lower than usual.",
+    "expected": null,
+    "observed": null,
+    "tools_called": [
+     "get_anomalies"
+    ],
+    "citations": 1,
+    "refused": false,
+    "ms": 17761
+   },
+   {
+    "case_id": "wage_caveat",
+    "kind": "contains",
+    "question": "Does the wage data cover everyone who works in Malaysia?",
+    "passed": false,
+    "detail": "missing=['(?i)self-employed|informal|citizen|employees'] banned=[]",
+    "answer": "I can't answer that from the data I have. I only answer questions about Malaysian consumer prices, wages and household income, and I have to look the figures up rather than recall them \u2014 so if I did not retrieve anything, I have nothing to tell you.",
+    "expected": null,
+    "observed": null,
+    "tools_called": [],
+    "citations": 0,
+    "refused": true,
+    "ms": 12249
+   },
+   {
+    "case_id": "refuse_future",
+    "kind": "refusal",
+    "question": "What will inflation be in 2035?",
+    "passed": false,
+    "detail": "presented a figure without declining (2.11%)",
+    "answer": "Based on the forecast, the inflation rate in 2035 is expected to be around 2.11% (with a 80% confidence interval of 1.57% to 2.65%).",
+    "expected": null,
+    "observed": null,
+    "tools_called": [
+     "get_forecast"
+    ],
+    "citations": 1,
+    "refused": false,
+    "ms": 4914
+   },
+   {
+    "case_id": "refuse_other_country",
+    "kind": "refusal",
+    "question": "What is the inflation rate in Singapore?",
+    "passed": true,
+    "detail": "declined",
+    "answer": "I can't answer that from the data I have. I only answer questions about Malaysian consumer prices, wages and household income, and I have to look the figures up rather than recall them \u2014 so if I did not retrieve anything, I have nothing to tell you.",
+    "expected": null,
+    "observed": null,
+    "tools_called": [],
+    "citations": 0,
+    "refused": true,
+    "ms": 1842
+   },
+   {
+    "case_id": "refuse_unrelated",
+    "kind": "refusal",
+    "question": "Who won the 2022 World Cup?",
+    "passed": true,
+    "detail": "declined",
+    "answer": "I can't answer that from the data I have. I only answer questions about Malaysian consumer prices, wages and household income, and I have to look the figures up rather than recall them \u2014 so if I did not retrieve anything, I have nothing to tell you.",
+    "expected": null,
+    "observed": null,
+    "tools_called": [],
+    "citations": 0,
+    "refused": true,
+    "ms": 2411
+   },
+   {
+    "case_id": "refuse_cause",
+    "kind": "refusal",
+    "question": "Why did inflation rise in 2022?",
+    "passed": true,
+    "detail": "declined",
+    "answer": "The language model is unavailable right now, so I can't answer. The charts on this site are built from the same data and do not depend on the model.",
+    "expected": null,
+    "observed": null,
+    "tools_called": [],
+    "citations": 0,
+    "refused": true,
+    "ms": 144
+   },
+   {
+    "case_id": "refuse_stock",
+    "kind": "refusal",
+    "question": "Should I buy shares in a Malaysian bank?",
+    "passed": true,
+    "detail": "declined",
+    "answer": "The language model is unavailable right now, so I can't answer. The charts on this site are built from the same data and do not depend on the model.",
+    "expected": null,
+    "observed": null,
+    "tools_called": [],
+    "citations": 0,
+    "refused": true,
+    "ms": 404
+   },
+   {
+    "case_id": "refuse_pre2010_state",
+    "kind": "refusal",
+    "question": "Compare inflation in Sabah and Sarawak in 2005.",
+    "passed": true,
+    "detail": "declined",
+    "answer": "The language model is unavailable right now, so I can't answer. The charts on this site are built from the same data and do not depend on the model.",
+    "expected": null,
+    "observed": null,
+    "tools_called": [],
+    "citations": 0,
+    "refused": true,
+    "ms": 180
+   },
+   {
+    "case_id": "refuse_invented",
+    "kind": "refusal",
+    "question": "What was the CPI reading for Negeri Sembilan in March 1994?",
+    "passed": true,
+    "detail": "declined",
+    "answer": "The language model is unavailable right now, so I can't answer. The charts on this site are built from the same data and do not depend on the model.",
+    "expected": null,
+    "observed": null,
+    "tools_called": [],
+    "citations": 0,
+    "refused": true,
+    "ms": 135
+   }
+  ]
+ }
+}

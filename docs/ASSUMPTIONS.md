@@ -121,6 +121,35 @@ plausible default and presenting it as official would be the easiest and most mi
 option. The form starts empty, with a one-click even split and a clear explanation of why
 there is no preset.
 
+**A22 — The model is chosen by measurement, not by the catalogue.**
+The Workers AI model list labels models with "Function calling: Yes". Three of the four we
+tried do not honour it against this Worker:
+
+| Model | Function calling advertised | Actually calls tools |
+| --- | --- | --- |
+| `@cf/ibm-granite/granite-4.0-h-micro` | yes | **no** — never emitted a tool call |
+| `@cf/meta/llama-3.2-3b-instruct` | — | **no** |
+| `@cf/meta/llama-3.1-8b-instruct-fp8` | yes | yes |
+| `@cf/meta/llama-3.3-70b-instruct-fp8-fast` | yes | yes |
+| `@cf/qwen/qwen3-30b-a3b-fp8` | yes | yes |
+
+`@hf/nousresearch/hermes-2-pro-mistral-7b`, which the Cloudflare function-calling
+documentation uses as its worked example, is **deprecated** and returns error 5028.
+The default is llama-3.1-8b, chosen because it works and is far cheaper than the 70B.
+
+None of this is visible from the documentation. It is only visible by calling each model and
+checking whether `tool_calls` comes back populated — which the eval harness now does.
+
+**A23 — The agent's data is bundled into the Worker, not served from R2.** See
+[ADR 0005](adr/0005-bundle-data-into-the-worker.md). The supplied R2 credentials are scoped to
+a different project's bucket and cannot create one, and at 123 KB gzipped the bundle is the
+better engineering choice regardless.
+
+**A24 — Rate limiting is best-effort, and documented as such.** The per-IP limiter lives in
+one isolate's memory, so requests routed elsewhere start from zero. It stops a single script
+hammering the endpoint, which is the realistic threat here; it does not stop a distributed one.
+Cloudflare's Rate Limiting binding or a D1 table is the durable upgrade.
+
 ## Open questions deferred to the phase gate
 
 See the Phase 0 report. The material ones: whether to include PriceCatcher, whether the

@@ -7,9 +7,11 @@ A public web app built entirely on Malaysia's open data. All figures come from D
 [open.dosm.gov.my](https://open.dosm.gov.my) and [data.gov.my](https://data.gov.my). Nothing
 is modelled, interpolated, or invented.
 
-> **Status: Phase 3 (frontend) complete.** A seven-page static site is built and passing
-> Lighthouse 99/100/100/100. The Worker and eval harness (Phase 4) and the deploy (Phase 5)
-> are still to come, so there is no live URL yet.
+> **Status: Phase 4 (AI agent) complete.** An eight-page site passing Lighthouse 99/100/100/100,
+> and a deployed Cloudflare Worker answering questions over the same data. Phase 5 (polish,
+> Pages deploy, live URL) remains.
+>
+> Worker: **https://colcheck-api.jerkfish123.workers.dev**
 
 ## Forecast, reported honestly
 
@@ -71,13 +73,24 @@ uv sync --extra dev
 uv run pytest -m "not network"     # 142 offline tests
 uv run pytest -m network           # 18 live upstream contract tests
 uv run colcheck run                # full pipeline -> ../data
-uv run colcheck run --skip-pricecatcher --skip-forecast   # fast iteration
+uv run colcheck bundle             # -> worker/src/generated/data.json
 
-# Site
+# Site  (8 pages, 11 charts)
 cd ../web
 bun install
-bun x astro build                  # static site -> web/dist
-bun x astro preview                # serve it locally
+bun x astro build                  # -> web/dist
+bun x astro preview
+
+# Agent  (deployed at colcheck-api.jerkfish123.workers.dev)
+cd ../worker
+bun install
+bun x vitest run                   # 65 tool and validation tests
+bun x tsc --noEmit
+bun x wrangler deploy
+
+# Evals  (needs the deployed Worker)
+cd ..
+uv run --project evals --with pandas python evals/run.py   --models "@cf/meta/llama-3.1-8b-instruct-fp8,@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 ```
 
 The site reads `data/*.json` at **build time** and never contacts `data.gov.my`. If an
@@ -100,13 +113,66 @@ Seven pages, eleven charts, no runtime data fetching.
 **Lighthouse: performance 99, accessibility 100, best practices 100, SEO 100**, zero failing
 audits. Dark mode, no webfonts, and a page with no charts ships zero JavaScript.
 
+## Ask the data
+
+A small agent at `/ask` answers questions by looking figures up in the same dataset the charts
+use. It has no memory of Malaysian statistics, and the system enforces that rather than
+requesting it: **if the model produces an answer without calling a data tool, the answer is
+discarded and replaced with a refusal.** A remembered number and an invented number are
+indistinguishable, so the design makes the first impossible.
+
+Every tool result carries its own citation — dataset, date range, and the date that data was
+published — so sources do not depend on the model remembering to mention them. The tool calls
+behind each answer are shown on request.
+
+### Eval results
+
+<!-- EVAL-TABLE-START -->
+| Model | numeric (60% required) | refusal (70% required) | behavioural (60% required) | Overall |
+|---|---|---|---|---|
+| `@cf/meta/llama-3.1-8b-instruct-fp8` | ❌ 18% (3/17) | ✅ 86% (6/7) | ✅ 75% (3/4) | 43% (12/28) |
+| `@cf/meta/llama-3.3-70b-instruct-fp8-fast` | ❌ 24% (4/17) | ✅ 100% (7/7) | ❌ 0% (4/4) | 39% (11/28) |
+
+_Run 2026-10-28T17:31:53Z. Full results in `evals/results/latest.json`._
+<!-- EVAL-TABLE-END -->
+
+The harness runs 26 cases: 17 numeric, checked against ground truth **computed in pandas** from
+the artifacts rather than typed by hand, 7 refusal cases, and 4 behavioural checks that the
+agent surfaces caveats and verdicts rather than only getting a number right.
+
+### The agent does not yet meet the bar, and this table is why it exists
+
+**Numeric accuracy is 18%. The threshold is 60%.** That is a real result, not a harness bug,
+and it is the most useful thing in this repository right now — a pass-rate table that only ever
+showed green would be worth nothing.
+
+Of the 14 numeric failures: **8** are answers that retrieved the right data and then quoted the
+wrong figure, most often picking a row from the middle of a ranked list instead of its end.
+**6** are refusals to in-scope questions, three of them without calling any tool at all. The
+retrieval and citation machinery works; the model's use of it does not.
+
+What does work: the food-away-versus-at-home cases match the artifacts exactly to two decimal
+places, refusals reach 86% (100% on the larger model), and the honesty guards hold — the agent
+declines out-of-scope questions rather than inventing answers.
+
+See `docs/KNOWN-GAPS.md` G24.
+
+### A finding worth recording
+
+The Workers AI catalogue labels models with "Function calling: Yes". Three of the four we
+tried do not honour it: **granite-4.0-h-micro never emitted a single tool call**, and
+`hermes-2-pro-mistral-7b`, the model Cloudflare's own function-calling documentation uses as
+its worked example, is **deprecated**. None of this is visible from the docs. It is visible by
+calling each model and checking whether `tool_calls` comes back populated, which is now what
+the eval harness does. See `docs/ASSUMPTIONS.md` A22.
+
 ## Repository layout
 
 ```
 pipeline/   Python data pipeline: fetch -> validate -> transform -> artifacts
 web/        Astro static site — reads only the committed artifacts, at build time
-worker/     Cloudflare Worker — /api/ask agent loop                    [Phase 4]
-evals/      Agent evaluation harness                                   [Phase 4]
+worker/     Cloudflare Worker — /api/ask agent loop (deployed)
+evals/      Agent evaluation harness
 docs/       Documentation (below)
 data/       Versioned static data artifacts
 ```

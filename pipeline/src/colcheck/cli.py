@@ -89,15 +89,39 @@ def build_parser() -> argparse.ArgumentParser:
         help="rolling-origin backtest folds per model",
     )
     run.add_argument("-v", "--verbose", action="store_true")
+
+    bundle = sub.add_parser(
+        "bundle",
+        help="build the compact data bundle the Worker carries (run after `run`)",
+    )
+    bundle.add_argument("--data-dir", type=Path, default=_default("data"))
+    bundle.add_argument(
+        "--out",
+        type=Path,
+        default=_default("worker/src/generated/data.json"),
+        help="where to write the bundle",
+    )
     return p
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     logging.basicConfig(
-        level=logging.DEBUG if args.verbose else logging.INFO,
+        level=logging.DEBUG if getattr(args, "verbose", False) else logging.INFO,
         format="%(levelname)-7s %(name)s: %(message)s",
     )
+
+    if args.command == "bundle":
+        from .bundle import write_bundle
+
+        size, dropped = write_bundle(args.data_dir, args.out)
+        log.info(
+            "Wrote %s (%.0f KB, %d trim note(s))",
+            args.out,
+            size / 1024,
+            dropped,
+        )
+        return 0
 
     if args.command != "run":
         return 2
