@@ -5,6 +5,16 @@ the project aims at [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added — Phase 5 (deployment)
+- **The site is live**: <https://colcheck-api.jerkfish123.workers.dev>, served from the Worker
+  as Workers Static Assets. All eight pages, `/health` and `/api/coverage` return 200.
+- Cloudflare Pages was abandoned for a credential reason, not a code one: the supplied token
+  has `Workers: Edit` but no `Pages: Edit`, and every Pages endpoint returns 403. The `cfat_`
+  token in `.env` fails verification everywhere and is not usable. See ADR 0006.
+- `wrangler.jsonc` now points at `../web/dist`, so `bun x wrangler deploy` publishes the site
+  and the API together. Wrangler moved to 4.x — 3.x ignored the `assets` field.
+- `/api/ask` remains blocked by Workers AI error 4006; recorded in `docs/KNOWN-GAPS.md` G14e.
+
 ### Added — Phase 4 (AI agent)
 - Cloudflare Worker at `/api/ask` implementing a bounded agent loop over seven typed tools,
   deployed at https://colcheck-api.jerkfish123.workers.dev
@@ -17,18 +27,22 @@ the project aims at [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   not depend on the model remembering to mention them
 - `uv run colcheck bundle` produces a 415 KB (123 KB gzipped) trimmed data bundle compiled
   into the Worker; every trim is recorded in the bundle's own `dropped_for_size`
-- Eval harness (`evals/`) with 26 cases: 17 numeric checked against ground truth computed in
-  pandas, 7 refusal, and 5 behavioural. Compares models from one command
+- Eval harness (`evals/`) with 28 cases: 17 numeric checked against ground truth computed in
+  pandas, 7 refusal, and 4 behavioural. Compares models from one command
 - Model allowlist, per-IP rate limiting, 500-character input cap, and a six-call tool budget
 - "Ask the data" page on the site, rendering answers with their Sources, refusals as a
   distinct state rather than an error, and the tool calls behind each answer
 
 ### Eval outcome
 - **Numeric accuracy 18%, against a 60% threshold.** The agent is not good enough yet, and the
-  README and `docs/KNOWN-GAPS.md` G24 say so with the breakdown. Refusals reach 86% (100% on
-  the larger model) and the food-split cases match the artifacts exactly.
-- Two models compared: llama-3.1-8b (cheap, 43% overall) and llama-3.3-70b (17x the cost,
-  39% overall, but 100% on refusals).
+  README and `docs/KNOWN-GAPS.md` G24 say so with the breakdown. The food-split cases match the
+  artifacts exactly.
+- **The first published numbers were contaminated and are corrected.** Four refusal cases hit
+  the daily Workers AI quota; the Worker returned `refused: true` and the scorer counted each
+  as a successful refusal, reporting 86% where the scorable result is 2/3. The run is invalid
+  (4 of 28 cases errored) and is published as invalid rather than deleted.
+- The earlier llama-3.3-70b comparison is withdrawn: its result file was overwritten before
+  commit, so no artifact backs those numbers.
 
 ### Fixed — Phase 4
 - **A `from` date past the end of the series returned the entire series.** `findIndex` returns
@@ -43,6 +57,10 @@ the project aims at [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   the first prompt change.
 - The eval harness scored prose refusals as fabrications, because a bare year in "I cannot
   provide the reading for March 1994" counted as an invented number.
+- **A model error scored as a successful refusal.** Workers AI error 4006 arrives through the
+  same `refused: true` path as a genuine decline, so a quota crash looked like good behaviour.
+  Errors are now unscored, reported as a separate count, and make the run exit non-zero when
+  they exceed 10% of cases.
 - Cloudflare returns 403/1010 for Python's default user agent, which broke every eval request
   before it reached the Worker.
 - **`mode: "cumulative"` rebased to the start of the window, not the base year.** The window
@@ -60,6 +78,14 @@ the project aims at [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Two genuine capability gaps closed: there was no tool exposing the national wage and
   household-income series, and none exposing the 3-digit spending groups — which is what
   "eating out versus groceries" needs.
+- **`.github/workflows/` was listed in `.gitignore`**, so the new `agent.yml` could never have
+  been committed. Removed the rule.
+- **The `web` workflow failed at the Lighthouse gate while the Lighthouse step itself passed.**
+  The old gate ran one unpinned Lighthouse (resolving to 13.6.0 in CI, not the 12 used
+  locally) and surfaced a threshold failure as a bare exit code. It now pins the version, runs
+  three times and takes the median — a single score on a shared runner is noisy enough to fail
+  on the runner rather than the site — prints every run's score into the step summary, and
+  uploads the reports even on failure.
 
 ### Added — Phase 3 (frontend)
 - Astro static site in `web/`, reading only the committed `data/` artifacts at build time.

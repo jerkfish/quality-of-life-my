@@ -75,6 +75,8 @@ export interface AgentAnswer {
   citations: Citation[];
   refused: boolean;
   refusal_reason?: string;
+  /** Short, non-sensitive diagnostic string when the model call itself failed. */
+  error_detail?: string;
   model: string;
   prompt_version: string;
   steps: TraceStep[];
@@ -147,13 +149,24 @@ export async function runAgent({ env, question, modelOverride, maxIterations }: 
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       steps.push({ type: "model_error", error: message });
+      // Log it, and surface a short machine-readable code. A generic "unavailable" makes a
+      // quota exhaustion, a removed model and a malformed request look identical, which cost
+      // real debugging time more than once.
+      console.error(JSON.stringify({ event: "model_error", model, error: message }));
+      const hint = /quota|neuron|limit|429|capacity/i.test(message)
+        ? "The free daily model allowance may be exhausted; it resets at 00:00 UTC."
+        : /no such model|not found|deprecated|removed/i.test(message)
+          ? "The configured model is not available on this account."
+          : "This is a server-side model error, not a problem with your question.";
       return {
         answer:
-          "The language model is unavailable right now, so I can't answer. The charts on this " +
-          "site are built from the same data and do not depend on the model.",
+          "The language model is unavailable right now, so I can't answer. " +
+          hint +
+          " The charts on this site are built from the same data and do not depend on the model.",
         citations: [],
         refused: true,
         refusal_reason: `model error: ${message}`,
+        error_detail: message.slice(0, 300),
         model,
         prompt_version: PROMPT_VERSION,
         steps,

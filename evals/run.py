@@ -64,6 +64,10 @@ class CaseResult:
     citations: int = 0
     refused: bool | None = None
     ms: int = 0
+    # True when the model call itself failed. Such a case carries no evidence about the
+    # agent's behaviour, so it is excluded from the pass rate rather than counted as a
+    # failure — but it is always reported, so a run full of errors cannot pass silently.
+    errored: bool = False
 
 
 # ------------------------------------------------------------------------ transport
@@ -124,6 +128,20 @@ def looks_like_refusal(text: str) -> bool:
     return any(re.search(p, lowered) for p in patterns)
 
 
+# The Worker's model-error path returns this sentence. Early result files predate the
+# `error_detail` field, so re-scoring them has to recognise the message itself.
+MODEL_ERROR_MARKERS = ("language model is unavailable",)
+
+
+def is_model_error(response: dict) -> bool:
+    if response.get("error_detail") or response.get("transport_error"):
+        return True
+    if any(step.get("type") == "model_error" for step in response.get("trace", [])):
+        return True
+    answer = (response.get("answer") or "").lower()
+    return any(marker in answer for marker in MODEL_ERROR_MARKERS)
+
+
 def score(case: Case, response: dict, elapsed_ms: int) -> CaseResult:
     answer = response.get("answer", "") or ""
     refused = bool(response.get("refused"))
@@ -142,6 +160,19 @@ def score(case: Case, response: dict, elapsed_ms: int) -> CaseResult:
         refused=refused,
         ms=elapsed_ms,
     )
+
+    # A model error is NOT a refusal, and must never score as one.
+    #
+    # This cost real accuracy in the reported numbers: when the daily neuron allowance ran
+    # out, the Worker returned `refused: true` with "the language model is unavailable", and
+    # the scorer counted four of those as successful refusals. The refusal rate read 86% when
+    # two of seven were genuine. An evaluation that rewards a crashed model is worse than no
+    # evaluation, because it looks like good news.
+    if is_model_error(response):
+        reason = response.get("error_detail") or "quota or model failure"
+        base.detail = f"MODEL ERROR (case not scored): {reason}"
+        base.errored = True
+        return base
 
     if not answer.strip():
         base.detail = "empty answer"
@@ -244,22 +275,33 @@ def run_model(worker: str, cases: list[Case], model: str | None, pause: float) -
 
 
 def summarise(results: list[CaseResult]) -> dict[str, dict[str, float | int]]:
+    """Pass rates over *scored* cases, with errored cases reported separately.
+
+    Errored cases are removed from the denominator. Including them as failures would
+    understate the agent; including them as passes (the original bug) overstates it. Neither
+    is a measurement, so they are counted on their own and `main` refuses the run outright
+    when too many of them occur.
+    """
     out: dict[str, dict[str, float | int]] = {}
     for kind in ("numeric", "refusal", "contains"):
         subset = [r for r in results if r.kind == kind]
         if not subset:
             continue
-        passed = sum(1 for r in subset if r.passed)
+        scored = [r for r in subset if not r.errored]
+        passed = sum(1 for r in scored if r.passed)
         out[kind] = {
             "passed": passed,
-            "total": len(subset),
-            "rate": passed / len(subset),
+            "total": len(scored),
+            "rate": passed / len(scored) if scored else 0.0,
+            "errored": len(subset) - len(scored),
         }
-    total_passed = sum(1 for r in results if r.passed)
+    scored_all = [r for r in results if not r.errored]
+    total_passed = sum(1 for r in scored_all if r.passed)
     out["overall"] = {
         "passed": total_passed,
-        "total": len(results),
-        "rate": total_passed / len(results) if results else 0.0,
+        "total": len(scored_all),
+        "rate": total_passed / len(scored_all) if scored_all else 0.0,
+        "errored": len(results) - len(scored_all),
     }
     return out
 
@@ -280,10 +322,81 @@ def markdown_table(models: dict[str, dict[str, dict[str, float | int]]]) -> str:
                 cells.append("—")
                 continue
             rate = float(entry["rate"])
-            mark = "✅" if kind not in THRESHOLDS or rate >= THRESHOLDS[kind] else "❌"
-            cells.append(f"{mark} {rate * 100:.0f}% ({entry['passed']}/{entry['total']})")
+            # No mark on the overall row: it has no threshold, and a green tick beside a
+            # failing breakdown reads as a pass when nothing has passed.
+            mark = "" if kind not in THRESHOLDS else ("✅" if rate >= THRESHOLDS[kind] else "❌")
+            cell = f"{mark} {rate * 100:.0f}% ({entry['passed']}/{entry['total']})"
+            if entry.get("errored"):
+                cell += f" +{entry['errored']} err"
+            cells.append(cell)
         lines.append(f"| `{model}` | " + " | ".join(cells) + " |")
     return "\n".join(lines)
+
+
+def rescore(path: Path, out: Path, cases: list[Case], ground_truth: dict) -> int:
+    """Re-derive summaries from a stored result file, without calling the Worker.
+
+    This exists because the first published numbers were wrong in a way that lived entirely in
+    the scorer: four quota failures had been recorded as passes. Re-scoring the saved answers
+    makes the correction reproducible from the committed artifact instead of asking you to
+    trust a second live run. The original summaries and per-case verdicts are preserved under
+    `prior_*`, so the evidence of the bug is not overwritten by its correction.
+    """
+    previous = json.loads(path.read_text(encoding="utf-8"))
+    by_id = {c.id: c for c in cases}
+    all_results: dict[str, list[CaseResult]] = {}
+    summaries: dict[str, dict[str, dict[str, float | int]]] = {}
+
+    for label, entries in previous.get("results", {}).items():
+        results: list[CaseResult] = []
+        for entry in entries:
+            case = by_id.get(entry["case_id"])
+            if case is None:
+                print(f"  ! {entry['case_id']} is not in the current case set; skipped")
+                continue
+            response = {
+                "answer": entry.get("answer") or "",
+                "refused": entry.get("refused"),
+                "citations": [{}] * int(entry.get("citations") or 0),
+                "trace": [],
+                # Old files recorded transport failures only in `detail`.
+                "transport_error": str(entry.get("detail", "")).startswith(
+                    ("HTTP ", "URLError", "TimeoutError", "ConnectionError")
+                ),
+            }
+            results.append(score(case, response, int(entry.get("ms") or 0)))
+        all_results[label] = results
+        summaries[label] = summarise(results)
+
+    table = markdown_table(summaries)
+    print(table)
+
+    payload = {
+        "worker": previous.get("worker"),
+        "generated_at": previous.get("generated_at"),
+        "rescored_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "rescored_from": str(path),
+        "ground_truth": previous.get("ground_truth", ground_truth),
+        "summaries": summaries,
+        # Idempotent: re-scoring an already-rescored file must not overwrite the original
+        # evidence with the corrected numbers.
+        "prior_summaries": previous.get("prior_summaries") or previous.get("summaries"),
+        "results": {label: [asdict(r) for r in rs] for label, rs in all_results.items()},
+        "prior_results": previous.get("prior_results") or previous.get("results"),
+    }
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(payload, indent=1), encoding="utf-8")
+    print(f"Wrote {out} (original summaries kept under `prior_summaries`)")
+
+    errored = sum(1 for rs in all_results.values() for r in rs if r.errored)
+    total = sum(len(rs) for rs in all_results.values())
+    if total and errored / total > 0.10:
+        print(
+            f"\n::error::Run INVALID — {errored}/{total} cases could not be scored. These rates"
+            " measure the model quota, not the agent."
+        )
+        return 3
+    return 0
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -303,6 +416,11 @@ def main(argv: list[str] | None = None) -> int:
         help="Seconds between requests. The endpoint allows 8 per minute; be a good citizen.",
     )
     parser.add_argument("--case", default="", help="Run only cases whose id contains this.")
+    parser.add_argument(
+        "--rescore",
+        action="store_true",
+        help="Re-score an existing --out file with the current scorer instead of calling the Worker.",
+    )
     args = parser.parse_args(argv)
 
     if not (args.data_dir / "cpi_national.json").exists():
@@ -316,6 +434,12 @@ def main(argv: list[str] | None = None) -> int:
     if not cases:
         print("No cases selected.")
         return 2
+
+    if args.rescore:
+        if not args.out.exists():
+            print(f"--rescore needs an existing results file; {args.out} does not exist.")
+            return 2
+        return rescore(args.out, args.out, cases, ground_truth)
 
     models: list[str | None] = [m.strip() for m in args.models.split(",") if m.strip()] or [None]
 
@@ -358,6 +482,34 @@ def main(argv: list[str] | None = None) -> int:
         encoding="utf-8",
     )
     print(f"Wrote {args.out}")
+
+    # An eval run that is mostly errors is not a verdict on the agent. The June run that
+    # produced the published numbers had four quota failures scored as passes; this guard
+    # exists so that cannot happen again quietly.
+    contaminated = [
+        (
+            label,
+            int(summary["overall"].get("errored", 0)),
+            int(summary["overall"].get("total", 0)) + int(summary["overall"].get("errored", 0)),
+        )
+        for label, summary in summaries.items()
+        if int(summary["overall"].get("errored", 0)) > 0
+    ]
+    if contaminated:
+        print("\nModel errors (excluded from pass rates):")
+        for label, errored, total in contaminated:
+            print(f"  {label}: {errored}/{total} cases could not be scored")
+        invalid = [
+            (label, errored, total)
+            for label, errored, total in contaminated
+            if total and errored / total > 0.10
+        ]
+        if invalid:
+            print(
+                "\n::error::Run INVALID — more than 10% of cases hit a model error. The rates"
+                " above measure the model quota, not the agent. Re-run after 00:00 UTC."
+            )
+            return 3
 
     failed = [
         (label, kind, float(entry["rate"]))

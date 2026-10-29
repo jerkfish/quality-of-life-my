@@ -61,6 +61,13 @@ do not search for a period that makes it look bigger.
 No paid LLM API. The agent must run on a Workers AI model that supports tool/function calling
 or structured JSON output — to be confirmed in Phase 4 against the current catalogue, not assumed.
 
+The measured consequence, recorded rather than glossed: Workers AI allows 10,000 Neurons per
+day, resetting at 00:00 UTC. That is enough to serve a low-traffic demo, but a full 28-case
+multi-model eval consumes most or all of the same daily pool, so the eval can exhaust the
+quota the live endpoint depends on. This is what contaminated the first published eval run
+(see G24) and it is not fixable within the $0 constraint — only manageable by batching evals
+or moving to the Workers Paid plan.
+
 **A12 — The frontend never calls `api.data.gov.my`.** All upstream access happens in the
 scheduled GitHub Action, which writes versioned artifacts. This is a hard constraint from the
 brief and it also happens to be required by the 4 req/min limit.

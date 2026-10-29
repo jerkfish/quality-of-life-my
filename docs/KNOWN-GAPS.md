@@ -102,10 +102,14 @@ the bundle's own `dropped_for_size`.
 Per-IP counters are in-isolate memory. A request routed to a different isolate starts from
 zero. Adequate against a single script; not adequate against a distributed one.
 
-**G21 — The eval harness needs a deployed Worker.**
-It tests the running system, not the code. There is no offline mode, so evals cannot run in a
-PR check without deploying first. A useful middle ground would be a mode that exercises the
-tool layer directly, which `worker/tests/tools.test.ts` partly covers already.
+**G21 — The eval harness needs a deployed Worker, and it does not fit the free tier.**
+It tests the running system, not the code, so evals cannot run in a PR check without deploying
+first. Worse, a full 28-case multi-model run costs more Neurons than the account gets in a day
+(10,000), so the run exhausts its own allowance partway through — which is exactly what
+contaminated the published numbers. A clean measurement needs either a Workers Paid plan, or
+batching the cases across several days, or a much cheaper model. A useful middle ground would
+be an offline mode that exercises the tool layer directly, which `worker/tests/tools.test.ts`
+partly covers already.
 
 **G22 — No streaming.**
 Answers arrive in one piece. On a free-tier model with six tool calls that can be a visible
@@ -140,9 +144,18 @@ CI verifies every chart island received non-empty props, but "props present" is 
 rendered". Two charts were silently failing during development and only a manual headless-Chrome
 DOM inspection caught them. A browser-based smoke test belongs in CI.
 
-**G14e — Not deployed.**
-The Cloudflare Pages project does not exist yet, so there is no live URL. Everything is
-verified against a local preview build.
+**G14e — The site is live, but the ask endpoint is blocked by a Workers AI quota fault.**
+The site is served from the Worker as static assets (ADR 0006) at
+`https://colcheck-api.jerkfish123.workers.dev`: `/`, `/ask/`, all eight pages, `/health` and
+`/api/coverage` return 200. No Cloudflare Pages project exists because the supplied token has
+no Pages:Edit permission (HTTP 403 on every Pages endpoint), which is why ADR 0006 exists.
+
+`/api/ask` returns Workers AI error **4006** — the daily 10,000-neuron allocation. The error
+persisted more than 15 hours after the documented 00:00 UTC reset, with no other Worker on the
+account making AI calls. Cloudflare's community forum has several open reports of this exact
+state (4006 while the dashboard shows 0/10,000 neurons used), so it appears to be
+platform-side rather than a bug here. Until it clears, the agent cannot be demonstrated live
+and a clean eval run cannot be produced.
 
 **G15 — PriceCatcher raw is ~130 MB of downloads per full CI run.**
 Reduced to a 4.5 MB aggregate, but the scheduled job is not fast.
@@ -150,6 +163,14 @@ Reduced to a 4.5 MB aggregate, but the scheduled job is not fast.
 **G24 — The agent's numeric accuracy is 18%, against a 60% threshold.**
 The largest open gap in the project. The harness measures it honestly and the README shows it.
 Diagnosed causes, largest first:
+
+0. **The published refusal rate was inflated by a scorer bug, since fixed.** Four of the seven
+   refusal cases hit the Workers AI daily quota; the Worker correctly returned `refused: true`
+   with a model-unavailable message, and the scorer counted each as a successful refusal. The
+   reported 86% was really 2/3 on scorable cases, and the run itself is invalid (4/28 errored).
+   `evals/run.py` now refuses to score a model error and exits non-zero when more than 10% of
+   cases error. The lesson generalises: a metric that treats an infrastructure failure as a
+   passing behaviour will always look best when the system is least healthy.
 
 1. **The model picks the wrong row from a ranked list.** Eight of fourteen numeric failures
    called the right tool, received a correctly ordered ranking, and quoted a value from the
@@ -161,9 +182,11 @@ Diagnosed causes, largest first:
    tightening the scope rule to stop out-of-scope answers produced over-refusal on a small
    model. There is a genuine tension between refusing too much and too little, and it needs
    few-shot examples on both sides rather than more imperative rules.
-3. **Small-model tool discipline.** llama-3.1-8b calls tools inconsistently. The 70B scores
-   100% on refusals but costs roughly 17x more per token against a 10,000-neuron daily
-   allowance — the trade-off the eval table exists to expose rather than hide.
+3. **Small-model tool discipline.** llama-3.1-8b calls tools inconsistently. A larger model
+   behaved differently in an earlier comparison, but that run's artifact was lost and is no
+   longer published. Larger models also cost roughly 17x more per token: the 70B is 26,668
+   neurons per million input tokens versus 13,778 for the 8B, against a 10,000-neuron daily
+   allowance for the whole account.
 
 **G25 — Some eval questions were ambiguous, and that cost measured accuracy.**
 "Food and beverage prices" can mean COICOP division 01 or 3-digit groups 001/011, and the model

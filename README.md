@@ -7,11 +7,16 @@ A public web app built entirely on Malaysia's open data. All figures come from D
 [open.dosm.gov.my](https://open.dosm.gov.my) and [data.gov.my](https://data.gov.my). Nothing
 is modelled, interpolated, or invented.
 
-> **Status: Phase 4 (AI agent) complete.** An eight-page site passing Lighthouse 99/100/100/100,
-> and a deployed Cloudflare Worker answering questions over the same data. Phase 5 (polish,
-> Pages deploy, live URL) remains.
+> **Status: deployed.** An eight-page site passing Lighthouse 99/100/100/100, and a Cloudflare
+> Worker answering questions over the same data. The site is served by that Worker as static
+> assets — see [ADR 0006](docs/adr/0006-serve-the-site-from-the-worker.md) for why Pages was
+> not used.
 >
-> Worker: **https://colcheck-api.jerkfish123.workers.dev**
+> Live site and API: **https://colcheck-api.jerkfish123.workers.dev**
+>
+> The agent's `/api/ask` endpoint is currently blocked by Workers AI error 4006 (the daily
+> free allocation, stuck past its documented reset). The site, charts, calculator and
+> `/api/coverage` are unaffected. See `docs/KNOWN-GAPS.md` G14e.
 
 ## Forecast, reported honestly
 
@@ -81,12 +86,13 @@ bun install
 bun x astro build                  # -> web/dist
 bun x astro preview
 
-# Agent  (deployed at colcheck-api.jerkfish123.workers.dev)
+# Agent + site  (deployed at colcheck-api.jerkfish123.workers.dev)
+# The `astro build` above produced ../web/dist; `wrangler deploy` uploads it with the Worker.
 cd ../worker
 bun install
 bun x vitest run                   # 65 tool and validation tests
 bun x tsc --noEmit
-bun x wrangler deploy
+bun x wrangler deploy              # publishes the API and the static site together
 
 # Evals  (needs the deployed Worker)
 cd ..
@@ -98,7 +104,7 @@ artifact is missing the build fails, rather than rendering a chart that quietly 
 
 ## The site
 
-Seven pages, eleven charts, no runtime data fetching.
+Eight pages, eleven charts, no runtime data fetching.
 
 | Page | What it shows |
 | --- | --- |
@@ -128,23 +134,44 @@ behind each answer are shown on request.
 ### Eval results
 
 <!-- EVAL-TABLE-START -->
-| Model | numeric (60% required) | refusal (70% required) | behavioural (60% required) | Overall |
-|---|---|---|---|---|
-| `@cf/meta/llama-3.1-8b-instruct-fp8` | ❌ 18% (3/17) | ✅ 86% (6/7) | ✅ 75% (3/4) | 43% (12/28) |
-| `@cf/meta/llama-3.3-70b-instruct-fp8-fast` | ❌ 24% (4/17) | ✅ 100% (7/7) | ❌ 0% (4/4) | 39% (11/28) |
+| Model | numeric (60% required) | refusal (70% required) | behavioural (60% required) | Overall | Errored |
+|---|---|---|---|---|---|
+| `@cf/meta/llama-3.1-8b-instruct-fp8` | ❌ 18% (3/17) | ❌ 67% (2/3) | ✅ 75% (3/4) | 33% (8/24) | 4/28 |
 
-_Run 2026-10-28T17:31:53Z. Full results in `evals/results/latest.json`._
+_Run 2026-10-28T17:31:53Z; re-scored from the saved answers on 2026-10-29. Full results in
+`evals/results/latest.json`, which keeps the original verdicts under `prior_summaries`.
+**This run is invalid** — see below. `uv run --with pandas python evals/run.py --rescore`
+reproduces the correction without calling the Worker._
 <!-- EVAL-TABLE-END -->
 
-The harness runs 26 cases: 17 numeric, checked against ground truth **computed in pandas** from
+The harness runs 28 cases: 17 numeric, checked against ground truth **computed in pandas** from
 the artifacts rather than typed by hand, 7 refusal cases, and 4 behavioural checks that the
 agent surfaces caveats and verdicts rather than only getting a number right.
+
+#### This table was wrong, and correcting it is part of the story
+
+The first version of this table said **86% on refusals**. It was not true. The account's daily
+Workers AI allowance ran out partway through the run; the Worker returned `refused: true` with
+"The language model is unavailable right now", and the scorer counted that as a successful
+refusal. Four of the seven refusal cases were quota crashes. The genuine score on the cases
+that could be scored is **2/3**.
+
+The scorer now treats a model error as an unscored case rather than a pass, and refuses the
+run outright when more than 10% of cases error. The published row is kept because deleting an
+inconvenient result would be the same dishonesty in the other direction; it is labelled invalid
+because it is.
+
+An earlier two-model comparison (llama-3.3-70b) is **not shown here**: its result file was
+overwritten before commit, so there is no artifact behind the numbers. A number without stored
+evidence does not belong in a table that claims to be reproducible.
 
 ### The agent does not yet meet the bar, and this table is why it exists
 
 **Numeric accuracy is 18%. The threshold is 60%.** That is a real result, not a harness bug,
 and it is the most useful thing in this repository right now — a pass-rate table that only ever
-showed green would be worth nothing.
+showed green would be worth nothing. None of the 17 numeric cases hit the quota error, so the
+numeric figure is a measurement; the run as a whole is still marked invalid because 4 of 28
+cases errored.
 
 Of the 14 numeric failures: **8** are answers that retrieved the right data and then quoted the
 wrong figure, most often picking a row from the middle of a ranked list instead of its end.
@@ -152,8 +179,10 @@ wrong figure, most often picking a row from the middle of a ranked list instead 
 retrieval and citation machinery works; the model's use of it does not.
 
 What does work: the food-away-versus-at-home cases match the artifacts exactly to two decimal
-places, refusals reach 86% (100% on the larger model), and the honesty guards hold — the agent
-declines out-of-scope questions rather than inventing answers.
+places, every answer that gave a figure carried citations back to a tool result, and when the
+agent declined it never invented a number to fill the gap. What does not: refusal discipline
+is 2 of 3 scorable cases, and one out-of-scope case (`refuse_future`) answered a question about
+a period the data cannot cover with a confident-looking figure.
 
 See `docs/KNOWN-GAPS.md` G24.
 

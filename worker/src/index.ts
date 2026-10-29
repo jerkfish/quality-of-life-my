@@ -186,6 +186,7 @@ export default {
           answer: result.answer,
           citations: result.citations,
           refused: result.refused,
+          ...(result.error_detail ? { error_detail: result.error_detail } : {}),
           model: result.model,
           prompt_version: result.prompt_version,
           // The trace is returned so a reader can see exactly which lookups produced the

@@ -67,39 +67,129 @@ jobs:
           done
           exit $fail
 
-      # Performance and accessibility gates. The brief asks for Lighthouse >= 90; we hold
-      # the same bar in CI so a regression cannot merge quietly.
-      - name: Lighthouse
+      # Performance and accessibility gates. The brief asks for Lighthouse >= 90; we hold the
+      # same bar in CI so a regression cannot merge quietly.
+      - name: Lighthouse (three runs)
         working-directory: web
         run: |
-          bun x astro preview --port 4321 &
-          sleep 5
-          bun x lighthouse http://localhost:4321/ \
-            --quiet --chrome-flags="--headless=new --no-sandbox" \
-            --output=json --output-path=./lighthouse.json \
-            --only-categories=performance,accessibility,best-practices,seo
+          set -euo pipefail
+          bun x astro preview --port 4321 > preview.log 2>&1 &
+          PREVIEW_PID=$!
+          echo "preview pid $PREVIEW_PID"
+
+          # Wait for the server to actually answer, rather than guessing with `sleep`.
+          #
+          # The first version slept 5 seconds and then ran Lighthouse. On a cold runner that
+          # is not always enough, Lighthouse could not connect, wrote no report, and the next
+          # step died on a missing file — which surfaced only as "Process completed with exit
+          # code 1" with no useful message. Poll until it is up, then give up loudly.
+          for i in $(seq 1 60); do
+            if curl -sf -o /dev/null --max-time 2 http://localhost:4321/; then
+              echo "server ready after ${i}s"
+              break
+            fi
+            if [ "$i" -eq 60 ]; then
+              echo "::error::astro preview did not become ready within 60s"
+              cat preview.log
+              exit 1
+            fi
+            sleep 1
+          done
+
+          # Three runs, median taken.
+          #
+          # A single Lighthouse performance score on a shared CI runner is noisy enough to
+          # swing by several points. A gate that fails on one unlucky sample reports the
+          # runner's mood, not the site's quality. Three runs still fail on a real regression
+          # (all three would drop) while ignoring a single slow moment.
+          #
+          # The version is pinned exactly: an unpinned `bun x lighthouse` changes scoring
+          # behaviour between runs and makes a threshold failure impossible to reproduce.
+          ok=0
+          for run in 1 2 3; do
+            if bun x lighthouse@13.6.0 http://localhost:4321/ \
+              --quiet \
+              --chrome-flags="--headless=new --no-sandbox --disable-dev-shm-usage" \
+              --output=json --output-path="./lhr-run-${run}.json" \
+              --only-categories=performance,accessibility,best-practices,seo; then
+              ok=$((ok + 1))
+            else
+              echo "::warning::Lighthouse run ${run} failed"
+            fi
+          done
+
+          kill "$PREVIEW_PID" 2>/dev/null || true
+
+          if [ "$ok" -lt 2 ]; then
+            echo "::error::only ${ok}/3 Lighthouse runs produced a report"
+            cat preview.log
+            exit 1
+          fi
+          ls -l lhr-run-*.json
 
       - name: Enforce Lighthouse thresholds
         working-directory: web
         run: |
           python3 - <<'PY'
-          import json, sys
-          scores = json.load(open("lighthouse.json"))["categories"]
+          import glob, json, statistics, sys
+
+          paths = sorted(glob.glob("lhr-run-*.json"))
+          if len(paths) < 2:
+              # Explicit, because the previous version surfaced this as a bare exit code 1.
+              print(f"::error::expected at least 2 Lighthouse reports, found {len(paths)}")
+              sys.exit(1)
+
+          reports = [json.load(open(p, encoding="utf-8")) for p in paths]
           thresholds = {"performance": 90, "accessibility": 95, "best-practices": 90, "seo": 90}
+
+          rows = ["| category | median | runs | required |", "|---|---|---|---|"]
           failed = False
-          print("| category | score | required |")
-          print("|---|---|---|")
           for name, floor in thresholds.items():
-              got = round(scores[name]["score"] * 100)
+              values = []
+              for report in reports:
+                  score = report["categories"][name]["score"]
+                  if score is not None:
+                      values.append(round(score * 100))
+              if not values:
+                  rows.append(f"| {name} | — | — | {floor} | **FAIL** (no score) |")
+                  failed = True
+                  continue
+              got = int(statistics.median(values))
               ok = got >= floor
-              failed |= not ok
-              print(f"| {name} | {got} | {floor} |{' FAIL' if not ok else ''}")
-          with open("lighthouse.md", "w") as fh:
-              fh.write("### Lighthouse\n\n")
+              failed = failed or not ok
+              runs = ", ".join(str(v) for v in values)
+              rows.append(f"| {name} | {got} | {runs} | {floor} |{' **FAIL**' if not ok else ''} |")
+
+          table = "\n".join(rows)
+          print(table)
+          with open("lighthouse.md", "w", encoding="utf-8") as fh:
+              fh.write(table + "\n")
+
+          # The step summary is the only place a failure like this is readable without
+          # admin access to the job log.
+          with open("lighthouse_summary.txt", "w", encoding="utf-8") as fh:
+              fh.write(table)
+              fh.write("\n\n" + ("**One or more categories are below the required score.**"
+                                 if failed else "All categories pass (median of three runs)."))
+
           sys.exit(1 if failed else 0)
           PY
 
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: |
+            web/lhr-run-*.json
+            web/lighthouse.md
+            web/lighthouse_summary.txt
+            web/preview.log
+          retention-days: 14
+          if-no-files-found: warn
+
       - name: Upload build
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: web-dist
@@ -111,6 +201,11 @@ jobs:
         run: |
           echo "### Web build" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          if [ -f web/lighthouse.md ]; then cat web/lighthouse.md >> "$GITHUB_STEP_SUMMARY"; fi
+          if [ -f web/lighthouse_summary.txt ]; then
+            cat web/lighthouse_summary.txt >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "_Lighthouse did not produce a summary — see the uploaded report artifact._" \
+              >> "$GITHUB_STEP_SUMMARY"
+          fi
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          du -sh web/dist >> "$GITHUB_STEP_SUMMARY"
+          du -sh web/dist 2>/dev/null >> "$GITHUB_STEP_SUMMARY" || true

@@ -4,6 +4,21 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-10-01",
 
+  // The built static site, served from this same Worker.
+  //
+  // Cloudflare Pages was the original plan, but the available API token has no Pages:Edit
+  // permission — every Pages endpoint returns 403 — so a Pages deploy is impossible without
+  // a new credential. Workers Static Assets needs only Workers:Edit, which the token has, and
+  // it puts the site and the API on one origin, removing CORS as a failure mode.
+  //
+  // Assets are matched before the Worker script runs; anything that is not a file (`/health`,
+  // `/api/*`) falls through to src/index.ts. Build the site with `cd web && bun run build`
+  // before deploying, because Wrangler uploads whatever is in ../web/dist.
+  "assets": {
+    "directory": "../web/dist",
+    "binding": "ASSETS"
+  },
+
   // Workers AI. The binding is why no API key appears anywhere in this file: the Worker
   // authenticates to the model through Cloudflare's own runtime, so there is no secret to
   // leak, rotate, or accidentally commit.

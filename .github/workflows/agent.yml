@@ -1,0 +1,147 @@
+name: agent
+
+# Type-checks the Worker, runs its unit tests, and — on manual dispatch — runs the eval
+# harness against the deployed Worker and commits the pass-rate table into the README.
+#
+# The evals are dispatch-only and not on a schedule, deliberately: they call Workers AI, which
+# allows 10,000 neurons per day. A nightly eval run would quietly consume the allowance that
+# the live site depends on, and the thing being measured would then stop working.
+
+on:
+  push:
+    paths:
+      - "worker/**"
+      - "evals/**"
+      - ".github/workflows/agent.yml"
+  pull_request:
+    paths:
+      - "worker/**"
+      - "evals/**"
+  workflow_dispatch:
+    inputs:
+      models:
+        description: "Comma-separated model ids to compare"
+        type: string
+        default: "@cf/meta/llama-3.1-8b-instruct-fp8,@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+      update_readme:
+        description: "Commit the pass-rate table into README.md"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: agent-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Install
+        working-directory: worker
+        run: bun install --frozen-lockfile
+
+      - name: Type check
+        working-directory: worker
+        run: bun x tsc --noEmit
+
+      # These run against the committed bundle, so they also catch a pipeline change that
+      # renamed a field the tools read. A tool reading `undefined` reports "no data" and looks
+      # exactly like a tool that works.
+      - name: Unit tests
+        working-directory: worker
+        run: bun x vitest run
+
+      # Guards the bug that inflated the published refusal rate: a quota error must never
+      # score as a successful refusal. Runs offline, so it catches a scorer regression even
+      # when the model quota is exhausted.
+      - name: Scorer regression tests
+        run: uv run --with pandas --with pytest python -m pytest evals -q
+
+  evals:
+    needs: check
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Run evals against the deployed Worker
+        run: |
+          uv run --with pandas python evals/run.py \
+            --models "${{ inputs.models }}" \
+            --pause 8 \
+            --out evals/results/latest.json
+
+      - name: Render the pass-rate table into the README
+        if: inputs.update_readme
+        run: |
+          python3 - <<'PY'
+          import json, re, pathlib
+          data = json.load(open("evals/results/latest.json"))
+          summaries = data["summaries"]
+
+          kinds = ["numeric", "refusal", "contains", "overall"]
+          thresholds = {"numeric": 0.60, "refusal": 0.70, "contains": 0.60}
+
+          header = "| Model | " + " | ".join(
+              f"{k} ({thresholds[k]*100:.0f}% required)" if k in thresholds else k.title()
+              for k in kinds
+          ) + " | Errored |"
+          lines = [header, "|---" * (len(kinds) + 2) + "|"]
+          for model, summary in summaries.items():
+              cells = []
+              for kind in kinds:
+                  entry = summary.get(kind)
+                  if not entry:
+                      cells.append("—")
+                      continue
+                  rate = float(entry["rate"])
+                  # No mark on the overall row: it has no threshold.
+                  mark = "" if kind not in thresholds else ("✅" if rate >= thresholds[kind] else "❌")
+                  cell = f"{mark} {rate*100:.0f}% ({entry['passed']}/{entry['total']})"
+                  if entry.get("errored"):
+                      cell += f" +{entry['errored']} err"
+                  cells.append(cell)
+              errored = summary.get("overall", {}).get("errored", 0)
+              cells.append(str(errored) if errored else "0")
+              lines.append(f"| `{model}` | " + " | ".join(cells) + " |")
+          table = "\n".join(lines)
+
+          readme = pathlib.Path("README.md")
+          text = readme.read_text(encoding="utf-8")
+          text = re.sub(
+              r"<!-- EVAL-TABLE-START -->.*?<!-- EVAL-TABLE-END -->",
+              f"<!-- EVAL-TABLE-START -->\n{table}\n\n_Run {data['generated_at']} against `{data['worker']}`._\n<!-- EVAL-TABLE-END -->",
+              text,
+              flags=re.S,
+          )
+          readme.write_text(text, encoding="utf-8")
+          print(table)
+          PY
+
+      - name: Commit results
+        if: inputs.update_readme
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md evals/results/latest.json
+          git commit -m "chore(evals): refresh agent pass-rate table" || echo "nothing to commit"
+          git push
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-results
+          path: evals/results/

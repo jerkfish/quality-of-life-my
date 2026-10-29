@@ -79,3 +79,15 @@ short change — once a bucket and a scoped token exist.
   something that is currently free.
 - **Give the agent the full untrimmed dataset** — 1.7 MB in the bundle, and the extra 1.3 MB
   is a matrix no tool queries. Bundling everything because it fits is how bundles stop fitting.
+
+## Update — 2026-10-30
+
+The R2 credentials were replaced after this decision. The new key pair can see both
+`exampapers` and a new `qol-check` bucket, which is empty and reachable, and `.env` now names
+that bucket. So the first argument above ("the credentials cannot do it") is no longer true.
+
+The decision still stands on the second argument, which was always the one that mattered:
+a bundled artifact cannot fail at runtime, adds no per-request fetch, and 415 KB is comfortably
+inside the Worker limit. R2 becomes worth revisiting only when the data must refresh without
+a redeploy — for example, if the pipeline starts updating several times a day.
+
